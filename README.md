@@ -4,7 +4,7 @@ Use
 ```
 ![Codey](https://github.com/VolkanSah/Codey/blob/main/codey.svg)
 ```
-![Codey](https://github.com/VolkanSah/Codey/blob/main/codey.svg)
+![Codey](https://github.com/VolkanSah/Codey/blob/main/codey2.svg)
 ```
 GITHUB_TOKEN - Automatisch verfügbar
 GIST_SECRET - Für dynamic badges (optional)
