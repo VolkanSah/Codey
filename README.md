@@ -4,12 +4,8 @@ Use
 ```
 ![Codey](https://github.com/VolkanSah/Codey/blob/main/codey.svg)
 ```
-![Codey](https://github.com/VolkanSah/Codey/blob/main/codey2.svg)
+![Codey](https://github.com/VolkanSah/Codey/blob/main/codey.svg)
 ```
-GITHUB_TOKEN - Automatisch verfügbar
-GIST_SECRET - Für dynamic badges (optional)
-GIST_ID - Gist ID für badges (optional)
-MAIL_USERNAME - Für Emergency Notifications
-MAIL_PASSWORD - App-Passwort für Gmail
-NOTIFICATION_EMAIL - Deine Email für Warnungen
+set = os.environ.get('GIT_TOKEN') or os.environ.get('GITHUB_TOKEN')
+set = os.environ.get('GIT_REPOSITORY') or os.environ.get('GITHUB_REPOSITORY')
 ```
