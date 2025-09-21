@@ -11,11 +11,11 @@ import sys
 from datetime import datetime, timedelta, timezone
 from collections import Counter
 
-# --- Konfiguration / Env ---
+# --- Configuration / Env ---
 TOKEN = os.environ.get('GIT_TOKEN') or os.environ.get('GITHUB_TOKEN')
 REPO = os.environ.get('GIT_REPOSITORY') or os.environ.get('GITHUB_REPOSITORY')
 if not REPO:
-    print("WARNUNG: Kein REPO gesetzt (GIT_REPOSITORY oder GITHUB_REPOSITORY). Verwende 'VolkanSah' als Fallback.")
+    print("WARNING: No REPO set (GIT_REPOSITORY or GITHUB_REPOSITORY). Using 'VolkanSah' as fallback.")
     REPO = "VolkanSah"
 
 # Normalize REPO: accept owner, owner/repo, or full URL
@@ -42,25 +42,25 @@ headers = {}
 if TOKEN:
     headers = {'Authorization': f'token {TOKEN}', 'Accept': 'application/vnd.github.com.v3+json'}
 else:
-    print("Hinweis: Kein Token gesetzt — API-Abrufe sind stark eingeschränkt.", file=sys.stderr)
+    print("NOTE: No token set - API calls will be heavily rate-limited.", file=sys.stderr)
 
 def get_json_safe(url, params=None):
     try:
         r = requests.get(url, headers=headers, params=params, timeout=20)
     except Exception as e:
-        print(f"Network-Error bei {url}: {e}", file=sys.stderr)
+        print(f"Network-Error at {url}: {e}", file=sys.stderr)
         return False, None
     if not r.ok:
         try:
             body = r.json()
         except Exception:
             body = r.text
-        print(f"GitHub API Error {r.status_code} bei {url}: {body}", file=sys.stderr)
+        print(f"GitHub API Error {r.status_code} at {url}: {body}", file=sys.stderr)
         return False, body
     try:
         data = r.json()
     except ValueError:
-        print(f"Antwort von {url} ist kein JSON.", file=sys.stderr)
+        print(f"Response from {url} is not JSON.", file=sys.stderr)
         return False, r.text
     return True, data
 
@@ -136,23 +136,53 @@ def load_codey():
     try:
         with open('codey.json', 'r') as f:
             data = json.load(f)
-            print("codey.json geladen.")
+            print("codey.json loaded.")
             # Ensure rpg_stats is always a dictionary
             if 'rpg_stats' not in data or not isinstance(data['rpg_stats'], dict):
                 data['rpg_stats'] = {}
+            if 'achievements' not in data or not isinstance(data['achievements'], list):
+                data['achievements'] = []
             return data
     except (FileNotFoundError, json.JSONDecodeError):
-        print("codey.json nicht gefunden oder ungültig — erstelle Standard-Daten.")
+        print("codey.json not found or invalid — creating default data.")
     return {
         'health': 50, 'hunger': 50, 'happiness': 50, 'energy': 50,
         'level': 1, 'streak': 0, 'total_commits': 0, 'mood': 'neutral',
-        'rpg_stats': {}
+        'rpg_stats': {},
+        'achievements': []
     }
+
+# Achievements System
+def check_achievements(codey):
+    achievements = codey.get('achievements', [])
+    if '🔥 Monthly Warrior' not in achievements and codey['streak'] >= 30: achievements.append('🔥 Monthly Warrior')
+    if '💯 Commit Master' not in achievements and codey['total_commits'] >= 1000: achievements.append('💯 Commit Master')
+    if '⭐ Social Star' not in achievements and codey['rpg_stats'].get('social_status', 0) >= 5: achievements.append('⭐ Social Star')
+    return achievements
+
+# Seasonal Events
+def get_seasonal_bonus():
+    month = datetime.now().month
+    if month == 10: return {'emoji': '🎃', 'name': 'Hacktoberfest'}
+    if month == 12: return {'emoji': '🎄', 'name': 'Advent of Code'}
+    return None
+
+# Weekend Bonus
+def is_weekend_warrior():
+    return datetime.now().weekday() >= 5 # Sa/So
 
 def update_stats(codey, daily_activity, all_time_data):
     if 'rpg_stats' not in codey:
         codey['rpg_stats'] = {}
-        
+    if 'achievements' not in codey:
+        codey['achievements'] = []
+
+    # Apply weekend bonus
+    if is_weekend_warrior():
+        daily_activity['commits'] *= 1.5
+        daily_activity['prs'] *= 1.5
+        codey['energy'] += 15 # extra energy for the weekend warrior
+
     codey['hunger'] = min(100, codey['hunger'] + daily_activity['commits'] * 10 + daily_activity['prs'] * 15)
     codey['happiness'] = min(100, codey['happiness'] + daily_activity['prs'] * 8)
     codey['energy'] = max(0, codey['energy'] - daily_activity['commits'] * 2 - daily_activity['prs'] * 5 + 20)
@@ -213,129 +243,100 @@ def update_stats(codey, daily_activity, all_time_data):
     
     codey['rpg_stats']['dominant_language'] = all_time_data.get('dominant_language')
 
+    # Update achievements after stats are calculated
+    codey['achievements'] = check_achievements(codey)
+
     return codey
-def generate_svg(codey):
+
+def generate_svg(codey, seasonal_bonus):
     moods = {'happy': '😊', 'sad': '😢', 'tired': '😴', 'neutral': '😐', 'overwhelmed': '😰', 'inspired': '✨'}
     pets = {
-        # All-Time Classics
-        'C': '🦫',  # Beaver - The builder
-        'C++': '🐬', # Dolphin - intelligent and fast
-        'C#': '🦊',  # Fox - smart and agile
-        'Java': '🦧', # Orangutan - wise and classic
-        'PHP': '🐘', # Elephant - the official mascot
-        'Python': '🐍', # Snake - the official mascot
-        'JavaScript': '🦔', # Hedgehog - fast and sharp
-        'TypeScript': '🦋', # Butterfly - a more refined form
-        'Ruby': '💎', # Gemstone - keeping the theme
-        'Go': '🐹',  # Hamster - the official mascot
-        'Swift': '🐦', # Bird - fast and modern
-        'Kotlin': '🐨', # Koala - modern and relaxed
-        'Rust': '🦀',  # Crab - the official mascot
-        
-        # Frontend & Web
-        'HTML': '🦘', # Kangaroo - for jumping and structure
-        'CSS': '🦎', # Lizard - adapts like a chameleon
-        'Sass': '🦄', # Unicorn - for the magical extension
-        'Vue': '🐉', # Dragon - a powerful mythical creature
-        'React': '🦥', # Sloth - optimized by doing only what's necessary
-        'Angular': '🦁', # Lion - robust and powerful
-        
-        # Data Science & Analytics
-        'Jupyter Notebook': '🦉', # Owl - for wisdom and data
-        'R': '🐿️', # Squirrel - gathers and organizes data
-        'Matlab': '🐻', # Bear - strong and good for complex calculations
-        'SQL': '🐙', # Octopus - many arms for data queries
-        'Julia': '🦓', # Zebra - fast and striking
-        
-        # Functional Languages
-        'Haskell': '🦚', # Peacock - for elegant, beautiful code
-        'Elixir': '🐝', # Bee - for a productive ecosystem
-        'Clojure': '🧠', # Brain - for a functional mindset
-        'F#': '🐑', # Sheep - for a "herd-based" programming model
-        
-        # Scripting & DevOps
-        'Shell': '🐌', # Snail - a creature with a shell
-        'PowerShell': '🐺', # Wolf - powerful and commanding
-        'Bash': '🦬', # Bison - robust and reliable
-        'Perl': '🐪', # Camel - the official mascot
-        'Lua': '🦊', # Fox - fast and clever
-        'Dart': ' Hummingbird', # Hummingbird - extremely fast
-        
-        # Game Development
-        'GDScript': '🐉', # Dragon - fits the fantasy of games
-        
-        # Others
-        'Assembly': '🐜', # Ant - small but diligent
-        'Solidity': '🐉', # Dragon - fits powerful blockchain systems
-        'Vim Script': '🕷️', # Spider - weaves a complex web
-        'GraphQL': '🕷️', # Spider - weaves a complex web
-        'SCSS': '🦚', # Peacock - for elegance and styling
-        'Svelte': '🕊️', # Dove - for speed and lightness
-        'Zig': '🐆'  # Cheetah - for extreme speed
+        'C': '🦫', 'C++': '🐬', 'C#': '🦊', 'Java': '🦧', 'PHP': '🐘', 'Python': '🐍', 'JavaScript': '🦔',
+        'TypeScript': '🦋', 'Ruby': '💎', 'Go': '🐹', 'Swift': '🐦', 'Kotlin': '🐨', 'Rust': '🦀',
+        'HTML': '🦘', 'CSS': '🦎', 'Sass': '🦄', 'Vue': '🐉', 'React': '🦥', 'Angular': '🦁',
+        'Jupyter Notebook': '🦉', 'R': '🐿️', 'Matlab': '🐻', 'SQL': '🐙', 'Julia': '🦓',
+        'Haskell': '🦚', 'Elixir': '🐝', 'Clojure': '🧠', 'F#': '🐑',
+        'Shell': '🐌', 'PowerShell': '🐺', 'Bash': '🦬', 'Perl': '🐪', 'Lua': '🦊', 'Dart': ' Hummingbird',
+        'GDScript': '🐉',
+        'Assembly': '🐜', 'Solidity': '🐉', 'Vim Script': '🕷️', 'GraphQL': '🕷️', 'SCSS': '🦚',
+        'Svelte': '🕊️', 'Zig': '🐆'
     }
     default_pet = '👾'
     pet_emoji = pets.get(codey.get('rpg_stats', {}).get('dominant_language'), default_pet)
     
     colors = {
-        'background': '#0d1117',
-        'card': '#161b22',
-        'text': '#f0f6fc',
-        'secondary_text': '#8b949e',
-        'health': '#f85149',
-        'hunger': '#ffa657',
-        'happiness': '#a855f7',
-        'energy': '#3fb950',
+        'background': '#0d1117', 'card': '#161b22', 'text': '#f0f6fc', 'secondary_text': '#8b949e',
+        'health': '#f85149', 'hunger': '#ffa657', 'happiness': '#a855f7', 'energy': '#3fb950',
         'border': '#30363d'
     }
     
+    achievements_display = ''
+    if codey.get('achievements'):
+        for i, ach in enumerate(codey['achievements']):
+            ach_emoji = ach.split(' ')[0]
+            achievements_display += f'''
+            <text x="{550 - (len(codey['achievements']) - 1 - i) * 35}" y="30" font-size="25">{ach_emoji}</text>
+            '''
+
+    seasonal_bonus_display = ''
+    if seasonal_bonus:
+        seasonal_bonus_display = f'''
+        <rect x="250" y="25" width="100" height="25" rx="12.5" fill="{colors['health']}"/>
+        <text x="300" y="42" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12">
+            {seasonal_bonus['emoji']} {seasonal_bonus['name']}
+        </text>
+        '''
+    
     svg = f'''<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="600" height="400" fill="{colors['background']}" rx="15"/>
-  <rect x="20" y="20" width="560" height="360" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
-  <text x="300" y="45" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="20" font-weight="bold">
-    🌟 Codey Level {codey['level']} - {codey.get('rpg_stats', {}).get('personality', 'N/A').title()} 🌟
-  </text>
-  <circle cx="120" cy="130" r="45" fill="#21262d" stroke="{colors['border']}" stroke-width="2"/>
-  <text x="120" y="145" text-anchor="middle" font-size="60" font-family="Arial, sans-serif">{pet_emoji}</text>
-  <circle cx="120" cy="190" r="25" fill="#21262d" stroke="{colors['border']}" stroke-width="1"/>
-  <text x="120" y="195" text-anchor="middle" font-size="25">{moods[codey['mood']]}</text>
-  <text x="120" y="240" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
-      {codey.get('rpg_stats', {}).get('type', 'Day Worker').replace('_', ' ').title()}
-  </text>
-  <g transform="translate(200, 70)">
-    <text x="0" y="20" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
-    <text x="350" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['health']:.0f}%</text>
-    <rect x="0" y="25" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="25" width="{codey['health']*3.5}" height="12" fill="{colors['health']}" rx="6"/>
-    <text x="0" y="60" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
-    <text x="350" y="60" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['hunger']:.0f}%</text>
-    <rect x="0" y="65" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="65" width="{codey['hunger']*3.5}" height="12" fill="{colors['hunger']}" rx="6"/>
-    <text x="0" y="100" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
-    <text x="350" y="100" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['happiness']:.0f}%</text>
-    <rect x="0" y="105" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="105" width="{codey['happiness']*3.5}" height="12" fill="{colors['happiness']}" rx="6"/>
-    <text x="0" y="140" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
-    <text x="350" y="140" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['energy']:.0f}%</text>
-    <rect x="0" y="145" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="145" width="{codey['energy']*3.5}" height="12" fill="{colors['energy']}" rx="6"/>
-    <text x="0" y="180" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">✨ Creativity</text>
-    <text x="350" y="180" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey.get('rpg_stats', {}).get('traits', {}).get('creativity', 0):.0f}</text>
-    <rect x="0" y="185" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="185" width="{min(350, codey.get('rpg_stats', {}).get('traits', {}).get('creativity', 0)*35)}" height="12" fill="{colors['happiness']}" rx="6"/>
-    <text x="0" y="220" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🔍 Curiosity</text>
-    <text x="350" y="220" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey.get('rpg_stats', {}).get('traits', {}).get('curiosity', 0):.0f}</text>
-    <rect x="0" y="225" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="225" width="{min(350, codey.get('rpg_stats', {}).get('traits', {}).get('curiosity', 0)*35)}" height="12" fill="{colors['hunger']}" rx="6"/>
-  </g>
-  <g transform="translate(300, 360)">
-    <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14">
-      🔥 {codey['streak']} day streak • 📊 {codey['total_commits']} commits
-    </text>
-  </g>
-  <text x="300" y="385" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
-    {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}
-  </text>
-</svg>'''
+      <rect width="600" height="400" fill="{colors['background']}" rx="15"/>
+      <rect x="20" y="20" width="560" height="360" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
+      <text x="300" y="45" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="20" font-weight="bold">
+        🌟 Codey Level {codey['level']} - {codey.get('rpg_stats', {}).get('personality', 'N/A').title()} 🌟
+      </text>
+      {seasonal_bonus_display}
+      {achievements_display}
+      <circle cx="120" cy="130" r="45" fill="#21262d" stroke="{colors['border']}" stroke-width="2"/>
+      <text x="120" y="145" text-anchor="middle" font-size="60" font-family="Arial, sans-serif">{pet_emoji}</text>
+      <circle cx="120" cy="190" r="25" fill="#21262d" stroke="{colors['border']}" stroke-width="1"/>
+      <text x="120" y="195" text-anchor="middle" font-size="25">{moods[codey['mood']]}</text>
+      <text x="120" y="240" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
+          {codey.get('rpg_stats', {}).get('type', 'Day Worker').replace('_', ' ').title()}
+      </text>
+      <g transform="translate(200, 70)">
+        <text x="0" y="20" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
+        <text x="350" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['health']:.0f}%</text>
+        <rect x="0" y="25" width="350" height="12" fill="#21262d" rx="6"/>
+        <rect x="0" y="25" width="{codey['health']*3.5}" height="12" fill="{colors['health']}" rx="6"/>
+        <text x="0" y="60" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
+        <text x="350" y="60" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['hunger']:.0f}%</text>
+        <rect x="0" y="65" width="350" height="12" fill="#21262d" rx="6"/>
+        <rect x="0" y="65" width="{codey['hunger']*3.5}" height="12" fill="{colors['hunger']}" rx="6"/>
+        <text x="0" y="100" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
+        <text x="350" y="100" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['happiness']:.0f}%</text>
+        <rect x="0" y="105" width="350" height="12" fill="#21262d" rx="6"/>
+        <rect x="0" y="105" width="{codey['happiness']*3.5}" height="12" fill="{colors['happiness']}" rx="6"/>
+        <text x="0" y="140" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
+        <text x="350" y="140" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['energy']:.0f}%</text>
+        <rect x="0" y="145" width="350" height="12" fill="#21262d" rx="6"/>
+        <rect x="0" y="145" width="{codey['energy']*3.5}" height="12" fill="{colors['energy']}" rx="6"/>
+        <text x="0" y="180" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">✨ Creativity</text>
+        <text x="350" y="180" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey.get('rpg_stats', {}).get('traits', {}).get('creativity', 0):.0f}</text>
+        <rect x="0" y="185" width="350" height="12" fill="#21262d" rx="6"/>
+        <rect x="0" y="185" width="{min(350, codey.get('rpg_stats', {}).get('traits', {}).get('creativity', 0)*35)}" height="12" fill="{colors['happiness']}" rx="6"/>
+        <text x="0" y="220" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🔍 Curiosity</text>
+        <text x="350" y="220" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey.get('rpg_stats', {}).get('traits', {}).get('curiosity', 0):.0f}</text>
+        <rect x="0" y="225" width="350" height="12" fill="#21262d" rx="6"/>
+        <rect x="0" y="225" width="{min(350, codey.get('rpg_stats', {}).get('traits', {}).get('curiosity', 0)*35)}" height="12" fill="{colors['hunger']}" rx="6"/>
+      </g>
+      <g transform="translate(300, 360)">
+        <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14">
+          🔥 {codey['streak']} day streak • 📊 {codey['total_commits']} commits
+        </text>
+      </g>
+      <text x="300" y="385" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
+        {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}
+      </text>
+    </svg>'''
     return svg
 
 if __name__ == "__main__":
@@ -375,22 +376,26 @@ if __name__ == "__main__":
 
     codey = load_codey()
     codey = update_stats(codey, daily_activity, all_time_data)
+    seasonal_bonus = get_seasonal_bonus()
 
     print(f"Updated stats: health={codey['health']:.0f}, mood={codey['mood']}, personality={codey.get('rpg_stats', {}).get('personality', 'N/A')}")
+    print(f"Achievements: {codey.get('achievements', [])}")
+    if seasonal_bonus:
+        print(f"Seasonal Bonus: {seasonal_bonus['name']} {seasonal_bonus['emoji']}")
     
     try:
         with open('codey.json', 'w') as f:
             json.dump(codey, f, indent=2)
-        print("codey.json geschrieben.")
+        print("codey.json written.")
     except Exception as e:
-        print(f"Fehler beim Schreiben von codey.json: {e}", file=sys.stderr)
+        print(f"Error writing codey.json: {e}", file=sys.stderr)
 
     try:
-        svg = generate_svg(codey)
+        svg = generate_svg(codey, seasonal_bonus)
         with open('codey.svg', 'w', encoding='utf-8') as f:
             f.write(svg)
-        print("codey.svg geschrieben.")
+        print("codey.svg written.")
     except Exception as e:
-        print(f"Fehler beim Schreiben von codey.svg: {e}", file=sys.stderr)
+        print(f"Error writing codey.svg: {e}", file=sys.stderr)
 
     print("✅ Codey update finished.")
