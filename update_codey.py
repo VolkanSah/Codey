@@ -10,10 +10,14 @@ import os
 import sys
 from datetime import datetime, timedelta, timezone
 from collections import Counter
+import psycopg2
 
 # --- Configuration / Env ---
 TOKEN = os.environ.get('GIT_TOKEN') or os.environ.get('GITHUB_TOKEN')
 REPO = os.environ.get('GIT_REPOSITORY') or os.environ.get('GITHUB_REPOSITORY')
+NEON_API_KEY = os.environ.get('NEON_API_KEY')
+NEON_PROJECT_ID = os.environ.get('NEON_PROJECT_ID')
+
 if not REPO:
     print("WARNING: No REPO set (GIT_REPOSITORY or GITHUB_REPOSITORY). Using 'VolkanSah' as fallback.")
     REPO = "VolkanSah"
@@ -132,25 +136,59 @@ def get_all_data_for_user(owner):
     }
 
 
-def load_codey():
+def connect_to_db():
+    conn_string = f"postgres://{NEON_API_KEY}@{NEON_PROJECT_ID}.cloud.neon.tech/neondb?sslmode=require"
+    return psycopg2.connect(conn_string)
+
+def load_codey_from_db(owner):
     try:
-        with open('codey.json', 'r') as f:
-            data = json.load(f)
-            print("codey.json loaded.")
-            # Ensure rpg_stats is always a dictionary
-            if 'rpg_stats' not in data or not isinstance(data['rpg_stats'], dict):
-                data['rpg_stats'] = {}
-            if 'achievements' not in data or not isinstance(data['achievements'], list):
-                data['achievements'] = []
-            return data
-    except (FileNotFoundError, json.JSONDecodeError):
-        print("codey.json not found or invalid — creating default data.")
-    return {
-        'health': 50, 'hunger': 50, 'happiness': 50, 'energy': 50,
-        'level': 1, 'streak': 0, 'total_commits': 0, 'mood': 'neutral',
-        'rpg_stats': {},
-        'achievements': []
-    }
+        conn = connect_to_db()
+        cursor = conn.cursor()
+        cursor.execute("CREATE TABLE IF NOT EXISTS codey_data (owner VARCHAR(255) PRIMARY KEY, data JSONB);")
+        cursor.execute("SELECT data FROM codey_data WHERE owner = %s;", (owner,))
+        result = cursor.fetchone()
+        
+        if result:
+            print("Codey data loaded from database.")
+            return result[0]
+        else:
+            print("No existing data found in DB. Creating default data.")
+            return {
+                'health': 50, 'hunger': 50, 'happiness': 50, 'energy': 50,
+                'level': 1, 'streak': 0, 'total_commits': 0, 'mood': 'neutral',
+                'rpg_stats': {},
+                'achievements': []
+            }
+    except Exception as e:
+        print(f"Error loading data from DB: {e}", file=sys.stderr)
+        return {
+            'health': 50, 'hunger': 50, 'happiness': 50, 'energy': 50,
+            'level': 1, 'streak': 0, 'total_commits': 0, 'mood': 'neutral',
+            'rpg_stats': {},
+            'achievements': []
+        }
+    finally:
+        if 'conn' in locals() and conn:
+            conn.close()
+
+def save_codey_to_db(owner, data):
+    try:
+        conn = connect_to_db()
+        cursor = conn.cursor()
+        
+        json_data = json.dumps(data)
+        
+        cursor.execute(
+            "INSERT INTO codey_data (owner, data) VALUES (%s, %s) ON CONFLICT (owner) DO UPDATE SET data = EXCLUDED.data;",
+            (owner, json_data)
+        )
+        conn.commit()
+        print("Codey data saved to database.")
+    except Exception as e:
+        print(f"Error saving data to DB: {e}", file=sys.stderr)
+    finally:
+        if 'conn' in locals() and conn:
+            conn.close()
 
 # Achievements System
 def check_achievements(codey):
@@ -374,7 +412,7 @@ if __name__ == "__main__":
     print("Daily activity (counts):", daily_activity)
     print("All-time data:", all_time_data)
 
-    codey = load_codey()
+    codey = load_codey_from_db(OWNER)
     codey = update_stats(codey, daily_activity, all_time_data)
     seasonal_bonus = get_seasonal_bonus()
 
@@ -383,12 +421,7 @@ if __name__ == "__main__":
     if seasonal_bonus:
         print(f"Seasonal Bonus: {seasonal_bonus['name']} {seasonal_bonus['emoji']}")
     
-    try:
-        with open('codey.json', 'w') as f:
-            json.dump(codey, f, indent=2)
-        print("codey.json written.")
-    except Exception as e:
-        print(f"Error writing codey.json: {e}", file=sys.stderr)
+    save_codey_to_db(OWNER, codey)
 
     try:
         svg = generate_svg(codey, seasonal_bonus)
