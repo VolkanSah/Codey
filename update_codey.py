@@ -127,36 +127,73 @@ def update_stats(codey, activity):
     return codey
 
 def generate_svg(codey):
+    """Generiert ein größeres, luftigeres SVG"""
     moods = {'happy': '😊', 'sad': '😢', 'tired': '😴', 'neutral': '😐'}
     pets = ['🦊', '🐍', '⚛️', '💎'][min(3, codey['level']//3)]
-    svg = f'''<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="200" fill="#0d1117" rx="10"/>
-  <text x="200" y="25" text-anchor="middle" fill="#f0f6fc" font-size="16" font-weight="bold">
+    
+    # Größere Dimensionen und mehr Abstand
+    svg = f'''<svg width="600" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund mit Gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="300" fill="url(#bg)" rx="15"/>
+  
+  <!-- Titel größer und zentrierter -->
+  <text x="300" y="35" text-anchor="middle" fill="#f0f6fc" font-family="system-ui" font-size="22" font-weight="bold">
     🌟 Codey Level {codey['level']} 🌟
   </text>
-  <circle cx="100" cy="100" r="35" fill="#21262d" stroke="#30363d" stroke-width="2"/>
-  <text x="100" y="110" text-anchor="middle" font-size="40">{pets}</text>
-  <text x="100" y="140" text-anchor="middle" font-size="20">{moods[codey['mood']]}</text>
-  <g transform="translate(160, 70)">
-    <text x="0" y="15" fill="#f0f6fc" font-size="11">❤️ Health: {codey['health']:.0f}%</text>
-    <rect x="0" y="20" width="200" height="6" fill="#21262d" rx="3"/>
-    <rect x="0" y="20" width="{codey['health']*2}" height="6" fill="#f85149" rx="3"/>
-    <text x="0" y="40" fill="#f0f6fc" font-size="11">🍖 Hunger: {codey['hunger']:.0f}%</text>
-    <rect x="0" y="45" width="200" height="6" fill="#21262d" rx="3"/>
-    <rect x="0" y="45" width="{codey['hunger']*2}" height="6" fill="#ffa657" rx="3"/>
-    <text x="0" y="65" fill="#f0f6fc" font-size="11">😊 Happy: {codey['happiness']:.0f}%</text>
-    <rect x="0" y="70" width="200" height="6" fill="#21262d" rx="3"/>
-    <rect x="0" y="70" width="{codey['happiness']*2}" height="6" fill="#a855f7" rx="3"/>
-    <text x="0" y="90" fill="#f0f6fc" font-size="11">⚡ Energy: {codey['energy']:.0f}%</text>
-    <rect x="0" y="95" width="200" height="6" fill="#21262d" rx="3"/>
-    <rect x="0" y="95" width="{codey['energy']*2}" height="6" fill="#3fb950" rx="3"/>
+  
+  <!-- Pet Display größer -->
+  <g transform="translate(150, 130)">
+    <circle r="50" fill="#21262d" stroke="#30363d" stroke-width="3"/>
+    <text y="15" text-anchor="middle" font-size="60">{pets}</text>
+    <text y="70" text-anchor="middle" font-size="30">{moods[codey['mood']]}</text>
   </g>
-  <text x="200" y="170" text-anchor="middle" fill="#8b949e" font-size="10">
-    🔥 {codey['streak']} day streak • 📊 {codey['total_commits']} commits
+  
+  <!-- Status Bars mit mehr Abstand und größer -->
+  <g transform="translate(280, 80)">
+    <!-- Health Bar -->
+    <text x="0" y="20" fill="#f0f6fc" font-family="system-ui" font-size="16" font-weight="500">❤️ Health: {codey['health']:.0f}%</text>
+    <rect x="0" y="28" width="280" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="28" width="{codey['health']*2.8}" height="12" fill="#f85149" rx="6"/>
+    
+    <!-- Hunger Bar -->
+    <text x="0" y="65" fill="#f0f6fc" font-family="system-ui" font-size="16" font-weight="500">🍖 Hunger: {codey['hunger']:.0f}%</text>
+    <rect x="0" y="73" width="280" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="73" width="{codey['hunger']*2.8}" height="12" fill="#ffa657" rx="6"/>
+    
+    <!-- Happiness Bar -->
+    <text x="0" y="110" fill="#f0f6fc" font-family="system-ui" font-size="16" font-weight="500">😊 Happiness: {codey['happiness']:.0f}%</text>
+    <rect x="0" y="118" width="280" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="118" width="{codey['happiness']*2.8}" height="12" fill="#a855f7" rx="6"/>
+    
+    <!-- Energy Bar -->
+    <text x="0" y="155" fill="#f0f6fc" font-family="system-ui" font-size="16" font-weight="500">⚡ Energy: {codey['energy']:.0f}%</text>
+    <rect x="0" y="163" width="280" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="163" width="{codey['energy']*2.8}" height="12" fill="#3fb950" rx="6"/>
+  </g>
+  
+  <!-- Streak und Stats größer und weiter unten -->
+  <text x="300" y="250" text-anchor="middle" fill="#8b949e" font-family="system-ui" font-size="14" font-weight="500">
+    🔥 {codey['streak']} day streak • 📊 {codey['total_commits']} total commits
   </text>
-  <text x="200" y="185" text-anchor="middle" fill="#6e7681" font-size="9">
-    {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}
+  
+  <!-- Zeitstempel -->
+  <text x="300" y="275" text-anchor="middle" fill="#6e7681" font-family="system-ui" font-size="12">
+    Last updated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}
   </text>
+  
+  <!-- Zusätzliche Deko-Elemente -->
+  <g opacity="0.3">
+    <circle cx="50" cy="50" r="3" fill="#30363d"/>
+    <circle cx="550" cy="60" r="2" fill="#30363d"/>
+    <circle cx="70" cy="250" r="2" fill="#30363d"/>
+    <circle cx="530" cy="240" r="3" fill="#30363d"/>
+  </g>
 </svg>'''
     return svg
 
