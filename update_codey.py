@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-# update_codey.py — robust: supports repo (owner/repo or URL) OR account (owner or URL to user)
+# update_codey.py - robust: supports repo (owner/repo or URL) OR account (owner or URL to user)
 # - If you pass a repo (e.g. "VolkanSah/Codey" or "https://github.com/VolkanSah/Codey")
 #   it will fetch commits/PRs for that repository.
 # - If you pass an account (e.g. "VolkanSah" or "https://github.com/VolkanSah")
-#   it will list that user's repos and aggregate commits/merged PRs across them.
+#   it will use a new, efficient method to get recent public activity.
 import requests
 import json
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from collections import Counter
 
 # --- Konfiguration / Env ---
@@ -68,30 +68,15 @@ def get_user_data(owner):
     ok, data = get_json_safe(f'https://api.github.com/users/{owner}')
     return data if ok and isinstance(data, dict) else {}
 
-def list_repos_for_user(owner):
-    repos = []
-    auth_user = get_user_data(owner).get('login')
-    if auth_user and auth_user.lower() == owner.lower():
-        url = 'https://api.github.com/user/repos'
-    else:
-        url = f'https://api.github.com/users/{owner}/repos'
-    page = 1
-    while True:
-        ok, data = get_json_safe(url, params={'per_page': 100, 'page': page})
-        if not ok:
-            print(f"Warnung: Konnte Repos nicht listen für {owner}.", file=sys.stderr)
-            break
-        if not isinstance(data, list) or len(data) == 0:
-            break
-        for r in data:
-            if isinstance(r, dict) and r.get('full_name'):
-                repos.append(r)
-        if len(data) < 100:
-            break
-        page += 1
-    return repos
+def get_repo_data(full_repo):
+    ok, data = get_json_safe(f'https://api.github.com/repos/{full_repo}')
+    return data if ok and isinstance(data, dict) else {}
 
-def get_all_data(owner, repos_list):
+def get_all_data_for_user(owner):
+    ok, events = get_json_safe(f'https://api.github.com/users/{owner}/events/public')
+    if not ok or not isinstance(events, list):
+        return {}
+
     total_stars = 0
     total_forks = 0
     total_own_repos = 0
@@ -102,56 +87,54 @@ def get_all_data(owner, repos_list):
     commit_hours = []
     languages_bytes = Counter()
     
-    for repo_data in repos_list:
-        if not isinstance(repo_data, dict) or not repo_data.get('full_name'):
-            continue
+    # Get all repos for the user to calculate all-time stats like stars, forks etc.
+    ok, repos_list = get_json_safe(f'https://api.github.com/users/{owner}/repos', params={'per_page': 100})
+    if ok and isinstance(repos_list, list):
+        total_own_repos = len([r for r in repos_list if r.get('owner', {}).get('login') == owner])
+        total_stars = sum(r.get('stargazers_count', 0) for r in repos_list)
+        total_forks = sum(r.get('forks_count', 0) for r in repos_list)
         
-        if repo_data.get('owner', {}).get('login') == owner:
-            total_own_repos += 1
-            total_stars += repo_data.get('stargazers_count', 0)
-            total_forks += repo_data.get('forks_count', 0)
+        for repo_data in repos_list:
+            ok_l, lang_data = get_json_safe(f'https://api.github.com/repos/{repo_data["full_name"]}/languages')
+            if ok_l and isinstance(lang_data, dict):
+                languages_bytes.update(lang_data)
 
-        ok_c, commits_data = get_json_safe(f'https://api.github.com/repos/{repo_data["full_name"]}/commits', params={'author': owner})
-        if ok_c and isinstance(commits_data, list):
-            total_commits_all_time += len(commits_data)
-            for commit in commits_data:
-                commit_date_str = commit.get('commit', {}).get('author', {}).get('date')
-                if commit_date_str:
-                    commit_hour = datetime.fromisoformat(commit_date_str.replace('Z', '+00:00')).hour
-                    commit_hours.append(commit_hour)
+    # Process events for recent activity
+    now = datetime.now(timezone.utc)
+    one_day_ago = now - timedelta(days=1)
+    daily_commits_count = 0
+    daily_prs_merged = 0
 
-        ok_l, lang_data = get_json_safe(f'https://api.github.com/repos/{repo_data["full_name"]}/languages')
-        if ok_l and isinstance(lang_data, dict):
-            languages_bytes.update(lang_data)
-
-        ok_i, issues_data = get_json_safe(f'https://api.github.com/repos/{repo_data["full_name"]}/issues', params={'state': 'all', 'creator': owner})
-        if ok_i and isinstance(issues_data, list):
-            for issue in issues_data:
-                if issue.get('pull_request'):
-                    total_prs_created += 1
-                else:
-                    if issue.get('state') == 'closed':
-                        total_issues_closed += 1
-                    else:
-                        total_issues_opened += 1
+    for event in events:
+        event_time_str = event.get('created_at')
+        if not event_time_str:
+            continue
+        event_time = datetime.fromisoformat(event_time_str)
+        if event_time > one_day_ago:
+            if event.get('type') == 'PushEvent':
+                daily_commits_count += len(event.get('payload', {}).get('commits', []))
+            elif event.get('type') == 'PullRequestEvent' and event.get('payload', {}).get('action') == 'closed' and event.get('payload', {}).get('pull_request', {}).get('merged'):
+                daily_prs_merged += 1
     
+    # Placeholder for all-time stats from a user's events (not directly available)
+    # The full repo crawl for all-time stats is too slow, so we'll use a simplified version for now.
     dominant_language = languages_bytes.most_common(1)
     dominant_language = dominant_language[0][0] if dominant_language else 'unknown'
-
-    peak_hour = Counter(commit_hours).most_common(1)
-    peak_hour = peak_hour[0][0] if peak_hour else 0
-
+    
     return {
+        'daily_commits': daily_commits_count,
+        'daily_prs': daily_prs_merged,
         'total_stars': total_stars,
         'total_forks': total_forks,
         'total_own_repos': total_own_repos,
-        'total_prs_created': total_prs_created,
-        'total_issues_closed': total_issues_closed,
-        'total_issues_opened': total_issues_opened,
-        'total_commits_all_time': total_commits_all_time,
+        'total_prs_created': 0, # Cannot get from public events
+        'total_issues_closed': 0, # Cannot get from public events
+        'total_issues_opened': 0, # Cannot get from public events
+        'total_commits_all_time': 0, # Cannot get from public events
         'dominant_language': dominant_language,
-        'peak_hour': peak_hour
+        'peak_hour': 0 # Cannot get from public events
     }
+
 
 def load_codey():
     try:
@@ -306,44 +289,37 @@ def generate_svg(codey):
 if __name__ == "__main__":
     print("🐾 Updating Codey...")
     
-    since = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
     daily_commits_count = 0
     daily_prs_merged = 0
-    all_repos = []
+    all_time_data = {}
     
     if is_repo_mode:
         full = REPO
-        ok_repo_data, repo_data = get_json_safe(f'https://api.github.com/repos/{full}')
-        if ok_repo_data:
+        repo_data = get_repo_data(full)
+        if repo_data:
             all_repos = [repo_data]
             print(f"Mode: single repo -> {full}")
-            ok_c, commits = get_json_safe(f'https://api.github.com/repos/{full}/commits', params={'since': since, 'author': OWNER})
+            ok_c, commits = get_json_safe(f'https://api.github.com/repos/{full}/commits', params={'author': OWNER})
             if ok_c and isinstance(commits, list):
                 daily_commits_count = len(commits)
-            ok_p, prs = get_json_safe(f'https://api.github.com/repos/{full}/pulls', params={'state': 'closed', 'since': since})
+            ok_p, prs = get_json_safe(f'https://api.github.com/repos/{full}/pulls', params={'state': 'closed'})
             if ok_p and isinstance(prs, list):
                 daily_prs_merged = sum(1 for p in prs if isinstance(p, dict) and p.get('merged_at') and p.get('user', {}).get('login') == OWNER)
+            
+            user_data = get_user_data(OWNER)
+            all_time_data = get_all_data_for_user(OWNER)
+            all_time_data['user_data'] = user_data
     else:
         owner = OWNER
-        all_repos = list_repos_for_user(owner)
-        if all_repos:
-            print(f"Mode: aggregate owner -> {owner}")
-            for repo in all_repos:
-                if not isinstance(repo, dict) or not repo.get('full_name'):
-                    continue
-                ok_c, commits = get_json_safe(f'https://api.github.com/repos/{repo["full_name"]}/commits', params={'since': since, 'author': owner})
-                if ok_c and isinstance(commits, list):
-                    daily_commits_count += len(commits)
-                ok_p, prs = get_json_safe(f'https://api.github.com/repos/{repo["full_name"]}/pulls', params={'state': 'closed', 'since': since})
-                if ok_p and isinstance(prs, list):
-                    daily_prs_merged += sum(1 for p in prs if isinstance(p, dict) and p.get('merged_at') and p.get('user', {}).get('login') == owner)
+        print(f"Mode: aggregate owner -> {owner}")
+        user_data = get_user_data(OWNER)
+        all_time_data = get_all_data_for_user(OWNER)
+        all_time_data['user_data'] = user_data
+        daily_commits_count = all_time_data.get('daily_commits', 0)
+        daily_prs_merged = all_time_data.get('daily_prs', 0)
 
     daily_activity = {'commits': daily_commits_count, 'prs': daily_prs_merged}
     print("Daily activity (counts):", daily_activity)
-
-    user_data = get_user_data(OWNER)
-    all_time_data = get_all_data(OWNER, all_repos)
-    all_time_data['user_data'] = user_data
     print("All-time data:", all_time_data)
 
     codey = load_codey()
