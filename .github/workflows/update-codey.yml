@@ -14,6 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        persist-credentials: true
 
     - uses: actions/setup-python@v4
       with:
@@ -31,7 +33,10 @@ jobs:
     - name: Update Codey
       run: python update_codey.py
       env:
+        # benutze das automatisch verfügbare Token (empfohlen)
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Falls du weiterhin ein eigenes Secret verwenden willst, füge es zu den Repo-Secrets hinzu
+        # GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 
     - name: Commit
       run: |
