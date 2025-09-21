@@ -218,65 +218,60 @@ def generate_svg(codey):
     moods = {'happy': '😊', 'sad': '😢', 'tired': '😴', 'neutral': '😐', 'overwhelmed': '😰', 'inspired': '✨'}
     pets = {
         # All-Time Classics
-        'C': '⚙️',
-        'C++': '💎',
-        'C#': '🎶',
-        'Java': '☕',
-        'PHP': '🐘', 
-        'Python': '🐍',
-        'JavaScript': '📜',
-        'TypeScript': '💙',
-        'Ruby': '💎',
-        'Go': '🐹',
-        'Swift': '🐦',
-        'Kotlin': '🤖',
-        'Rust': '🦀',
+        'C': '🦫',  # Biber - Der Baumeister
+        'C++': '🐬', # Delfin - intelligent und schnell
+        'C#': '🦊',  # Fuchs - schlau und agil
+        'Java': '🦧', # Orang-Utan - weise und klassisch
+        'PHP': '🐘', # Elefant - das offizielle Maskottchen
+        'Python': '🐍', # Schlange - das offizielle Maskottchen
+        'JavaScript': '🦔', # Igel - schnell und spitzfindig
+        'TypeScript': '🦋', # Schmetterling - eine veredelte Form
+        'Ruby': '💎', # Edelstein - das Thema ist beibehalten
+        'Go': '🐹',  # Hamster - das offizielle Maskottchen
+        'Swift': '🐦', # Vogel - schnell und modern
+        'Kotlin': '🐨', # Koala - modern und entspannt
+        'Rust': '🦀',  # Krabbe - das offizielle Maskottchen
         
         # Frontend & Web
-        'HTML': '🧱',
-        'CSS': '🎨',
-        'Sass': '🌈',
-        'Vue': '🟢',
-        'React': '⚛️',
-        'Angular': '🅰️',
+        'HTML': '🦘', # Känguru - für Sprungmarken und Struktur
+        'CSS': '🦎', # Eidechse - passt sich an wie ein Chamäleon
+        'Sass': '🦄', # Einhorn - für die magische Erweiterung
+        'Vue': '🐉', # Drache - ein mächtiges Fabelwesen
+        'React': '🦥', # Faultier - optimiert, indem es nur das Nötigste tut
+        'Angular': '🦁', # Löwe - robust und mächtig
         
         # Data Science & Analytics
-        'Jupyter Notebook': '📓',
-        'R': '📊',
-        'Matlab': '📈',
-        'SQL': '🗄️',
-        'Julia': '⚛️',
+        'Jupyter Notebook': '🦉', # Eule - für Weisheit und Daten
+        'R': '🐿️', # Eichhörnchen - sammelt und organisiert Daten
+        'Matlab': '🐻', # Bär - stark und gut für komplexe Berechnungen
+        'SQL': '🐙', # Oktopus - viele Arme für Datenabfragen
+        'Julia': '🦓', # Zebra - schnell und auffällig
         
         # Functional Languages
-        'Haskell': 'λ',
-        'Elixir': '🧪',
-        'Clojure': '🧠',
-        'F#': '🎼',
+        'Haskell': '🦚', # Pfau - für eleganten, schönen Code
+        'Elixir': '🐝', # Biene - für ein produktives Ökosystem
+        'Clojure': '🧠', # Gehirn - für einen funktionalen Denkprozess
+        'F#': '🐑', # Schaf - für ein "herdenbasiertes" Programmiermodell
         
         # Scripting & DevOps
-        'Shell': '🐚',
-        'PowerShell': '💻',
-        'Bash': '🪖',
-        'Perl': '🐪',
-        'Lua': '🌕',
-        'Dart': '🎯',
+        'Shell': '🐌', # Schnecke - ein Lebewesen mit einem Shell
+        'PowerShell': '🐺', # Wolf - mächtig und befehligt
+        'Bash': '🦬', # Bison - robust und zuverlässig
+        'Perl': '🐪', # Kamel - das offizielle Maskottchen
+        'Lua': '🦊', # Fuchs - schnell und schlau
+        'Dart': ' Hummingbird', # Kolibri - extrem schnell
         
         # Game Development
-        'GDScript': '🕹️',
-        
-        # Mobile
-        'Objective-C': '📱',
-        'Swift': '🐦',
-        'Dart': '🎯', # Dart can be used for both web and mobile
+        'GDScript': '🐉', # Drache - passt zur Fantasie von Games
         
         # Others
-        'Assembly': '🤖',
-        'Solidity': '⛓️',
-        'Vim Script': '📜',
-        'GraphQL': '🔗',
-        'SCSS': '🎨',
-        'Svelte': '✨',
-        'Zig': '⚡'
+        'Assembly': '🐜', # Ameise - klein, aber fleißig
+        'Solidity': '🐉', # Drache - passt zu mächtigen Blockchain-Systemen
+        'Vim Script': '🕷️', # Spinne - spinnt ein komplexes Netz
+        'GraphQL': '🕷️', # Spinne - spinnt ein komplexes Netz
+        'SCSS': '🦚', # Pfau - für Eleganz und Styling
+        'Svelte': '🕊️', # Taube - für die Geschwindigkeit und Leichtigkeit
+        'Zig': '🐆'  # Gepard - für extreme Schnelligkeit
     }
     default_pet = '👾'
     pet_emoji = pets.get(codey.get('rpg_stats', {}).get('dominant_language'), default_pet)
