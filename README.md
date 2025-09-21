@@ -1,3 +1,8 @@
+Use
+```
+![Codey](https://github.com/USERNAME/REPO/blob/main/codey.svg)
+```
+
 ```
 GITHUB_TOKEN - Automatisch verfügbar
 GIST_SECRET - Für dynamic badges (optional)
