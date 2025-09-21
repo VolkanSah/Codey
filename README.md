@@ -1,6 +1,7 @@
 # 🐾 Codey - Your Personal GitHub Pet
 
 #### The Full RPG Experience
+Better to use with your GitHub Account, for Repos use Cody Lite 🙂
 
 A powerful script that transforms your GitHub activity into a comprehensive digital pet, complete with deep RPG stats and dynamic growth.
 
