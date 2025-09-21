@@ -218,60 +218,60 @@ def generate_svg(codey):
     moods = {'happy': '😊', 'sad': '😢', 'tired': '😴', 'neutral': '😐', 'overwhelmed': '😰', 'inspired': '✨'}
     pets = {
         # All-Time Classics
-        'C': '🦫',  # Biber - Der Baumeister
-        'C++': '🐬', # Delfin - intelligent und schnell
-        'C#': '🦊',  # Fuchs - schlau und agil
-        'Java': '🦧', # Orang-Utan - weise und klassisch
-        'PHP': '🐘', # Elefant - das offizielle Maskottchen
-        'Python': '🐍', # Schlange - das offizielle Maskottchen
-        'JavaScript': '🦔', # Igel - schnell und spitzfindig
-        'TypeScript': '🦋', # Schmetterling - eine veredelte Form
-        'Ruby': '💎', # Edelstein - das Thema ist beibehalten
-        'Go': '🐹',  # Hamster - das offizielle Maskottchen
-        'Swift': '🐦', # Vogel - schnell und modern
-        'Kotlin': '🐨', # Koala - modern und entspannt
-        'Rust': '🦀',  # Krabbe - das offizielle Maskottchen
+        'C': '🦫',  # Beaver - The builder
+        'C++': '🐬', # Dolphin - intelligent and fast
+        'C#': '🦊',  # Fox - smart and agile
+        'Java': '🦧', # Orangutan - wise and classic
+        'PHP': '🐘', # Elephant - the official mascot
+        'Python': '🐍', # Snake - the official mascot
+        'JavaScript': '🦔', # Hedgehog - fast and sharp
+        'TypeScript': '🦋', # Butterfly - a more refined form
+        'Ruby': '💎', # Gemstone - keeping the theme
+        'Go': '🐹',  # Hamster - the official mascot
+        'Swift': '🐦', # Bird - fast and modern
+        'Kotlin': '🐨', # Koala - modern and relaxed
+        'Rust': '🦀',  # Crab - the official mascot
         
         # Frontend & Web
-        'HTML': '🦘', # Känguru - für Sprungmarken und Struktur
-        'CSS': '🦎', # Eidechse - passt sich an wie ein Chamäleon
-        'Sass': '🦄', # Einhorn - für die magische Erweiterung
-        'Vue': '🐉', # Drache - ein mächtiges Fabelwesen
-        'React': '🦥', # Faultier - optimiert, indem es nur das Nötigste tut
-        'Angular': '🦁', # Löwe - robust und mächtig
+        'HTML': '🦘', # Kangaroo - for jumping and structure
+        'CSS': '🦎', # Lizard - adapts like a chameleon
+        'Sass': '🦄', # Unicorn - for the magical extension
+        'Vue': '🐉', # Dragon - a powerful mythical creature
+        'React': '🦥', # Sloth - optimized by doing only what's necessary
+        'Angular': '🦁', # Lion - robust and powerful
         
         # Data Science & Analytics
-        'Jupyter Notebook': '🦉', # Eule - für Weisheit und Daten
-        'R': '🐿️', # Eichhörnchen - sammelt und organisiert Daten
-        'Matlab': '🐻', # Bär - stark und gut für komplexe Berechnungen
-        'SQL': '🐙', # Oktopus - viele Arme für Datenabfragen
-        'Julia': '🦓', # Zebra - schnell und auffällig
+        'Jupyter Notebook': '🦉', # Owl - for wisdom and data
+        'R': '🐿️', # Squirrel - gathers and organizes data
+        'Matlab': '🐻', # Bear - strong and good for complex calculations
+        'SQL': '🐙', # Octopus - many arms for data queries
+        'Julia': '🦓', # Zebra - fast and striking
         
         # Functional Languages
-        'Haskell': '🦚', # Pfau - für eleganten, schönen Code
-        'Elixir': '🐝', # Biene - für ein produktives Ökosystem
-        'Clojure': '🧠', # Gehirn - für einen funktionalen Denkprozess
-        'F#': '🐑', # Schaf - für ein "herdenbasiertes" Programmiermodell
+        'Haskell': '🦚', # Peacock - for elegant, beautiful code
+        'Elixir': '🐝', # Bee - for a productive ecosystem
+        'Clojure': '🧠', # Brain - for a functional mindset
+        'F#': '🐑', # Sheep - for a "herd-based" programming model
         
         # Scripting & DevOps
-        'Shell': '🐌', # Schnecke - ein Lebewesen mit einem Shell
-        'PowerShell': '🐺', # Wolf - mächtig und befehligt
-        'Bash': '🦬', # Bison - robust und zuverlässig
-        'Perl': '🐪', # Kamel - das offizielle Maskottchen
-        'Lua': '🦊', # Fuchs - schnell und schlau
-        'Dart': ' Hummingbird', # Kolibri - extrem schnell
+        'Shell': '🐌', # Snail - a creature with a shell
+        'PowerShell': '🐺', # Wolf - powerful and commanding
+        'Bash': '🦬', # Bison - robust and reliable
+        'Perl': '🐪', # Camel - the official mascot
+        'Lua': '🦊', # Fox - fast and clever
+        'Dart': ' Hummingbird', # Hummingbird - extremely fast
         
         # Game Development
-        'GDScript': '🐉', # Drache - passt zur Fantasie von Games
+        'GDScript': '🐉', # Dragon - fits the fantasy of games
         
         # Others
-        'Assembly': '🐜', # Ameise - klein, aber fleißig
-        'Solidity': '🐉', # Drache - passt zu mächtigen Blockchain-Systemen
-        'Vim Script': '🕷️', # Spinne - spinnt ein komplexes Netz
-        'GraphQL': '🕷️', # Spinne - spinnt ein komplexes Netz
-        'SCSS': '🦚', # Pfau - für Eleganz und Styling
-        'Svelte': '🕊️', # Taube - für die Geschwindigkeit und Leichtigkeit
-        'Zig': '🐆'  # Gepard - für extreme Schnelligkeit
+        'Assembly': '🐜', # Ant - small but diligent
+        'Solidity': '🐉', # Dragon - fits powerful blockchain systems
+        'Vim Script': '🕷️', # Spider - weaves a complex web
+        'GraphQL': '🕷️', # Spider - weaves a complex web
+        'SCSS': '🦚', # Peacock - for elegance and styling
+        'Svelte': '🕊️', # Dove - for speed and lightness
+        'Zig': '🐆'  # Cheetah - for extreme speed
     }
     default_pet = '👾'
     pet_emoji = pets.get(codey.get('rpg_stats', {}).get('dominant_language'), default_pet)
