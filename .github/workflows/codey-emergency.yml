@@ -1,0 +1,63 @@
+# .github/workflows/codey-emergency.yml
+name: 🚨 Codey Emergency Care
+
+on:
+  schedule:
+    # Alle 6 Stunden prüfen ob Codey Hilfe braucht
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  emergency-check:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == github.actor || github.event_name == 'workflow_dispatch'
+
+    steps:
+    - name: 🚀 Checkout
+      uses: actions/checkout@v4
+
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: 🔍 Check Codey Health
+      run: |
+        python scripts/emergency_check.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: 📧 Send Emergency Notification
+      if: env.CODEY_CRITICAL == 'true'
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: ${{ secrets.MAIL_USERNAME }}
+        password: ${{ secrets.MAIL_PASSWORD }}
+        subject: "🚨 Codey braucht deine Hilfe!"
+        to: ${{ secrets.NOTIFICATION_EMAIL }}
+        from: Codey Bot <noreply@github.com>
+        html_body: |
+          <h2>🐾 Codey Emergency Alert!</h2>
+          <p>Dein virtuelles Haustier Codey braucht dringend deine Aufmerksamkeit!</p>
+          
+          <h3>📊 Aktueller Status:</h3>
+          <ul>
+            <li>Gesundheit: ${{ env.CODEY_HEALTH }}% ❤️</li>
+            <li>Hunger: ${{ env.CODEY_HUNGER }}% 🍖</li>
+            <li>Glück: ${{ env.CODEY_HAPPINESS }}% 😊</li>
+            <li>Energie: ${{ env.CODEY_ENERGY }}% ⚡</li>
+          </ul>
+          
+          <p><strong>Letzte Aktivität:</strong> vor ${{ env.DAYS_INACTIVE }} Tagen</p>
+          
+          <h3>💡 Empfehlungen:</h3>
+          <ul>
+            <li>Mache ein paar Commits 📝</li>
+            <li>Merge einen Pull Request 🔄</li>
+            <li>Schließe ein Issue ✅</li>
+          </ul>
+          
+          <p>Besuche dein <a href="https://github.com/${{ github.repository_owner }}">GitHub Profil</a> um Codey zu sehen!</p>
+
