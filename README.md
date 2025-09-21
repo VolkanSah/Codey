@@ -4,7 +4,7 @@
 
 ![Codey - Your GitHub Pet](https://raw.githubusercontent.com/VolkanSah/Codey/refs/heads/main/codey.svg)
 
-[Behind the scenes of Codey](Behind-the-Scenes.md) - or [Codey lite?](https://github.com/VolkanSah/Codey)
+[Behind the scenes of Codey](Behind-the-Scenes.md) - or [Codey lite?](https://github.com/VolkanSah/Codey/tree/the-idea)
 
 
 A powerful script that transforms your GitHub activity into a comprehensive digital pet, complete with deep RPG stats and dynamic growth.
@@ -90,5 +90,6 @@ only static in `codey.json`
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
 
