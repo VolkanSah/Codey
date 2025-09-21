@@ -1,9 +1,8 @@
 name: Update Codey
-
 on:
-  schedule:
-    - cron: '0 6 * * *'  # Täglich 6:00
   workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
 
 jobs:
   update-codey:
@@ -12,33 +11,27 @@ jobs:
       contents: write
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       with:
-        # Wenn du ein eigenes Secret GIT_TOKEN verwendest, übergib es hier.
-        # Sonst entfernt diese Zeile und actions/checkout nutzt das automatische GITHUB_TOKEN.
-        token: ${{ secrets.GIT_TOKEN }}
+        # entweder entferne die token-Zeile ganz (dann wird GITHUB_TOKEN genutzt),
+        # oder explizit GITHUB_TOKEN setzen:
+        token: ${{ secrets.GITHUB_TOKEN }}
         persist-credentials: true
 
-    - name: Setup Python
-      uses: actions/setup-python@v4
+    - uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then
-          pip install -r requirements.txt
-        else
-          pip install requests
-        fi
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install requests; fi
 
     - name: Update Codey
       env:
-        # Übergib dein Secret an das Script
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # optional fallback, nur wenn du ein PAT verwenden willst:
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-        # Falls du stattdessen eine Repository-Variable namens GIT_REPOSITORY eingerichtet hast:
         GIT_REPOSITORY: ${{ vars.GIT_REPOSITORY }}
       run: python update_codey.py
 
