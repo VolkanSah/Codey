@@ -4,6 +4,9 @@ A fun little script that turns your GitHub activity into a digital pet!
 
 Codey is a project that updates daily based on your commits and merged pull requests, reflecting your coding journey in a cute, animated SVG badge.
 
+## Example: 
+![Codey - Your GitHub Pet](https://raw.githubusercontent.com/VolkanSah/Codey/main/codey.svg)
+
 ## ✨ Features
 
 * **Daily Updates:** Automatically refreshes your pet's stats every day via GitHub Actions.
