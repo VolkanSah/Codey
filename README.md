@@ -4,6 +4,8 @@
 
 ![Codey - Your GitHub Pet](https://raw.githubusercontent.com/VolkanSah/Codey/refs/heads/v.2/codey.svg)
 
+[Behind the scenes of Codey](Behind-the-Scenes.md)
+
 
 A powerful script that transforms your GitHub activity into a comprehensive digital pet, complete with deep RPG stats and dynamic growth.
 
