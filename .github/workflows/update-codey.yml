@@ -1,8 +1,10 @@
+# nur die relevanten Teile / ersetze den Commit-Step in deiner aktuellen Datei
 name: Update Codey
+
 on:
-  workflow_dispatch:
   schedule:
     - cron: '0 6 * * *'
+  workflow_dispatch:
 
 jobs:
   update-codey:
@@ -13,8 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        # entweder entferne die token-Zeile ganz (dann wird GITHUB_TOKEN genutzt),
-        # oder explizit GITHUB_TOKEN setzen:
         token: ${{ secrets.GITHUB_TOKEN }}
         persist-credentials: true
 
@@ -30,7 +30,6 @@ jobs:
     - name: Update Codey
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # optional fallback, nur wenn du ein PAT verwenden willst:
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
         GIT_REPOSITORY: ${{ vars.GIT_REPOSITORY }}
       run: python update_codey.py
@@ -39,6 +38,14 @@ jobs:
       run: |
         git config --local user.name "Codey Bot"
         git config --local user.email "action@github.com"
-        git add codey.svg codey.json
-        git commit -m "🐾 Daily Codey update" || exit 0
-        git push
+
+        # Versuche nur die generierten Dateien hinzuzufügen (Fehler unterdrücken)
+        git add codey.svg codey.json 2>/dev/null || true
+
+        # Wenn nichts gestaged ist, nichts committen/pushen
+        if git diff --cached --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "🐾 Daily Codey update"
+          git push
+        fi
