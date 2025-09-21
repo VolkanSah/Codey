@@ -1,3 +1,4 @@
+# IDEA dont know wich version :D
 #!/usr/bin/env python3
 # update_codey.py — robust: supports repo (owner/repo or URL) OR account (owner or URL to user)
 # - If you pass a repo (e.g. "VolkanSah/Codey" or "https://github.com/VolkanSah/Codey")
