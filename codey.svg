@@ -5,7 +5,7 @@
     🌟 Codey Level 7 - Influencer 🌟
   </text>
   <circle cx="120" cy="130" r="45" fill="#21262d" stroke="#30363d" stroke-width="2"/>
-  <text x="120" y="145" text-anchor="middle" font-size="60" font-family="Arial, sans-serif">📓</text>
+  <text x="120" y="145" text-anchor="middle" font-size="60" font-family="Arial, sans-serif">🦉</text>
   <circle cx="120" cy="190" r="25" fill="#21262d" stroke="#30363d" stroke-width="1"/>
   <text x="120" y="195" text-anchor="middle" font-size="25">✨</text>
   <text x="120" y="240" text-anchor="middle" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">
@@ -13,17 +13,17 @@
   </text>
   <g transform="translate(200, 70)">
     <text x="0" y="20" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
-    <text x="350" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">35%</text>
+    <text x="350" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">33%</text>
     <rect x="0" y="25" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="25" width="122.5" height="12" fill="#f85149" rx="6"/>
+    <rect x="0" y="25" width="116.66666666666667" height="12" fill="#f85149" rx="6"/>
     <text x="0" y="60" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
     <text x="350" y="60" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">90%</text>
     <rect x="0" y="65" width="350" height="12" fill="#21262d" rx="6"/>
     <rect x="0" y="65" width="315.0" height="12" fill="#ffa657" rx="6"/>
     <text x="0" y="100" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
-    <text x="350" y="100" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">15%</text>
+    <text x="350" y="100" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">10%</text>
     <rect x="0" y="105" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="105" width="52.5" height="12" fill="#a855f7" rx="6"/>
+    <rect x="0" y="105" width="35.0" height="12" fill="#a855f7" rx="6"/>
     <text x="0" y="140" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
     <text x="350" y="140" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">0%</text>
     <rect x="0" y="145" width="350" height="12" fill="#21262d" rx="6"/>
@@ -39,10 +39,10 @@
   </g>
   <g transform="translate(300, 360)">
     <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14">
-      🔥 3 day streak • 📊 155 commits
+      🔥 4 day streak • 📊 174 commits
     </text>
   </g>
   <text x="300" y="385" text-anchor="middle" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">
-    2025-09-21 12:43 UTC
+    2025-09-21 12:48 UTC
   </text>
 </svg>
