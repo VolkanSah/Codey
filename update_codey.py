@@ -137,7 +137,9 @@ def get_all_data_for_user(owner):
 
 
 def connect_to_db():
-    conn_string = f"postgres://{NEON_API_KEY}@{NEON_PROJECT_ID}.cloud.neon.tech/neondb?sslmode=require"
+    conn_string = os.environ.get('DATABASE_URL')
+    if not conn_string:
+        raise ValueError("DATABASE_URL environment variable is not set.")
     return psycopg2.connect(conn_string)
 
 def load_codey_from_db(owner):
