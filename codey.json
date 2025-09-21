@@ -1,10 +1,10 @@
 {
-  "health": 43.333333333333336,
-  "hunger": 80,
-  "happiness": 30,
-  "energy": 20,
+  "health": 45.0,
+  "hunger": 70,
+  "happiness": 25,
+  "energy": 40,
   "level": 5,
-  "streak": 2,
+  "streak": 1,
   "total_commits": 111,
   "mood": "neutral"
 }

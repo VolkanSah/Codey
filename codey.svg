@@ -22,38 +22,38 @@
   <g transform="translate(200, 70)">
     <!-- Health -->
     <text x="0" y="20" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
-    <text x="350" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">43%</text>
+    <text x="350" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">45%</text>
     <rect x="0" y="25" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="25" width="151.66666666666669" height="12" fill="#f85149" rx="6"/>
+    <rect x="0" y="25" width="157.5" height="12" fill="#f85149" rx="6"/>
     
     <!-- Hunger -->
     <text x="0" y="60" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
-    <text x="350" y="60" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">80%</text>
+    <text x="350" y="60" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">70%</text>
     <rect x="0" y="65" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="65" width="280.0" height="12" fill="#ffa657" rx="6"/>
+    <rect x="0" y="65" width="245.0" height="12" fill="#ffa657" rx="6"/>
     
     <!-- Happiness -->
     <text x="0" y="100" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
-    <text x="350" y="100" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">30%</text>
+    <text x="350" y="100" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">25%</text>
     <rect x="0" y="105" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="105" width="105.0" height="12" fill="#a855f7" rx="6"/>
+    <rect x="0" y="105" width="87.5" height="12" fill="#a855f7" rx="6"/>
     
     <!-- Energy -->
     <text x="0" y="140" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
-    <text x="350" y="140" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">20%</text>
+    <text x="350" y="140" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">40%</text>
     <rect x="0" y="145" width="350" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="145" width="70.0" height="12" fill="#3fb950" rx="6"/>
+    <rect x="0" y="145" width="140.0" height="12" fill="#3fb950" rx="6"/>
   </g>
   
   <!-- Statistik am unteren Rand -->
   <g transform="translate(300, 250)">
     <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14">
-      🔥 2 day streak • 📊 111 commits
+      🔥 1 day streak • 📊 111 commits
     </text>
   </g>
   
   <!-- Zeitstempel -->
   <text x="300" y="280" text-anchor="middle" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">
-    2025-09-21 10:02 UTC
+    2025-09-21 10:07 UTC
   </text>
 </svg>
