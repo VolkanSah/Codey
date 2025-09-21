@@ -1,0 +1,17 @@
+- name: Debug auth
+  run: |
+    git remote -v
+    python - <<'PY'
+import os, requests
+t = os.environ.get('GIT_TOKEN') or os.environ.get('GITHUB_TOKEN')
+h = {'Authorization': f'token {t}'} if t else {}
+r = requests.get('https://api.github.com/user', headers=h, timeout=10)
+print("status", r.status_code)
+try:
+    print(r.json())
+except:
+    print(r.text)
+PY
+  env:
+    GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
