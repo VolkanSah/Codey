@@ -1,0 +1,20 @@
+# Zusätzlich: .github/dependabot.yml
+version: 2
+updates:
+  # GitHub Actions Updates
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    commit-message:
+      prefix: "🤖 "
+      include: "scope"
+
+  # Python Dependencies Updates
+  - package-ecosystem: "pip"
+    directory: "/scripts"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "🐍 "
