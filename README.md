@@ -1,13 +1,14 @@
 # 🐾 Codey (Lite) - Your Personal GitHub Pet
-#### A simple pet
-🐾 Codey [The Full RPG Experience? here ->](https://github.com/VolkanSah/Codey/tree/v.2)
 
-A fun little script that turns your GitHub activity into a digital pet!
-
-Codey is a project that updates daily based on your commits and merged pull requests, reflecting your coding journey in a cute, animated SVG badge.
+A fun little script that turns your GitHub activity into a digital pet! **Codey** is a project that updates daily based on your commits and merged pull requests, reflecting your coding journey in a cute, animated SVG badge.
 
 ## Example: 
 ![Codey - Your GitHub Pet](https://raw.githubusercontent.com/VolkanSah/Codey/main/codey.svg)
+
+
+> [!IMPORTANT]
+> The Lite version was the initial concept, but I've stopped its development to rebuild the project from scratch. This new logic allows for the full range of features.
+> For the best experience, please use Codey [The Full RPG Experience](https://github.com/VolkanSah/Codey/tree/v.2).
 
 ## ✨ Features
 
@@ -17,6 +18,8 @@ Codey is a project that updates daily based on your commits and merged pull requ
 * **Dynamic Moods:** Codey's mood (😊, 😢, 😴, 😐) changes based on its well-being.
 * **Leveling System:** Gain experience and level up as you contribute more, unlocking new pet forms.
 * **Commit Streak:** Keeps track of your daily coding streak.
+
+
 
 ## 🚀 How to Use Codey in Your Own Repository
 
