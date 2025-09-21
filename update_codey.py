@@ -5,8 +5,8 @@ import os
 from datetime import datetime, timedelta
 
 # GitHub API Setup
-TOKEN = os.environ['GITHUB_TOKEN']
-REPO = os.environ['GITHUB_REPOSITORY']
+TOKEN = os.environ['GIT_TOKEN']
+REPO = os.environ['GIT_REPOSITORY']
 OWNER = REPO.split('/')[0]
 
 headers = {'Authorization': f'token {TOKEN}'}
