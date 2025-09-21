@@ -1,5 +1,6 @@
 # 🐾 Codey (Lite) - Your Personal GitHub Pet
 #### A simple pet
+🐾 Codey [The Full RPG Experience?](https://github.com/VolkanSah/Codey/tree/v.2)
 
 A fun little script that turns your GitHub activity into a digital pet!
 
