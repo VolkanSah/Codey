@@ -1,63 +1,59 @@
 <svg width="600" height="300" xmlns="http://www.w3.org/2000/svg">
-  <!-- Hintergrund mit Gradient -->
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0d1117"/>
-      <stop offset="100%" style="stop-color:#161b22"/>
-    </linearGradient>
-  </defs>
-  <rect width="600" height="300" fill="url(#bg)" rx="15"/>
+  <!-- Hintergrund mit abgerundeten Ecken -->
+  <rect width="600" height="300" fill="#0d1117" rx="15"/>
   
-  <!-- Titel größer und zentrierter -->
-  <text x="300" y="35" text-anchor="middle" fill="#f0f6fc" font-family="system-ui" font-size="22" font-weight="bold">
-    🌟 Codey Level 3 🌟
+  <!-- Hauptcontainer -->
+  <rect x="20" y="20" width="560" height="260" fill="#161b22" rx="12" stroke="#30363d" stroke-width="1"/>
+  
+  <!-- Titel -->
+  <text x="300" y="45" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="20" font-weight="bold">
+    🌟 Codey Level 5 🌟
   </text>
   
-  <!-- Pet Display größer -->
-  <g transform="translate(150, 130)">
-    <circle r="50" fill="#21262d" stroke="#30363d" stroke-width="3"/>
-    <text y="15" text-anchor="middle" font-size="60">🐍</text>
-    <text y="70" text-anchor="middle" font-size="30">😴</text>
+  <!-- Pet mit Rahmen -->
+  <circle cx="120" cy="130" r="45" fill="#21262d" stroke="#30363d" stroke-width="2"/>
+  <text x="120" y="145" text-anchor="middle" font-size="60" font-family="Arial, sans-serif">🐍</text>
+  
+  <!-- Stimmungsanzeige -->
+  <circle cx="120" cy="190" r="25" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <text x="120" y="195" text-anchor="middle" font-size="25">😴</text>
+  
+  <!-- Statusbalken -->
+  <g transform="translate(200, 70)">
+    <!-- Health -->
+    <text x="0" y="20" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
+    <text x="350" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">42%</text>
+    <rect x="0" y="25" width="350" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="25" width="145.83333333333331" height="12" fill="#f85149" rx="6"/>
+    
+    <!-- Hunger -->
+    <text x="0" y="60" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
+    <text x="350" y="60" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">90%</text>
+    <rect x="0" y="65" width="350" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="65" width="315.0" height="12" fill="#ffa657" rx="6"/>
+    
+    <!-- Happiness -->
+    <text x="0" y="100" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
+    <text x="350" y="100" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">35%</text>
+    <rect x="0" y="105" width="350" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="105" width="122.5" height="12" fill="#a855f7" rx="6"/>
+    
+    <!-- Energy -->
+    <text x="0" y="140" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
+    <text x="350" y="140" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">0%</text>
+    <rect x="0" y="145" width="350" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="145" width="0.0" height="12" fill="#3fb950" rx="6"/>
   </g>
   
-  <!-- Status Bars mit mehr Abstand und größer -->
-  <g transform="translate(280, 80)">
-    <!-- Health Bar -->
-    <text x="0" y="20" fill="#f0f6fc" font-family="system-ui" font-size="16" font-weight="500">❤️ Health: 43%</text>
-    <rect x="0" y="28" width="280" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="28" width="121.33333333333333" height="12" fill="#f85149" rx="6"/>
-    
-    <!-- Hunger Bar -->
-    <text x="0" y="65" fill="#f0f6fc" font-family="system-ui" font-size="16" font-weight="500">🍖 Hunger: 90%</text>
-    <rect x="0" y="73" width="280" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="73" width="251.99999999999997" height="12" fill="#ffa657" rx="6"/>
-    
-    <!-- Happiness Bar -->
-    <text x="0" y="110" fill="#f0f6fc" font-family="system-ui" font-size="16" font-weight="500">😊 Happiness: 40%</text>
-    <rect x="0" y="118" width="280" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="118" width="112.0" height="12" fill="#a855f7" rx="6"/>
-    
-    <!-- Energy Bar -->
-    <text x="0" y="155" fill="#f0f6fc" font-family="system-ui" font-size="16" font-weight="500">⚡ Energy: 0%</text>
-    <rect x="0" y="163" width="280" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="163" width="0.0" height="12" fill="#3fb950" rx="6"/>
+  <!-- Statistik am unteren Rand -->
+  <g transform="translate(300, 250)">
+    <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14">
+      🔥 3 day streak • 📊 111 commits
+    </text>
   </g>
-  
-  <!-- Streak und Stats größer und weiter unten -->
-  <text x="300" y="250" text-anchor="middle" fill="#8b949e" font-family="system-ui" font-size="14" font-weight="500">
-    🔥 2 day streak • 📊 71 total commits
-  </text>
   
   <!-- Zeitstempel -->
-  <text x="300" y="275" text-anchor="middle" fill="#6e7681" font-family="system-ui" font-size="12">
-    Last updated: 2025-09-21 09:42 UTC
+  <text x="300" y="280" text-anchor="middle" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">
+    2025-09-21 09:49 UTC
   </text>
-  
-  <!-- Zusätzliche Deko-Elemente -->
-  <g opacity="0.3">
-    <circle cx="50" cy="50" r="3" fill="#30363d"/>
-    <circle cx="550" cy="60" r="2" fill="#30363d"/>
-    <circle cx="70" cy="250" r="2" fill="#30363d"/>
-    <circle cx="530" cy="240" r="3" fill="#30363d"/>
-  </g>
 </svg>
