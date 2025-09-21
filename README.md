@@ -1,6 +1,7 @@
 # 🐾 Codey - Your Personal GitHub Pet
 
 #### The Full RPG Experience + Brain 😃 dev :(
+sorry neon newbie
 
 ![Codey - Your GitHub Pet](codey.svg)
 
@@ -82,6 +83,7 @@ Once the workflow is set up and has run at least once, `codey.svg` and `codey.js
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
 
 
