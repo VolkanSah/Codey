@@ -40,7 +40,7 @@ OWNER = REPO.split('/')[0] if is_repo_mode else REPO.split('/')[0]
 
 headers = {}
 if TOKEN:
-    headers = {'Authorization': f'token {TOKEN}', 'Accept': 'application/vnd.github.v3+json'}
+    headers = {'Authorization': f'token {TOKEN}', 'Accept': 'application/vnd.github.com.v3+json'}
 else:
     print("Hinweis: Kein Token gesetzt — API-Abrufe sind stark eingeschränkt.", file=sys.stderr)
 
@@ -87,7 +87,6 @@ def get_all_data_for_user(owner):
     commit_hours = []
     languages_bytes = Counter()
     
-    # Get all repos for the user to calculate all-time stats like stars, forks etc.
     ok, repos_list = get_json_safe(f'https://api.github.com/users/{owner}/repos', params={'per_page': 100})
     if ok and isinstance(repos_list, list):
         total_own_repos = len([r for r in repos_list if r.get('owner', {}).get('login') == owner])
@@ -99,7 +98,6 @@ def get_all_data_for_user(owner):
             if ok_l and isinstance(lang_data, dict):
                 languages_bytes.update(lang_data)
 
-    # Process events for recent activity
     now = datetime.now(timezone.utc)
     one_day_ago = now - timedelta(days=1)
     daily_commits_count = 0
@@ -116,8 +114,6 @@ def get_all_data_for_user(owner):
             elif event.get('type') == 'PullRequestEvent' and event.get('payload', {}).get('action') == 'closed' and event.get('payload', {}).get('pull_request', {}).get('merged'):
                 daily_prs_merged += 1
     
-    # Placeholder for all-time stats from a user's events (not directly available)
-    # The full repo crawl for all-time stats is too slow, so we'll use a simplified version for now.
     dominant_language = languages_bytes.most_common(1)
     dominant_language = dominant_language[0][0] if dominant_language else 'unknown'
     
@@ -141,6 +137,9 @@ def load_codey():
         with open('codey.json', 'r') as f:
             data = json.load(f)
             print("codey.json geladen.")
+            # Ensure rpg_stats is always a dictionary
+            if 'rpg_stats' not in data or not isinstance(data['rpg_stats'], dict):
+                data['rpg_stats'] = {}
             return data
     except (FileNotFoundError, json.JSONDecodeError):
         print("codey.json nicht gefunden oder ungültig — erstelle Standard-Daten.")
@@ -151,6 +150,9 @@ def load_codey():
     }
 
 def update_stats(codey, daily_activity, all_time_data):
+    if 'rpg_stats' not in codey:
+        codey['rpg_stats'] = {}
+        
     codey['hunger'] = min(100, codey['hunger'] + daily_activity['commits'] * 10 + daily_activity['prs'] * 15)
     codey['happiness'] = min(100, codey['happiness'] + daily_activity['prs'] * 8)
     codey['energy'] = max(0, codey['energy'] - daily_activity['commits'] * 2 - daily_activity['prs'] * 5 + 20)
@@ -297,7 +299,6 @@ if __name__ == "__main__":
         full = REPO
         repo_data = get_repo_data(full)
         if repo_data:
-            all_repos = [repo_data]
             print(f"Mode: single repo -> {full}")
             ok_c, commits = get_json_safe(f'https://api.github.com/repos/{full}/commits', params={'author': OWNER})
             if ok_c and isinstance(commits, list):
