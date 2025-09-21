@@ -23,14 +23,12 @@ def normalize_repo_input(r):
     r = r.strip()
     if r.startswith('http://') or r.startswith('https://'):
         parts = r.rstrip('/').split('/')
-        if len(parts) >= 2:
-            last = parts[-1]
-            second_last = parts[-2]
-            if second_last.lower() == 'github.com' and len(parts) >= 3:
-                if len(parts) >= 4:
-                    return f"{parts[-2]}/{parts[-1]}"
-                else:
-                    return parts[-1]
+        if 'github.com' in parts:
+            gh_index = parts.index('github.com')
+            if len(parts) > gh_index + 2:
+                return f"{parts[gh_index + 1]}/{parts[gh_index + 2]}"
+            elif len(parts) > gh_index + 1:
+                return parts[gh_index + 1]
         return r
     return r
 
@@ -105,12 +103,14 @@ def get_all_data(owner, repos_list):
     languages_bytes = Counter()
     
     for repo_data in repos_list:
+        if not isinstance(repo_data, dict) or not repo_data.get('full_name'):
+            continue
+        
         if repo_data.get('owner', {}).get('login') == owner:
             total_own_repos += 1
             total_stars += repo_data.get('stargazers_count', 0)
             total_forks += repo_data.get('forks_count', 0)
 
-        # Get commits for this repo (all time)
         ok_c, commits_data = get_json_safe(f'https://api.github.com/repos/{repo_data["full_name"]}/commits', params={'author': owner})
         if ok_c and isinstance(commits_data, list):
             total_commits_all_time += len(commits_data)
@@ -120,12 +120,10 @@ def get_all_data(owner, repos_list):
                     commit_hour = datetime.fromisoformat(commit_date_str.replace('Z', '+00:00')).hour
                     commit_hours.append(commit_hour)
 
-        # Get language data for this repo
         ok_l, lang_data = get_json_safe(f'https://api.github.com/repos/{repo_data["full_name"]}/languages')
         if ok_l and isinstance(lang_data, dict):
             languages_bytes.update(lang_data)
 
-        # Get issues & PRs
         ok_i, issues_data = get_json_safe(f'https://api.github.com/repos/{repo_data["full_name"]}/issues', params={'state': 'all', 'creator': owner})
         if ok_i and isinstance(issues_data, list):
             for issue in issues_data:
@@ -137,11 +135,9 @@ def get_all_data(owner, repos_list):
                     else:
                         total_issues_opened += 1
     
-    # Calculate dominant language
     dominant_language = languages_bytes.most_common(1)
     dominant_language = dominant_language[0][0] if dominant_language else 'unknown'
 
-    # Calculate peak hour
     peak_hour = Counter(commit_hours).most_common(1)
     peak_hour = peak_hour[0][0] if peak_hour else 0
 
@@ -172,7 +168,6 @@ def load_codey():
     }
 
 def update_stats(codey, daily_activity, all_time_data):
-    # Old stats logic
     codey['hunger'] = min(100, codey['hunger'] + daily_activity['commits'] * 10 + daily_activity['prs'] * 15)
     codey['happiness'] = min(100, codey['happiness'] + daily_activity['prs'] * 8)
     codey['energy'] = max(0, codey['energy'] - daily_activity['commits'] * 2 - daily_activity['prs'] * 5 + 20)
@@ -186,7 +181,6 @@ def update_stats(codey, daily_activity, all_time_data):
     codey['total_commits'] += daily_activity['commits']
     codey['level'] = min(10, 1 + codey['total_commits'] // 25)
 
-    # New RPG stats logic
     followers = all_time_data.get('user_data', {}).get('followers', 1)
     following = all_time_data.get('user_data', {}).get('following', 1)
     
@@ -263,7 +257,7 @@ def generate_svg(codey):
   <rect width="600" height="400" fill="{colors['background']}" rx="15"/>
   <rect x="20" y="20" width="560" height="360" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
   <text x="300" y="45" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="20" font-weight="bold">
-    🌟 Codey Level {codey['level']} - {codey.get('rpg_stats', {}).get('personality', 'Balanced').title()} 🌟
+    🌟 Codey Level {codey['level']} - {codey.get('rpg_stats', {}).get('personality', 'N/A').title()} 🌟
   </text>
   <circle cx="120" cy="130" r="45" fill="#21262d" stroke="{colors['border']}" stroke-width="2"/>
   <text x="120" y="145" text-anchor="middle" font-size="60" font-family="Arial, sans-serif">{pet_emoji}</text>
@@ -312,27 +306,31 @@ def generate_svg(codey):
 if __name__ == "__main__":
     print("🐾 Updating Codey...")
     
-    # Existing daily activity check
     since = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
     daily_commits_count = 0
     daily_prs_merged = 0
+    all_repos = []
     
     if is_repo_mode:
         full = REPO
-        print(f"Mode: single repo -> {full}")
-        ok_c, commits = get_json_safe(f'https://api.github.com/repos/{full}/commits', params={'since': since, 'author': OWNER})
-        if ok_c and isinstance(commits, list):
-            daily_commits_count = len(commits)
-        ok_p, prs = get_json_safe(f'https://api.github.com/repos/{full}/pulls', params={'state': 'closed', 'since': since})
-        if ok_p and isinstance(prs, list):
-            daily_prs_merged = sum(1 for p in prs if isinstance(p, dict) and p.get('merged_at') and p.get('user', {}).get('login') == OWNER)
-        all_repos = [get_json_safe(f'https://api.github.com/repos/{full}')[1]]
+        ok_repo_data, repo_data = get_json_safe(f'https://api.github.com/repos/{full}')
+        if ok_repo_data:
+            all_repos = [repo_data]
+            print(f"Mode: single repo -> {full}")
+            ok_c, commits = get_json_safe(f'https://api.github.com/repos/{full}/commits', params={'since': since, 'author': OWNER})
+            if ok_c and isinstance(commits, list):
+                daily_commits_count = len(commits)
+            ok_p, prs = get_json_safe(f'https://api.github.com/repos/{full}/pulls', params={'state': 'closed', 'since': since})
+            if ok_p and isinstance(prs, list):
+                daily_prs_merged = sum(1 for p in prs if isinstance(p, dict) and p.get('merged_at') and p.get('user', {}).get('login') == OWNER)
     else:
         owner = OWNER
-        print(f"Mode: aggregate owner -> {owner}")
         all_repos = list_repos_for_user(owner)
         if all_repos:
+            print(f"Mode: aggregate owner -> {owner}")
             for repo in all_repos:
+                if not isinstance(repo, dict) or not repo.get('full_name'):
+                    continue
                 ok_c, commits = get_json_safe(f'https://api.github.com/repos/{repo["full_name"]}/commits', params={'since': since, 'author': owner})
                 if ok_c and isinstance(commits, list):
                     daily_commits_count += len(commits)
@@ -343,7 +341,6 @@ if __name__ == "__main__":
     daily_activity = {'commits': daily_commits_count, 'prs': daily_prs_merged}
     print("Daily activity (counts):", daily_activity)
 
-    # New RPG data collection
     user_data = get_user_data(OWNER)
     all_time_data = get_all_data(OWNER, all_repos)
     all_time_data['user_data'] = user_data
