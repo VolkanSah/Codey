@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-# update_codey.py — robust, speichert activity.json, erzeugt codey.json und codey.svg immer
+# update_codey.py — robust: supports repo (owner/repo or URL) OR account (owner or URL to user)
+# - If you pass a repo (e.g. "VolkanSah/Codey" or "https://github.com/VolkanSah/Codey")
+#   it will fetch commits/PRs for that repository.
+# - If you pass an account (e.g. "VolkanSah" or "https://github.com/VolkanSah")
+#   it will list that user's repos and aggregate commits/merged PRs across them.
 import requests
 import json
 import os
@@ -12,10 +16,34 @@ REPO = os.environ.get('GIT_REPOSITORY') or os.environ.get('GITHUB_REPOSITORY')
 if not REPO:
     print("WARNUNG: Kein REPO gesetzt (GIT_REPOSITORY oder GITHUB_REPOSITORY). Verwende 'VolkanSah/Codey' als Fallback.")
     REPO = "VolkanSah/Codey"
-if REPO.startswith('http'):
-    parts = REPO.rstrip('/').split('/')
-    REPO = '/'.join(parts[-2:]).replace('.git', '')
-OWNER = REPO.split('/')[0]
+
+# Normalize REPO: accept owner, owner/repo, or full URL
+def normalize_repo_input(r):
+    r = r.strip()
+    if r.startswith('http://') or r.startswith('https://'):
+        parts = r.rstrip('/').split('/')
+        # last two parts could be owner/repo or if URL ends with owner only, return owner
+        if len(parts) >= 2:
+            last = parts[-1]
+            second_last = parts[-2]
+            # if URL ends with owner (e.g. https://github.com/VolkanSah) -> return owner
+            # if ends with repo (e.g. https://github.com/VolkanSah/Codey) -> return owner/repo
+            if second_last.lower() == 'github.com' and len(parts) >= 3:
+                # actually parts[-2] is owner when url is /owner/repo
+                # detect if URL contains repo by checking length; if there are 2 segments after domain -> owner/repo
+                # simplified: if the URL has at least owner and repo, return owner/repo, else owner
+                if len(parts) >= 4:
+                    return f"{parts[-2]}/{parts[-1]}"
+                else:
+                    return parts[-1]
+        return r
+    return r
+
+REPO = normalize_repo_input(REPO)
+
+# Determine whether input is owner/repo or just owner
+is_repo_mode = '/' in REPO and len(REPO.split('/')) == 2
+OWNER = REPO.split('/')[0] if is_repo_mode else REPO.split('/')[0]
 
 headers = {}
 if TOKEN:
@@ -25,11 +53,10 @@ else:
 
 def get_json_safe(url, params=None):
     try:
-        r = requests.get(url, headers=headers, params=params, timeout=15)
+        r = requests.get(url, headers=headers, params=params, timeout=20)
     except Exception as e:
         print(f"Network-Error bei {url}: {e}", file=sys.stderr)
         return False, None
-    # Wenn kein Token gesetzt, GitHub gibt trotzdem 200 für public endpoints, sonst 401/403 möglich
     if not r.ok:
         try:
             body = r.json()
@@ -40,54 +67,157 @@ def get_json_safe(url, params=None):
     try:
         data = r.json()
     except ValueError:
-        print(f"Antwort von {url} kein JSON.", file=sys.stderr)
+        print(f"Antwort von {url} ist kein JSON.", file=sys.stderr)
         return False, r.text
     return True, data
 
+def get_authenticated_user_login():
+    """Return login of token owner, or None if no token or failed."""
+    if not TOKEN:
+        return None
+    ok, data = get_json_safe('https://api.github.com/user')
+    if not ok or not isinstance(data, dict):
+        return None
+    return data.get('login')
+
+def list_repos_for_user(owner):
+    """
+    Return list of repo full_names for the owner.
+    - If token present and owner == authenticated user, use /user/repos to include private repos.
+    - Else use /users/{owner}/repos (public repos only).
+    Handles pagination.
+    """
+    repos = []
+    auth_user = get_authenticated_user_login()
+    if auth_user and auth_user.lower() == owner.lower():
+        url = 'https://api.github.com/user/repos'
+    else:
+        url = f'https://api.github.com/users/{owner}/repos'
+
+    page = 1
+    while True:
+        ok, data = get_json_safe(url, params={'per_page': 100, 'page': page})
+        if not ok:
+            print(f"Warnung: Konnte Repos nicht listen für {owner}.", file=sys.stderr)
+            break
+        if not isinstance(data, list) or len(data) == 0:
+            break
+        for r in data:
+            if isinstance(r, dict) and r.get('full_name'):
+                repos.append(r['full_name'])
+        # detect pagination via Link header - simpler: break if less than per_page
+        if len(data) < 100:
+            break
+        page += 1
+    return repos
+
+def get_activity_for_repo(full_repo, since_iso):
+    """Return (commits_count_by_owner, merged_prs_count) for a single repo."""
+    commits_count = 0
+    prs_merged = 0
+    # commits by author (use author param to narrow down)
+    commits_url = f'https://api.github.com/repos/{full_repo}/commits'
+    ok, commits = get_json_safe(commits_url, params={'since': since_iso, 'per_page': 100})
+    if ok and isinstance(commits, list):
+        commits_count = len([c for c in commits if isinstance(c, dict)])
+    else:
+        # fallback: 0
+        commits_count = 0
+
+    # PRs: list closed PRs and count merged
+    prs_url = f'https://api.github.com/repos/{full_repo}/pulls'
+    okp, prs = get_json_safe(prs_url, params={'state': 'closed', 'per_page': 100})
+    if okp and isinstance(prs, list):
+        prs_merged = sum(1 for p in prs if isinstance(p, dict) and p.get('merged_at'))
+    else:
+        prs_merged = 0
+
+    return commits_count, prs_merged
+
 def get_github_activity():
-    """Holt Rohdaten und zählt Commits / PRs; speichert activity.json für Debug."""
-    yesterday = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
-    commits_url = f'https://api.github.com/repos/{REPO}/commits'
-    ok_c, commits = get_json_safe(commits_url, params={'since': yesterday, 'per_page': 100})
-    if not ok_c or not isinstance(commits, list):
-        print("Warnung: commits konnte nicht als Liste gelesen werden; setze commits = []", file=sys.stderr)
-        commits = []
+    """Holt Rohdaten und zählt Commits / PRs; speichert activity.json für Debug.
+       Supports both: single repo OR aggregate over all repos of an account.
+    """
+    since = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
+    total_commits = 0
+    total_prs = 0
+    per_repo = {}
 
-    prs_url = f'https://api.github.com/repos/{REPO}/pulls'
-    ok_p, prs = get_json_safe(prs_url, params={'state': 'closed', 'per_page': 100})
-    if not ok_p or not isinstance(prs, list):
-        print("Warnung: prs konnte nicht als Liste gelesen werden; setze prs = []", file=sys.stderr)
-        prs = []
+    if is_repo_mode:
+        full = REPO
+        print(f"Mode: single repo -> {full}")
+        commits_url = f'https://api.github.com/repos/{full}/commits'
+        ok_c, commits = get_json_safe(commits_url, params={'since': since, 'per_page': 100})
+        if not ok_c or not isinstance(commits, list):
+            print("Warnung: commits konnte nicht als Liste gelesen werden; setze commits = []", file=sys.stderr)
+            commits = []
+        prs_url = f'https://api.github.com/repos/{full}/pulls'
+        ok_p, prs = get_json_safe(prs_url, params={'state': 'closed', 'per_page': 100})
+        if not ok_p or not isinstance(prs, list):
+            print("Warnung: prs konnte nicht als Liste gelesen werden; setze prs = []", file=sys.stderr)
+            prs = []
 
-    # Speichere die rohen Ergebnisse (kurz, nur wenn sie existieren)
+        # count owner commits conservatively (author may be None)
+        commit_count = 0
+        owner_login = OWNER
+        for c in commits:
+            if not isinstance(c, dict):
+                continue
+            author = c.get('author')
+            if isinstance(author, dict) and author.get('login') == owner_login:
+                commit_count += 1
+        recent_prs = sum(1 for pr in prs if isinstance(pr, dict) and pr.get('merged_at'))
+        total_commits = commit_count
+        total_prs = recent_prs
+        per_repo[full] = {'commits': commit_count, 'prs': recent_prs}
+    else:
+        owner = OWNER
+        print(f"Mode: aggregate owner -> {owner}")
+        repos = list_repos_for_user(owner)
+        if not repos:
+            print(f"Warnung: Keine Repos gefunden für {owner} (oder Fehler beim Listen).", file=sys.stderr)
+        # iterate repos and aggregate
+        for full in repos:
+            print(f"Checking repo: {full}")
+            # use commit author filter where possible to reduce data
+            ok_c, commits_data = get_json_safe(f'https://api.github.com/repos/{full}/commits', params={'since': since, 'author': owner, 'per_page': 100})
+            commits_count = 0
+            if ok_c and isinstance(commits_data, list):
+                commits_count = len(commits_data)
+            else:
+                # fallback: try fetching without author and filter later (expensive)
+                if ok_c and isinstance(commits_data, dict):
+                    # unexpected shape; skip
+                    commits_count = 0
+                else:
+                    commits_count = 0
+
+            ok_p, prs_data = get_json_safe(f'https://api.github.com/repos/{full}/pulls', params={'state': 'closed', 'per_page': 100})
+            prs_merged = 0
+            if ok_p and isinstance(prs_data, list):
+                prs_merged = sum(1 for p in prs_data if isinstance(p, dict) and p.get('merged_at'))
+            per_repo[full] = {'commits': commits_count, 'prs': prs_merged}
+            total_commits += commits_count
+            total_prs += prs_merged
+
+    # write activity.json for debugging (include per-repo breakdown)
     try:
-        with open('activity.json', 'w') as f:
-            json.dump({'commits_raw': commits if isinstance(commits, list) else commits,
-                       'prs_raw': prs if isinstance(prs, list) else prs}, f, indent=2, default=str)
-        print("activity.json geschrieben.")
+        with open('activity.json', 'w', encoding='utf-8') as f:
+            json.dump({
+                'since': since,
+                'mode': 'repo' if is_repo_mode else 'owner',
+                'target': REPO,
+                'totals': {'commits': total_commits, 'prs': total_prs},
+                'per_repo': per_repo
+            }, f, indent=2, default=str)
+        print("activity.json written.")
     except Exception as e:
-        print(f"Fehler beim Schreiben von activity.json: {e}", file=sys.stderr)
+        print(f"Error writing activity.json: {e}", file=sys.stderr)
 
-    # Zähle commits vom Owner
-    commit_count = 0
-    for c in commits:
-        if not isinstance(c, dict):
-            continue
-        author = c.get('author')
-        if isinstance(author, dict) and author.get('login') == OWNER:
-            commit_count += 1
-        # Falls author None ist (z. B. importierte commits), könnte man commit['commit']['author']['name'] nutzen.
+    print(f"Found commits: {total_commits}, merged PRs: {total_prs}")
+    return {'commits': total_commits, 'prs': total_prs}
 
-    recent_prs = 0
-    for pr in prs:
-        if not isinstance(pr, dict):
-            continue
-        if pr.get('merged_at'):
-            recent_prs += 1
-
-    print(f"Gefundene commits (owner={OWNER}): {commit_count}, merged PRs: {recent_prs}")
-    return {'commits': commit_count, 'prs': recent_prs}
-
+# --- the rest of the script (load_codey, update_stats, generate_svg, main) remain unchanged ---
 def load_codey():
     try:
         with open('codey.json', 'r') as f:
