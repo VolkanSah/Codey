@@ -8,7 +8,7 @@ A fun little script that turns your GitHub activity into a digital pet! **Codey*
 
 > [!IMPORTANT]
 > The Lite version was the initial concept, but I've stopped its development to rebuild the project from scratch. This new logic allows for the full range of features.
-> For the best experience, please use Codey [The Full RPG Experience](https://github.com/VolkanSah/Codey/tree/v.2).
+> For the best experience, please use Codey [The Full RPG Experience](https://github.com/VolkanSah/Codey/tree/main).
 
 ## ✨ Features
 
