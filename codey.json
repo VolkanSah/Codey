@@ -1,10 +1,23 @@
 {
-  "health": 45.0,
-  "hunger": 70,
-  "happiness": 25,
-  "energy": 40,
-  "level": 5,
-  "streak": 1,
-  "total_commits": 111,
-  "mood": "neutral"
+  "health": 40.0,
+  "hunger": 90,
+  "happiness": 20,
+  "energy": 10,
+  "level": 6,
+  "streak": 2,
+  "total_commits": 136,
+  "mood": "inspired",
+  "rpg_stats": {
+    "personality": "influencer",
+    "social_status": 3,
+    "type": "night_owl",
+    "traits": {
+      "curiosity": 11.2,
+      "creativity": 20.0,
+      "teamwork": 0.0,
+      "perfectionism": 0.0,
+      "stress_level": 0.0
+    },
+    "dominant_language": "Jupyter Notebook"
+  }
 }
