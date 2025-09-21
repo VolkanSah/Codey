@@ -129,32 +129,76 @@ def update_stats(codey, activity):
 def generate_svg(codey):
     moods = {'happy': '😊', 'sad': '😢', 'tired': '😴', 'neutral': '😐'}
     pets = ['🦊', '🐍', '⚛️', '💎'][min(3, codey['level']//3)]
-    svg = f'''<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="200" fill="#0d1117" rx="10"/>
-  <text x="200" y="25" text-anchor="middle" fill="#f0f6fc" font-size="16" font-weight="bold">
+    
+    # Farbpalette für einheitliches Design
+    colors = {
+        'background': '#0d1117',
+        'card': '#161b22',
+        'text': '#f0f6fc',
+        'secondary_text': '#8b949e',
+        'health': '#f85149',
+        'hunger': '#ffa657',
+        'happiness': '#a855f7',
+        'energy': '#3fb950',
+        'border': '#30363d'
+    }
+    
+    svg = f'''<svg width="600" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund mit abgerundeten Ecken -->
+  <rect width="600" height="300" fill="{colors['background']}" rx="15"/>
+  
+  <!-- Hauptcontainer -->
+  <rect x="20" y="20" width="560" height="260" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
+  
+  <!-- Titel -->
+  <text x="300" y="45" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="20" font-weight="bold">
     🌟 Codey Level {codey['level']} 🌟
   </text>
-  <circle cx="100" cy="100" r="35" fill="#21262d" stroke="#30363d" stroke-width="2"/>
-  <text x="100" y="110" text-anchor="middle" font-size="40">{pets}</text>
-  <text x="100" y="140" text-anchor="middle" font-size="20">{moods[codey['mood']]}</text>
-  <g transform="translate(160, 70)">
-    <text x="0" y="15" fill="#f0f6fc" font-size="11">❤️ Health: {codey['health']:.0f}%</text>
-    <rect x="0" y="20" width="200" height="6" fill="#21262d" rx="3"/>
-    <rect x="0" y="20" width="{codey['health']*2}" height="6" fill="#f85149" rx="3"/>
-    <text x="0" y="40" fill="#f0f6fc" font-size="11">🍖 Hunger: {codey['hunger']:.0f}%</text>
-    <rect x="0" y="45" width="200" height="6" fill="#21262d" rx="3"/>
-    <rect x="0" y="45" width="{codey['hunger']*2}" height="6" fill="#ffa657" rx="3"/>
-    <text x="0" y="65" fill="#f0f6fc" font-size="11">😊 Happy: {codey['happiness']:.0f}%</text>
-    <rect x="0" y="70" width="200" height="6" fill="#21262d" rx="3"/>
-    <rect x="0" y="70" width="{codey['happiness']*2}" height="6" fill="#a855f7" rx="3"/>
-    <text x="0" y="90" fill="#f0f6fc" font-size="11">⚡ Energy: {codey['energy']:.0f}%</text>
-    <rect x="0" y="95" width="200" height="6" fill="#21262d" rx="3"/>
-    <rect x="0" y="95" width="{codey['energy']*2}" height="6" fill="#3fb950" rx="3"/>
+  
+  <!-- Pet mit Rahmen -->
+  <circle cx="120" cy="130" r="45" fill="#21262d" stroke="{colors['border']}" stroke-width="2"/>
+  <text x="120" y="145" text-anchor="middle" font-size="60" font-family="Arial, sans-serif">{pets}</text>
+  
+  <!-- Stimmungsanzeige -->
+  <circle cx="120" cy="190" r="25" fill="#21262d" stroke="{colors['border']}" stroke-width="1"/>
+  <text x="120" y="195" text-anchor="middle" font-size="25">{moods[codey['mood']]}</text>
+  
+  <!-- Statusbalken -->
+  <g transform="translate(200, 70)">
+    <!-- Health -->
+    <text x="0" y="20" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
+    <text x="350" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['health']:.0f}%</text>
+    <rect x="0" y="25" width="350" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="25" width="{codey['health']*3.5}" height="12" fill="{colors['health']}" rx="6"/>
+    
+    <!-- Hunger -->
+    <text x="0" y="60" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
+    <text x="350" y="60" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['hunger']:.0f}%</text>
+    <rect x="0" y="65" width="350" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="65" width="{codey['hunger']*3.5}" height="12" fill="{colors['hunger']}" rx="6"/>
+    
+    <!-- Happiness -->
+    <text x="0" y="100" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
+    <text x="350" y="100" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['happiness']:.0f}%</text>
+    <rect x="0" y="105" width="350" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="105" width="{codey['happiness']*3.5}" height="12" fill="{colors['happiness']}" rx="6"/>
+    
+    <!-- Energy -->
+    <text x="0" y="140" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
+    <text x="350" y="140" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['energy']:.0f}%</text>
+    <rect x="0" y="145" width="350" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="145" width="{codey['energy']*3.5}" height="12" fill="{colors['energy']}" rx="6"/>
   </g>
-  <text x="200" y="170" text-anchor="middle" fill="#8b949e" font-size="10">
-    🔥 {codey['streak']} day streak • 📊 {codey['total_commits']} commits
-  </text>
-  <text x="200" y="185" text-anchor="middle" fill="#6e7681" font-size="9">
+  
+  <!-- Statistik am unteren Rand -->
+  <g transform="translate(300, 250)">
+    <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14">
+      🔥 {codey['streak']} day streak • 📊 {codey['total_commits']} commits
+    </text>
+  </g>
+  
+  <!-- Zeitstempel -->
+  <text x="300" y="280" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
     {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}
   </text>
 </svg>'''
