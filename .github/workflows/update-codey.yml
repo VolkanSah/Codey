@@ -1,4 +1,3 @@
-# .github/workflows/update-codey.yml
 name: Update Codey
 
 on:
@@ -13,11 +12,16 @@ jobs:
       contents: write
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
       with:
+        # Wenn du ein eigenes Secret GIT_TOKEN verwendest, übergib es hier.
+        # Sonst entfernt diese Zeile und actions/checkout nutzt das automatische GITHUB_TOKEN.
+        token: ${{ secrets.GIT_TOKEN }}
         persist-credentials: true
 
-    - uses: actions/setup-python@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
@@ -31,12 +35,12 @@ jobs:
         fi
 
     - name: Update Codey
-      run: python update_codey.py
       env:
-        # benutze das automatisch verfügbare Token (empfohlen)
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # Falls du weiterhin ein eigenes Secret verwenden willst, füge es zu den Repo-Secrets hinzu
-        # GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+        # Übergib dein Secret an das Script
+        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+        # Falls du stattdessen eine Repository-Variable namens GIT_REPOSITORY eingerichtet hast:
+        GIT_REPOSITORY: ${{ vars.GIT_REPOSITORY }}
+      run: python update_codey.py
 
     - name: Commit
       run: |
