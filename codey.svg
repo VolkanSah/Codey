@@ -15,9 +15,9 @@
       </text>
       <g transform="translate(200, 70)">
         <text x="0" y="20" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
-        <text x="350" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">46%</text>
+        <text x="350" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">49%</text>
         <rect x="0" y="25" width="350" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="25" width="162.16666666666669" height="12" fill="#f85149" rx="6"/>
+        <rect x="0" y="25" width="172.66666666666669" height="12" fill="#f85149" rx="6"/>
         <text x="0" y="60" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
         <text x="350" y="60" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">90%</text>
         <rect x="0" y="65" width="350" height="12" fill="#21262d" rx="6"/>
@@ -27,9 +27,9 @@
         <rect x="0" y="105" width="350" height="12" fill="#21262d" rx="6"/>
         <rect x="0" y="105" width="157.5" height="12" fill="#a855f7" rx="6"/>
         <text x="0" y="140" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
-        <text x="350" y="140" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">4%</text>
+        <text x="350" y="140" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">13%</text>
         <rect x="0" y="145" width="350" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="145" width="14.0" height="12" fill="#3fb950" rx="6"/>
+        <rect x="0" y="145" width="45.5" height="12" fill="#3fb950" rx="6"/>
         <text x="0" y="180" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">✨ Creativity</text>
         <text x="350" y="180" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">20</text>
         <rect x="0" y="185" width="350" height="12" fill="#21262d" rx="6"/>
@@ -41,10 +41,10 @@
       </g>
       <g transform="translate(300, 360)">
         <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14">
-          🗓️ 1 day streak • 📊 40.5 commits
+          🗓️ 1 day streak • 📊 36.0 commits
         </text>
       </g>
       <text x="300" y="385" text-anchor="middle" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">
-        2025-09-21 15:01 UTC
+        2025-09-21 15:10 UTC
       </text>
     </svg>
