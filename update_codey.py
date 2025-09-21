@@ -214,14 +214,69 @@ def update_stats(codey, daily_activity, all_time_data):
     codey['rpg_stats']['dominant_language'] = all_time_data.get('dominant_language')
 
     return codey
-
 def generate_svg(codey):
     moods = {'happy': '😊', 'sad': '😢', 'tired': '😴', 'neutral': '😐', 'overwhelmed': '😰', 'inspired': '✨'}
     pets = {
-        'python': '🐍',
-        'javascript': '🦊',
-        'rust': '🦀',
-        'go': '🐹'
+        # All-Time Classics
+        'C': '⚙️',
+        'C++': '💎',
+        'C#': '🎶',
+        'Java': '☕',
+        'PHP': '🐘', 
+        'Python': '🐍',
+        'JavaScript': '📜',
+        'TypeScript': '💙',
+        'Ruby': '💎',
+        'Go': '🐹',
+        'Swift': '🐦',
+        'Kotlin': '🤖',
+        'Rust': '🦀',
+        
+        # Frontend & Web
+        'HTML': '🧱',
+        'CSS': '🎨',
+        'Sass': '🌈',
+        'Vue': '🟢',
+        'React': '⚛️',
+        'Angular': '🅰️',
+        
+        # Data Science & Analytics
+        'Jupyter Notebook': '📓',
+        'R': '📊',
+        'Matlab': '📈',
+        'SQL': '🗄️',
+        'Julia': '⚛️',
+        
+        # Functional Languages
+        'Haskell': 'λ',
+        'Elixir': '🧪',
+        'Clojure': '🧠',
+        'F#': '🎼',
+        
+        # Scripting & DevOps
+        'Shell': '🐚',
+        'PowerShell': '💻',
+        'Bash': '🪖',
+        'Perl': '🐪',
+        'Lua': '🌕',
+        'Dart': '🎯',
+        
+        # Game Development
+        'GDScript': '🕹️',
+        
+        # Mobile
+        'Objective-C': '📱',
+        'Swift': '🐦',
+        'Dart': '🎯', # Dart can be used for both web and mobile
+        
+        # Others
+        'Assembly': '🤖',
+        'Solidity': '⛓️',
+        'Vim Script': '📜',
+        'GraphQL': '🔗',
+        'SCSS': '🎨',
+        'Svelte': '✨',
+        'Zig': '⚡'
     }
     default_pet = '👾'
     pet_emoji = pets.get(codey.get('rpg_stats', {}).get('dominant_language'), default_pet)
