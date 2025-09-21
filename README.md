@@ -2,7 +2,7 @@
 
 #### The Full RPG Experience
 Better to use with your GitHub Account, for Repos use Cody Lite 🙂
-![Codey - Your GitHub Pet](https://raw.githubusercontent.com/Codey/edit/v.2/main/codey.svg)
+![Codey - Your GitHub Pet](https://raw.githubusercontent.com/VolkanSah/Codey/refs/heads/v.2/codey.svg)
 
 A powerful script that transforms your GitHub activity into a comprehensive digital pet, complete with deep RPG stats and dynamic growth.
 
