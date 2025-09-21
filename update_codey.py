@@ -330,7 +330,7 @@ def generate_svg(codey, seasonal_bonus):
       </g>
       <g transform="translate(300, 360)">
         <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14">
-          🔥 {codey['streak']} day streak • 📊 {codey['total_commits']} commits
+          🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits
         </text>
       </g>
       <text x="300" y="385" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
