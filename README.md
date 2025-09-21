@@ -79,7 +79,16 @@ Once the workflow is set up and has run at least once, `codey.svg` and `codey.js
 *Remember to replace `YOUR-USERNAME` and `YOUR-REPO` with your actual GitHub username and repository name.*
 
 
+### 🧠
+only static in `codey.json`
+
+### Roadmap
+- [ ] 🚤 + 🧠 on psql
+- [ ] some other stupid stuff if i was borred
+- [ ] more fun 🥳
+
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
