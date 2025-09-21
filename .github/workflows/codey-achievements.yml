@@ -1,0 +1,70 @@
+# .github/workflows/codey-achievements.yml
+name: 🏆 Codey Achievements
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ closed ]
+  issues:
+    types: [ closed ]
+  watch:
+    types: [ started ]
+
+jobs:
+  check-achievements:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
+
+    steps:
+    - name: 🚀 Checkout
+      uses: actions/checkout@v4
+
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: 🏆 Check for New Achievements
+      run: |
+        python scripts/check_achievements.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        EVENT_TYPE: ${{ github.event_name }}
+        REPO_OWNER: ${{ github.repository_owner }}
+
+    - name: 🎉 Celebrate Achievement
+      if: env.NEW_ACHIEVEMENT == 'true'
+      run: |
+        echo "🎉 Neues Achievement freigeschaltet: ${{ env.ACHIEVEMENT_NAME }}"
+        python scripts/generate_achievement_svg.py
+      env:
+        ACHIEVEMENT: ${{ env.ACHIEVEMENT_NAME }}
+
+    - name: 📱 Post Achievement to Discussion
+      if: env.NEW_ACHIEVEMENT == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const achievement = process.env.ACHIEVEMENT_NAME;
+          const body = `🎉 **Neues Codey Achievement freigeschaltet!**
+          
+          ### 🏆 ${achievement}
+          
+          ![Achievement](https://github.com/${{ github.repository }}/blob/main/achievements/${achievement.toLowerCase().replace(/ /g, '-')}.svg)
+          
+          Codey ist stolz auf deine Leistung! 🐾`;
+          
+          // Erstelle einen neuen Discussion Post (falls Discussions aktiviert)
+          try {
+            await github.rest.repos.createDiscussion({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🏆 Achievement: ${achievement}`,
+              body: body,
+              category_slug: 'announcements'
+            });
+          } catch (error) {
+            console.log('Discussions not available, skipping...');
+          }
+
