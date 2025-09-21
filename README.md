@@ -1,4 +1,5 @@
-# 🐾 Codey - Your Personal GitHub Pet
+# 🐾 Codey (Lite) - Your Personal GitHub Pet
+#### A simple pet
 
 A fun little script that turns your GitHub activity into a digital pet!
 
