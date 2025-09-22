@@ -18,7 +18,6 @@ Codey updates daily via GitHub Actions, reflecting your entire coding journey in
     * **Personality:** Your pet's personality (`influencer`, `explorer`, `balanced`) is shaped by your follower-to-following ratio.
     * **Social Status:** A status level based on the total stars you've earned across all your projects.
     * **Dominant Language & Pet Evolution:** Your pet's form (🐍, 🦊, 🦀, 🐹) evolves based on your most-used programming language, now with an expanded list of animals and mythical creatures.
-    * **Work Style:** Your pet's type (`night_owl`, `early_bird`, `day_worker`) is determined by your peak commit hour.
     * **Advanced Traits:** Tracks professional traits like `creativity`, `curiosity`, and `teamwork`.
 * **Dynamic Moods:** Codey's mood reacts to your traits and well-being, showing new emotions like `overwhelmed` and `inspired`.
 * **Achievements System:** Unlock special badges for major milestones like `🔥 Monthly Warrior`, `💯 Commit Master`, and `⭐ Social Star`.
@@ -27,6 +26,7 @@ Codey updates daily via GitHub Actions, reflecting your entire coding journey in
 * **Weekend Bonus:** Your pet gets an energy boost to reflect your dedication to being a `Weekend Warrior`.
 * **Leveling System:** Gain experience and level up as you contribute more, unlocking new pet forms.
 * **Commit Streak:** Keeps track of your daily coding streak.
+* **and more fun*** Writing the docs needs more time the coding 😠
 
 ---
 
@@ -95,5 +95,6 @@ This edition of Codey uses a far more demanding and unforgiving system than stan
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
 
