@@ -568,25 +568,28 @@ def generate_brutal_svg(codey, seasonal_bonus):
         'border': '#30363d', 'tier': tier_colors.get(tier, '#22c55e')
     }
     
-    # Achievements display with bubble backgrounds (FIXED OVERLAPS & STYLE)
+    # Achievements display aligned to the right with darker bubble
     achievements_display = ''
     if codey.get('achievements'):
-        # Only show the latest 4 achievements to prevent clutter
-        ach_start_x = 550
-        for i, ach in enumerate(codey['achievements'][-4:]):
+        # Show last 4 achievements
+        ach_count = min(4, len(codey['achievements']))
+        ach_width = 35
+        gap = 10
+        ach_start_x = 580 - ach_count * (ach_width + gap)
+        for i, ach in enumerate(codey['achievements'][-ach_count:]):
             ach_emoji = ach.split(' ')[0]
-            x_pos = ach_start_x - (i * 45)
+            x_pos = ach_start_x + (i * (ach_width + gap)) + (ach_width / 2)
             achievements_display += f'''
-            <rect x="{x_pos-15}" y="12" width="35" height="35" rx="17.5" fill="#21262d" stroke="{colors['tier']}" stroke-width="1" opacity="0.8"/>
-            <text x="{x_pos}" y="35" text-anchor="middle" font-size="20">{ach_emoji}</text>
+            <rect x="{x_pos - (ach_width / 2)}" y="25" width="{ach_width}" height="{ach_width}" rx="17.5" fill="{colors['card']}" stroke="{colors['tier']}" stroke-width="1" opacity="0.9"/>
+            <text x="{x_pos}" y="48" text-anchor="middle" font-size="20">{ach_emoji}</text>
             '''
 
-    # Seasonal bonus display (POSITIONING FIXED)
+    # Seasonal bonus display
     seasonal_display = ''
     if seasonal_bonus:
         seasonal_display = f'''
-        <rect x="25" y="12" width="130" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.8"/>
-        <text x="90" y="35" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+        <rect x="25" y="25" width="130" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.8"/>
+        <text x="90" y="48" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
             {seasonal_bonus['emoji']} {seasonal_bonus['name']}
         </text>
         '''
@@ -607,27 +610,24 @@ def generate_brutal_svg(codey, seasonal_bonus):
         </text>
         '''
 
-    svg = f'''<svg width="600" height="450" xmlns="http://www.w3.org/2000/svg">
-      <rect width="600" height="450" fill="{colors['background']}" rx="15"/>
-      <rect x="20" y="20" width="560" height="410" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
+    svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
+      <rect width="630" height="473" fill="{colors['background']}" rx="15"/>
+      <rect x="20" y="20" width="590" height="433" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
       
-      <text x="300" y="45" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
-        {tier_emojis[tier]} CODEY Level {codey['level']} - {tier.upper()} {tier_emojis[tier]}
-      </text>
-      
-      {prestige_display}
       {seasonal_display}
       {achievements_display}
       
-      <circle cx="120" cy="150" r="50" fill="#21262d" stroke="{colors['tier']}" stroke-width="3"/>
-      <text x="120" y="165" text-anchor="middle" font-size="65" font-family="Arial, sans-serif">{pet_emoji}</text>
-      <circle cx="120" cy="225" r="25" fill="#21262d" stroke="{colors['border']}" stroke-width="1"/>
-      <text x="120" y="230" text-anchor="middle" font-size="25">{moods.get(codey['mood'], '😐')}</text>
-      <text x="120" y="260" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">
-          {codey['mood'].title()} • {brutal_stats.get('github_years', 1):.1f}y
-      </text>
+      <g transform="translate(0, 50)">
+        <circle cx="120" cy="150" r="50" fill="#21262d" stroke="{colors['tier']}" stroke-width="3"/>
+        <text x="120" y="165" text-anchor="middle" font-size="65" font-family="Arial, sans-serif">{pet_emoji}</text>
+        <circle cx="120" cy="225" r="25" fill="#21262d" stroke="{colors['border']}" stroke-width="1"/>
+        <text x="120" y="230" text-anchor="middle" font-size="25">{moods.get(codey['mood'], '😐')}</text>
+        <text x="120" y="260" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">
+            {codey['mood'].title()} • {brutal_stats.get('github_years', 1):.1f}y
+        </text>
+      </g>
       
-      <g transform="translate(200, 95)">
+      <g transform="translate(200, 75)">
         <text x="0" y="20" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
         <text x="330" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['health']:.0f}%</text>
         <rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/>
@@ -659,23 +659,22 @@ def generate_brutal_svg(codey, seasonal_bonus):
         <rect x="0" y="200" width="{brutal_stats.get('avg_repo_quality', 0.5)*330}" height="12" fill="{colors['happiness']}" rx="6"/>
       </g>
       
-      <g transform="translate(30, 320)">
-        <text x="0" y="0" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="13" font-weight="bold">PET STATUS:</text>
-        <text x="0" y="20" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">
-          Tier: {tier.upper()} • XP Mult: {brutal_stats.get('multipliers', {}).get('xp', 1.0):.2f}x
+      <g transform="translate(30, 360)">
+        <text x="0" y="0" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="13" font-weight="bold">
+            PET STATUS:
         </text>
-        <text x="0" y="35" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">
-          Penalties: {', '.join(brutal_stats.get('social_penalties', [])[:3]) or 'None'}
+        <text x="100" y="0" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">
+          Tier: {tier.upper()} • XP Mult: {brutal_stats.get('multipliers', {}).get('xp', 1.0):.2f}x • Penalties: {', '.join(brutal_stats.get('social_penalties', [])[:3]) or 'None'}
         </text>
       </g>
       
-      <g transform="translate(300, 390)">
+      <g transform="translate(315, 413)">
         <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14">
           🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits • ⭐ {brutal_stats.get('total_stars', 0)} stars
         </text>
       </g>
       
-      <text x="300" y="415" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
+      <text x="315" y="438" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
         Last Update: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • Dominant: {dominant_lang}
       </text>
       
