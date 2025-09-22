@@ -552,64 +552,16 @@ def generate_brutal_svg(codey, seasonal_bonus):
         'elite': '😎', 'wise': '🧐', 'neutral': '😐', 'overwhelmed': '🤯'
     }
     
-    # Pet selection based on dominant language (UPDATED with more animals/fabelwesen)
+    # Pet selection based on dominant language
     pets = {
-        # All-Time Classics
-        'C': '🦫',  # Beaver - The builder
-        'C++': '🐬', # Dolphin - intelligent and fast
-        'C#': '🦊',  # Fox - smart and agile
-        'Java': '🦧', # Orangutan - wise and classic
-        'PHP': '🐘', # Elephant - the official mascot
-        'Python': '🐍', # Snake - the official mascot
-        'JavaScript': '🦔', # Hedgehog - fast and sharp
-        'TypeScript': '🦋', # Butterfly - a more refined form
-        'Ruby': '🐉', # Dragon
-        'Go': '🐹',  # Hamster - the official mascot
-        'Swift': '🐦', # Bird - fast and modern
-        'Kotlin': '🐨', # Koala - modern and relaxed
-        'Rust': '🦀',  # Crab - the official mascot
-        
-        # Frontend & Web
-        'HTML': '🦘', # Kangaroo - for jumping and structure
-        'CSS': '🦎', # Lizard - adapts like a chameleon
-        'Sass': '🦄', # Unicorn - for the magical extension
-        'Vue': '🐉', # Dragon - a powerful mythical creature
-        'React': '🦥', # Sloth - optimized by doing only what's necessary
-        'Angular': '🦁', # Lion - robust and powerful
-        
-        # Data Science & Analytics
-        'Jupyter Notebook': '🦉', # Owl - for wisdom and data
-        'R': '🐿️', # Squirrel - gathers and organizes data
-        'Matlab': '🐻', # Bear - strong and good for complex calculations
-        'SQL': '🐙', # Octopus - many arms for data queries
-        'Julia': '🦓', # Zebra - fast and striking
-        
-        # Functional Languages
-        'Haskell': '🦚', # Peacock - for elegant, beautiful code
-        'Elixir': '🐝', # Bee - for a productive ecosystem
-        'Clojure': '🦌', # Deer - for a functional mindset
-        'F#': '🐑', # Sheep - for a "herd-based" programming model
-        
-        # Scripting & DevOps
-        'Shell': '🐌', # Snail - a creature with a shell
-        'PowerShell': '🐺', # Wolf - powerful and commanding
-        'Bash': '🦬', # Bison - robust and reliable
-        'Perl': '🐪', # Camel - the official mascot
-        'Lua': '🦊', # Fox - fast and clever
-        'Dart': '🐦', # Hummingbird emoji
-        
-        # Game Development
-        'GDScript': '🐉', # Dragon - fits the fantasy of games
-        
-        # Others
-        'Assembly': '🐜', # Ant - small but diligent
-        'Solidity': '🐉', # Dragon - fits powerful blockchain systems
-        'Vim Script': '🕷️', # Spider - weaves a complex web
-        'GraphQL': '🕷️', # Spider - weaves a complex web
-        'SCSS': '🦚', # Peacock - for elegance and styling
-        'Svelte': '🕊️', # Dove - for speed and lightness
-        'Zig': '🐆',  # Cheetah - for extreme speed
-        'unknown': '🐲'
+        'C': '🦫', 'C++': '🐬', 'C#': '🦊', 'Java': '🦧', 'PHP': '🐘', 
+        'Python': '🐍', 'JavaScript': '🦔', 'TypeScript': '🦋', 'Ruby': '🐉', 
+        'Go': '🐹', 'Swift': '🐦', 'Kotlin': '🐨', 'Rust': '🦀', 'HTML': '🦘', 
+        'CSS': '🦎', 'Haskell': '🐑', 'Clojure': '🦌', 'Erlang': '🐝', 
+        'Solidity': '🦄', 'R': '🦈', 'Scala': '🐆', 'Perl': '🐪', 'Lua': '🦙',
+        'MATLAB': '🐋', 'Shell': '🐢', 'PowerShell': '⚡', 'Dart': '🐦',
+        'Elixir': '🧪', 'F#': '🎻', 'Objective-C': '🍎', 'Vue': '🟢',
+        'React': '⚛️', 'Angular': '🅰️', 'Svelte': '💨', 'unknown': '🐲'
     }
     
     dominant_lang = brutal_stats.get('dominant_language', 'unknown')
@@ -618,124 +570,143 @@ def generate_brutal_svg(codey, seasonal_bonus):
     colors = {
         'background': '#0d1117', 'card': '#161b22', 'text': '#f0f6fc', 'secondary_text': '#8b949e',
         'health': '#f85149', 'hunger': '#ffa657', 'happiness': '#a855f7', 'energy': '#3fb950',
-        'border': '#30363d', 'tier': tier_colors.get(tier, '#22c55e')
+        'border': '#30363d', 'tier': tier_colors.get(tier, '#22c55e'),
+        'tier_light': '#22c55e33'  # Leichter Schimmer mit Transparenz
     }
     
-    # Achievements display in the header, aligned to the right, no rings
+    # Achievements display - rechts oben mit besserem Abstand
     achievements_display = ''
     if codey.get('achievements'):
         ach_count = min(4, len(codey['achievements']))
-        ach_width = 35
-        gap = 10
-        ach_start_x = 580 - ach_count * (ach_width + gap)
+        ach_start_x = 530  # Weiter rechts für bessere Balance
         for i, ach in enumerate(codey['achievements'][-ach_count:]):
             ach_emoji = ach.split(' ')[0]
-            x_pos = ach_start_x + (i * (ach_width + gap)) + (ach_width / 2)
+            x_pos = ach_start_x + (i * 40)  # Mehr Abstand zwischen Icons
             achievements_display += f'''
-            <text x="{x_pos}" y="48" text-anchor="middle" font-size="20">{ach_emoji}</text>
+            <circle cx="{x_pos}" cy="45" r="15" fill="#21262d" stroke="{colors['tier']}" stroke-width="1.5" opacity="0.8"/>
+            <text x="{x_pos}" y="50" text-anchor="middle" font-size="14" fill="{colors['text']}">{ach_emoji}</text>
             '''
 
-    # Seasonal bonus display
+    # Seasonal bonus display - links oben mit Tier-Icon
     seasonal_display = ''
+    tier_icon_display = f'''
+    <circle cx="50" cy="45" r="18" fill="{colors['tier']}" opacity="0.9"/>
+    <text x="50" y="51" text-anchor="middle" font-size="16" fill="{colors['text']}">{tier_emojis[tier]}</text>
+    '''
+    
     if seasonal_bonus:
         seasonal_display = f'''
-        <rect x="25" y="25" width="130" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.8"/>
-        <text x="90" y="48" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+        <rect x="80" y="30" width="140" height="30" rx="15" fill="{colors['tier']}" opacity="0.8"/>
+        <text x="150" y="48" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="11" font-weight="bold">
             {seasonal_bonus['emoji']} {seasonal_bonus['name']}
         </text>
         '''
     
-    # Prestige indicator
+    # Prestige indicator - unter dem Haupttitel
     prestige_display = ''
     if codey.get('prestige_level', 0) > 0:
-        stars = '⭐' * codey['prestige_level']
+        stars = '⭐' * min(codey['prestige_level'], 3)
         prestige_display = f'''
-        <text x="315" y="70" text-anchor="middle" fill="{colors['tier']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">
-            {stars} PRESTIGE {stars}
+        <text x="300" y="75" text-anchor="middle" fill="{colors['tier']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+            {stars} PRESTIGE {codey['prestige_level']} {stars}
         </text>
         '''
     elif brutal_stats.get('can_prestige', False):
         prestige_display = f'''
-        <text x="315" y="70" text-anchor="middle" fill="{colors['energy']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+        <text x="300" y="75" text-anchor="middle" fill="{colors['energy']}" font-family="Arial, sans-serif" font-size="11" font-weight="bold">
             ✨ PRESTIGE READY ✨
         </text>
         '''
-    
-    # Calculate new pet avatar size (15% larger)
-    pet_radius = 50 * 1.15
-    pet_text_y = 165 + (pet_radius - 50) * 1.5
 
-    svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
-      <rect width="630" height="473" fill="{colors['background']}" rx="15"/>
-      <rect x="20" y="20" width="590" height="433" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
+    # Haupttitel mit Tier-Info
+    title_display = f'''
+    <text x="300" y="50" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="16" font-weight="bold">
+        CODEY Level {codey['level']} - {tier.upper()}
+    </text>
+    '''
+
+    svg = f'''<svg width="600" height="450" xmlns="http://www.w3.org/2000/svg">
+      <!-- Hintergrund -->
+      <rect width="600" height="450" fill="{colors['background']}" rx="15"/>
+      <rect x="20" y="20" width="560" height="410" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
       
-      <text x="40" y="50" text-anchor="start" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
-        {tier_emojis[tier]} CODEY Level {codey['level']}
-      </text>
-
-      {prestige_display}
+      <!-- Header Bereich -->
+      {title_display}
+      {tier_icon_display}
       {seasonal_display}
+      {prestige_display}
       {achievements_display}
       
-      <g transform="translate(0, 54)">
-        <circle cx="120" cy="150" r="{pet_radius}" fill="#21262d" stroke="{colors['tier']}" stroke-width="3"/>
-        <text x="120" y="{pet_text_y}" text-anchor="middle" font-size="65" font-family="Arial, sans-serif">{pet_emoji}</text>
-        <circle cx="120" cy="225" r="25" fill="#21262d" stroke="{colors['border']}" stroke-width="1"/>
-        <text x="120" y="230" text-anchor="middle" font-size="25">{moods.get(codey['mood'], '😐')}</text>
-        <text x="120" y="260" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">
-            {codey['mood'].title()} • {brutal_stats.get('github_years', 1):.1f}y
+      <!-- Avatar Bereich - zentriert und mit Abstand -->
+      <g transform="translate(120, 140)">
+        <!-- Pet Avatar -->
+        <circle cx="0" cy="0" r="55" fill="#21262d" stroke="{colors['tier']}" stroke-width="3"/>
+        <text x="0" y="15" text-anchor="middle" font-size="70" font-family="Arial, sans-serif">{pet_emoji}</text>
+        
+        <!-- Mood Indicator -->
+        <circle cx="0" cy="80" r="22" fill="#21262d" stroke="{colors['tier']}" stroke-width="1.5"/>
+        <text x="0" y="87" text-anchor="middle" font-size="18">{moods.get(codey['mood'], '😐')}</text>
+        
+        <!-- Status Info -->
+        <text x="0" y="115" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="10">
+            {codey['mood'].title()} • {brutal_stats.get('github_years', 1):.1f}y GitHub
         </text>
       </g>
       
-      <g transform="translate(205, 90)">
-        <text x="0" y="20" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
-        <text x="330" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['health']:.0f}%</text>
-        <rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="25" width="{min(330, codey['health']*3.3)}" height="12" fill="{colors['health']}" rx="6"/>
+      <!-- Stats Balken - kleiner und besser positioniert -->
+      <g transform="translate(240, 100)">
+        <!-- Kürzere Balken für besseres Verhältnis -->
+        <text x="0" y="20" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">❤️ Health</text>
+        <text x="250" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="10">{codey['health']:.0f}%</text>
+        <rect x="0" y="25" width="250" height="8" fill="#21262d" rx="4"/>
+        <rect x="0" y="25" width="{min(250, codey['health']*2.5)}" height="8" fill="{colors['health']}" rx="4"/>
         
-        <text x="0" y="55" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
-        <text x="330" y="55" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['hunger']:.0f}%</text>
-        <rect x="0" y="60" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="60" width="{min(330, codey['hunger']*3.3)}" height="12" fill="{colors['hunger']}" rx="6"/>
+        <text x="0" y="50" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🍖 Hunger</text>
+        <text x="250" y="50" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="10">{codey['hunger']:.0f}%</text>
+        <rect x="0" y="55" width="250" height="8" fill="#21262d" rx="4"/>
+        <rect x="0" y="55" width="{min(250, codey['hunger']*2.5)}" height="8" fill="{colors['hunger']}" rx="4"/>
         
-        <text x="0" y="90" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
-        <text x="330" y="90" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['happiness']:.0f}%</text>
-        <rect x="0" y="95" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="95" width="{min(330, codey['happiness']*3.3)}" height="12" fill="{colors['happiness']}" rx="6"/>
+        <text x="0" y="80" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">😊 Happiness</text>
+        <text x="250" y="80" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="10">{codey['happiness']:.0f}%</text>
+        <rect x="0" y="85" width="250" height="8" fill="#21262d" rx="4"/>
+        <rect x="0" y="85" width="{min(250, codey['happiness']*2.5)}" height="8" fill="{colors['happiness']}" rx="4"/>
         
-        <text x="0" y="125" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
-        <text x="330" y="125" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['energy']:.0f}%</text>
-        <rect x="0" y="130" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="130" width="{min(330, codey['energy']*3.3)}" height="12" fill="{colors['energy']}" rx="6"/>
+        <text x="0" y="110" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">⚡ Energy</text>
+        <text x="250" y="110" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="10">{codey['energy']:.0f}%</text>
+        <rect x="0" y="115" width="250" height="8" fill="#21262d" rx="4"/>
+        <rect x="0" y="115" width="{min(250, codey['energy']*2.5)}" height="8" fill="{colors['energy']}" rx="4"/>
         
-        <text x="0" y="160" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">👥 Social</text>
-        <text x="330" y="160" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{brutal_stats.get('social_score', 1.0):.2f}</text>
-        <rect x="0" y="165" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="165" width="{min(330, brutal_stats.get('social_score', 1.0)*165)}" height="12" fill="{colors['tier']}" rx="6"/>
+        <text x="0" y="140" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">👥 Social</text>
+        <text x="250" y="140" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="10">{brutal_stats.get('social_score', 1.0):.2f}</text>
+        <rect x="0" y="145" width="250" height="8" fill="#21262d" rx="4"/>
+        <rect x="0" y="145" width="{min(250, brutal_stats.get('social_score', 1.0)*125)}" height="8" fill="{colors['tier']}" rx="4"/>
         
-        <text x="0" y="195" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">💎 Quality</text>
-        <text x="330" y="195" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{brutal_stats.get('avg_repo_quality', 0.5):.2f}</text>
-        <rect x="0" y="200" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="200" width="{min(330, brutal_stats.get('avg_repo_quality', 0.5)*330)}" height="12" fill="{colors['happiness']}" rx="6"/>
+        <text x="0" y="170" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">💎 Quality</text>
+        <text x="250" y="170" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="10">{brutal_stats.get('avg_repo_quality', 0.5):.2f}</text>
+        <rect x="0" y="175" width="250" height="8" fill="#21262d" rx="4"/>
+        <rect x="0" y="175" width="{min(250, brutal_stats.get('avg_repo_quality', 0.5)*250)}" height="8" fill="{colors['happiness']}" rx="4"/>
       </g>
       
-      <g transform="translate(315, 375)">
-        <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="13" font-weight="bold">
-            PET STATUS:
-        </text>
-        <text x="0" y="15" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">
-            Tier: {tier.upper()} • XP Mult: {brutal_stats.get('multipliers', {}).get('xp', 1.0):.2f}x • Penalties: {', '.join(brutal_stats.get('social_penalties', [])[:3]) or 'None'}
-        </text>
-      </g>
-      
-      <g transform="translate(315, 413)">
-        <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14">
+      <!-- Footer Stats - sauber ausgerichtet -->
+      <g transform="translate(300, 350)">
+        <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="11" font-weight="bold">
           🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits • ⭐ {brutal_stats.get('total_stars', 0)} stars
         </text>
       </g>
       
-      <text x="315" y="438" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
-        Last Update: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • Dominant: {dominant_lang}
+      <!-- Brutal Status Footer -->
+      <g transform="translate(300, 370)">
+        <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="10" font-weight="bold">
+          🔥 BRUTAL STATUS: {tier.upper()} • XP: {brutal_stats.get('multipliers', {}).get('xp', 1.0):.2f}x
+        </text>
+        <text x="0" y="15" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="9">
+          Penalties: {', '.join(brutal_stats.get('social_penalties', [])[:2]) or 'None'} • Lang: {dominant_lang}
+        </text>
+      </g>
+      
+      <!-- Bottom Footer -->
+      <text x="300" y="395" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="9">
+        Last Update: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}
       </text>
       
     </svg>'''
