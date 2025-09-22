@@ -1,5 +1,6 @@
 # 🐾 Codey - Your Personal GitHub Pet 
-### (RPG `No Mercy` Edition)
+##### (RPG `No Mercy` Edition)
+Codey need testers 😿
 
 ![Codey - Your GitHub Pet](https://raw.githubusercontent.com/VolkanSah/Codey/refs/heads/main/codey.svg)
 
@@ -94,4 +95,5 @@ This edition of Codey uses a far more demanding and unforgiving system than stan
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
