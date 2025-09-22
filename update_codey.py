@@ -569,19 +569,18 @@ def generate_brutal_svg(codey, seasonal_bonus):
         'border': '#30363d', 'tier': tier_colors.get(tier, '#22c55e')
     }
     
-    # Achievements display below the main stats, without rings
+    # Achievements display below the main stats, with text and no rings
     achievements_display = ''
     if codey.get('achievements'):
-        ach_count = min(4, len(codey['achievements']))
-        ach_width = 35
-        gap = 10
-        ach_start_x = 220
-        ach_y = 300
-        for i, ach in enumerate(codey['achievements'][-ach_count:]):
-            ach_emoji = ach.split(' ')[0]
-            x_pos = ach_start_x + (i * (ach_width + gap)) + (ach_width / 2)
+        achievements_display += f'''
+        <text x="315" y="325" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+            🏆 Achievements
+        </text>
+        '''
+        y_pos = 345
+        for i, ach in enumerate(codey['achievements'][-4:]):
             achievements_display += f'''
-            <text x="{x_pos}" y="{ach_y}" text-anchor="middle" font-size="20">{ach_emoji}</text>
+            <text x="315" y="{y_pos + (i * 15)}" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">{ach}</text>
             '''
 
     # Seasonal bonus display
@@ -610,9 +609,9 @@ def generate_brutal_svg(codey, seasonal_bonus):
         </text>
         '''
     
-    # Calculate new pet avatar size (15% larger)
-    pet_radius = 50 * 1.15
-    pet_text_y = 165 + (pet_radius - 50) * 1.5
+    # Calculate new pet avatar size (larger than bars)
+    pet_radius = 190
+    pet_text_y = 150 + (pet_radius * 0.4)
 
     svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
       <rect width="630" height="473" fill="{colors['background']}" rx="15"/>
@@ -639,22 +638,22 @@ def generate_brutal_svg(codey, seasonal_bonus):
         <text x="0" y="20" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
         <text x="330" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['health']:.0f}%</text>
         <rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="25" width="{codey['health']*3.3}" height="12" fill="{colors['health']}" rx="6"/>
+        <rect x="0" y="25" width="{min(330, codey['health']*3.3)}" height="12" fill="{colors['health']}" rx="6"/>
         
         <text x="0" y="55" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
         <text x="330" y="55" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['hunger']:.0f}%</text>
         <rect x="0" y="60" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="60" width="{codey['hunger']*3.3}" height="12" fill="{colors['hunger']}" rx="6"/>
+        <rect x="0" y="60" width="{min(330, codey['hunger']*3.3)}" height="12" fill="{colors['hunger']}" rx="6"/>
         
         <text x="0" y="90" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
         <text x="330" y="90" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['happiness']:.0f}%</text>
         <rect x="0" y="95" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="95" width="{codey['happiness']*3.3}" height="12" fill="{colors['happiness']}" rx="6"/>
+        <rect x="0" y="95" width="{min(330, codey['happiness']*3.3)}" height="12" fill="{colors['happiness']}" rx="6"/>
         
         <text x="0" y="125" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
         <text x="330" y="125" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['energy']:.0f}%</text>
         <rect x="0" y="130" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="130" width="{codey['energy']*3.3}" height="12" fill="{colors['energy']}" rx="6"/>
+        <rect x="0" y="130" width="{min(330, codey['energy']*3.3)}" height="12" fill="{colors['energy']}" rx="6"/>
         
         <text x="0" y="160" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">👥 Social</text>
         <text x="330" y="160" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{brutal_stats.get('social_score', 1.0):.2f}</text>
@@ -664,20 +663,19 @@ def generate_brutal_svg(codey, seasonal_bonus):
         <text x="0" y="195" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">💎 Quality</text>
         <text x="330" y="195" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{brutal_stats.get('avg_repo_quality', 0.5):.2f}</text>
         <rect x="0" y="200" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="200" width="{brutal_stats.get('avg_repo_quality', 0.5)*330}" height="12" fill="{colors['happiness']}" rx="6"/>
+        <rect x="0" y="200" width="{min(330, brutal_stats.get('avg_repo_quality', 0.5)*330)}" height="12" fill="{colors['happiness']}" rx="6"/>
       </g>
       
-      <g transform="translate(190, 340)">
-        <text x="0" y="0" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">Achievements:</text>
-        {achievements_display}
-      </g>
+      {achievements_display}
       
-      <text x="315" y="375" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="13" font-weight="bold">
-          PET STATUS:
-          <tspan x="315" dy="15" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">
+      <g transform="translate(315, 375)">
+        <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="13" font-weight="bold">
+            PET STATUS:
+        </text>
+        <text x="0" y="15" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">
             Tier: {tier.upper()} • XP Mult: {brutal_stats.get('multipliers', {}).get('xp', 1.0):.2f}x • Penalties: {', '.join(brutal_stats.get('social_penalties', [])[:3]) or 'None'}
-          </tspan>
-      </text>
+        </text>
+      </g>
       
       <g transform="translate(315, 413)">
         <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14">
@@ -691,6 +689,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
       
     </svg>'''
     return svg
+
 ### SVG END
 
 if __name__ == "__main__":
