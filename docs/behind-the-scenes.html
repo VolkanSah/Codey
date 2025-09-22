@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behind the Scenes - Codey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        github: {
+                            dark: '#0d1117',
+                            darker: '#010409',
+                            border: '#30363d',
+                            text: '#c9d1d9',
+                            highlight: '#1f6feb',
+                            accent: '#58a6ff',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+        .github-card {
+            background-color: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-github-darker text-github-text min-h-screen">
+    <nav class="bg-github-dark border-b border-github-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-github-accent font-bold text-xl">🐾 Codey</span>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="index.html" class="text-gray-300 hover:bg-github-dark hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="#" class="bg-github-highlight text-white px-3 py-2 rounded-md text-sm font-medium">Behind the Scenes</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <a href="https://github.com/VolkanSah/Codey" target="_blank" class="bg-github-highlight hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center">
+                            <i data-feather="github" class="mr-2 w-4 h-4"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-github-dark border-b border-github-border">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                <span class="block">💻 Behind the Scenes</span>
+                <span class="block text-github-accent">How Codey Calculates Your Stats</span>
+            </h1>
+            <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+                Codey's stats are a brutal reflection of your coding habits and contributions.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 border-b border-github-border pb-4">Pet's Well-being</h2>
+            <p class="text-gray-400 mb-8">
+                These stats represent your pet's current, volatile state. They are directly influenced by your recent activity, with no room for laziness.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="stat-card github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-red-900/30 text-red-400 mr-4">
+                            <i data-feather="heart"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Health ❤️</h3>
+                    </div>
+                    <p class="text-gray-400">The average of your pet's hunger, happiness, and energy. A low score in any one area will drag your pet's overall health down.</p>
+                </div>
+                
+                <div class="stat-card github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-yellow-900/30 text-yellow-400 mr-4">
+                            <i data-feather="droplet"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Hunger 🍖</h3>
+                    </div>
+                    <p class="text-gray-400">Increases sharply with daily activity (commits and PRs) and decays aggressively. Your pet is always hungry for code.</p>
+                </div>
+                
+                <div class="stat-card github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-green-900/30 text-green-400 mr-4">
+                            <i data-feather="smile"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Happiness 😊</h3>
+                    </div>
+                    <p class="text-gray-400">Increases with merged pull requests (PRs), but also drops quickly with unmerged or rejected changes.</p>
+                </div>
+                
+                <div class="stat-card github-card p-6 rounded-lg border border-github-border col-span-1 md:col-span-3" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-blue-900/30 text-blue-400 mr-4">
+                            <i data-feather="zap"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Energy ⚡</h3>
+                    </div>
+                    <p class="text-gray-400">Drains with every line of code you write and is only minimally replenished daily. Burnout is a real possibility.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 border-b border-github-border pb-4">Core RPG Stats</h2>
+            <p class="text-gray-400 mb-8">
+                These are the long-term stats that define your pet's "character." They reflect your all-time contributions and are a permanent record of your coding journey.
+            </p>
+            
+            <div class="github-card p-6 rounded-lg border border-github-border mb-8" data-aos="fade-up">
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i data-feather="user" class="mr-2"></i> Personality
+                </h3>
+                <p class="text-gray-400 mb-4">Calculated based on your <strong>follower-to-following ratio</strong>:</p>
+                
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-github-dark p-4 rounded-lg">
+                        <h4 class="font-medium text-white mb-2">influencer</h4>
+                        <p class="text-gray-300 text-sm"><code>followers / following > 2</code></p>
+                        <p class="text-gray-400 mt-2">You are a magnet for followers.</p>
+                    </div>
+                    
+                    <div class="bg-github-dark p-4 rounded-lg">
+                        <h4 class="font-medium text-white mb-2">explorer</h4>
+                        <p class="text-gray-300 text-sm"><code>followers / following < 0.5</code></p>
+                        <p class="text-gray-400 mt-2">You focus on discovering and contributing to many projects.</p>
+                    </div>
+                    
+                    <div class="bg-github-dark p-4 rounded-lg">
+                        <h4 class="font-medium text-white mb-2">balanced</h4>
+                        <p class="text-gray-300 text-sm">All other cases</p>
+                        <p class="text-gray-400 mt-2">You maintain a good mix of following and being followed.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="github-card p-6 rounded-lg border border-github-border mb-8" data-aos="fade-up">
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i data-feather="star" class="mr-2"></i> Social Status
+                </h3>
+                <div class="bg-github-dark p-4 rounded-lg">
+                    <pre class="text-gray-300 overflow-x-auto"><code>min(10, total_stars // 100)</code></pre>
+                </div>
+                <p class="text-gray-400 mt-4">A simple, merciless score based on the total number of stars across all your public repositories, capped at a maximum of 10.</p>
+            </div>
+            
+            <div class="github-card p-6 rounded-lg border border-github-border mb-8" data-aos="fade-up">
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i data-feather="code" class="mr-2"></i> Dominant Language & Pet Evolution
+                </h3>
+                <p class="text-gray-400 mb-4">Your pet's form evolves based on the total bytes of code written in each language across your repositories.</p>
+                <p class="text-gray-400">The script finds the language with the highest cumulative byte count to determine your true form.</p>
+            </div>
+            
+            <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i data-feather="award" class="mr-2"></i> Prestige System
+                </h3>
+                <p class="text-gray-400">A new, unforgiving mechanic. Once you meet a set of harsh criteria (e.g., reaching a certain level or number of stars), you can prestige. This resets your pet's stats to zero but unlocks permanent visual rewards and an increased XP multiplier, forcing you to prove your worth all over again.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-bold text-white mb-8 border-b border-github-border pb-4">Advanced Traits</h2>
+            <p class="text-gray-400 mb-8">
+                These traits provide a more detailed, and often critical, look at your developer profile.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
+                    <h3 class="text-xl font-semibold text-white mb-4">Creativity</h3>
+                    <div class="bg-github-dark p-4 rounded-lg mb-4">
+                        <pre class="text-gray-300 overflow-x-auto"><code>total_own_repos / 5</code></pre>
+                    </div>
+                    <p class="text-gray-400">This measures your tendency to create new projects and is scaled by the number of repositories you own.</p>
+                </div>
+                
+                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-semibold text-white mb-4">Curiosity</h3>
+                    <div class="bg-github-dark p-4 rounded-lg mb-4">
+                        <pre class="text-gray-300 overflow-x-auto"><code>total_forks / 10</code></pre>
+                    </div>
+                    <p class="text-gray-400">This reflects your interest in exploring and experimenting with other people's projects.</p>
+                </div>
+                
+                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
+                    <h3 class="text-xl font-semibold text-white mb-4">Teamwork</h3>
+                    <div class="bg-github-dark p-4 rounded-lg mb-4">
+                        <pre class="text-gray-300 overflow-x-auto"><code>total_prs_created / 3</code></pre>
+                    </div>
+                    <p class="text-gray-400">This rewards your collaborative efforts and contributions to external projects.</p>
+                </div>
+                
+                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-semibold text-white mb-4">Perfectionism</h3>
+                    <div class="bg-github-dark p-4 rounded-lg mb-4">
+                        <pre class="text-gray-300 overflow-x-auto"><code>total_issues_closed / max(total_issues_opened, 1)</code></pre>
+                    </div>
+                    <p class="text-gray-400">A ratio that indicates your focus on resolving issues.</p>
+                </div>
+            </div>
+            
+            <div class="github-card p-6 rounded-lg border border-github-border mt-8" data-aos="fade-up">
+                <p class="text-gray-400">The values of these traits, along with your pet's well-being, directly influence its <strong>mood</strong> and overall health. For example, a high stress level from too many open issues can make your pet <code class="bg-github-dark px-2 py-1 rounded text-sm">overwhelmed</code>—and there's no easy fix.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-github-dark border-t border-github-border py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-github-accent font-bold text-lg">🐾 Codey</span>
+                    <p class="text-gray-400 text-sm mt-1">Your Personal GitHub Pet (RPG No Mercy Edition)</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="text-gray-400 hover:text-white">Home</a>
+                    <a href="https://github.com/VolkanSah/Codey" target="_blank" class="text-gray-400 hover:text-white flex items-center">
+                        <i data-feather="github" class="mr-1 w-4 h-4"></i> GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-500 text-sm">
+                <p>Licensed under the Apache 2 License by Volkan Kücükbudak</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        feather.replace();
+    </script>
+</body>
+</html>
