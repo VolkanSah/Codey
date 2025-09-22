@@ -554,10 +554,62 @@ def generate_brutal_svg(codey, seasonal_bonus):
     
     # Pet selection based on dominant language (UPDATED with more animals/fabelwesen)
     pets = {
-        'C': '🦫', 'C++': '🐬', 'C#': '🦊', 'Java': '🦧', 'PHP': '🐘', 'Python': '🐍', 'JavaScript': '🦔',
-        'TypeScript': '🦋', 'Ruby': '🐉', 'Go': '🐹', 'Swift': '🐦', 'Kotlin': '🐨', 'Rust': '🦀',
-        'HTML': '🦘', 'CSS': '🦎', 'Haskell': '🐑', '🦌': '🦌', 'Erlang': '🐝', 'Solidity': '🦄',
-        'R': '🦈', 'unknown': '🐲'
+        # All-Time Classics
+        'C': '🦫',  # Beaver - The builder
+        'C++': '🐬', # Dolphin - intelligent and fast
+        'C#': '🦊',  # Fox - smart and agile
+        'Java': '🦧', # Orangutan - wise and classic
+        'PHP': '🐘', # Elephant - the official mascot
+        'Python': '🐍', # Snake - the official mascot
+        'JavaScript': '🦔', # Hedgehog - fast and sharp
+        'TypeScript': '🦋', # Butterfly - a more refined form
+        'Ruby': '🐉', # Dragon
+        'Go': '🐹',  # Hamster - the official mascot
+        'Swift': '🐦', # Bird - fast and modern
+        'Kotlin': '🐨', # Koala - modern and relaxed
+        'Rust': '🦀',  # Crab - the official mascot
+        
+        # Frontend & Web
+        'HTML': '🦘', # Kangaroo - for jumping and structure
+        'CSS': '🦎', # Lizard - adapts like a chameleon
+        'Sass': '🦄', # Unicorn - for the magical extension
+        'Vue': '🐉', # Dragon - a powerful mythical creature
+        'React': '🦥', # Sloth - optimized by doing only what's necessary
+        'Angular': '🦁', # Lion - robust and powerful
+        
+        # Data Science & Analytics
+        'Jupyter Notebook': '🦉', # Owl - for wisdom and data
+        'R': '🐿️', # Squirrel - gathers and organizes data
+        'Matlab': '🐻', # Bear - strong and good for complex calculations
+        'SQL': '🐙', # Octopus - many arms for data queries
+        'Julia': '🦓', # Zebra - fast and striking
+        
+        # Functional Languages
+        'Haskell': '🦚', # Peacock - for elegant, beautiful code
+        'Elixir': '🐝', # Bee - for a productive ecosystem
+        'Clojure': '🦌', # Deer - for a functional mindset
+        'F#': '🐑', # Sheep - for a "herd-based" programming model
+        
+        # Scripting & DevOps
+        'Shell': '🐌', # Snail - a creature with a shell
+        'PowerShell': '🐺', # Wolf - powerful and commanding
+        'Bash': '🦬', # Bison - robust and reliable
+        'Perl': '🐪', # Camel - the official mascot
+        'Lua': '🦊', # Fox - fast and clever
+        'Dart': '🐦', # Hummingbird emoji
+        
+        # Game Development
+        'GDScript': '🐉', # Dragon - fits the fantasy of games
+        
+        # Others
+        'Assembly': '🐜', # Ant - small but diligent
+        'Solidity': '🐉', # Dragon - fits powerful blockchain systems
+        'Vim Script': '🕷️', # Spider - weaves a complex web
+        'GraphQL': '🕷️', # Spider - weaves a complex web
+        'SCSS': '🦚', # Peacock - for elegance and styling
+        'Svelte': '🕊️', # Dove - for speed and lightness
+        'Zig': '🐆',  # Cheetah - for extreme speed
+        'unknown': '🐲'
     }
     
     dominant_lang = brutal_stats.get('dominant_language', 'unknown')
@@ -569,7 +621,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
         'border': '#30363d', 'tier': tier_colors.get(tier, '#22c55e')
     }
     
-    # Achievements display in the header, aligned to the right
+    # Achievements display in the header, aligned to the right, no rings
     achievements_display = ''
     if codey.get('achievements'):
         ach_count = min(4, len(codey['achievements']))
@@ -580,7 +632,6 @@ def generate_brutal_svg(codey, seasonal_bonus):
             ach_emoji = ach.split(' ')[0]
             x_pos = ach_start_x + (i * (ach_width + gap)) + (ach_width / 2)
             achievements_display += f'''
-            <rect x="{x_pos - (ach_width / 2)}" y="25" width="{ach_width}" height="{ach_width}" rx="17.5" fill="{colors['card']}" stroke="{colors['tier']}" stroke-width="1" opacity="0.9"/>
             <text x="{x_pos}" y="48" text-anchor="middle" font-size="20">{ach_emoji}</text>
             '''
 
