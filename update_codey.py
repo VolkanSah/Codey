@@ -660,7 +660,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
       </g>
       
       <g transform="translate(30, 320)">
-        <text x="0" y="0" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="13" font-weight="bold">🔥 BRUTAL STATUS:</text>
+        <text x="0" y="0" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="13" font-weight="bold">PET STATUS:</text>
         <text x="0" y="20" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="11">
           Tier: {tier.upper()} • XP Mult: {brutal_stats.get('multipliers', {}).get('xp', 1.0):.2f}x
         </text>
