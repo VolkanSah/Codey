@@ -1,0 +1,62 @@
+{
+  "health": 51.86666666666667,
+  "hunger": 56.599999999999994,
+  "happiness": 42.0,
+  "energy": 57.0,
+  "level": 1,
+  "streak": 1,
+  "total_commits": 12,
+  "mood": "overwhelmed",
+  "rpg_stats": {},
+  "achievements": [
+    "\ud83e\uddd9\u200d\u2642\ufe0f Elder Council",
+    "\ud83d\udc51 Social Elite",
+    "\ud83d\udc8e Quality Craftsman"
+  ],
+  "history": [
+    {
+      "timestamp": "2025-09-22T10:40:31.166556+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 50,
+      "mood": "neutral",
+      "streak": 0,
+      "tier": "elder"
+    }
+  ],
+  "brutal_stats": {
+    "tier": "elder",
+    "github_years": 9.555099247091034,
+    "social_score": 1.25,
+    "social_penalties": [
+      "quality_curator"
+    ],
+    "avg_repo_quality": 0.8000000000000004,
+    "commit_quality_score": 0.9,
+    "commit_quality_penalties": [
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages"
+    ],
+    "multipliers": {
+      "xp": 0.25,
+      "decay": 0.8,
+      "requirements": 4.0
+    },
+    "total_stars": 370,
+    "language_diversity_penalty": 1.0,
+    "xp_earned": 27.0,
+    "can_prestige": false,
+    "prestige_missing": "Need Level 10"
+  },
+  "last_update": "2025-09-22T10:40:31.166556+00:00"
+}
