@@ -92,9 +92,14 @@ This edition of Codey uses a far more demanding and unforgiving system than stan
   * [x] some other stupid stuff if I was bored
   * [x] more fun 🥳
 
+###  Known issues
+
+- we are all dragons! i lost my shield! on the way an damage the a logic without an version control :angry: so we are all dragons! willfixit soon!
+
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
 
 
