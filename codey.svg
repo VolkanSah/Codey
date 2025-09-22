@@ -1,0 +1,52 @@
+<svg width="600" height="480" xmlns="http://www.w3.org/2000/svg">
+      <!-- Hintergrund -->
+      <rect width="600" height="480" fill="#0d1117" rx="15"/>
+      <rect x="20" y="20" width="560" height="440" fill="#161b22" rx="12" stroke="#30363d" stroke-width="1"/>
+
+      <!-- Titel -->
+      <text x="300" y="40" text-anchor="middle" fill="#f0f6fc" font-size="16" font-weight="bold">
+        CODEY • Level 1 • ELDER
+      </text>
+
+      
+    <rect x="520" y="20" width="50" height="25" rx="6" fill="#f59e0b" opacity="0.85"/>
+    <text x="545" y="38" text-anchor="middle" font-size="14" fill="#f0f6fc">🧙‍♂️</text>
+    
+      
+      
+
+      <!-- Avatar -->
+      <g transform="translate(300, 150)">
+        <circle cx="0" cy="0" r="60" fill="#21262d" stroke="#f8bb54" stroke-width="3"/>
+        <text x="0" y="15" text-anchor="middle" font-size="70">🐲</text>
+      </g>
+
+      <!-- Mood Badge -->
+      <rect x="260" y="220" width="80" height="28" rx="14" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+      <text x="300" y="240" text-anchor="middle" font-size="16">🤯</text>
+
+      <!-- Achievements -->
+      
+            <rect x="200" y="270" width="40" height="40" rx="8" fill="#21262d" stroke="#f8bb54" stroke-width="1"/>
+            <text x="220" y="295" text-anchor="middle" font-size="18">🧙‍♂️</text>
+            
+            <rect x="250" y="270" width="40" height="40" rx="8" fill="#21262d" stroke="#f8bb54" stroke-width="1"/>
+            <text x="270" y="295" text-anchor="middle" font-size="18">👑</text>
+            
+            <rect x="300" y="270" width="40" height="40" rx="8" fill="#21262d" stroke="#f8bb54" stroke-width="1"/>
+            <text x="320" y="295" text-anchor="middle" font-size="18">💎</text>
+            
+
+      <!-- Footer Stats -->
+      <g transform="translate(300, 350)">
+        <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="13">
+          🗓️ 4d streak • 📊 48 commits • ⭐ 370 stars
+        </text>
+        <text x="0" y="20" text-anchor="middle" fill="#8b949e" font-size="11">
+          Lang: unknown • Mult: 0.25x • Social: 1.25
+        </text>
+        <text x="0" y="40" text-anchor="middle" fill="#8b949e" font-size="10">
+          Last Update: 2025-09-22 11:18 UTC
+        </text>
+      </g>
+    </svg>
