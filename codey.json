@@ -1,24 +1,179 @@
 {
-  "health": 36.666666666666664,
-  "hunger": 90,
-  "happiness": 20.0,
-  "energy": 0,
-  "level": 8.0,
-  "streak": 6,
-  "total_commits": 181.0,
-  "mood": "inspired",
-  "rpg_stats": {
-    "personality": "influencer",
-    "social_status": 3,
-    "type": "night_owl",
-    "traits": {
-      "curiosity": 11.8,
-      "creativity": 20.0,
-      "teamwork": 0.0,
-      "perfectionism": 0.0,
-      "stress_level": 0.0
+  "health": 77.66666666666667,
+  "hunger": 85,
+  "happiness": 0,
+  "energy": 148.0,
+  "level": 2,
+  "streak": 14,
+  "total_commits": 168,
+  "mood": "overwhelmed",
+  "rpg_stats": {},
+  "achievements": [
+    "\ud83e\uddd9\u200d\u2642\ufe0f Elder Council",
+    "\ud83d\udc51 Social Elite",
+    "\ud83d\udc8e Quality Craftsman"
+  ],
+  "history": [
+    {
+      "timestamp": "2025-09-22T10:40:31.166556+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 50,
+      "mood": "neutral",
+      "streak": 0,
+      "tier": "elder"
     },
-    "dominant_language": "Jupyter Notebook"
+    {
+      "timestamp": "2025-09-22T10:49:52.749089+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 51.86666666666667,
+      "mood": "overwhelmed",
+      "streak": 1,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T11:03:31.281433+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 53.73333333333333,
+      "mood": "overwhelmed",
+      "streak": 2,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T11:18:01.813823+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 55.599999999999994,
+      "mood": "overwhelmed",
+      "streak": 3,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T11:30:59.753577+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 57.46666666666666,
+      "mood": "overwhelmed",
+      "streak": 4,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T11:47:44.482709+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 59.33333333333332,
+      "mood": "overwhelmed",
+      "streak": 5,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T12:13:42.215355+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 59.666666666666664,
+      "mood": "overwhelmed",
+      "streak": 6,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T12:20:03.562188+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 61.333333333333336,
+      "mood": "overwhelmed",
+      "streak": 7,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T12:23:03.524116+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 63.666666666666664,
+      "mood": "overwhelmed",
+      "streak": 8,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T12:29:21.817924+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 66.0,
+      "mood": "overwhelmed",
+      "streak": 9,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T12:33:04.334497+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 68.33333333333333,
+      "mood": "overwhelmed",
+      "streak": 10,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T12:35:39.264973+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 70.66666666666667,
+      "mood": "overwhelmed",
+      "streak": 11,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T12:38:59.408972+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 73.0,
+      "mood": "overwhelmed",
+      "streak": 12,
+      "tier": "elder"
+    },
+    {
+      "timestamp": "2025-09-22T12:44:33.376568+00:00",
+      "daily_commits": 12,
+      "daily_prs": 0,
+      "health": 75.33333333333333,
+      "mood": "overwhelmed",
+      "streak": 13,
+      "tier": "elder"
+    }
+  ],
+  "brutal_stats": {
+    "tier": "elder",
+    "github_years": 9.555099247091034,
+    "social_score": 1.25,
+    "social_penalties": [
+      "quality_curator"
+    ],
+    "avg_repo_quality": 0.8000000000000004,
+    "commit_quality_score": 0.9,
+    "commit_quality_penalties": [
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages",
+      "short_messages"
+    ],
+    "multipliers": {
+      "xp": 0.25,
+      "decay": 0.8,
+      "requirements": 4.0
+    },
+    "total_stars": 370,
+    "language_diversity_penalty": 1.0,
+    "xp_earned": 27.0,
+    "can_prestige": false,
+    "prestige_missing": "Need Level 10"
   },
-  "achievements": []
+  "last_update": "2025-09-22T12:44:33.376568+00:00"
 }
