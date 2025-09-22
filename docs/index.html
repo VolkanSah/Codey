@@ -1,1 +1,229 @@
 
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codey - Your Personal GitHub Pet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        github: {
+                            dark: '#0d1117',
+                            darker: '#010409',
+                            border: '#30363d',
+                            text: '#c9d1d9',
+                            highlight: '#1f6feb',
+                            accent: '#58a6ff',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+        .github-card {
+            background-color: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .language-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body class="bg-github-darker text-github-text min-h-screen">
+    <nav class="bg-github-dark border-b border-github-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-github-accent font-bold text-xl">🐾 Codey</span>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#" class="bg-github-highlight text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="behind-the-scenes.html" class="text-gray-300 hover:bg-github-dark hover:text-white px-3 py-2 rounded-md text-sm font-medium">Behind the Scenes</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <a href="https://github.com/VolkanSah/Codey" target="_blank" class="bg-github-highlight hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center">
+                            <i data-feather="github" class="mr-2 w-4 h-4"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-github-dark border-b border-github-border">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                <span class="block">🐾 Codey</span>
+                <span class="block text-github-accent">Your Personal GitHub Pet</span>
+            </h1>
+            <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+                A brutally honest script that transforms your GitHub activity into an unforgiving digital pet.
+            </p>
+            <div class="mt-10 flex justify-center">
+                <img src="https://raw.githubusercontent.com/VolkanSah/Codey/refs/heads/main/codey.svg" alt="Codey" class="h-64 w-64">
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 border-b border-github-border pb-4">✨ Features</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-blue-900/30 text-blue-400 mr-4">
+                            <i data-feather="activity"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Daily & All-Time Stats</h3>
+                    </div>
+                    <p class="text-gray-400">Automatically updates your pet's stats every day, tracking both your recent activity and your overall contributions.</p>
+                </div>
+                
+                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-purple-900/30 text-purple-400 mr-4">
+                            <i data-feather="bar-chart-2"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Brutal RPG Stats</h3>
+                    </div>
+                    <p class="text-gray-400">Personality, Social Status, Dominant Language & Pet Evolution, and Advanced Traits that shape your pet's character.</p>
+                </div>
+                
+                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-green-900/30 text-green-400 mr-4">
+                            <i data-feather="smile"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Dynamic Moods</h3>
+                    </div>
+                    <p class="text-gray-400">Codey's mood reacts to your traits and well-being, showing emotions like overwhelmed and inspired.</p>
+                </div>
+                
+                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-yellow-900/30 text-yellow-400 mr-4">
+                            <i data-feather="award"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Achievements System</h3>
+                    </div>
+                    <p class="text-gray-400">Unlock special badges for major milestones like Monthly Warrior, Commit Master, and Social Star.</p>
+                </div>
+                
+                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-red-900/30 text-red-400 mr-4">
+                            <i data-feather="calendar"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Seasonal Events</h3>
+                    </div>
+                    <p class="text-gray-400">Special visual bonuses and boosts during events like Hacktoberfest and Advent of Code.</p>
+                </div>
+                
+                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-indigo-900/30 text-indigo-400 mr-4">
+                            <i data-feather="star"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Prestige System</h3>
+                    </div>
+                    <p class="text-gray-400">Reset your stats for special rewards and a visual prestige icon, a truly brutal test of skill.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 border-b border-github-border pb-4">🚀 How to Use Codey</h2>
+            <div class="github-card p-6 rounded-lg border border-github-border mb-8" data-aos="fade-up">
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i data-feather="git-branch" class="mr-2"></i> Set Up the Workflow
+                </h3>
+                <p class="text-gray-400 mb-4">Copy the <code class="bg-github-dark px-2 py-1 rounded text-sm">update_codey.py</code> script and the <code class="bg-github-dark px-2 py-1 rounded text-sm">.github/workflows/update_codey.yml</code> file into your own repository.</p>
+            </div>
+            
+            <div class="github-card p-6 rounded-lg border border-github-border mb-8" data-aos="fade-up">
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i data-feather="settings" class="mr-2"></i> Configure Your Tracking Mode
+                </h3>
+                <p class="text-gray-400 mb-4">The script uses the <code class="bg-github-dark px-2 py-1 rounded text-sm">GIT_REPOSITORY</code> environment variable to determine what to track.</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium text-white mb-2">Option A: Track a Single Repository</h4>
+                    <div class="bg-github-dark p-4 rounded-lg">
+                        <pre class="text-gray-300 overflow-x-auto"><code>env:
+  GIT_REPOSITORY: 'YourUsername/YourProject'</code></pre>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-medium text-white mb-2">Option B: Track Your Entire Account</h4>
+                    <div class="bg-github-dark p-4 rounded-lg">
+                        <pre class="text-gray-300 overflow-x-auto"><code>env:
+  GIT_REPOSITORY: 'YourUsername'</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i data-feather="file-text" class="mr-2"></i> Add the Badge to Your README
+                </h3>
+                <p class="text-gray-400 mb-4">Once the workflow is set up, add this to your <code class="bg-github-dark px-2 py-1 rounded text-sm">README.md</code>:</p>
+                <div class="bg-github-dark p-4 rounded-lg">
+                    <pre class="text-gray-300 overflow-x-auto"><code>![Codey - Your GitHub Pet](https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/main/codey.svg)</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-github-dark border-t border-github-border py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-github-accent font-bold text-lg">🐾 Codey</span>
+                    <p class="text-gray-400 text-sm mt-1">Your Personal GitHub Pet (RPG No Mercy Edition)</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="behind-the-scenes.html" class="text-gray-400 hover:text-white">Behind the Scenes</a>
+                    <a href="https://github.com/VolkanSah/Codey" target="_blank" class="text-gray-400 hover:text-white flex items-center">
+                        <i data-feather="github" class="mr-1 w-4 h-4"></i> GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-500 text-sm">
+                <p>Licensed under the Apache 2 License by Volkan Kücükbudak</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        feather.replace();
+    </script>
+</body>
+</html>
