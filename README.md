@@ -1,6 +1,7 @@
 # 🐾 Codey - Your Personal GitHub Pet
 
 #### The Full RPG Experience (alpha)  - No mercy EDITION for casual devs!
+###### just 4 fun
 
 ![Codey - Your GitHub Pet](codey.svg)
 
@@ -90,6 +91,7 @@ only static in `codey.json`
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
 
 
