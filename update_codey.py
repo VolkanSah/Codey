@@ -482,6 +482,7 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
         'total_stars': all_time_data.get('total_stars', 0),
         'language_diversity_penalty': language_penalty,
         'xp_earned': commit_xp + pr_xp
+        'dominant_language': all_time_data.get('dominant_language', 'unknown')  # DIESE ZEILE HINZUFÜGEN
     }
     
     # Mood calculation with brutality
@@ -613,8 +614,8 @@ def generate_brutal_svg(codey, seasonal_bonus):
     }
     
     dominant_lang = brutal_stats.get('dominant_language', 'unknown')
-    #pet_emoji = pets.get(dominant_lang, '🐲')
-    pet_emoji = pets.get(codey.get('rpg_stats', {}).get('dominant_language'), default_pet)
+    pet_emoji = pets.get(dominant_lang, '🐲')
+
     
     colors = {
         'background': '#0d1117', 'card': '#161b22', 'text': '#f0f6fc', 'secondary_text': '#8b949e',
