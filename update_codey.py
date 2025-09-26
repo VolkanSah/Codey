@@ -481,8 +481,8 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
         'multipliers': multipliers,
         'total_stars': all_time_data.get('total_stars', 0),
         'language_diversity_penalty': language_penalty,
-        'xp_earned': commit_xp + pr_xp
-        'dominant_language': all_time_data.get('dominant_language', 'unknown')  # DIESE ZEILE HINZUFÜGEN
+        'xp_earned': commit_xp + pr_xp,
+        'dominant_language': all_time_data.get('dominant_language', 'unknown')  
     }
     
     # Mood calculation with brutality
