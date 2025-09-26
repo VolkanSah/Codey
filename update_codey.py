@@ -613,7 +613,8 @@ def generate_brutal_svg(codey, seasonal_bonus):
     }
     
     dominant_lang = brutal_stats.get('dominant_language', 'unknown')
-    pet_emoji = pets.get(dominant_lang, '🐲')
+    #pet_emoji = pets.get(dominant_lang, '🐲')
+    pet_emoji = pets.get(codey.get('rpg_stats', {}).get('dominant_language'), default_pet)
     
     colors = {
         'background': '#0d1117', 'card': '#161b22', 'text': '#f0f6fc', 'secondary_text': '#8b949e',
