@@ -3,7 +3,7 @@
       <rect x="20" y="20" width="590" height="433" fill="#161b22" rx="12" stroke="#30363d" stroke-width="1"/>
       
       <text x="40" y="50" text-anchor="start" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
-        🧙‍♂️ CODEY Level 4
+        🧙‍♂️ CODEY Level 5
       </text>
 
       
@@ -28,14 +28,14 @@
       
       <g transform="translate(205, 90)">
         <text x="0" y="20" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
-        <text x="330" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">32%</text>
+        <text x="330" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">18%</text>
         <rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="25" width="106.14999999999999" height="12" fill="#f85149" rx="6"/>
+        <rect x="0" y="25" width="61.05" height="12" fill="#f85149" rx="6"/>
         
         <text x="0" y="55" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
-        <text x="330" y="55" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">12%</text>
+        <text x="330" y="55" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">0%</text>
         <rect x="0" y="60" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="60" width="39.599999999999994" height="12" fill="#ffa657" rx="6"/>
+        <rect x="0" y="60" width="0.0" height="12" fill="#ffa657" rx="6"/>
         
         <text x="0" y="90" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
         <text x="330" y="90" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">0%</text>
@@ -43,9 +43,9 @@
         <rect x="0" y="95" width="0.0" height="12" fill="#a855f7" rx="6"/>
         
         <text x="0" y="125" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
-        <text x="330" y="125" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">84%</text>
+        <text x="330" y="125" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">56%</text>
         <rect x="0" y="130" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="130" width="278.84999999999997" height="12" fill="#3fb950" rx="6"/>
+        <rect x="0" y="130" width="183.14999999999998" height="12" fill="#3fb950" rx="6"/>
         
         <text x="0" y="160" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">👥 Social</text>
         <text x="330" y="160" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">1.25</text>
@@ -55,7 +55,7 @@
         <text x="0" y="195" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">💎 Quality</text>
         <text x="330" y="195" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">0.80</text>
         <rect x="0" y="200" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="200" width="264.0000000000001" height="12" fill="#a855f7" rx="6"/>
+        <rect x="0" y="200" width="264.5593220338984" height="12" fill="#a855f7" rx="6"/>
       </g>
       
       <g transform="translate(315, 375)">
@@ -69,12 +69,12 @@
       
       <g transform="translate(315, 413)">
         <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14">
-          🗓️ 22 day streak • 📊 373 commits • ⭐ 350 stars
+          🗓️ 23 day streak • 📊 409 commits • ⭐ 331 stars
         </text>
       </g>
       
       <text x="315" y="438" text-anchor="middle" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">
-        Last Update: 2025-09-27 06:26 UTC • Dominant: Python
+        Last Update: 2025-09-28 06:28 UTC • Dominant: Python
       </text>
       
     </svg>
