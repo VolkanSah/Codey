@@ -527,6 +527,8 @@ def is_weekend_warrior():
     return datetime.now().weekday() >= 5
 
 ### SVG 
+import datetime
+
 def generate_brutal_svg(codey, seasonal_bonus):
     """Enhanced SVG with brutal stats display, cleaned layout and pet icons."""
     brutal_stats = codey.get('brutal_stats', {})
@@ -552,7 +554,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
         'elite': '😎', 'wise': '🧐', 'neutral': '😐', 'overwhelmed': '🤯'
     }
     
-    # Pet selection based on dominant language (UPDATED: Duplicates fixed)
+    # Pet selection based on dominant language (UPDATED: Duplikate behoben)
     pets = {
     # All-Time Classics
     'C': '🦫',  # Beaver - The builder
@@ -563,7 +565,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
     'Python': '🐍', # Snake - the official mascot
     'JavaScript': '🦔', # Hedgehog - fast and sharp
     'TypeScript': '🦋', # Butterfly - a more refined form
-    'Ruby': '💎', # Gem/Diamond - precious, elegant (FIXED: Was Dragon)
+    'Ruby': '💎', # Gem/Diamond - precious, elegant (FIXED: War Dragon)
     'Go': '🐹',  # Hamster - the official mascot
     'Swift': '🐦', # Bird - fast and modern
     'Kotlin': '🐨', # Koala - modern and relaxed
@@ -595,18 +597,18 @@ def generate_brutal_svg(codey, seasonal_bonus):
     'PowerShell': '🐺', # Wolf - powerful and commanding
     'Bash': '🦬', # Bison - robust and reliable
     'Perl': '🐪', # Camel - the official mascot
-    'Lua': '🐒', # Monkey - fast and agile (FIXED: Was Fox)
-    'Dart': '🐧', # Penguin - Cool, Linux/modern feel (FIXED: Was Bird)
+    'Lua': '🐒', # Monkey - fast and agile (FIXED: War Fox)
+    'Dart': '🐧', # Penguin - Cool, Linux/modern feel (FIXED: War Bird)
     
     # Game Development
-    'GDScript': '🕹️', # Joystick - Fits the game theme (FIXED: Was Dragon)
+    'GDScript': '🕹️', # Joystick - Fits the game theme (FIXED: War Dragon)
     
     # Others
     'Assembly': '🐜', # Ant - small but diligent
-    'Solidity': '🔱', # Trident/Poseidon - fits powerful blockchain systems (FIXED: Was Dragon)
+    'Solidity': '🔱', # Trident/Poseidon - fits powerful blockchain systems (FIXED: War Dragon)
     'Vim Script': '🕷️', # Spider - weaves a complex web
-    'GraphQL': '🕸️', # Spiderweb - Weaves a complex web of relations (FIXED: Was Spider)
-    'SCSS': '🦢', # Swan - Elegant, graceful styling (FIXED: Was Peacock)
+    'GraphQL': '🕸️', # Spiderweb - Weaves a complex web of relations (FIXED: War Spider)
+    'SCSS': '🦢', # Swan - Elegant, graceful styling (FIXED: War Peacock)
     'Svelte': '🕊️', # Dove - for speed and lightness
     'Zig': '🐆',  # Cheetah - for extreme speed
     'unknown': '🐲'
@@ -628,7 +630,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
         ach_count = min(4, len(codey['achievements']))
         ach_width = 35
         gap = 10
-        # Start X is calculated from the right edge (610) minus total width
+        # Start X ist 610 (rechte Kante) minus Gesamtbreite
         ach_start_x = 610 - ach_count * (ach_width + gap) + gap 
         for i, ach in enumerate(codey['achievements'][-ach_count:]):
             ach_emoji = ach.split(' ')[0]
@@ -637,11 +639,10 @@ def generate_brutal_svg(codey, seasonal_bonus):
             <text x="{x_pos}" y="48" text-anchor="middle" font-size="20">{ach_emoji}</text>
             '''
 
-    # Seasonal bonus display - REPAIRED POSITIONING to be OVERLAPPING and on top
+    # Seasonal bonus display - REPARATUR: Positionierung für Überlappung
     seasonal_display = ''
     if seasonal_bonus:
-        # Position 15, 15 means it starts 5px outside the inner card (20, 20)
-        # and 5px inside the outer card (0, 0), creating the 'overlapping on the edge' effect.
+        # translate(15, 15) platziert es 5px außerhalb der inneren Karte (20, 20)
         seasonal_display = f'''
         <g transform="translate(15, 15)">
             <rect x="0" y="0" width="150" height="30" rx="15" fill="{colors['tier']}" stroke="{colors['border']}" stroke-width="1.5"/>
@@ -651,9 +652,8 @@ def generate_brutal_svg(codey, seasonal_bonus):
         </g>
         '''
     
-    # Prestige indicator
-    # MOVED down to prevent overlap with the new seasonal_display position
-    prestige_y_pos = 70 
+    # Prestige indicator - REPARATUR: Y-Position nach unten verschoben
+    prestige_y_pos = 85 # War 70
     
     prestige_display = ''
     if codey.get('prestige_level', 0) > 0:
@@ -672,20 +672,22 @@ def generate_brutal_svg(codey, seasonal_bonus):
     
     # Calculate new pet avatar size (15% larger)
     pet_radius = 50 * 1.15
+    # y-Koordinate muss an die neue Position der <g> Gruppe angepasst werden
     pet_text_y = 165 + (pet_radius - 50) * 1.5
 
+    # HAUPT-SVG-STRUKTUR
     svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
       <rect width="630" height="473" fill="{colors['background']}" rx="15"/>
       <rect x="20" y="20" width="590" height="433" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
       
-      {seasonal_display} <text x="40" y="60" text-anchor="start" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
+      {seasonal_display} <text x="40" y="75" text-anchor="start" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
         {tier_emojis[tier]} CODEY Level {codey['level']}
       </text>
 
       {prestige_display}
       {achievements_display}
       
-      <g transform="translate(0, 54)">
+      <g transform="translate(0, 84)">
         <circle cx="120" cy="150" r="{pet_radius}" fill="#21262d" stroke="{colors['tier']}" stroke-width="3"/>
         <text x="120" y="{pet_text_y}" text-anchor="middle" font-size="65" font-family="Arial, sans-serif">{pet_emoji}</text>
         <circle cx="120" cy="225" r="25" fill="#21262d" stroke="{colors['border']}" stroke-width="1"/>
@@ -695,7 +697,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
         </text>
       </g>
       
-      <g transform="translate(205, 90)">
+      <g transform="translate(205, 120)"> 
         <text x="0" y="20" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
         <text x="330" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['health']:.0f}%</text>
         <rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/>
@@ -748,7 +750,6 @@ def generate_brutal_svg(codey, seasonal_bonus):
       
     </svg>'''
     return svg
-
 ### SVG END
 
 if __name__ == "__main__":
