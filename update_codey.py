@@ -535,8 +535,6 @@ def is_weekend_warrior():
 
 ### SVG 
 
-import datetime
-
 def generate_brutal_svg(codey, seasonal_bonus):
     """Enhanced SVG with brutal stats display, cleaned layout and pet icons."""
     brutal_stats = codey.get('brutal_stats', {})
