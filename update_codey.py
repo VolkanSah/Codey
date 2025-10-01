@@ -527,6 +527,16 @@ def get_seasonal_bonus():
     if month == 10: return {'emoji': '🎃', 'name': 'Hacktoberfest', 'multiplier': 1.5}
     if month == 12: return {'emoji': '🎄', 'name': 'Advent of Code', 'multiplier': 1.3}
     if month == 1: return {'emoji': '🎯', 'name': 'New Year Resolution', 'multiplier': 1.2}
+    # Themed bonus for all months: Mix of real dev events and lifecycle sprints (e.g., Refactoring, Documentation)
+    if month == 2: return {'emoji': '💖', 'name': 'Open Source Love', 'multiplier': 1.1}
+    if month == 3: return {'emoji': '🧹', 'name': 'Refactor Spring', 'multiplier': 1.2}
+    if month == 4: return {'emoji': '🐞', 'name': 'Bug Hunt Bonus', 'multiplier': 1.1}
+    if month == 5: return {'emoji': '🚀', 'name': 'Deployment Sprint', 'multiplier': 1.3}
+    if month == 6: return {'emoji': '📚', 'name': 'Documentation Focus', 'multiplier': 1.1}
+    if month == 7: return {'emoji': '🔥', 'name': 'Summer Grind', 'multiplier': 1.4}
+    if month == 8: return {'emoji': '🧊', 'name': 'Feature Freeze', 'multiplier': 1.05}
+    if month == 9: return {'emoji': '🎓', 'name': 'Back-to-School Prep', 'multiplier': 1.2}
+    
     return None
 
 def is_weekend_warrior():
