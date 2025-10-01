@@ -535,6 +535,8 @@ def is_weekend_warrior():
 
 ### SVG 
 
+import datetime
+
 def generate_brutal_svg(codey, seasonal_bonus):
     """Enhanced SVG with brutal stats display, cleaned layout and pet icons."""
     brutal_stats = codey.get('brutal_stats', {})
@@ -543,14 +545,14 @@ def generate_brutal_svg(codey, seasonal_bonus):
     # Tier-specific styling
     tier_colors = {
         'noob': '#22c55e',      # Green
-        'developer': '#3b82f6',  # Blue  
-        'veteran': '#8b5cf6',    # Purple
-        'elder': '#f59e0b'       # Gold
+        'developer': '#3b82f6', # Blue  
+        'veteran': '#8b5cf6',   # Purple
+        'elder': '#f59e0b'      # Gold
     }
     
     tier_emojis = {
         'noob': '🌱',
-        'developer': '💻', 
+        'developer': '💻',  
         'veteran': '⚔️',
         'elder': '🧙‍♂️'
     }
@@ -562,61 +564,14 @@ def generate_brutal_svg(codey, seasonal_bonus):
     
     # Pet selection based on dominant language (UPDATED with more animals/fabelwesen)
     pets = {
-    # All-Time Classics (Duplicate fixes)
-    'C': '🦫',  
-    'C++': '🐬', 
-    'C#': '🦊',  
-    'Java': '🦧', 
-    'PHP': '🐘', 
-    'Python': '🐍', 
-    'JavaScript': '🦔', 
-    'TypeScript': '🦋', 
-    'Ruby': '💎', # FIX: Changed from Dragon (War ein Duplikat)
-    'Go': '🐹',  
-    'Swift': '🐦', 
-    'Kotlin': '🐨', 
-    'Rust': '🦀',  
-    
-    # Frontend & Web
-    'HTML': '🦘', 
-    'CSS': '🦎', 
-    'Sass': '🦄', 
-    'Vue': '🐉', 
-    'React': '🦥', 
-    'Angular': '🦁', 
-    
-    # Data Science & Analytics
-    'Jupyter Notebook': '🦉', 
-    'R': '🐿️', 
-    'Matlab': '🐻', 
-    'SQL': '🐙', 
-    'Julia': '🦓', 
-    
-    # Functional Languages
-    'Haskell': '🦚', 
-    'Elixir': '🐝', 
-    'Clojure': '🦌', 
-    'F#': '🐑', 
-    
-    # Scripting & DevOps
-    'Shell': '🐌', 
-    'PowerShell': '🐺', 
-    'Bash': '🦬', 
-    'Perl': '🐪', 
-    'Lua': '🐒', # FIX: Changed from Fox (War ein Duplikat)
-    'Dart': '🐧', # FIX: Changed from Bird (War ein Duplikat)
-    
-    # Game Development
-    'GDScript': '🕹️', # FIX: Changed from Dragon (War ein Duplikat)
-    
-    # Others
-    'Assembly': '🐜', 
-    'Solidity': '🔱', # FIX: Changed from Dragon (War ein Duplikat)
-    'Vim Script': '🕷️', 
-    'GraphQL': '🕸️', # FIX: Changed from Spider (War ein Duplikat)
-    'SCSS': '🦢', # FIX: Changed from Peacock (War ein Duplikat)
-    'Svelte': '🕊️', 
-    'Zig': '🐆',  
+    'C': '🦫', 'C++': '🐬', 'C#': '🦊', 'Java': '🦧', 'PHP': '🐘', 'Python': '🐍', 
+    'JavaScript': '🦔', 'TypeScript': '🦋', 'Ruby': '💎', 'Go': '🐹', 'Swift': '🐦', 
+    'Kotlin': '🐨', 'Rust': '🦀', 'HTML': '🦘', 'CSS': '🦎', 'Sass': '🦄', 'Vue': '🐉', 
+    'React': '🦥', 'Angular': '🦁', 'Jupyter Notebook': '🦉', 'R': '🐿️', 'Matlab': '🐻', 
+    'SQL': '🐙', 'Julia': '🦓', 'Haskell': '🦚', 'Elixir': '🐝', 'Clojure': '🦌', 
+    'F#': '🐑', 'Shell': '🐌', 'PowerShell': '🐺', 'Bash': '🦬', 'Perl': '🐪', 
+    'Lua': '🐒', 'Dart': '🐧', 'GDScript': '🕹️', 'Assembly': '🐜', 'Solidity': '🔱', 
+    'Vim Script': '🕷️', 'GraphQL': '🕸️', 'SCSS': '🦢', 'Svelte': '🕊️', 'Zig': '🐆',  
     'unknown': '🐲'
     }
     
@@ -640,24 +595,36 @@ def generate_brutal_svg(codey, seasonal_bonus):
         for i, ach in enumerate(codey['achievements'][-ach_count:]):
             ach_emoji = ach.split(' ')[0]
             x_pos = ach_start_x + (i * (ach_width + gap)) + (ach_width / 2)
+            # FIX: y-Koordinate bleibt 48
             achievements_display += f'''
             <text x="{x_pos}" y="48" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="20">{ach_emoji}</text>
             '''
 
-    # Seasonal bonus display - FIX: Erneute Positionierung für den Überlapp
+    # Pet Avatar Berechnung
+    pet_radius = 50 * 1.15
+    pet_diameter = pet_radius * 2
+    
+    # Seasonal bonus display - NEUE LOGIK: Zentriert über dem Pet-Avatar
     seasonal_display = ''
     if seasonal_bonus:
-        # Rechteck beginnt nun tiefer, um den Codey Level Text nicht zu berühren
+        # Die Avatar-Gruppe startet bei x=0 und der Kreis bei cx=120.
+        # Das Rechteck soll bei x = 120 - (pet_diameter / 2) starten.
+        bonus_x_start = 120 - (pet_diameter / 2)
+        
+        # y-Position: 20 (Kartenrand) - 10 (Überhang)
+        bonus_y_start = 10
+        
         seasonal_display = f'''
-        <g transform="translate(0, 0)"> <rect x="25" y="35" width="130" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.8"/>
-            <text x="90" y="58" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+        <g transform="translate(0, 0)"> 
+            <rect x="{bonus_x_start}" y="{bonus_y_start}" width="{pet_diameter}" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.9" stroke="{colors['border']}" stroke-width="1.5"/>
+            <text x="120" y="{bonus_y_start + 23}" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
                 {seasonal_bonus['emoji']} {seasonal_bonus['name']}
             </text>
         </g>
         '''
     
-    # Prestige indicator - FIX: Y-Position an den tieferen Codey Level Text angepasst
-    prestige_y_pos = 85 # War 70
+    # Prestige indicator - Y-Position bleibt 85
+    prestige_y_pos = 85
     
     prestige_display = ''
     if codey.get('prestige_level', 0) > 0:
@@ -674,8 +641,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
         </text>
         '''
     
-    # Calculate new pet avatar size (15% larger)
-    pet_radius = 50 * 1.15
+    # Pet text position muss nur relativ zum translate(0, 84) berechnet werden
     pet_text_y = 165 + (pet_radius - 50) * 1.5
 
     svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
