@@ -528,6 +528,8 @@ def is_weekend_warrior():
 
 ### SVG 
 
+import datetime
+
 def generate_brutal_svg(codey, seasonal_bonus):
     """Enhanced SVG with brutal stats display, cleaned layout and pet icons."""
     brutal_stats = codey.get('brutal_stats', {})
@@ -536,14 +538,14 @@ def generate_brutal_svg(codey, seasonal_bonus):
     # Tier-specific styling
     tier_colors = {
         'noob': '#22c55e',      # Green
-        'developer': '#3b82f6',  # Blue  
-        'veteran': '#8b5cf6',    # Purple
-        'elder': '#f59e0b'       # Gold
+        'developer': '#3b82f6', # Blue  
+        'veteran': '#8b5cf6',   # Purple
+        'elder': '#f59e0b'      # Gold
     }
     
     tier_emojis = {
         'noob': '🌱',
-        'developer': '💻', 
+        'developer': '💻',  
         'veteran': '⚔️',
         'elder': '🧙‍♂️'
     }
@@ -553,8 +555,8 @@ def generate_brutal_svg(codey, seasonal_bonus):
         'elite': '😎', 'wise': '🧐', 'neutral': '😐', 'overwhelmed': '🤯'
     }
     
-    # Pet selection based on dominant language (UPDATED with more animals/fabelwesen)
-    pets = pets = {
+    # Pet selection based on dominant language (UPDATED: Duplicates fixed)
+    pets = {
     # All-Time Classics
     'C': '🦫',  # Beaver - The builder
     'C++': '🐬', # Dolphin - intelligent and fast
@@ -564,7 +566,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
     'Python': '🐍', # Snake - the official mascot
     'JavaScript': '🦔', # Hedgehog - fast and sharp
     'TypeScript': '🦋', # Butterfly - a more refined form
-    'Ruby': '🐉', # Dragon
+    'Ruby': '💎', # Gem/Diamond - precious, elegant (FIXED: Was Dragon)
     'Go': '🐹',  # Hamster - the official mascot
     'Swift': '🐦', # Bird - fast and modern
     'Kotlin': '🐨', # Koala - modern and relaxed
@@ -574,7 +576,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
     'HTML': '🦘', # Kangaroo - for jumping and structure
     'CSS': '🦎', # Lizard - adapts like a chameleon
     'Sass': '🦄', # Unicorn - for the magical extension
-    'Vue': '🐉', # Dragon - a powerful mythical creature
+    'Vue': '🐉', # Dragon
     'React': '🦥', # Sloth - optimized by doing only what's necessary
     'Angular': '🦁', # Lion - robust and powerful
     
@@ -596,18 +598,18 @@ def generate_brutal_svg(codey, seasonal_bonus):
     'PowerShell': '🐺', # Wolf - powerful and commanding
     'Bash': '🦬', # Bison - robust and reliable
     'Perl': '🐪', # Camel - the official mascot
-    'Lua': '🦊', # Fox - fast and clever
-    'Dart': '🐦', # Hummingbird emoji
+    'Lua': '🐒', # Monkey - fast and agile (FIXED: Was Fox)
+    'Dart': '🐧', # Penguin - Cool, Linux/modern feel (FIXED: Was Bird)
     
     # Game Development
-    'GDScript': '🐉', # Dragon - fits the fantasy of games
+    'GDScript': '🕹️', # Joystick - Fits the game theme (FIXED: Was Dragon)
     
     # Others
     'Assembly': '🐜', # Ant - small but diligent
-    'Solidity': '🐉', # Dragon - fits powerful blockchain systems
+    'Solidity': '🔱', # Trident/Poseidon - fits powerful blockchain systems (FIXED: Was Dragon)
     'Vim Script': '🕷️', # Spider - weaves a complex web
-    'GraphQL': '🕷️', # Spider - weaves a complex web
-    'SCSS': '🦚', # Peacock - for elegance and styling
+    'GraphQL': '🕸️', # Spiderweb - Weaves a complex web of relations (FIXED: Was Spider)
+    'SCSS': '🦢', # Swan - Elegant, graceful styling (FIXED: Was Peacock)
     'Svelte': '🕊️', # Dove - for speed and lightness
     'Zig': '🐆',  # Cheetah - for extreme speed
     'unknown': '🐲'
@@ -623,13 +625,14 @@ def generate_brutal_svg(codey, seasonal_bonus):
         'border': '#30363d', 'tier': tier_colors.get(tier, '#22c55e')
     }
     
-    # Achievements display in the header, aligned to the right, no rings
+    # Achievements display in the header, aligned to the right
     achievements_display = ''
     if codey.get('achievements'):
         ach_count = min(4, len(codey['achievements']))
         ach_width = 35
         gap = 10
-        ach_start_x = 580 - ach_count * (ach_width + gap)
+        # Start X is calculated from the right edge (610) minus total width
+        ach_start_x = 610 - ach_count * (ach_width + gap) + gap 
         for i, ach in enumerate(codey['achievements'][-ach_count:]):
             ach_emoji = ach.split(' ')[0]
             x_pos = ach_start_x + (i * (ach_width + gap)) + (ach_width / 2)
@@ -637,28 +640,35 @@ def generate_brutal_svg(codey, seasonal_bonus):
             <text x="{x_pos}" y="48" text-anchor="middle" font-size="20">{ach_emoji}</text>
             '''
 
-    # Seasonal bonus display
+    # Seasonal bonus display - REPAIRED POSITIONING to be OVERLAPPING and on top
     seasonal_display = ''
     if seasonal_bonus:
+        # Position 15, 15 means it starts 5px outside the inner card (20, 20)
+        # and 5px inside the outer card (0, 0), creating the 'overlapping on the edge' effect.
         seasonal_display = f'''
-        <rect x="25" y="25" width="130" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.8"/>
-        <text x="90" y="48" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
-            {seasonal_bonus['emoji']} {seasonal_bonus['name']}
-        </text>
+        <g transform="translate(15, 15)">
+            <rect x="0" y="0" width="150" height="30" rx="15" fill="{colors['tier']}" stroke="{colors['border']}" stroke-width="1.5"/>
+            <text x="75" y="19" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+                {seasonal_bonus['emoji']} {seasonal_bonus['name']}
+            </text>
+        </g>
         '''
     
     # Prestige indicator
+    # MOVED down to prevent overlap with the new seasonal_display position
+    prestige_y_pos = 70 
+    
     prestige_display = ''
     if codey.get('prestige_level', 0) > 0:
         stars = '⭐' * codey['prestige_level']
         prestige_display = f'''
-        <text x="315" y="70" text-anchor="middle" fill="{colors['tier']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">
+        <text x="315" y="{prestige_y_pos}" text-anchor="middle" fill="{colors['tier']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">
             {stars} PRESTIGE {stars}
         </text>
         '''
     elif brutal_stats.get('can_prestige', False):
         prestige_display = f'''
-        <text x="315" y="70" text-anchor="middle" fill="{colors['energy']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+        <text x="315" y="{prestige_y_pos}" text-anchor="middle" fill="{colors['energy']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
             ✨ PRESTIGE READY ✨
         </text>
         '''
@@ -671,12 +681,11 @@ def generate_brutal_svg(codey, seasonal_bonus):
       <rect width="630" height="473" fill="{colors['background']}" rx="15"/>
       <rect x="20" y="20" width="590" height="433" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
       
-      <text x="40" y="50" text-anchor="start" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
+      {seasonal_display} <text x="40" y="60" text-anchor="start" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
         {tier_emojis[tier]} CODEY Level {codey['level']}
       </text>
 
       {prestige_display}
-      {seasonal_display}
       {achievements_display}
       
       <g transform="translate(0, 54)">
@@ -732,17 +741,16 @@ def generate_brutal_svg(codey, seasonal_bonus):
       
       <g transform="translate(315, 413)">
         <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14">
-          🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits • ⭐ {brutal_stats.get('total_stars', 0)} stars
+            🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits • ⭐ {brutal_stats.get('total_stars', 0)} stars
         </text>
       </g>
       
       <text x="315" y="438" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
-        Last Update: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • Dominant: {dominant_lang}
+        Last Update: {datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • Dominant: {dominant_lang}
       </text>
       
     </svg>'''
     return svg
-
 
 ### SVG END
 
