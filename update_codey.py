@@ -4,7 +4,8 @@ import requests
 import json
 import os
 import sys
-from datetime import datetime, timedelta, timezone
+# FIX: Die Klasse 'datetime' wurde direkt importiert. Der Fehler liegt in der redundanten Verwendung von 'datetime.now()'
+from datetime import datetime, timedelta, timezone 
 from collections import Counter
 import re
 
@@ -71,6 +72,7 @@ def get_github_age_years(created_at_str):
     """Calculate years since GitHub account creation"""
     try:
         created = datetime.fromisoformat(created_at_str.replace('Z', '+00:00'))
+        # FIX: Aufruf von 'datetime.now()' korrigiert
         return (datetime.now(timezone.utc) - created).days / 365.25
     except:
         return 1  # fallback
@@ -210,6 +212,7 @@ def calculate_skill_decay(last_update_str, current_stats):
     
     try:
         last_update = datetime.fromisoformat(last_update_str.replace('Z', '+00:00'))
+        # FIX: Aufruf von 'datetime.now()' korrigiert
         days_inactive = (datetime.now(timezone.utc) - last_update).days
         
         if days_inactive <= 1:
@@ -260,6 +263,7 @@ def get_all_data_for_user(owner):
                 languages_bytes.update(lang_data)
 
     # Recent activity analysis
+    # FIX: Aufruf von 'datetime.now()' korrigiert
     now = datetime.now(timezone.utc)
     one_day_ago = now - timedelta(days=1)
     daily_commits_count = 0
@@ -400,6 +404,7 @@ def calculate_prestige_requirements(codey, tier, github_years):
 
 def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     """Main brutal stats update function"""
+    # FIX: Aufruf von 'datetime.now()' korrigiert
     now = datetime.now(timezone.utc).isoformat()
     
     # Get GitHub age
@@ -517,6 +522,7 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
 
 def get_seasonal_bonus():
     """Enhanced seasonal system"""
+    # FIX: Aufruf von 'datetime.now()' korrigiert
     month = datetime.now().month
     if month == 10: return {'emoji': '🎃', 'name': 'Hacktoberfest', 'multiplier': 1.5}
     if month == 12: return {'emoji': '🎄', 'name': 'Advent of Code', 'multiplier': 1.3}
@@ -524,10 +530,10 @@ def get_seasonal_bonus():
     return None
 
 def is_weekend_warrior():
+    # FIX: Aufruf von 'datetime.now()' korrigiert
     return datetime.now().weekday() >= 5
 
 ### SVG 
-import datetime
 
 def generate_brutal_svg(codey, seasonal_bonus):
     """Enhanced SVG with brutal stats display, cleaned layout and pet icons."""
@@ -537,14 +543,14 @@ def generate_brutal_svg(codey, seasonal_bonus):
     # Tier-specific styling
     tier_colors = {
         'noob': '#22c55e',      # Green
-        'developer': '#3b82f6', # Blue  
-        'veteran': '#8b5cf6',   # Purple
-        'elder': '#f59e0b'      # Gold
+        'developer': '#3b82f6',  # Blue  
+        'veteran': '#8b5cf6',    # Purple
+        'elder': '#f59e0b'       # Gold
     }
     
     tier_emojis = {
         'noob': '🌱',
-        'developer': '💻',  
+        'developer': '💻', 
         'veteran': '⚔️',
         'elder': '🧙‍♂️'
     }
@@ -554,63 +560,63 @@ def generate_brutal_svg(codey, seasonal_bonus):
         'elite': '😎', 'wise': '🧐', 'neutral': '😐', 'overwhelmed': '🤯'
     }
     
-    # Pet selection based on dominant language (UPDATED: Duplikate behoben)
+    # Pet selection based on dominant language (UPDATED with more animals/fabelwesen)
     pets = {
-    # All-Time Classics
-    'C': '🦫',  # Beaver - The builder
-    'C++': '🐬', # Dolphin - intelligent and fast
-    'C#': '🦊',  # Fox - smart and agile
-    'Java': '🦧', # Orangutan - wise and classic
-    'PHP': '🐘', # Elephant - the official mascot
-    'Python': '🐍', # Snake - the official mascot
-    'JavaScript': '🦔', # Hedgehog - fast and sharp
-    'TypeScript': '🦋', # Butterfly - a more refined form
-    'Ruby': '💎', # Gem/Diamond - precious, elegant (FIXED: War Dragon)
-    'Go': '🐹',  # Hamster - the official mascot
-    'Swift': '🐦', # Bird - fast and modern
-    'Kotlin': '🐨', # Koala - modern and relaxed
-    'Rust': '🦀',  # Crab - the official mascot
+    # All-Time Classics (Duplicate fixes)
+    'C': '🦫',  
+    'C++': '🐬', 
+    'C#': '🦊',  
+    'Java': '🦧', 
+    'PHP': '🐘', 
+    'Python': '🐍', 
+    'JavaScript': '🦔', 
+    'TypeScript': '🦋', 
+    'Ruby': '💎', # FIX: Changed from Dragon (War ein Duplikat)
+    'Go': '🐹',  
+    'Swift': '🐦', 
+    'Kotlin': '🐨', 
+    'Rust': '🦀',  
     
     # Frontend & Web
-    'HTML': '🦘', # Kangaroo - for jumping and structure
-    'CSS': '🦎', # Lizard - adapts like a chameleon
-    'Sass': '🦄', # Unicorn - for the magical extension
-    'Vue': '🐉', # Dragon
-    'React': '🦥', # Sloth - optimized by doing only what's necessary
-    'Angular': '🦁', # Lion - robust and powerful
+    'HTML': '🦘', 
+    'CSS': '🦎', 
+    'Sass': '🦄', 
+    'Vue': '🐉', 
+    'React': '🦥', 
+    'Angular': '🦁', 
     
     # Data Science & Analytics
-    'Jupyter Notebook': '🦉', # Owl - for wisdom and data
-    'R': '🐿️', # Squirrel - gathers and organizes data
-    'Matlab': '🐻', # Bear - strong and good for complex calculations
-    'SQL': '🐙', # Octopus - many arms for data queries
-    'Julia': '🦓', # Zebra - fast and striking
+    'Jupyter Notebook': '🦉', 
+    'R': '🐿️', 
+    'Matlab': '🐻', 
+    'SQL': '🐙', 
+    'Julia': '🦓', 
     
     # Functional Languages
-    'Haskell': '🦚', # Peacock - for elegant, beautiful code
-    'Elixir': '🐝', # Bee - for a productive ecosystem
-    'Clojure': '🦌', # Deer - for a functional mindset
-    'F#': '🐑', # Sheep - for a "herd-based" programming model
+    'Haskell': '🦚', 
+    'Elixir': '🐝', 
+    'Clojure': '🦌', 
+    'F#': '🐑', 
     
     # Scripting & DevOps
-    'Shell': '🐌', # Snail - a creature with a shell
-    'PowerShell': '🐺', # Wolf - powerful and commanding
-    'Bash': '🦬', # Bison - robust and reliable
-    'Perl': '🐪', # Camel - the official mascot
-    'Lua': '🐒', # Monkey - fast and agile (FIXED: War Fox)
-    'Dart': '🐧', # Penguin - Cool, Linux/modern feel (FIXED: War Bird)
+    'Shell': '🐌', 
+    'PowerShell': '🐺', 
+    'Bash': '🦬', 
+    'Perl': '🐪', 
+    'Lua': '🐒', # FIX: Changed from Fox (War ein Duplikat)
+    'Dart': '🐧', # FIX: Changed from Bird (War ein Duplikat)
     
     # Game Development
-    'GDScript': '🕹️', # Joystick - Fits the game theme (FIXED: War Dragon)
+    'GDScript': '🕹️', # FIX: Changed from Dragon (War ein Duplikat)
     
     # Others
-    'Assembly': '🐜', # Ant - small but diligent
-    'Solidity': '🔱', # Trident/Poseidon - fits powerful blockchain systems (FIXED: War Dragon)
-    'Vim Script': '🕷️', # Spider - weaves a complex web
-    'GraphQL': '🕸️', # Spiderweb - Weaves a complex web of relations (FIXED: War Spider)
-    'SCSS': '🦢', # Swan - Elegant, graceful styling (FIXED: War Peacock)
-    'Svelte': '🕊️', # Dove - for speed and lightness
-    'Zig': '🐆',  # Cheetah - for extreme speed
+    'Assembly': '🐜', 
+    'Solidity': '🔱', # FIX: Changed from Dragon (War ein Duplikat)
+    'Vim Script': '🕷️', 
+    'GraphQL': '🕸️', # FIX: Changed from Spider (War ein Duplikat)
+    'SCSS': '🦢', # FIX: Changed from Peacock (War ein Duplikat)
+    'Svelte': '🕊️', 
+    'Zig': '🐆',  
     'unknown': '🐲'
     }
     
@@ -624,35 +630,33 @@ def generate_brutal_svg(codey, seasonal_bonus):
         'border': '#30363d', 'tier': tier_colors.get(tier, '#22c55e')
     }
     
-    # Achievements display in the header, aligned to the right
+    # Achievements display in the header, aligned to the right, no rings
     achievements_display = ''
     if codey.get('achievements'):
         ach_count = min(4, len(codey['achievements']))
         ach_width = 35
         gap = 10
-        # Start X ist 610 (rechte Kante) minus Gesamtbreite
-        ach_start_x = 610 - ach_count * (ach_width + gap) + gap 
+        ach_start_x = 580 - ach_count * (ach_width + gap)
         for i, ach in enumerate(codey['achievements'][-ach_count:]):
             ach_emoji = ach.split(' ')[0]
             x_pos = ach_start_x + (i * (ach_width + gap)) + (ach_width / 2)
             achievements_display += f'''
-            <text x="{x_pos}" y="48" text-anchor="middle" font-size="20">{ach_emoji}</text>
+            <text x="{x_pos}" y="48" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="20">{ach_emoji}</text>
             '''
 
-    # Seasonal bonus display - REPARATUR: Positionierung für Überlappung
+    # Seasonal bonus display - FIX: Erneute Positionierung für den Überlapp
     seasonal_display = ''
     if seasonal_bonus:
-        # translate(15, 15) platziert es 5px außerhalb der inneren Karte (20, 20)
+        # Rechteck beginnt nun tiefer, um den Codey Level Text nicht zu berühren
         seasonal_display = f'''
-        <g transform="translate(15, 15)">
-            <rect x="0" y="0" width="150" height="30" rx="15" fill="{colors['tier']}" stroke="{colors['border']}" stroke-width="1.5"/>
-            <text x="75" y="19" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+        <g transform="translate(0, 0)"> <rect x="25" y="35" width="130" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.8"/>
+            <text x="90" y="58" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
                 {seasonal_bonus['emoji']} {seasonal_bonus['name']}
             </text>
         </g>
         '''
     
-    # Prestige indicator - REPARATUR: Y-Position nach unten verschoben
+    # Prestige indicator - FIX: Y-Position an den tieferen Codey Level Text angepasst
     prestige_y_pos = 85 # War 70
     
     prestige_display = ''
@@ -672,10 +676,8 @@ def generate_brutal_svg(codey, seasonal_bonus):
     
     # Calculate new pet avatar size (15% larger)
     pet_radius = 50 * 1.15
-    # y-Koordinate muss an die neue Position der <g> Gruppe angepasst werden
     pet_text_y = 165 + (pet_radius - 50) * 1.5
 
-    # HAUPT-SVG-STRUKTUR
     svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
       <rect width="630" height="473" fill="{colors['background']}" rx="15"/>
       <rect x="20" y="20" width="590" height="433" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
@@ -697,7 +699,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
         </text>
       </g>
       
-      <g transform="translate(205, 120)"> 
+      <g transform="translate(205, 120)">
         <text x="0" y="20" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
         <text x="330" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">{codey['health']:.0f}%</text>
         <rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/>
@@ -740,16 +742,18 @@ def generate_brutal_svg(codey, seasonal_bonus):
       
       <g transform="translate(315, 413)">
         <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-family="Arial, sans-serif" font-size="14">
-            🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits • ⭐ {brutal_stats.get('total_stars', 0)} stars
+          🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits • ⭐ {brutal_stats.get('total_stars', 0)} stars
         </text>
       </g>
       
       <text x="315" y="438" text-anchor="middle" fill="{colors['secondary_text']}" font-family="Arial, sans-serif" font-size="12">
-        Last Update: {datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • Dominant: {dominant_lang}
+        Last Update: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • Dominant: {dominant_lang}
       </text>
       
     </svg>'''
     return svg
+
+
 ### SVG END
 
 if __name__ == "__main__":
