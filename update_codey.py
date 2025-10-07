@@ -234,33 +234,47 @@ def calculate_skill_decay(last_update_str, current_stats):
     
     except:
         return current_stats
+        
 
 def get_all_data_for_user(owner):
-    """Enhanced data collection with brutality metrics"""
+    """Enhanced data collection with brutality metrics and paging for all repos"""
     ok, events = get_json_safe(f'https://api.github.com/users/{owner}/events/public')
     if not ok or not isinstance(events, list):
         return {}
 
-    ok, repos_list = get_json_safe(f'https://api.github.com/users/{owner}/repos', params={'per_page': 100})
-    if not ok or not isinstance(repos_list, list):
-        repos_list = []
+    # --- Alle Repos mit Paging abrufen ---
+    all_repos = []
+    page = 1
+    while True:
+        ok, repos_page = get_json_safe(f'https://api.github.com/users/{owner}/repos',
+                                       params={'per_page': 100, 'page': page})
+        if not ok or not isinstance(repos_page, list) or not repos_page:
+            break
+        all_repos.extend(repos_page)
+        if len(repos_page) < 100:  # letzte Seite
+            break
+        page += 1
+
+    repos_list = all_repos
 
     # Basic stats
     total_own_repos = len([r for r in repos_list if not r.get('fork')])
     total_stars = sum(r.get('stargazers_count', 0) for r in repos_list if not r.get('fork'))
     total_forks = sum(r.get('forks_count', 0) for r in repos_list if not r.get('fork'))
-    
+
     # Quality analysis
     repo_qualities = [analyze_repo_quality(repo) for repo in repos_list if not repo.get('fork')]
     avg_repo_quality = sum(repo_qualities) / max(len(repo_qualities), 1)
-    
-    # Language analysis
+
+    # Language analysis (nur die ersten 20 Repos limitieren)
     languages_bytes = Counter()
-    for repo_data in repos_list[:20]:  # Limit API calls
+    for repo_data in repos_list[:20]:
         if not repo_data.get('fork'):
             ok_l, lang_data = get_json_safe(f'https://api.github.com/repos/{repo_data["full_name"]}/languages')
             if ok_l and isinstance(lang_data, dict):
                 languages_bytes.update(lang_data)
+
+
 
     # Recent activity analysis
     # FIX: Aufruf von 'datetime.now()' korrigiert
