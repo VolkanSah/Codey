@@ -536,18 +536,18 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
 
 def get_seasonal_bonus():
     """Enhanced seasonal system"""
-    # FIX: Aufruf von 'datetime.now()' korrigiert
-    month = datetime.now().month
-    if month == 10: return {'emoji': '🎃', 'name': 'Hacktoberfest', 'multiplier': 1.5}
-    if month == 12: return {'emoji': '🎄', 'name': 'Advent of Code', 'multiplier': 1.3}
-    if month == 1: return {'emoji': '🎯', 'name': 'New Year Resolution', 'multiplier': 1.2}
+    # FIX: Aufruf von 'datetime.now()' korrigiert 
+    month = datetime.now().month  
+    if month == 10: return {'emoji': '🎃', 'name': 'Hacktoberfest', 'multiplier': 1.3}
+    if month == 12: return {'emoji': '🎄', 'name': 'Advent of Code', 'multiplier': 1.2}
+    if month == 1: return {'emoji': '🎯', 'name': 'New Year Resolution', 'multiplier': 1.15}
     # Themed bonus for all months: Mix of real dev events and lifecycle sprints (e.g., Refactoring, Documentation)
-    if month == 2: return {'emoji': '💖', 'name': 'Open Source Love', 'multiplier': 1.1}
+    if month == 2: return {'emoji': '💖', 'name': 'Open Source Love', 'multiplier': 1.25}
     if month == 3: return {'emoji': '🧹', 'name': 'Refactor Spring', 'multiplier': 1.2}
     if month == 4: return {'emoji': '🐞', 'name': 'Bug Hunt Bonus', 'multiplier': 1.1}
-    if month == 5: return {'emoji': '🚀', 'name': 'Deployment Sprint', 'multiplier': 1.3}
+    if month == 5: return {'emoji': '🚀', 'name': 'Deployment Sprint', 'multiplier': 1.1}
     if month == 6: return {'emoji': '📚', 'name': 'Documentation Focus', 'multiplier': 1.1}
-    if month == 7: return {'emoji': '🔥', 'name': 'Summer Grind', 'multiplier': 1.4}
+    if month == 7: return {'emoji': '🔥', 'name': 'Summer Grind', 'multiplier': 1.15}
     if month == 8: return {'emoji': '🧊', 'name': 'Feature Freeze', 'multiplier': 1.05}
     if month == 9: return {'emoji': '🎓', 'name': 'Back-to-School Prep', 'multiplier': 1.2}
     
@@ -784,10 +784,10 @@ if __name__ == "__main__":
     daily_activity = {'commits': daily_commits_count, 'prs': daily_prs_merged}
     
     # Enhanced weekend bonus
-    if is_weekend_warrior():
+    if is_weekend_warrior(): # codey has to much energy! fixed!
         print("🎯 Weekend Warrior bonus activated!")
-        daily_activity['commits'] = int(daily_activity['commits'] * 1.5)
-        daily_activity['prs'] = int(daily_activity['prs'] * 1.5)
+        daily_activity['commits'] = int(daily_activity['commits'] * 1.2) # orginal 1.5
+        daily_activity['prs'] = int(daily_activity['prs'] * 1.2) # orginal 1.5
 
     print("Daily activity (enhanced):", daily_activity)
     print("Brutal metrics preview:")
