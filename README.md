@@ -3,7 +3,7 @@
 ##### (RPG `No Mercy` Edition) - need testers - dev status
 „Codey only counts stars on your own repos. Forks and self-stars don’t matter!“
 
-![Codey - Your GitHub Pet](https://raw.githubusercontent.com/VolkanSah/Codey/refs/heads/main/codey.svg)
+![Codey - Your GitHub Pet](codey.svg)
 
 A brutally honest script that transforms your GitHub activity into an unforgiving digital pet, complete with deep RPG stats and dynamic, no-mercy growth.
 
@@ -117,6 +117,7 @@ The core of the changes was to make the pet's status more dynamic and challengin
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
 
 
