@@ -86,6 +86,23 @@ This edition of Codey uses a far more demanding and unforgiving system than stan
 
 -----
 
+The core of the changes was to make the pet's status more dynamic and challenging. The previous system made it too easy for Codey to stay at 100% health and energy.
+
+  * **Reworked Energy System**:
+
+      * **Cost for Actions**: Commits and PRs now have a direct energy cost, making activity more meaningful.
+      * **Conditional Regeneration**: Instead of a flat `+25` energy every day, Codey now regenerates a lot of energy on "rest" days (no commits) and very little on "active" days. This simulates a sleep/work cycle.
+
+  * **Increased Daily Decay**:
+
+      * The daily loss of **Hunger** and **Happiness** was increased. This makes daily activity more necessary to keep your pet's stats high.
+
+  * **Balanced Stat Rewards**:
+
+      * The amount of Hunger and Happiness gained from commits and PRs was slightly reduced to work with the new decay rates, preventing stats from filling up too quickly.
+
+
+
 ## Roadmap
 
   * [ ] 🚤 + 🧠 on psql
@@ -99,6 +116,7 @@ This edition of Codey uses a far more demanding and unforgiving system than stan
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
 
 
