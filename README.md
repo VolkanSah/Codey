@@ -1,4 +1,4 @@
-# 🐾 Codey - Your Personal GitHub Pet (v2.0.6)
+# 🐾 Codey - Your Personal GitHub Pet (v2.0.6)! Bricked! 
 
 ##### (RPG `No Mercy` Edition) - need testers - dev status
 „Codey only counts stars on your own repos. Forks and self-stars don’t matter!“
@@ -117,6 +117,7 @@ The core of the changes was to make the pet's status more dynamic and challengin
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
 
 
