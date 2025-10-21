@@ -443,13 +443,30 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     language_penalty = all_time_data.get('language_diversity_penalty', 1.0)
     total_xp = (commit_xp + pr_xp) * language_penalty
     
-    # 2. Daily decay and energy consumption
+# ---- Fix the energy/hunger  ----
+    # 2. Daily decay
     codey['hunger'] = max(0, codey['hunger'] - GAME_BALANCE['DAILY_HUNGER_DECAY'])
     codey['happiness'] = max(0, codey['happiness'] - GAME_BALANCE['DAILY_HAPPINESS_DECAY'])
-    
+
+    # energy consumption for today's activity
     energy_consumed = (daily_activity['commits'] * GAME_BALANCE['ENERGY_COST_COMMIT']) + \
                       (daily_activity['prs'] * GAME_BALANCE['ENERGY_COST_PR'])
-    codey['energy'] = max(0, codey['energy'] - energy_consumed)
+
+    # NEW: apply consumption and regeneration in one net step so small activity
+    # cannot accidentally increase energy if regen > cost.
+    if energy_consumed == 0:
+        regen = GAME_BALANCE['ENERGY_REGEN_REST']
+    else:
+        # small positive regen for active days (should be <= per-action cost to avoid net gain)
+        regen = GAME_BALANCE['ENERGY_REGEN_ACTIVE']
+
+    # net change = -consumed + regen, then clamp
+    codey['energy'] = max(0, min(100, codey.get('energy', 0) - energy_consumed + regen))
+
+    # rewards from activity
+    codey['hunger'] = min(100, codey['hunger'] + total_xp * GAME_BALANCE['HUNGER_GAIN_MODIFIER'])
+    codey['happiness'] = min(100, codey['happiness'] + pr_xp * GAME_BALANCE['HAPPINESS_GAIN_MODIFIER'])
+# ---- end fix ----
 
     # 3. Regeneration and rewards from activity
     if energy_consumed == 0: # Rest day
