@@ -4,7 +4,7 @@
 > [!IMPORTANT]
 > Testing from 21.10.2025 till 26.10.2025 with Energy/Hunger fix. use backup_codex.py for  stable in main.
 
-![Codey - Your GitHub Pet](https://raw.githubusercontent.com/VolkanSah/Codey/refs/heads/main/codey.svg)
+![Codey - Your GitHub Pet](codey.svg)
 
 A brutally honest script that transforms your GitHub activity into an unforgiving digital pet, complete with deep RPG stats and dynamic, no-mercy growth.
 
@@ -101,6 +101,7 @@ This edition of Codey uses a far more demanding and unforgiving system than stan
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
 
 
