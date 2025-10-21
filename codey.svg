@@ -1,86 +1,18 @@
 <svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
-      <rect width="630" height="473" fill="#0d1117" rx="15"/>
-      <rect x="20" y="20" width="590" height="433" fill="#161b22" rx="12" stroke="#30363d" stroke-width="1"/>
-      
-      
-        <g transform="translate(0, 0)"> 
-            <rect x="62.50000000000001" y="10" width="114.99999999999999" height="35" rx="17.5" fill="#f59e0b" opacity="0.9" stroke="#30363d" stroke-width="1.5"/>
-            <text x="120" y="33" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
-                🎃 Hacktoberfest
-            </text>
-        </g>
-         <text x="40" y="75" text-anchor="start" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
-        🧙‍♂️ CODEY Level 6
-      </text>
-
-      
-      
-            <text x="462.5" y="48" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="20">🧙‍♂️</text>
-            
-            <text x="507.5" y="48" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="20">👑</text>
-            
-            <text x="552.5" y="48" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="20">💎</text>
-            
-      
-      <g transform="translate(0, 84)">
-        <circle cx="120" cy="150" r="57.49999999999999" fill="#21262d" stroke="#f59e0b" stroke-width="3"/>
-        <text x="120" y="176.25" text-anchor="middle" font-size="65" font-family="Arial, sans-serif">🐍</text>
-        <circle cx="120" cy="225" r="25" fill="#21262d" stroke="#30363d" stroke-width="1"/>
-        <text x="120" y="230" text-anchor="middle" font-size="25">😎</text>
-        <text x="120" y="260" text-anchor="middle" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">
-            Elite • 9.6y
-        </text>
-      </g>
-      
+      <rect width="630" height="473" fill="#0d1117" rx="15"/><rect x="20" y="20" width="590" height="433" fill="#161b22" rx="12" stroke="#30363d" stroke-width="1"/>
+      <g><rect x="62.5" y="10" width="115" height="35" rx="17.5" fill="#f59e0b" opacity="0.9" stroke="#30363d" stroke-width="1.5"/>
+            <text x="120" y="33" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">🎃 Hacktoberfest</text></g><text x="40" y="75" fill="#f0f6fc" font-size="18" font-weight="bold">🧙‍♂️ CODEY Level 6</text>
+      <text x="462.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">🧙‍♂️</text><text x="507.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">👑</text><text x="552.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">💎</text>
+      <g transform="translate(0, 84)"><circle cx="120" cy="150" r="57.5" fill="#21262d" stroke="#f59e0b" stroke-width="3"/><text x="120" y="176" text-anchor="middle" font-size="65">🐍</text><circle cx="120" cy="225" r="25" fill="#21262d" stroke="#30363d" stroke-width="1"/><text x="120" y="230" text-anchor="middle" font-size="25">😎</text><text x="120" y="260" text-anchor="middle" fill="#8b949e" font-size="11">Elite • 9.6y</text></g>
       <g transform="translate(205, 120)">
-        <text x="0" y="20" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
-        <text x="330" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">174%</text>
-        <rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="25" width="330" height="12" fill="#f85149" rx="6"/>
-        
-        <text x="0" y="55" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
-        <text x="330" y="55" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">0%</text>
-        <rect x="0" y="60" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="60" width="0.0" height="12" fill="#ffa657" rx="6"/>
-        
-        <text x="0" y="90" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
-        <text x="330" y="90" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">0%</text>
-        <rect x="0" y="95" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="95" width="0.0" height="12" fill="#a855f7" rx="6"/>
-        
-        <text x="0" y="125" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
-        <text x="330" y="125" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">522%</text>
-        <rect x="0" y="130" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="130" width="330" height="12" fill="#3fb950" rx="6"/>
-        
-        <text x="0" y="160" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">👥 Social</text>
-        <text x="330" y="160" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">1.25</text>
-        <rect x="0" y="165" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="165" width="206.25" height="12" fill="#f59e0b" rx="6"/>
-        
-        <text x="0" y="195" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">💎 Quality</text>
-        <text x="330" y="195" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">0.81</text>
-        <rect x="0" y="200" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="200" width="265.9250000000003" height="12" fill="#a855f7" rx="6"/>
+        <text x="0" y="20" fill="#f0f6fc" font-weight="bold" font-size="14">❤️ Health</text><text x="330" y="20" text-anchor="end" fill="#8b949e" font-size="12">33%</text><rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="25" width="110.0" height="12" fill="#f85149" rx="6"/>
+        <text x="0" y="55" fill="#f0f6fc" font-weight="bold" font-size="14">🍖 Hunger</text><text x="330" y="55" text-anchor="end" fill="#8b949e" font-size="12">0%</text><rect x="0" y="60" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="60" width="0.0" height="12" fill="#ffa657" rx="6"/>
+        <text x="0" y="90" fill="#f0f6fc" font-weight="bold" font-size="14">😊 Happiness</text><text x="330" y="90" text-anchor="end" fill="#8b949e" font-size="12">0%</text><rect x="0" y="95" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="95" width="0.0" height="12" fill="#a855f7" rx="6"/>
+        <text x="0" y="125" fill="#f0f6fc" font-weight="bold" font-size="14">⚡ Energy</text><text x="330" y="125" text-anchor="end" fill="#8b949e" font-size="12">100%</text><rect x="0" y="130" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="130" width="330" height="12" fill="#3fb950" rx="6"/>
+        <text x="0" y="160" fill="#f0f6fc" font-weight="bold" font-size="14">👥 Social</text><text x="330" y="160" text-anchor="end" fill="#8b949e" font-size="12">1.25</text><rect x="0" y="165" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="165" width="206.25" height="12" fill="#f59e0b" rx="6"/>
+        <text x="0" y="195" fill="#f0f6fc" font-weight="bold" font-size="14">💎 Quality</text><text x="330" y="195" text-anchor="end" fill="#8b949e" font-size="12">0.81</text><rect x="0" y="200" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="200" width="265.9250000000003" height="12" fill="#a855f7" rx="6"/>
       </g>
-      
-      <g transform="translate(315, 375)">
-        <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="13" font-weight="bold">
-            PET STATUS:
-        </text>
-        <text x="0" y="15" text-anchor="middle" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">
-            Tier: ELDER • XP Mult: 0.25x • Penalties: quality_curator
-        </text>
-      </g>
-      
-      <g transform="translate(315, 413)">
-        <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14">
-          🗓️ 16 day streak • 📊 561 commits • ⭐ 547 stars
-        </text>
-      </g>
-      
-      <text x="315" y="438" text-anchor="middle" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">
-        Last Update: 2025-10-21 06:31 UTC • Dominant: Python
-      </text>
-      
+      <g transform="translate(315, 375)"><text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="13" font-weight="bold">PET STATUS:</text><text x="0" y="15" text-anchor="middle" fill="#8b949e" font-size="11">Tier: ELDER • XP Mult: 0.25x • Penalties: quality_curator</text></g>
+      <g transform="translate(315, 413)"><text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="14">🗓️ 15 day streak • 📊 561 commits • ⭐ 548 stars</text></g>
+      <text x="315" y="438" text-anchor="middle" fill="#8b949e" font-size="12">Last Update: 2025-10-21 16:36 UTC • Dominant: Python</text>
     </svg>
