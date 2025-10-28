@@ -4,7 +4,7 @@
   "happiness": 0.0,
   "energy": 100,
   "level": 6,
-  "streak": 9,
+  "streak": 8,
   "total_commits": 561,
   "mood": "elite",
   "rpg_stats": {},
@@ -14,15 +14,6 @@
     "\ud83d\udc8e Quality Craftsman"
   ],
   "history": [
-    {
-      "timestamp": "2025-10-01T08:25:23.810694+00:00",
-      "daily_commits": 1,
-      "daily_prs": 0,
-      "health": 46.666666666666664,
-      "mood": "elite",
-      "streak": 28,
-      "tier": "elder"
-    },
     {
       "timestamp": "2025-10-01T08:41:55.110865+00:00",
       "daily_commits": 1,
@@ -283,11 +274,20 @@
       "mood": "elite",
       "streak": 10,
       "tier": "elder"
+    },
+    {
+      "timestamp": "2025-10-28T06:32:59.371275+00:00",
+      "daily_commits": 0,
+      "daily_prs": 0,
+      "health": 33.333333333333336,
+      "mood": "elite",
+      "streak": 9,
+      "tier": "elder"
     }
   ],
   "brutal_stats": {
     "tier": "elder",
-    "github_years": 9.648186173853524,
+    "github_years": 9.650924024640657,
     "social_score": 1.25,
     "social_penalties": [
       "quality_curator"
@@ -307,5 +307,5 @@
     "can_prestige": false,
     "prestige_missing": "Need Level 10"
   },
-  "last_update": "2025-10-27T06:34:59.217388+00:00"
+  "last_update": "2025-10-28T06:32:59.371275+00:00"
 }
