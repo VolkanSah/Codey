@@ -224,7 +224,7 @@ def calculate_skill_decay(last_update_str, current_stats):
         decayed_stats = current_stats.copy()
         decayed_stats['health'] *= decay_factor
         decayed_stats['happiness'] *= decay_factor
-        decayed_stats['energy'] *= max(0.3, decay_factor)  # Energy decays faster
+        decayed_stats['energy'] *= max(0.5, decay_factor)  # Energy decays faster orginal 0.3 changed 30.10.2025 ->0.5
         
         # Streak penalty for gaps
         if days_inactive > 2:
