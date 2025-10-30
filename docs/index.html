@@ -3,46 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codey - Your Personal GitHub Pet</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        github: {
-                            dark: '#0d1117',
-                            darker: '#010409',
-                            border: '#30363d',
-                            text: '#c9d1d9',
-                            highlight: '#1f6feb',
-                            accent: '#58a6ff',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Codey - Your Personal GitHub Pet (Vanilla)</title>
     <style>
-        body {
-            scroll-behavior: smooth;
+        /* ==================================== */
+        /* I. CUSTOM CSS VARIABLEN (THEME) */
+        /* Ersetzt die Tailwind-Konfiguration */
+        /* ==================================== */
+        :root {
+            /* GitHub Dark Theme Variablen */
+            --color-dark: #0d1117;
+            --color-darker: #010409;
+            --color-border: #30363d;
+            --color-text: #c9d1d9;
+            --color-highlight: #1f6feb;
+            --color-accent: #58a6ff;
+            /* Layout Variablen */
+            --max-width: 1280px;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --radius: 0.375rem; /* rounded-md */
         }
+
+        /* ==================================== */
+        /* II. BASE STYLES & TYPOGRAPHY */
+        /* ==================================== */
+        body {
+            background-color: var(--color-darker);
+            color: var(--color-text);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+
+        /* Zurücksetzen für Utility-Ersatz */
+        .h-16 { height: 4rem; }
+        .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+        .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        /* ... weitere Spacing Utilities müssten nach Bedarf ergänzt werden ... */
+
+        /* Max-Breite und Zentrierung (Ersetzt max-w-7xl mx-auto) */
+        .container {
+            max-width: var(--max-width);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: var(--spacing-md);
+            padding-right: var(--spacing-md);
+        }
+
+        /* ==================================== */
+        /* III. KOMPONENTEN-STYLES */
+        /* Ersetzt Tailwind-Klassen wie bg-github-dark, border-github-border, etc. */
+        /* ==================================== */
+
+        /* Navigationsleiste */
+        .navbar {
+            background-color: var(--color-dark);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        /* GitHub-Karte (Hintergrund + Border) */
         .github-card {
             background-color: rgba(13, 17, 23, 0.8);
             backdrop-filter: blur(10px);
+            border: 1px solid var(--color-border);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius);
         }
-        .language-dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 5px;
+        
+        /* Buttons/Links */
+        .btn-highlight {
+            background-color: var(--color-highlight);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: background-color 0.2s;
         }
+        .btn-highlight:hover {
+            background-color: #175bc6; /* Dunklere Farbe für Hover */
+        }
+        .nav-link {
+            color: #9ca3af; /* text-gray-400 */
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.05); /* Leichter Hover-Effekt */
+            color: white;
+        }
+        .nav-link-active {
+            background-color: var(--color-highlight);
+            color: white;
+        }
+
+        /* Sektionen */
+        .feature-grid {
+            display: grid;
+            gap: 1.5rem; /* gap-6 */
+        }
+        @media (min-width: 768px) { /* md:grid-cols-2 */
+            .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (min-width: 1024px) { /* lg:grid-cols-3 */
+            .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        /* Icon-Wrapper für Feature Cards */
+        .icon-wrapper {
+            padding: 0.75rem;
+            border-radius: 9999px; /* rounded-full */
+            margin-right: var(--spacing-md);
+            /* Beispielhafte Farb-Ersatz-Klassen (muss für jede Farbe definiert werden) */
+        }
+        .bg-blue-accent { background-color: rgba(59, 130, 246, 0.3); color: #60a5fa; }
+        .bg-purple-accent { background-color: rgba(168, 85, 247, 0.3); color: #c084fc; }
+        /* ... weitere Farben müssen definiert werden ... */
+
+        /* Code-Blöcke */
+        code {
+            background-color: var(--color-dark);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            color: #e5e7eb; /* Grauton für Code-Text */
+        }
+        pre {
+            background-color: var(--color-dark);
+            padding: 1rem;
+            border-radius: var(--radius);
+            color: #d1d5db;
+            overflow-x: auto;
+        }
+
+        /* ==================================== */
+        /* IV. HELFERKLASSEN (INITIAL STYLE) */
+        /* ==================================== */
+
+        /* Initialer Zustand für Animationen (ersetzt AOS) */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* Zustand bei Sichtbarkeit (wird von JS hinzugefügt) */
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Initialer Ladezustand */
         #main-content {
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
@@ -50,26 +174,25 @@
         #main-content.loaded {
             opacity: 1;
         }
+        
+        /* Noscript Message */
         #noscript-message {
-            position: absolute;
+            position: fixed; /* Besser fixed für volle Abdeckung */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #010409;
-            color: #c9d1d9;
+            background-color: var(--color-darker);
+            color: var(--color-text);
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             flex-direction: column;
-            padding: 2rem;
-            z-index: 999;
+            padding: var(--spacing-lg);
+            z-index: 9999; /* Sehr hoch, um alles zu überlagern */
         }
-        #noscript-message h1, #noscript-message p {
-            max-width: 80%;
-            margin: 0 auto;
-        }
+
     </style>
 </head>
 <body class="bg-github-darker text-github-text min-h-screen">
@@ -79,32 +202,28 @@
         <p class="mt-4 text-sm text-gray-500">Für eine Suchmaschine: Dies ist die statische Version der Seite. Der Inhalt wird nach dem Laden von JavaScript gerendert.</p>
     </div>
     <div id="main-content">
-        <nav class="bg-github-dark border-b border-github-border sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <span class="text-github-accent font-bold text-xl">🐾 Codey</span>
-                        </div>
-                        <div class="hidden md:block">
-                            <div class="ml-10 flex items-baseline space-x-4">
-                                <a href="#" class="bg-github-highlight text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                                <a href="behind-the-scenes.html" class="text-gray-300 hover:bg-github-dark hover:text-white px-3 py-2 rounded-md text-sm font-medium">Behind the Scenes</a>
-                            </div>
-                        </div>
-                    </div>
+        <nav class="navbar">
+            <div class="container h-16 flex items-center justify-between">
+                <div class="flex items-center">
+                    <span class="text-github-accent font-bold text-xl">🐾 Codey</span>
                     <div class="hidden md:block">
-                        <div class="ml-4 flex items-center md:ml-6">
-                            <a href="https://github.com/VolkanSah/Codey" target="_blank" class="bg-github-highlight hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center">
-                                <i data-feather="github" class="mr-2 w-4 h-4"></i> GitHub
-                            </a>
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#" class="nav-link nav-link-active">Home</a>
+                            <a href="behind-the-scenes.html" class="nav-link">Behind the Scenes</a>
                         </div>
                     </div>
                 </div>
+                <div class="hidden md:block">
+                    <a href="https://github.com/VolkanSah/Codey" target="_blank" class="btn-highlight">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 3c0-1.72-.63-4.57-2-6.5S15.65 1.77 15.65 1.77h-6.3S8.35 1.77 8.35 1.77c-1.37 2-2 4.77-2 6.5A5.44 5.44 0 0 0 4 11.23c0 5.47 3.3 6.66 6.44 7.01C11.66 18.23 12 19 12 20v3.87"></path></svg>
+                        GitHub
+                    </a>
+                </div>
             </div>
         </nav>
+
         <header class="bg-github-dark border-b border-github-border">
-            <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 text-center">
+            <div class="container py-16 text-center">
                 <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
                     <span class="block">🐾 Codey</span>
                     <span class="block text-github-accent">Your Personal GitHub Pet</span>
@@ -117,105 +236,37 @@
                 </div>
             </div>
         </header>
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <main class="container py-12">
             <section class="mb-16">
                 <h2 class="text-3xl font-bold text-white mb-8 border-b border-github-border pb-4">✨ Features</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
+                <div class="feature-grid">
+                    <div class="github-card animate-on-scroll" data-aos-delay="0">
                         <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-blue-900/30 text-blue-400 mr-4">
-                                <i data-feather="activity"></i>
+                            <div class="icon-wrapper bg-blue-accent">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                             </div>
                             <h3 class="text-xl font-semibold text-white">Daily & All-Time Stats</h3>
                         </div>
                         <p class="text-gray-400">Automatically updates your pet's stats every day, tracking both your recent activity and your overall contributions.</p>
                     </div>
-                                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="github-card animate-on-scroll" data-aos-delay="100">
                         <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-purple-900/30 text-purple-400 mr-4">
-                                <i data-feather="bar-chart-2"></i>
+                            <div class="icon-wrapper bg-purple-accent">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                             </div>
                             <h3 class="text-xl font-semibold text-white">Brutal RPG Stats</h3>
                         </div>
                         <p class="text-gray-400">Personality, Social Status, Dominant Language & Pet Evolution, and Advanced Traits that shape your pet's character.</p>
                     </div>
-                                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="200">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-green-900/30 text-green-400 mr-4">
-                                <i data-feather="smile"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Dynamic Moods</h3>
-                        </div>
-                        <p class="text-gray-400">Codey's mood reacts to your traits and well-being, showing emotions like overwhelmed and inspired.</p>
+
                     </div>
-                                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-yellow-900/30 text-yellow-400 mr-4">
-                                <i data-feather="award"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Achievements System</h3>
-                        </div>
-                        <p class="text-gray-400">Unlock special badges for major milestones like Monthly Warrior, Commit Master, and Social Star.</p>
-                    </div>
-                                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="100">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-red-900/30 text-red-400 mr-4">
-                                <i data-feather="calendar"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Seasonal Events</h3>
-                        </div>
-                        <p class="text-gray-400">Special visual bonuses and boosts during events like Hacktoberfest and Advent of Code.</p>
-                    </div>
-                                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="200">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-indigo-900/30 text-indigo-400 mr-4">
-                                <i data-feather="star"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Prestige System</h3>
-                        </div>
-                        <p class="text-gray-400">Reset your stats for special rewards and a visual prestige icon, a truly brutal test of skill.</p>
-                    </div>
-                </div>
-            </section>
-            <section class="mb-16">
-                <h2 class="text-3xl font-bold text-white mb-8 border-b border-github-border pb-4">🚀 How to Use Codey</h2>
-                <div class="github-card p-6 rounded-lg border border-github-border mb-8" data-aos="fade-up">
-                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                        <i data-feather="git-branch" class="mr-2"></i> Set Up the Workflow
-                    </h3>
-                    <p class="text-gray-400 mb-4">Copy the <code class="bg-github-dark px-2 py-1 rounded text-sm">update_codey.py</code> script and the <code class="bg-github-dark px-2 py-1 rounded text-sm">.github/workflows/update_codey.yml</code> file into your own repository.</p>
-                </div>
-                                <div class="github-card p-6 rounded-lg border border-github-border mb-8" data-aos="fade-up">
-                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                        <i data-feather="settings" class="mr-2"></i> Configure Your Tracking Mode
-                    </h3>
-                    <p class="text-gray-400 mb-4">The script uses the <code class="bg-github-dark px-2 py-1 rounded text-sm">GIT_REPOSITORY</code> environment variable to determine what to track.</p>
-                                    <div class="mb-6">
-                        <h4 class="text-lg font-medium text-white mb-2">Option A: Track a Single Repository</h4>
-                        <div class="bg-github-dark p-4 rounded-lg">
-                            <pre class="text-gray-300 overflow-x-auto"><code>env:  GIT_REPOSITORY: 'YourUsername/YourProject'</code></pre>
-                        </div>
-                    </div>
-                                    <div>
-                        <h4 class="text-lg font-medium text-white mb-2">Option B: Track Your Entire Account</h4>
-                        <div class="bg-github-dark p-4 rounded-lg">
-                            <pre class="text-gray-300 overflow-x-auto"><code>env:  GIT_REPOSITORY: 'YourUsername'</code></pre>
-                        </div>
-                    </div>
-                </div>
-                                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
-                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                        <i data-feather="file-text" class="mr-2"></i> Add the Badge to Your README
-                    </h3>
-                    <p class="text-gray-400 mb-4">Once the workflow is set up, add this to your <code class="bg-github-dark px-2 py-1 rounded text-sm">README.md</code>:</p>
-                    <div class="bg-github-dark p-4 rounded-lg">
-                        <pre class="text-gray-300 overflow-x-auto"><code>![Codey - Your GitHub Pet](https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/main/codey.svg)</code></pre>
-                    </div>
-                </div>
             </section>
         </main>
+
         <footer class="bg-github-dark border-t border-github-border py-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="container">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <div class="mb-4 md:mb-0">
                         <span class="text-github-accent font-bold text-lg">🐾 Codey</span>
@@ -224,7 +275,8 @@
                     <div class="flex space-x-6">
                         <a href="behind-the-scenes.html" class="text-gray-400 hover:text-white">Behind the Scenes</a>
                         <a href="https://github.com/VolkanSah/Codey" target="_blank" class="text-gray-400 hover:text-white flex items-center">
-                            <i data-feather="github" class="mr-1 w-4 h-4"></i> GitHub
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 3c0-1.72-.63-4.57-2-6.5S15.65 1.77 15.65 1.77h-6.3S8.35 1.77 8.35 1.77c-1.37 2-2 4.77-2 6.5A5.44 5.44 0 0 0 4 11.23c0 5.47 3.3 6.66 6.44 7.01C11.66 18.23 12 19 12 20v3.87"></path></svg>
+                            GitHub
                         </a>
                     </div>
                 </div>
@@ -234,19 +286,68 @@
             </div>
         </footer>
     </div>
+    
     <script>
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true
+        /**
+         * 1. AOS-ERSATZ: Intersection Observer
+         * Überwacht Elemente mit der Klasse 'animate-on-scroll' und fügt 'is-visible' hinzu,
+         * sobald sie in den Viewport kommen, um die CSS-Animation auszulösen.
+         */
+        function initAOSReplacement() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            // Verzögerungen aus data-aos-delay Attributen umsetzen
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delayAttr = entry.target.getAttribute('data-aos-delay');
+                        const delay = delayAttr ? parseInt(delayAttr) : 0;
+                        
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target); // optional: nur einmal animieren
+                        }, delay);
+                    }
+                });
+            }, {
+                rootMargin: '0px 0px -10% 0px', // 10% früher auslösen
+                threshold: 0.1 // Auslösen, wenn 10% sichtbar
+            });
+
+            elements.forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+
+        /**
+         * 2. HAUPTLADE-FUNKTION (Ersetzt window.onload Logik)
+         * Stellt sicher, dass #main-content nur sichtbar wird, wenn JS geladen ist und
+         * versteckt die #noscript-message.
+         */
+        document.addEventListener("DOMContentLoaded", () => {
+            const mainContent = document.getElementById('main-content');
+            const noscriptMessage = document.getElementById('noscript-message');
+
+            // 1. Initialisierung und Ladezustand
+            if (mainContent && noscriptMessage) {
+                // Versteckt die NoScript-Meldung sofort
+                noscriptMessage.style.display = 'none';
+                
+                // Setzt die 'loaded' Klasse für den Fade-In-Effekt
+                // (Der Code wird etwas später ausgeführt, um sicherzustellen, dass das Layout bereit ist)
+                setTimeout(() => {
+                    mainContent.classList.add('loaded');
+                }, 100); 
+            }
+            
+            // 2. AOS-Ersatz starten
+            initAOSReplacement();
+
+            // 3. Feather Icons Ersatz: Wird nicht benötigt, da SVGs direkt eingefügt wurden.
+            // falls doch dynamisch benötig, müsste eine kleine Funktion zum SVG-Laden/Ersetzen geschrieben werden.
+
         });
-        feather.replace();
-        const mainContent = document.getElementById('main-content');
-        const noscriptMessage = document.getElementById('noscript-message');
-        window.onload = function() {
-            mainContent.classList.add('loaded');
-            noscriptMessage.style.display = 'none';
-        };
     </script>
 </body>
 </html>
