@@ -2,7 +2,7 @@
   "health": 50.0,
   "hunger": 0,
   "happiness": 0,
-  "energy": 150.0,
+  "energy": 100.0,
   "level": 6,
   "streak": 5,
   "total_commits": 561,
