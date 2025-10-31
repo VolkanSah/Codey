@@ -36,22 +36,22 @@
         <text x="0" y="20" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❤️ Health</text>
         <text x="330" y="20" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">51%</text>
         <rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="25" width="167.2" height="12" fill="#f85149" rx="6"/>
+        <rect x="0" y="25" width="169.4" height="12" fill="#f85149" rx="6"/>
         
         <text x="0" y="55" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🍖 Hunger</text>
-        <text x="330" y="55" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">35%</text>
+        <text x="330" y="55" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">20%</text>
         <rect x="0" y="60" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="60" width="115.5" height="12" fill="#ffa657" rx="6"/>
+        <rect x="0" y="60" width="66.0" height="12" fill="#ffa657" rx="6"/>
         
         <text x="0" y="90" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">😊 Happiness</text>
-        <text x="330" y="90" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">42%</text>
+        <text x="330" y="90" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">34%</text>
         <rect x="0" y="95" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="95" width="138.6" height="12" fill="#a855f7" rx="6"/>
+        <rect x="0" y="95" width="112.19999999999999" height="12" fill="#a855f7" rx="6"/>
         
         <text x="0" y="125" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ Energy</text>
-        <text x="330" y="125" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">75%</text>
+        <text x="330" y="125" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">100%</text>
         <rect x="0" y="130" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="130" width="247.5" height="12" fill="#3fb950" rx="6"/>
+        <rect x="0" y="130" width="330" height="12" fill="#3fb950" rx="6"/>
         
         <text x="0" y="160" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="14" font-weight="bold">👥 Social</text>
         <text x="330" y="160" text-anchor="end" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">1.25</text>
@@ -80,7 +80,7 @@
       </g>
       
       <text x="315" y="438" text-anchor="middle" fill="#8b949e" font-family="Arial, sans-serif" font-size="12">
-        Last Update: 2025-10-30 17:05 UTC • Dominant: Python
+        Last Update: 2025-10-31 06:31 UTC • Dominant: Python
       </text>
       
     </svg>
