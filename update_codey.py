@@ -523,7 +523,7 @@ def get_seasonal_bonus():
     month = datetime.now().month
     bonuses = {
         10: {'emoji': '🎃', 'name': 'Hacktoberfest', 'multiplier': 1.5},
-        11: {'emoji': '🍁', 'name': 'End-of-Year Push', 'multiplier': 1.25} # Fix #2: November hinzugefügt
+        11: {'emoji': '🍁', 'name': 'End of Year Push', 'multiplier': 1.25},
         12: {'emoji': '🎄', 'name': 'Advent of Code', 'multiplier': 1.3},
         1: {'emoji': '🎯', 'name': 'New Year Resolution', 'multiplier': 1.2},
         2: {'emoji': '💖', 'name': 'Open Source Love', 'multiplier': 1.1},
