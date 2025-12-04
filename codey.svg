@@ -3,7 +3,7 @@
       <g><rect x="62.5" y="10" width="115" height="35" rx="17.5" fill="#f59e0b" opacity="0.9" stroke="#30363d" stroke-width="1.5"/>
             <text x="120" y="33" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">🎄 Advent of Code</text></g><text x="40" y="75" fill="#f0f6fc" font-size="18" font-weight="bold">🧙‍♂️ CODEY Level 1</text>
       <text x="462.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">🧙‍♂️</text><text x="507.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">💎</text><text x="552.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">👑</text>
-      <g transform="translate(0, 84)"><circle cx="120" cy="150" r="57.5" fill="#21262d" stroke="#f59e0b" stroke-width="3"/><text x="120" y="176" text-anchor="middle" font-size="65">🐍</text><circle cx="120" cy="225" r="25" fill="#21262d" stroke="#30363d" stroke-width="1"/><text x="120" y="230" text-anchor="middle" font-size="25">😎</text><text x="120" y="260" text-anchor="middle" fill="#8b949e" font-size="11">Elite • 9.7y</text></g>
+      <g transform="translate(0, 84)"><circle cx="120" cy="150" r="57.5" fill="#21262d" stroke="#f59e0b" stroke-width="3"/><text x="120" y="176" text-anchor="middle" font-size="65">🐍</text><circle cx="120" cy="225" r="25" fill="#21262d" stroke="#30363d" stroke-width="1"/><text x="120" y="230" text-anchor="middle" font-size="25">😎</text><text x="120" y="260" text-anchor="middle" fill="#8b949e" font-size="11">Elite • 9.8y</text></g>
       <g transform="translate(205, 120)">
         <text x="0" y="20" fill="#f0f6fc" font-weight="bold" font-size="14">❤️ Health</text><text x="330" y="20" text-anchor="end" fill="#8b949e" font-size="12">33%</text><rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="25" width="110.0" height="12" fill="#f85149" rx="6"/>
         <text x="0" y="55" fill="#f0f6fc" font-weight="bold" font-size="14">🍖 Hunger</text><text x="330" y="55" text-anchor="end" fill="#8b949e" font-size="12">0%</text><rect x="0" y="60" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="60" width="0.0" height="12" fill="#ffa657" rx="6"/>
@@ -14,5 +14,5 @@
       </g>
       <g transform="translate(315, 375)"><text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="13" font-weight="bold">PET STATUS:</text><text x="0" y="15" text-anchor="middle" fill="#8b949e" font-size="11">Tier: ELDER • XP Mult: 0.25x • Penalties: quality_curator</text></g>
       <g transform="translate(315, 413)"><text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="14">🗓️ 0 day streak • 📊 0 commits • ⭐ 558 stars</text></g>
-      <text x="315" y="438" text-anchor="middle" fill="#8b949e" font-size="12">Last Update: 2025-12-03 06:34 UTC • Dominant: Python</text>
+      <text x="315" y="438" text-anchor="middle" fill="#8b949e" font-size="12">Last Update: 2025-12-04 06:34 UTC • Dominant: Python</text>
     </svg>
