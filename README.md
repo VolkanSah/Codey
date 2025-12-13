@@ -96,12 +96,13 @@ This edition of Codey uses a far more demanding and unforgiving system than stan
 ###  Known issues
 
   * [x] FIXED 😄- we are all dragons!
-  * [ ] Cody is on drugs! To much energy!
-  * [ ] some dragons
+  * [x] Fixed - Cody is on drugs! To much energy!-
+  * [x] Fixed -some dragons
 
 ## 📝 License
 
 This project is licensed under the Apache 2 License by Volkan Kücükbudak
+
 
 
 
