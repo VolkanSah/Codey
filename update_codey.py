@@ -415,7 +415,7 @@ def calculate_prestige_requirements(codey, tier, github_years):
     return can_prestige, missing
 
 def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
-    """Main brutal stats update function"""
+    """Main brutal stats update function - FIXED VERSION"""
     now = datetime.now(timezone.utc).isoformat()
     
     github_years = get_github_age_years(user_data.get('created_at', ''))
@@ -432,7 +432,6 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     }
     codey['history'] = codey.get('history', [])[-29:] + [history_entry]
     
-    # OPTIMIZED: New, more challenging balance logic using the GAME_BALANCE config.
     # 1. Calculate XP and penalties first
     commit_xp = daily_activity['commits'] * GAME_BALANCE['XP_PER_COMMIT'] * multipliers['xp']
     pr_xp = daily_activity['prs'] * GAME_BALANCE['XP_PER_PR'] * multipliers['xp']
@@ -443,7 +442,7 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     language_penalty = all_time_data.get('language_diversity_penalty', 1.0)
     total_xp = (commit_xp + pr_xp) * language_penalty
     
-# ---- Fix the energy/hunger  ----
+    # ---- Fix the energy/hunger (CLEAN VERSION) ----
     # 2. Daily decay
     codey['hunger'] = max(0, codey['hunger'] - GAME_BALANCE['DAILY_HUNGER_DECAY'])
     codey['happiness'] = max(0, codey['happiness'] - GAME_BALANCE['DAILY_HAPPINESS_DECAY'])
@@ -452,30 +451,22 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     energy_consumed = (daily_activity['commits'] * GAME_BALANCE['ENERGY_COST_COMMIT']) + \
                       (daily_activity['prs'] * GAME_BALANCE['ENERGY_COST_PR'])
 
-    # NEW: apply consumption and regeneration in one net step so small activity
-    # cannot accidentally increase energy if regen > cost.
+    # NEW: apply consumption and regeneration in one net step
     if energy_consumed == 0:
         regen = GAME_BALANCE['ENERGY_REGEN_REST']
     else:
-        # small positive regen for active days (should be <= per-action cost to avoid net gain)
+        # small positive regen for active days
         regen = GAME_BALANCE['ENERGY_REGEN_ACTIVE']
 
     # net change = -consumed + regen, then clamp
     codey['energy'] = max(0, min(100, codey.get('energy', 0) - energy_consumed + regen))
 
-    # rewards from activity
+    # rewards from activity (Nur EINMAL hier anwenden!)
     codey['hunger'] = min(100, codey['hunger'] + total_xp * GAME_BALANCE['HUNGER_GAIN_MODIFIER'])
     codey['happiness'] = min(100, codey['happiness'] + pr_xp * GAME_BALANCE['HAPPINESS_GAIN_MODIFIER'])
-# ---- end fix ----
+    # ---- end fix ----
 
-    # 3. Regeneration and rewards from activity
-    if energy_consumed == 0: # Rest day
-        codey['energy'] = min(100, codey['energy'] + GAME_BALANCE['ENERGY_REGEN_REST'])
-    else: # Active day
-        codey['energy'] = min(100, codey['energy'] + GAME_BALANCE['ENERGY_REGEN_ACTIVE'])
-
-    codey['hunger'] = min(100, codey['hunger'] + total_xp * GAME_BALANCE['HUNGER_GAIN_MODIFIER'])
-    codey['happiness'] = min(100, codey['happiness'] + pr_xp * GAME_BALANCE['HAPPINESS_GAIN_MODIFIER'])
+    # HIER WAREN DIE DOPPELTEN ZEILEN - JETZT GELÖSCHT
     
     # 4. Final health calculation
     codey['health'] = (codey['hunger'] + codey['happiness'] + codey['energy']) / 3
