@@ -1,5 +1,5 @@
 # 🐾 Codey - Your Brutally Honest GitHub Pet
-### RPG "No Mercy" Edition - Where Your Code Gets Judged For Real
+###### RPG "No Mercy" Edition - Where Your Code Gets Judged For Real
 
 [![Codey - Your GitHub Pet](codey.svg)](https://volkansah.github.io/Codey/)
 
@@ -264,4 +264,5 @@ Check out my Codey in action: [volkansah.github.io/Codey](https://volkansah.gith
 [⭐ Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 
 </div>
+
 
