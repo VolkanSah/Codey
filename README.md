@@ -1,8 +1,6 @@
 # 🐾 Codey - Your Brutally Honest GitHub Pet
 ### RPG "No Mercy" Edition - Where Your Code Gets Judged For Real
 
-*"You killed Kenny! You bastards!"* — Well, Codey won't die, but your coding reputation might.
-
 [![Codey - Your GitHub Pet](codey.svg)](https://volkansah.github.io/Codey/)
 
 **Codey isn't your typical GitHub stats badge.** This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy, and evolves into different creatures based on what you actually code. 
@@ -266,3 +264,4 @@ Check out my Codey in action: [volkansah.github.io/Codey](https://volkansah.gith
 [⭐ Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 
 </div>
+
