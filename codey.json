@@ -85,29 +85,38 @@
       "mood": "elite",
       "streak": 0,
       "tier": "elder"
+    },
+    {
+      "timestamp": "2025-12-21T06:33:24.584695+00:00",
+      "daily_commits": 0,
+      "daily_prs": 0,
+      "health": 33.333333333333336,
+      "mood": "elite",
+      "streak": 0,
+      "tier": "noob"
     }
   ],
   "brutal_stats": {
-    "tier": "elder",
-    "github_years": 9.796030116358658,
+    "tier": "noob",
+    "github_years": 1,
     "social_score": 1.25,
     "social_penalties": [
       "quality_curator"
     ],
-    "avg_repo_quality": 0.816000000000001,
+    "avg_repo_quality": 0,
     "commit_quality_score": 1.0,
     "commit_quality_penalties": [],
     "multipliers": {
-      "xp": 0.25,
-      "decay": 0.8,
-      "requirements": 4.0
+      "xp": 1.25,
+      "decay": 0.95,
+      "requirements": 1.0
     },
-    "total_stars": 662,
-    "language_diversity_penalty": 0.9,
+    "total_stars": 0,
+    "language_diversity_penalty": 1.0,
     "xp_earned": 0.0,
-    "dominant_language": "Python",
+    "dominant_language": "unknown",
     "can_prestige": false,
     "prestige_missing": "Need Level 10"
   },
-  "last_update": "2025-12-20T06:33:09.500645+00:00"
+  "last_update": "2025-12-21T06:33:24.584695+00:00"
 }
