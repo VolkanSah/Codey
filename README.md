@@ -3,13 +3,15 @@
 
 [![Codey - Your GitHub Pet](codey.svg)](https://volkansah.github.io/Codey/)
 
+
+
 **Codey isn't your typical GitHub stats badge.** This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy, and evolves into different creatures based on what you actually code. 
 
 No fake motivation. No participation trophies. Just raw, unfiltered feedback on your dev life.
 
 Daily updates via GitHub Actions. Tracks commits, stars, languages, streaks, and more — then brutally scores you on traits like creativity, curiosity, and teamwork. Your pet evolves (or devolves) based on your real GitHub behavior.
 
-> **⚠️ Current Status:** Dev build, needs testers brave enough to face the truth!
+> **⚠️ Current Status:** Dev build, needs testers brave enough to face the truth! But Codey dies! Must fix it!
 
 
 
@@ -264,5 +266,6 @@ Check out my Codey in action: [volkansah.github.io/Codey](https://volkansah.gith
 [⭐ Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 
 </div>
+
 
 
