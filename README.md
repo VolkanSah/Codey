@@ -197,6 +197,7 @@ Unlock special badges for major milestones:
 - ✅ ~~Everyone was a dragon~~ — Evolution system fixed
 - ✅ ~~Codey on drugs~~ — Energy calculation normalized  
 - ✅ ~~Some dragons~~ — Species diversity restored
+- ✅ Codey dies after 3 or 5 days!
 
 
 
@@ -266,6 +267,7 @@ Check out my Codey in action: [volkansah.github.io/Codey](https://volkansah.gith
 [⭐ Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 
 </div>
+
 
 
 
