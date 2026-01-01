@@ -1,7 +1,7 @@
 <svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
       <rect width="630" height="473" fill="#0d1117" rx="15"/><rect x="20" y="20" width="590" height="433" fill="#161b22" rx="12" stroke="#30363d" stroke-width="1"/>
       <g><rect x="62.5" y="10" width="115" height="35" rx="17.5" fill="#22c55e" opacity="0.9" stroke="#30363d" stroke-width="1.5"/>
-            <text x="120" y="33" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">🎄 Advent of Code</text></g><text x="40" y="75" fill="#f0f6fc" font-size="18" font-weight="bold">🌱 CODEY Level 1</text>
+            <text x="120" y="33" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">🎯 New Year Resolution</text></g><text x="40" y="75" fill="#f0f6fc" font-size="18" font-weight="bold">🌱 CODEY Level 1</text>
       <text x="462.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">🧙‍♂️</text><text x="507.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">👑</text><text x="552.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">💎</text>
       <g transform="translate(0, 84)"><circle cx="120" cy="150" r="57.5" fill="#21262d" stroke="#22c55e" stroke-width="3"/><text x="120" y="176" text-anchor="middle" font-size="65">🐲</text><circle cx="120" cy="225" r="25" fill="#21262d" stroke="#30363d" stroke-width="1"/><text x="120" y="230" text-anchor="middle" font-size="25">😎</text><text x="120" y="260" text-anchor="middle" fill="#8b949e" font-size="11">Elite • 1.0y</text></g>
       <g transform="translate(205, 120)">
@@ -14,5 +14,5 @@
       </g>
       <g transform="translate(315, 375)"><text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="13" font-weight="bold">PET STATUS:</text><text x="0" y="15" text-anchor="middle" fill="#8b949e" font-size="11">Tier: NOOB • XP Mult: 1.25x • Penalties: quality_curator</text></g>
       <g transform="translate(315, 413)"><text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="14">🗓️ 0 day streak • 📊 0 commits • ⭐ 0 stars</text></g>
-      <text x="315" y="438" text-anchor="middle" fill="#8b949e" font-size="12">Last Update: 2025-12-31 06:36 UTC • Dominant: unknown</text>
+      <text x="315" y="438" text-anchor="middle" fill="#8b949e" font-size="12">Last Update: 2026-01-01 06:36 UTC • Dominant: unknown</text>
     </svg>
