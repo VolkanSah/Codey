@@ -10,9 +10,9 @@
         <text x="0" y="90" fill="#f0f6fc" font-weight="bold" font-size="14">😊 Happiness</text><text x="330" y="90" text-anchor="end" fill="#8b949e" font-size="12">0%</text><rect x="0" y="95" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="95" width="0.0" height="12" fill="#a855f7" rx="6"/>
         <text x="0" y="125" fill="#f0f6fc" font-weight="bold" font-size="14">⚡ Energy</text><text x="330" y="125" text-anchor="end" fill="#8b949e" font-size="12">100%</text><rect x="0" y="130" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="130" width="330" height="12" fill="#3fb950" rx="6"/>
         <text x="0" y="160" fill="#f0f6fc" font-weight="bold" font-size="14">👥 Social</text><text x="330" y="160" text-anchor="end" fill="#8b949e" font-size="12">1.25</text><rect x="0" y="165" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="165" width="206.25" height="12" fill="#f59e0b" rx="6"/>
-        <text x="0" y="195" fill="#f0f6fc" font-weight="bold" font-size="14">💎 Quality</text><text x="330" y="195" text-anchor="end" fill="#8b949e" font-size="12">0.82</text><rect x="0" y="200" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="200" width="270.7559055118113" height="12" fill="#a855f7" rx="6"/>
+        <text x="0" y="195" fill="#f0f6fc" font-weight="bold" font-size="14">💎 Quality</text><text x="330" y="195" text-anchor="end" fill="#8b949e" font-size="12">0.82</text><rect x="0" y="200" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="200" width="271.9921875000003" height="12" fill="#a855f7" rx="6"/>
       </g>
       <g transform="translate(315, 375)"><text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="13" font-weight="bold">PET STATUS:</text><text x="0" y="15" text-anchor="middle" fill="#8b949e" font-size="11">Tier: ELDER • XP Mult: 0.25x • Penalties: quality_curator</text></g>
-      <g transform="translate(315, 413)"><text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="14">🗓️ 0 day streak • 📊 0 commits • ⭐ 680 stars</text></g>
-      <text x="315" y="438" text-anchor="middle" fill="#8b949e" font-size="12">Last Update: 2026-02-05 07:01 UTC • Dominant: Python</text>
+      <g transform="translate(315, 413)"><text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="14">🗓️ 0 day streak • 📊 0 commits • ⭐ 682 stars</text></g>
+      <text x="315" y="438" text-anchor="middle" fill="#8b949e" font-size="12">Last Update: 2026-02-06 06:57 UTC • Dominant: Python</text>
     </svg>
