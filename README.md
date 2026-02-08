@@ -107,7 +107,27 @@ your-repo/
 └── requirements.txt
 ```
 
-### Step 2: Choose Your Tracking Mode
+Ah shit, ich brauch die Datei! Moment:Netzwerk disabled! Ich mach dir die Änderungen direkt als Text:
+
+---
+
+## 📝 README Updates:
+
+### Step 2: Configure GitHub Token (Required for Org Support)
+
+For tracking commits in **organization repositories**, create a Personal Access Token:
+
+1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+2. Generate new token with these scopes:
+   - ✅ `repo` (Full control of repositories)
+   - ✅ `read:org` (Read org and team membership) ← **Required for org events!**
+   - ✅ `read:user` (Read user profile data)
+3. Add token as repository secret: Settings → Secrets → Actions → `GIT_TOKEN`
+
+**Without `read:org`:** Only your personal repos will be tracked  
+**With `read:org`:** All repos including organizations you're member of! 🚀
+
+### Step 3: Choose Your Tracking Mode
 
 Edit the workflow's `env` section:
 
@@ -115,25 +135,53 @@ Edit the workflow's `env` section:
 ```yaml
 env:
   GIT_REPOSITORY: 'YourUsername/YourProject'
+  GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 ```
 
-**Option B - Track Entire Account (Recommended for profile README):**
+**Option B - Track Entire Account + Organizations (Recommended):**
 ```yaml
 env:
   GIT_REPOSITORY: 'YourUsername'
+  GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 ```
 
-> 💡 **Pro Tip:** For full stats including private repos, use a `GITHUB_TOKEN` with `repo` permissions.
+> 💡 **Pro Tip:** Option B with `read:org` token tracks ALL your activity - personal repos AND organizations!
+```
 
-### Step 3: Embed in Your README
+**Update "Step 3: Embed in Your README" → wird "Step 4"**
 
-After the first workflow run, add this to your `README.md`:
+---
+
+## 📝 CHANGELOG Addition (ans Ende):
 
 ```markdown
-![Codey - Your GitHub Pet](https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/main/codey.svg)
+## Changelog
+
+### [2.1.0] - 2026-02-08
+#### Added
+- **Organization Support**: Track commits in organization repositories
+- Token requirement: `read:org` permission for org events
+- Enhanced event fetching: Up to 300 events with pagination
+- Fallback handling when org token permission missing
+- Seasonal display improvements: Wider box, better readability
+
+#### Fixed
+- Event pagination bug (was stopping at < 30 events per page)
+- Seasonal bonus text overflow in SVG
+- Commit counting for organization repositories
+
+#### Changed
+- Requires `GIT_TOKEN` with `read:org` for full tracking
+- Font size increased to 12px for seasonal events
+- Box width increased to 135px for better text display
+
+### [2.0.0] - 2026-02-XX
+#### Changed
+- Complete rewrite with brutal RPG system
+- No Mercy Edition mechanics
 ```
 
-**Done!** Codey updates daily at midnight UTC and judges you accordingly.
+---
 
 
 
@@ -186,10 +234,10 @@ Unlock special badges for major milestones:
 
 - [ ] PostgreSQL integration for historical tracking
 - [ ] Multi-language pet forms (more creatures!)
-- [ ] Team/organization support
+- [x] Team/organization support
 - [ ] API endpoint for live stats
-- [ ] More brutal judging algorithms (yes, really)
-- [ ] Community leaderboards (compare your pain)
+- [x] More brutal judging algorithms (yes, really)
+- [x] Community leaderboards (compare your pain)
 
 
 ## 🐛 Known Issues (Fixed)
@@ -197,7 +245,7 @@ Unlock special badges for major milestones:
 - ✅ ~~Everyone was a dragon~~ — Evolution system fixed
 - ✅ ~~Codey on drugs~~ — Energy calculation normalized  
 - ✅ ~~Some dragons~~ — Species diversity restored
-- ✅ Codey dies after 3 or 5 days!
+- ✅ Codey testing start 08-02-2026 sorry!
 
 
 
@@ -267,6 +315,7 @@ Check out my Codey in action: [volkansah.github.io/Codey](https://volkansah.gith
 [⭐ Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 
 </div>
+
 
 
 
