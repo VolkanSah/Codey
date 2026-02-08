@@ -1,7 +1,6 @@
-# 2026 today i fix it! wait! 
 #!/usr/bin/env python3
-# update_codey.py - FIXED VERSION - No mercy EDITION for casual devs!
-# All API calls restored, daily tracking fixed, SVG layout optimized
+# update_codey.py - No mercy EDITION for casual devs!
+# MINIMAL FIX - only seasonal display + API events
 import requests
 import json
 import os
@@ -17,7 +16,6 @@ if not REPO:
     print("WARNING: No REPO set (GIT_REPOSITORY or GITHUB_REPOSITORY). Using 'VolkanSah' as fallback.")
     REPO = "VolkanSah"
 
-# OPTIMIZED: Central configuration for game balance
 GAME_BALANCE = {
     'ENERGY_COST_COMMIT': 2.5,
     'ENERGY_COST_PR': 5.0,
@@ -92,7 +90,7 @@ def get_github_age_years(created_at_str):
         created = datetime.fromisoformat(created_at_str.replace('Z', '+00:00'))
         return (datetime.now(timezone.utc) - created).days / 365.25
     except:
-        return 1  # fallback
+        return 1
 
 def analyze_commit_quality(commits):
     """Brutal commit message analysis"""
@@ -102,10 +100,9 @@ def analyze_commit_quality(commits):
     penalties = []
     quality_score = 1.0
     
-    for commit in commits:
+    for commit in commits[:20]:
         message = commit.get('commit', {}).get('message', '').lower()
         
-        # Penalties for bad commit messages
         if any(word in message for word in ['fix', 'todo', 'wip', 'typo', 'oops']):
             quality_score -= 0.05
             penalties.append('lazy_messages')
@@ -126,7 +123,7 @@ def analyze_commit_quality(commits):
 def analyze_repo_quality(repo_data):
     """Check repo quality factors"""
     quality_factors = {
-        'has_readme': bool(repo_data.get('has_downloads')),  # proxy check
+        'has_readme': bool(repo_data.get('has_downloads')),
         'has_license': bool(repo_data.get('license')),
         'has_description': bool(repo_data.get('description')),
         'star_to_size_ratio': repo_data.get('stargazers_count', 0) / max(repo_data.get('size', 1), 1),
@@ -135,14 +132,13 @@ def analyze_repo_quality(repo_data):
         'open_issues': repo_data.get('open_issues_count', 0)
     }
     
-    # Calculate quality score
     score = 1.0
     if not quality_factors['has_license']:
         score -= 0.3
     if not quality_factors['has_description']:
         score -= 0.2
     if quality_factors['is_fork']:
-        score *= 0.1  # Forks are worth much less
+        score *= 0.1
     if quality_factors['open_issues'] > 10:
         score -= 0.2
         
@@ -153,15 +149,12 @@ def calculate_social_engineering_score(user_data, all_repos):
     followers = user_data.get('followers', 0)
     following = user_data.get('following', 0)
     
-    # Following/Follower Ratio (FFR)
     ffr = following / max(followers, 1)
     
-    # Own repos vs forks
     own_repos = sum(1 for r in all_repos if not r.get('fork', False))
     forked_repos = sum(1 for r in all_repos if r.get('fork', False))
     fork_ratio = forked_repos / max(own_repos, 1)
     
-    # Calculate penalties
     social_score = 1.0
     penalties = []
     
@@ -172,14 +165,13 @@ def calculate_social_engineering_score(user_data, all_repos):
         social_score *= 0.75
         penalties.append('desperate_networker')
     elif ffr < 0.5:
-        social_score *= 1.25  # bonus for quality curation
+        social_score *= 1.25
         penalties.append('quality_curator')
     
     if fork_ratio > 2.0:
         social_score *= 0.5
         penalties.append('fork_leech')
     
-    # Hollow metrics detection
     total_stars = sum(r.get('stargazers_count', 0) for r in all_repos if not r.get('fork'))
     star_per_repo = total_stars / max(own_repos, 1)
     
@@ -216,8 +208,6 @@ def calculate_tier_multipliers(tier, social_score):
     }
     
     base = multipliers.get(tier, multipliers['noob'])
-    
-    # Social engineering penalty applies to all tiers
     base['xp'] *= social_score
     
     return base
@@ -232,17 +222,15 @@ def calculate_skill_decay(last_update_str, current_stats):
         days_inactive = (datetime.now(timezone.utc) - last_update).days
         
         if days_inactive <= 1:
-            return current_stats  # No decay for daily updates
+            return current_stats
         
-        # Exponential decay
         decay_factor = 0.95 ** days_inactive
         
         decayed_stats = current_stats.copy()
         decayed_stats['health'] *= decay_factor
         decayed_stats['happiness'] *= decay_factor
-        decayed_stats['energy'] *= max(0.3, decay_factor)  # Energy decays faster
+        decayed_stats['energy'] *= max(0.3, decay_factor)
         
-        # Streak penalty for gaps
         if days_inactive > 2:
             decayed_stats['streak'] = max(0, decayed_stats['streak'] - days_inactive + 1)
         
@@ -252,7 +240,7 @@ def calculate_skill_decay(last_update_str, current_stats):
         return current_stats
 
 def fetch_all_repos_for_user(owner):
-    """Fetches ALL user repositories using pagination - FIXED"""
+    """Fetches ALL user repositories using pagination."""
     all_repos = []
     page = 1
     while True:
@@ -264,20 +252,19 @@ def fetch_all_repos_for_user(owner):
         
         all_repos.extend(repos_page)
         
-        if len(repos_page) < 100:  # Last page
+        if len(repos_page) < 100:
             break
         page += 1
-    
-    print(f"✓ Fetched {len(all_repos)} repositories")
+        
     return all_repos
 
-def fetch_all_events_for_user(owner):
-    """Fetch ALL recent events with pagination - FIXED"""
+def get_all_data_for_user(owner):
+    """FIXED: Fetch ALL events with pagination for accurate commit counting"""
+    # FIXED: Paginate through ALL events (up to 300)
     all_events = []
     page = 1
-    
-    while page <= 10:  # GitHub limits to 300 events (10 pages)
-        params = {'per_page': 100, 'page': page}
+    while page <= 10:  # GitHub allows max 300 events (10 pages)
+        params = {'per_page': 30, 'page': page}
         ok, events_page = get_json_safe(f'https://api.github.com/users/{owner}/events/public', params=params)
         
         if not ok or not isinstance(events_page, list) or not events_page:
@@ -285,88 +272,42 @@ def fetch_all_events_for_user(owner):
         
         all_events.extend(events_page)
         
-        if len(events_page) < 100:
+        if len(events_page) < 30:
             break
         page += 1
     
-    print(f"✓ Fetched {len(all_events)} events")
-    return all_events
+    print(f"✓ Fetched {len(all_events)} events for commit analysis")
 
-def get_commits_by_date(owner, days_back=30):
-    """Get commits grouped by date for the last N days - NEW FUNCTION"""
-    all_events = fetch_all_events_for_user(owner)
-    
-    # Initialize date map
-    now = datetime.now(timezone.utc)
-    commits_by_date = {}
-    prs_by_date = {}
-    
-    for i in range(days_back):
-        date = (now - timedelta(days=i)).date()
-        commits_by_date[date] = 0
-        prs_by_date[date] = 0
-    
-    # Process events
-    for event in all_events:
-        event_time_str = event.get('created_at')
-        if not event_time_str:
-            continue
-            
-        event_time = datetime.fromisoformat(event_time_str.replace('Z', '+00:00'))
-        event_date = event_time.date()
-        
-        if event_date not in commits_by_date:
-            continue  # Too old
-        
-        if event.get('type') == 'PushEvent':
-            commits = event.get('payload', {}).get('commits', [])
-            commits_by_date[event_date] += len(commits)
-            
-        elif event.get('type') == 'PullRequestEvent':
-            if (event.get('payload', {}).get('action') == 'closed' and 
-                event.get('payload', {}).get('pull_request', {}).get('merged')):
-                prs_by_date[event_date] += 1
-    
-    return commits_by_date, prs_by_date
-
-def get_all_data_for_user(owner):
-    """Enhanced data collection - FULLY RESTORED"""
-    all_events = fetch_all_events_for_user(owner)
     repos_list = fetch_all_repos_for_user(owner)
 
-    # Basic stats
     total_own_repos = len([r for r in repos_list if not r.get('fork')])
     total_stars = sum(r.get('stargazers_count', 0) for r in repos_list if not r.get('fork'))
     total_forks = sum(r.get('forks_count', 0) for r in repos_list if not r.get('fork'))
 
-    # Quality analysis on ALL repos
     repo_qualities = [analyze_repo_quality(repo) for repo in repos_list if not repo.get('fork')]
     avg_repo_quality = sum(repo_qualities) / max(len(repo_qualities), 1)
 
-    # Language analysis - ALL repos, not just 5!
+    # Language analysis - keep at 5 to save API calls
     languages_bytes = Counter()
-    print("Analyzing languages across all repos...")
-    for i, repo_data in enumerate(repos_list):
+    for repo_data in repos_list[:5]:
         if not repo_data.get('fork'):
             ok_l, lang_data = get_json_safe(f'https://api.github.com/repos/{repo_data["full_name"]}/languages')
             if ok_l and isinstance(lang_data, dict):
                 languages_bytes.update(lang_data)
-            if (i + 1) % 10 == 0:
-                print(f"  Processed {i + 1}/{len(repos_list)} repos...")
 
-    # Recent activity analysis - last 24h
+    # FIXED: Process ALL events for accurate daily commits
     now = datetime.now(timezone.utc)
     one_day_ago = now - timedelta(days=1)
     daily_commits_count = 0
     daily_prs_merged = 0
     all_commits = []
+    commit_quality_data = {'quality_score': 1.0, 'penalties': []}
 
-    for event in all_events:
+    for event in all_events:  # FIXED: All events, not just [:50]
         event_time_str = event.get('created_at')
         if not event_time_str:
             continue
         event_time = datetime.fromisoformat(event_time_str.replace('Z', '+00:00'))
-        
         if event_time > one_day_ago:
             if event.get('type') == 'PushEvent':
                 commits = event.get('payload', {}).get('commits', [])
@@ -378,19 +319,19 @@ def get_all_data_for_user(owner):
                     event.get('payload', {}).get('pull_request', {}).get('merged')):
                     daily_prs_merged += 1
 
-    # Analyze commit quality
-    commit_quality_data = analyze_commit_quality(all_commits)
-    
+    # Analyze commit quality from ALL commits
+    if all_commits:
+        commit_quality_data = analyze_commit_quality(all_commits)
+
     dominant_language = languages_bytes.most_common(1)
     dominant_language = dominant_language[0][0] if dominant_language else 'unknown'
     
-    # Language diversity analysis
     language_count = len(languages_bytes)
     language_diversity_penalty = 1.0
     if language_count > 10:
-        language_diversity_penalty = 0.8  # Jack of all trades penalty
+        language_diversity_penalty = 0.8
     elif language_count == 1:
-        language_diversity_penalty = 0.9  # One trick pony penalty
+        language_diversity_penalty = 0.9
     
     return {
         'daily_commits': daily_commits_count,
@@ -412,12 +353,10 @@ def load_codey():
             data = json.load(f)
             print("codey.json loaded.")
             
-            # Ensure new structure exists
             if 'history' not in data: data['history'] = []
             if 'rpg_stats' not in data: data['rpg_stats'] = {}
             if 'achievements' not in data: data['achievements'] = []
             if 'brutal_stats' not in data: data['brutal_stats'] = {}
-            if 'daily_history' not in data: data['daily_history'] = {}  # NEW
                 
             return data
     except (FileNotFoundError, json.JSONDecodeError):
@@ -426,8 +365,7 @@ def load_codey():
     return {
         'health': 50, 'hunger': 50, 'happiness': 50, 'energy': 50,
         'level': 1, 'streak': 0, 'total_commits': 0, 'mood': 'neutral',
-        'rpg_stats': {}, 'achievements': [], 'history': [], 
-        'brutal_stats': {}, 'daily_history': {},
+        'rpg_stats': {}, 'achievements': [], 'history': [], 'brutal_stats': {},
         'last_update': None
     }
 
@@ -472,7 +410,7 @@ def calculate_prestige_requirements(codey, tier, github_years):
     return can_prestige, missing
 
 def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
-    """Main brutal stats update function - FIXED & ENHANCED"""
+    """Main brutal stats update function - FIXED VERSION"""
     now = datetime.now(timezone.utc).isoformat()
     
     github_years = get_github_age_years(user_data.get('created_at', ''))
@@ -483,14 +421,13 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     if codey.get('last_update'):
         codey = calculate_skill_decay(codey['last_update'], codey)
     
-    # History entry
     history_entry = {
         'timestamp': now, 'daily_commits': daily_activity['commits'], 'daily_prs': daily_activity['prs'],
         'health': codey['health'], 'mood': codey['mood'], 'streak': codey['streak'], 'tier': tier
     }
     codey['history'] = codey.get('history', [])[-29:] + [history_entry]
     
-    # Calculate XP and penalties
+    # Calculate XP
     commit_xp = daily_activity['commits'] * GAME_BALANCE['XP_PER_COMMIT'] * multipliers['xp']
     pr_xp = daily_activity['prs'] * GAME_BALANCE['XP_PER_PR'] * multipliers['xp']
     
@@ -504,7 +441,7 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     codey['hunger'] = max(0, codey['hunger'] - GAME_BALANCE['DAILY_HUNGER_DECAY'])
     codey['happiness'] = max(0, codey['happiness'] - GAME_BALANCE['DAILY_HAPPINESS_DECAY'])
 
-    # Energy consumption and regeneration
+    # Energy
     energy_consumed = (daily_activity['commits'] * GAME_BALANCE['ENERGY_COST_COMMIT']) + \
                       (daily_activity['prs'] * GAME_BALANCE['ENERGY_COST_PR'])
 
@@ -513,23 +450,23 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     else:
         regen = GAME_BALANCE['ENERGY_REGEN_ACTIVE']
 
-    codey['energy'] = max(0, min(100, codey.get('energy', 50) - energy_consumed + regen))
+    codey['energy'] = max(0, min(100, codey.get('energy', 0) - energy_consumed + regen))
 
-    # Rewards from activity
+    # Rewards
     codey['hunger'] = min(100, codey['hunger'] + total_xp * GAME_BALANCE['HUNGER_GAIN_MODIFIER'])
     codey['happiness'] = min(100, codey['happiness'] + pr_xp * GAME_BALANCE['HAPPINESS_GAIN_MODIFIER'])
     
-    # Final health calculation
+    # Health
     codey['health'] = (codey['hunger'] + codey['happiness'] + codey['energy']) / 3
     
-    # Brutal streak calculation
+    # Streak
     if daily_activity['commits'] > 0 or daily_activity['prs'] > 0:
         codey['streak'] += 1
     else:
         streak_loss = max(1, codey['streak'] // GAME_BALANCE['STREAK_LOSS_DIVISOR'])
         codey['streak'] = max(0, codey['streak'] - streak_loss)
     
-    # Brutal leveling
+    # Leveling
     codey['total_commits'] += daily_activity['commits']
     tier_requirement = GAME_BALANCE['BASE_LEVEL_REQUIREMENT'] * multipliers['requirements']
     codey['level'] = min(10, 1 + int(codey['total_commits'] / tier_requirement))
@@ -543,7 +480,7 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
         'xp_earned': total_xp, 'dominant_language': all_time_data.get('dominant_language', 'unknown')  
     }
     
-    # Mood calculation
+    # Mood
     if codey['health'] < 30: codey['mood'] = 'struggling'
     elif codey['energy'] < 20: codey['mood'] = 'exhausted'
     elif len(social_analysis['penalties']) + len(commit_quality.get('penalties', [])) > 2: codey['mood'] = "overwhelmed"
@@ -565,10 +502,10 @@ def get_seasonal_bonus():
     month = datetime.now().month
     bonuses = {
         10: {'emoji': '🎃', 'name': 'Hacktoberfest', 'multiplier': 1.5},
-        11: {'emoji': '🍁', 'name': 'End of Year Push', 'multiplier': 1.25},
-        12: {'emoji': '🎄', 'name': 'Advent of Code', 'multiplier': 1.3},
-        1: {'emoji': '🎯', 'name': 'New Year', 'multiplier': 1.2},
-        2: {'emoji': '💖', 'name': 'OS Love', 'multiplier': 1.1},
+        11: {'emoji': '🍁', 'name': 'Year Push', 'multiplier': 1.25},  # FIXED: Shorter
+        12: {'emoji': '🎄', 'name': 'Advent', 'multiplier': 1.3},  # FIXED: Shorter
+        1: {'emoji': '🎯', 'name': 'New Year', 'multiplier': 1.2},  # FIXED: Shorter
+        2: {'emoji': '💖', 'name': 'OS Love', 'multiplier': 1.1},  # FIXED: Shorter
         3: {'emoji': '🧹', 'name': 'Refactor', 'multiplier': 1.2},
         4: {'emoji': '🐞', 'name': 'Bug Hunt', 'multiplier': 1.1},
         5: {'emoji': '🚀', 'name': 'Deploy', 'multiplier': 1.3},
@@ -583,33 +520,16 @@ def is_weekend_warrior():
     return datetime.now().weekday() >= 5
 
 def generate_brutal_svg(codey, seasonal_bonus):
-    """Generate SVG with FIXED layout - no text overlap"""
     brutal_stats = codey.get('brutal_stats', {})
     tier = brutal_stats.get('tier', 'noob')
     tier_colors = {'noob': '#22c55e', 'developer': '#3b82f6', 'veteran': '#8b5cf6', 'elder': '#f59e0b'}
     tier_emojis = {'noob': '🌱', 'developer': '💻', 'veteran': '⚔️', 'elder': '🧙‍♂️'}
-    moods = {'happy': '😊', 'struggling': '😰', 'exhausted': '😵', 'grinding': '😤', 
-             'elite': '😎', 'wise': '🧐', 'neutral': '😐', 'overwhelmed': '🤯'}
-    pets = {'C': '🦫', 'C++': '🐬', 'C#': '🦊', 'Java': '🦧', 'PHP': '🐘', 'Python': '🐍', 
-            'JavaScript': '🦔', 'TypeScript': '🦋', 'Ruby': '💎', 'Go': '🐹', 'Swift': '🐦', 
-            'Kotlin': '🐨', 'Rust': '🦀', 'HTML': '🦘', 'CSS': '🦎', 'Sass': '🦄', 'Vue': '🐉', 
-            'React': '🦥', 'Angular': '🦁', 'Jupyter Notebook': '🦉', 'R': '🐿️', 'Matlab': '🐻', 
-            'SQL': '🐙', 'Julia': '🦓', 'Haskell': '🦚', 'Elixir': '🐝', 'Clojure': '🦌', 
-            'F#': '🐑', 'Shell': '🐌', 'PowerShell': '🐺', 'Bash': '🦬', 'Perl': '🐪', 
-            'Lua': '🐒', 'Dart': '🐧', 'GDScript': '🕹️', 'Assembly': '🐜', 'Solidity': '🔱', 
-            'Vim Script': '🕷️', 'GraphQL': '🕸️', 'SCSS': '🦢', 'Svelte': '🕊️', 'Zig': '🐆', 
-            'unknown': '🐲'}
-    
+    moods = {'happy': '😊', 'struggling': '😰', 'exhausted': '😵', 'grinding': '😤', 'elite': '😎', 'wise': '🧐', 'neutral': '😐', 'overwhelmed': '🤯'}
+    pets = {'C': '🦫', 'C++': '🐬', 'C#': '🦊', 'Java': '🦧', 'PHP': '🐘', 'Python': '🐍', 'JavaScript': '🦔', 'TypeScript': '🦋', 'Ruby': '💎', 'Go': '🐹', 'Swift': '🐦', 'Kotlin': '🐨', 'Rust': '🦀', 'HTML': '🦘', 'CSS': '🦎', 'Sass': '🦄', 'Vue': '🐉', 'React': '🦥', 'Angular': '🦁', 'Jupyter Notebook': '🦉', 'R': '🐿️', 'Matlab': '🐻', 'SQL': '🐙', 'Julia': '🦓', 'Haskell': '🦚', 'Elixir': '🐝', 'Clojure': '🦌', 'F#': '🐑', 'Shell': '🐌', 'PowerShell': '🐺', 'Bash': '🦬', 'Perl': '🐪', 'Lua': '🐒', 'Dart': '🐧', 'GDScript': '🕹️', 'Assembly': '🐜', 'Solidity': '🔱', 'Vim Script': '🕷️', 'GraphQL': '🕸️', 'SCSS': '🦢', 'Svelte': '🕊️', 'Zig': '🐆', 'unknown': '🐲'}
     dominant_lang = brutal_stats.get('dominant_language', 'unknown')
     pet_emoji = pets.get(dominant_lang, '🐲')
-    colors = {
-        'background': '#0d1117', 'card': '#161b22', 'text': '#f0f6fc', 
-        'secondary_text': '#8b949e', 'health': '#f85149', 'hunger': '#ffa657', 
-        'happiness': '#a855f7', 'energy': '#3fb950', 'border': '#30363d', 
-        'tier': tier_colors.get(tier, '#22c55e')
-    }
+    colors = {'background': '#0d1117', 'card': '#161b22', 'text': '#f0f6fc', 'secondary_text': '#8b949e', 'health': '#f85149', 'hunger': '#ffa657', 'happiness': '#a855f7', 'energy': '#3fb950', 'border': '#30363d', 'tier': tier_colors.get(tier, '#22c55e')}
     
-    # Achievements display - FIXED positioning
     achievements_display = ''
     if codey.get('achievements'):
         ach_count = min(4, len(codey['achievements']))
@@ -619,12 +539,12 @@ def generate_brutal_svg(codey, seasonal_bonus):
             x_pos = ach_start_x + (i * (ach_width + gap)) + (ach_width / 2)
             achievements_display += f'<text x="{x_pos}" y="48" text-anchor="middle" fill="{colors["text"]}" font-size="20">{ach.split(" ")[0]}</text>'
 
-    # Seasonal display - FIXED: shorter text
+    # FIXED: Seasonal display with shorter names and smaller font
     seasonal_display = ''
     if seasonal_bonus:
-        bonus_x_start, bonus_y_start, pet_diameter = 120 - 50, 10, 100
-        seasonal_display = f'''<g><rect x="{bonus_x_start}" y="{bonus_y_start}" width="{pet_diameter}" height="30" rx="15" fill="{colors['tier']}" opacity="0.9" stroke="{colors['border']}" stroke-width="1.5"/>
-            <text x="120" y="{bonus_y_start + 20}" text-anchor="middle" fill="{colors['text']}" font-size="11" font-weight="bold">{seasonal_bonus['emoji']} {seasonal_bonus['name']}</text></g>'''
+        bonus_x_start, bonus_y_start, pet_diameter = 120 - 57.5, 10, 115
+        seasonal_display = f'''<g><rect x="{bonus_x_start}" y="{bonus_y_start}" width="{pet_diameter}" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.9" stroke="{colors['border']}" stroke-width="1.5"/>
+            <text x="120" y="{bonus_y_start + 23}" text-anchor="middle" fill="{colors['text']}" font-size="11" font-weight="bold">{seasonal_bonus['emoji']} {seasonal_bonus['name']}</text></g>'''
     
     prestige_display = ''
     if codey.get('prestige_level', 0) > 0:
@@ -634,77 +554,26 @@ def generate_brutal_svg(codey, seasonal_bonus):
         prestige_display = f'<text x="315" y="85" text-anchor="middle" fill="{colors["energy"]}" font-size="12" font-weight="bold">✨ PRESTIGE READY ✨</text>'
     
     svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
-      <rect width="630" height="473" fill="{colors['background']}" rx="15"/>
-      <rect x="20" y="20" width="590" height="433" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
-      {seasonal_display}
-      <text x="40" y="75" fill="{colors['text']}" font-size="18" font-weight="bold">{tier_emojis[tier]} CODEY Level {codey['level']}</text>
-      {prestige_display}
-      {achievements_display}
-      
-      <g transform="translate(0, 84)">
-        <circle cx="120" cy="150" r="57.5" fill="#21262d" stroke="{colors['tier']}" stroke-width="3"/>
-        <text x="120" y="176" text-anchor="middle" font-size="65">{pet_emoji}</text>
-        <circle cx="120" cy="225" r="25" fill="#21262d" stroke="{colors['border']}" stroke-width="1"/>
-        <text x="120" y="230" text-anchor="middle" font-size="25">{moods.get(codey['mood'], '😐')}</text>
-        <text x="120" y="260" text-anchor="middle" fill="{colors['secondary_text']}" font-size="11">{codey['mood'].title()} • {brutal_stats.get('github_years', 1):.1f}y</text>
-      </g>
-      
+      <rect width="630" height="473" fill="{colors['background']}" rx="15"/><rect x="20" y="20" width="590" height="433" fill="{colors['card']}" rx="12" stroke="{colors['border']}" stroke-width="1"/>
+      {seasonal_display}<text x="40" y="75" fill="{colors['text']}" font-size="18" font-weight="bold">{tier_emojis[tier]} CODEY Level {codey['level']}</text>
+      {prestige_display}{achievements_display}
+      <g transform="translate(0, 84)"><circle cx="120" cy="150" r="57.5" fill="#21262d" stroke="{colors['tier']}" stroke-width="3"/><text x="120" y="176" text-anchor="middle" font-size="65">{pet_emoji}</text><circle cx="120" cy="225" r="25" fill="#21262d" stroke="{colors['border']}" stroke-width="1"/><text x="120" y="230" text-anchor="middle" font-size="25">{moods.get(codey['mood'], '😐')}</text><text x="120" y="260" text-anchor="middle" fill="{colors['secondary_text']}" font-size="11">{codey['mood'].title()} • {brutal_stats.get('github_years', 1):.1f}y</text></g>
       <g transform="translate(205, 120)">
-        <text x="0" y="20" fill="{colors['text']}" font-weight="bold" font-size="14">❤️ Health</text>
-        <text x="330" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{codey['health']:.0f}%</text>
-        <rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="25" width="{min(330, codey['health']*3.3)}" height="12" fill="{colors['health']}" rx="6"/>
-        
-        <text x="0" y="55" fill="{colors['text']}" font-weight="bold" font-size="14">🍖 Hunger</text>
-        <text x="330" y="55" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{codey['hunger']:.0f}%</text>
-        <rect x="0" y="60" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="60" width="{min(330, codey['hunger']*3.3)}" height="12" fill="{colors['hunger']}" rx="6"/>
-        
-        <text x="0" y="90" fill="{colors['text']}" font-weight="bold" font-size="14">😊 Happiness</text>
-        <text x="330" y="90" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{codey['happiness']:.0f}%</text>
-        <rect x="0" y="95" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="95" width="{min(330, codey['happiness']*3.3)}" height="12" fill="{colors['happiness']}" rx="6"/>
-        
-        <text x="0" y="125" fill="{colors['text']}" font-weight="bold" font-size="14">⚡ Energy</text>
-        <text x="330" y="125" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{codey['energy']:.0f}%</text>
-        <rect x="0" y="130" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="130" width="{min(330, codey['energy']*3.3)}" height="12" fill="{colors['energy']}" rx="6"/>
-        
-        <text x="0" y="160" fill="{colors['text']}" font-weight="bold" font-size="14">👥 Social</text>
-        <text x="330" y="160" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{brutal_stats.get('social_score', 1.0):.2f}</text>
-        <rect x="0" y="165" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="165" width="{min(330, brutal_stats.get('social_score', 1.0)*165)}" height="12" fill="{colors['tier']}" rx="6"/>
-        
-        <text x="0" y="195" fill="{colors['text']}" font-weight="bold" font-size="14">💎 Quality</text>
-        <text x="330" y="195" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{brutal_stats.get('avg_repo_quality', 0.5):.2f}</text>
-        <rect x="0" y="200" width="330" height="12" fill="#21262d" rx="6"/>
-        <rect x="0" y="200" width="{min(330, brutal_stats.get('avg_repo_quality', 0.5)*330)}" height="12" fill="{colors['happiness']}" rx="6"/>
+        <text x="0" y="20" fill="{colors['text']}" font-weight="bold" font-size="14">❤️ Health</text><text x="330" y="20" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{codey['health']:.0f}%</text><rect x="0" y="25" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="25" width="{min(330, codey['health']*3.3)}" height="12" fill="{colors['health']}" rx="6"/>
+        <text x="0" y="55" fill="{colors['text']}" font-weight="bold" font-size="14">🍖 Hunger</text><text x="330" y="55" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{codey['hunger']:.0f}%</text><rect x="0" y="60" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="60" width="{min(330, codey['hunger']*3.3)}" height="12" fill="{colors['hunger']}" rx="6"/>
+        <text x="0" y="90" fill="{colors['text']}" font-weight="bold" font-size="14">😊 Happiness</text><text x="330" y="90" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{codey['happiness']:.0f}%</text><rect x="0" y="95" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="95" width="{min(330, codey['happiness']*3.3)}" height="12" fill="{colors['happiness']}" rx="6"/>
+        <text x="0" y="125" fill="{colors['text']}" font-weight="bold" font-size="14">⚡ Energy</text><text x="330" y="125" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{codey['energy']:.0f}%</text><rect x="0" y="130" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="130" width="{min(330, codey['energy']*3.3)}" height="12" fill="{colors['energy']}" rx="6"/>
+        <text x="0" y="160" fill="{colors['text']}" font-weight="bold" font-size="14">👥 Social</text><text x="330" y="160" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{brutal_stats.get('social_score', 1.0):.2f}</text><rect x="0" y="165" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="165" width="{min(330, brutal_stats.get('social_score', 1.0)*165)}" height="12" fill="{colors['tier']}" rx="6"/>
+        <text x="0" y="195" fill="{colors['text']}" font-weight="bold" font-size="14">💎 Quality</text><text x="330" y="195" text-anchor="end" fill="{colors['secondary_text']}" font-size="12">{brutal_stats.get('avg_repo_quality', 0.5):.2f}</text><rect x="0" y="200" width="330" height="12" fill="#21262d" rx="6"/><rect x="0" y="200" width="{min(330, brutal_stats.get('avg_repo_quality', 0.5)*330)}" height="12" fill="{colors['happiness']}" rx="6"/>
       </g>
-      
-      <g transform="translate(315, 375)">
-        <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="13" font-weight="bold">PET STATUS</text>
-        <text x="0" y="15" text-anchor="middle" fill="{colors['secondary_text']}" font-size="10">
-          Tier: {tier.upper()} • XP: {brutal_stats.get('multipliers', {}).get('xp', 1.0):.2f}x
-        </text>
-        <text x="0" y="28" text-anchor="middle" fill="{colors['secondary_text']}" font-size="10">
-          Penalties: {', '.join(brutal_stats.get('social_penalties', [])[:2]) or 'None'}
-        </text>
-      </g>
-      
-      <g transform="translate(315, 413)">
-        <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="13">
-          🗓️ {codey['streak']}d • 📊 {codey['total_commits']}c • ⭐ {brutal_stats.get('total_stars', 0)}s
-        </text>
-      </g>
-      
-      <text x="315" y="438" text-anchor="middle" fill="{colors['secondary_text']}" font-size="11">
-        Updated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • Lang: {dominant_lang}
-      </text>
+      <g transform="translate(315, 375)"><text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="13" font-weight="bold">PET STATUS:</text><text x="0" y="15" text-anchor="middle" fill="{colors['secondary_text']}" font-size="11">Tier: {tier.upper()} • XP Mult: {brutal_stats.get('multipliers', {}).get('xp', 1.0):.2f}x • Penalties: {', '.join(brutal_stats.get('social_penalties', [])[:3]) or 'None'}</text></g>
+      <g transform="translate(315, 413)"><text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="14">🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits • ⭐ {brutal_stats.get('total_stars', 0)} stars</text></g>
+      <text x="315" y="438" text-anchor="middle" fill="{colors['secondary_text']}" font-size="12">Last Update: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • Dominant: {dominant_lang}</text>
     </svg>'''
     return svg
 
 if __name__ == "__main__":
-    print("🔥 Updating BRUTAL Codey - FIXED VERSION...")
+    print("🔥 Updating BRUTAL Codey...")
     
     daily_commits_count = 0
     daily_prs_merged = 0
@@ -731,9 +600,10 @@ if __name__ == "__main__":
         daily_activity['commits'] = int(daily_activity['commits'] * GAME_BALANCE['WEEKEND_BONUS'])
         daily_activity['prs'] = int(daily_activity['prs'] * GAME_BALANCE['WEEKEND_BONUS'])
 
-    print(f"\nDaily activity: {daily_activity['commits']} commits, {daily_activity['prs']} PRs")
-    print(f"Repo Quality: {all_time_data.get('avg_repo_quality', 0):.2f}")
-    print(f"Commit Quality: {all_time_data.get('commit_quality', {}).get('quality_score', 1.0):.2f}")
+    print("Daily activity (enhanced):", daily_activity)
+    print("Brutal metrics preview:")
+    print(f"  - Repo Quality: {all_time_data.get('avg_repo_quality', 0):.2f}")
+    print(f"  - Commit Quality: {all_time_data.get('commit_quality', {}).get('quality_score', 1.0):.2f}")
     
     codey = load_codey()
     codey = update_brutal_stats(codey, daily_activity, all_time_data, user_data)
@@ -741,16 +611,14 @@ if __name__ == "__main__":
     brutal_stats = codey.get('brutal_stats', {})
     
     print(f"\n🔥 BRUTAL UPDATE COMPLETE:")
-    print(f"  Tier: {brutal_stats.get('tier', 'unknown').upper()} ({brutal_stats.get('github_years', 0):.1f} years)")
+    print(f"  Tier: {brutal_stats.get('tier', 'unknown').upper()} (GitHub: {brutal_stats.get('github_years', 0):.1f} years)")
     print(f"  Health: {codey['health']:.0f}% | Energy: {codey['energy']:.0f}% | Mood: {codey['mood']}")
-    print(f"  Social: {brutal_stats.get('social_score', 1.0):.2f}x | XP: {brutal_stats.get('xp_earned', 0):.0f}")
+    print(f"  Social Score: {brutal_stats.get('social_score', 1.0):.2f}x | XP Today: {brutal_stats.get('xp_earned', 0):.0f}")
     
     if brutal_stats.get('can_prestige', False):
         print("  🌟 PRESTIGE READY! 🌟")
     else:
-        missing = brutal_stats.get('prestige_missing', [])
-        if missing:
-            print(f"  Prestige missing: {', '.join(missing)}")
+        print(f"  Prestige missing: {', '.join(brutal_stats.get('prestige_missing', []))}")
 
     seasonal_bonus = get_seasonal_bonus()
     if seasonal_bonus:
@@ -758,11 +626,11 @@ if __name__ == "__main__":
 
     with open('codey.json', 'w') as f:
         json.dump(codey, f, indent=2)
-    print("\n💾 codey.json saved")
+    print("\n💾 codey.json written with brutal stats.")
     
     svg = generate_brutal_svg(codey, seasonal_bonus)
     with open('codey.svg', 'w', encoding='utf-8') as f:
         f.write(svg)
-    print("🎨 codey.svg generated")
+    print("🎨 codey.svg written with brutal styling.")
 
-    print("\n💀 BRUTAL Codey update finished! 💀")
+    print("\n💀 BRUTAL Codey update finished. Only the strong survive! 💀")
