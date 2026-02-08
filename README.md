@@ -235,7 +235,7 @@ Unlock special badges for major milestones:
 
 - [ ] PostgreSQL integration for historical tracking
 - [ ] Multi-language pet forms (more creatures!)
-- [x] Team/organization support
+- [ ] Team/organization support cost to much calculate power
 - [ ] API endpoint for live stats
 - [x] More brutal judging algorithms (yes, really)
 - [x] Community leaderboards (compare your pain)
@@ -247,6 +247,7 @@ Unlock special badges for major milestones:
 - ✅ ~~Codey on drugs~~ — Energy calculation normalized  
 - ✅ ~~Some dragons~~ — Species diversity restored
 - ✅ Codey testing start 08-02-2026 sorry!
+- Thinking about new an better hybrid tech!
 
 
 
@@ -316,6 +317,7 @@ Check out my Codey in action: [volkansah.github.io/Codey](https://volkansah.gith
 [⭐ Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 
 </div>
+
 
 
 
