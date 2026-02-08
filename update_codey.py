@@ -267,13 +267,13 @@ def get_all_data_for_user(owner):
         params = {'per_page': 30, 'page': page}
         ok, events_page = get_json_safe(f'https://api.github.com/users/{owner}/events/public', params=params)
         
-        if not ok or not isinstance(events_page, list) or not events_page:
+        if not ok or not isinstance(events_page, list):
+            break
+        
+        if not events_page:  # FIXED: Only break if page is actually empty
             break
         
         all_events.extend(events_page)
-        
-        if len(events_page) < 30:
-            break
         page += 1
     
     print(f"✓ Fetched {len(all_events)} events for commit analysis")
@@ -539,12 +539,14 @@ def generate_brutal_svg(codey, seasonal_bonus):
             x_pos = ach_start_x + (i * (ach_width + gap)) + (ach_width / 2)
             achievements_display += f'<text x="{x_pos}" y="48" text-anchor="middle" fill="{colors["text"]}" font-size="20">{ach.split(" ")[0]}</text>'
 
-    # FIXED: Seasonal display with shorter names and smaller font
+    # FIXED: Seasonal display with proper width and padding
     seasonal_display = ''
     if seasonal_bonus:
-        bonus_x_start, bonus_y_start, pet_diameter = 120 - 57.5, 10, 115
-        seasonal_display = f'''<g><rect x="{bonus_x_start}" y="{bonus_y_start}" width="{pet_diameter}" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.9" stroke="{colors['border']}" stroke-width="1.5"/>
-            <text x="120" y="{bonus_y_start + 23}" text-anchor="middle" fill="{colors['text']}" font-size="11" font-weight="bold">{seasonal_bonus['emoji']} {seasonal_bonus['name']}</text></g>'''
+        bonus_width = 135  # Wider box for readability
+        bonus_x_start = 120 - (bonus_width / 2)
+        bonus_y_start = 10
+        seasonal_display = f'''<g><rect x="{bonus_x_start}" y="{bonus_y_start}" width="{bonus_width}" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.9" stroke="{colors['border']}" stroke-width="1.5"/>
+            <text x="120" y="{bonus_y_start + 23}" text-anchor="middle" fill="{colors['text']}" font-size="12" font-weight="bold">{seasonal_bonus['emoji']} {seasonal_bonus['name']}</text></g>'''
     
     prestige_display = ''
     if codey.get('prestige_level', 0) > 0:
