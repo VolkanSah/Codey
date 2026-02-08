@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CODEY // PIXEL_DRAGON_V1.0</title>
+    <title>GH0ST_SQUAD // Pixel Dragon Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
@@ -14,34 +14,24 @@
                 extend: {
                     fontFamily: { mono: ['JetBrains Mono', 'monospace'], display: ['Orbitron', 'sans-serif'] },
                     colors: {
-                        cyber: { black: '#0a0a0f', dark: '#12121a', cyan: '#00f3ff', pink: '#ff00ff', green: '#00ff41', red: '#ff0040', yellow: '#f0f000' }
+                        cyber: { black: '#0a0a0f', dark: '#12121a', cyan: '#00f3ff', pink: '#ff00ff', green: '#00ff41', red: '#ff0040' }
                     },
                     animation: {
-                        'pulse-fast': 'pulse 1s infinite',
-                        'dragon-fly': 'fly 10s linear infinite alternate',
-                        'dragon-fire': 'fire 1.5s ease-in-out infinite',
-                        'dragon-idle-head': 'idleHead 3s ease-in-out infinite alternate',
-                        'dragon-idle-tail': 'idleTail 3s ease-in-out infinite alternate',
+                        'dragon-fly': 'fly 25s linear infinite alternate',
+                        'fire-move': 'fire 1.2s ease-out forwards',
                     },
                     keyframes: {
                         fly: {
-                            '0%, 100%': { transform: 'translate(0, 0)' },
-                            '25%': { transform: 'translate(200px, -50px)' },
-                            '50%': { transform: 'translate(400px, 0px)' },
-                            '75%': { transform: 'translate(200px, 50px)' },
+                            '0%': { transform: 'translate(0vw, 10vh) scaleX(1)' },
+                            '49%': { transform: 'translate(80vw, 20vh) scaleX(1)' },
+                            '50%': { transform: 'translate(80vw, 20vh) scaleX(-1)' },
+                            '99%': { transform: 'translate(0vw, 40vh) scaleX(-1)' },
+                            '100%': { transform: 'translate(0vw, 40vh) scaleX(1)' },
                         },
                         fire: {
-                            '0%, 100%': { opacity: '0', transform: 'scale(0.5) translateX(0)' },
-                            '20%': { opacity: '1', transform: 'scale(1) translateX(10px)' },
-                            '80%': { opacity: '0.8', transform: 'scale(1.2) translateX(20px)' },
-                        },
-                        idleHead: {
-                            '0%, 100%': { transform: 'rotate(0deg)' },
-                            '50%': { transform: 'rotate(5deg)' },
-                        },
-                        idleTail: {
-                            '0%, 100%': { transform: 'rotate(0deg)' },
-                            '50%': { transform: 'rotate(-5deg)' },
+                            '0%': { opacity: '0', transform: 'scale(0.5) translateX(0)' },
+                            '20%': { opacity: '1', transform: 'scale(1.2) translateX(-15px)' },
+                            '100%': { opacity: '0', transform: 'scale(2) translateX(-50px) translateY(10px)' },
                         }
                     }
                 }
@@ -49,218 +39,135 @@
         }
     </script>
     <style>
-        body { background-color: #0a0a0f; color: #e0e0e0; }
-        .neon-border { box-shadow: 0 0 15px rgba(0, 243, 255, 0.4); border: 1px solid rgba(0, 243, 255, 0.5); }
+        body { background-color: #0a0a0f; color: #e0e0e0; overflow-x: hidden; }
+        .terminal-grid {
+            background-image: linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Pixel Dragon CSS */
+        .dragon-container { position: fixed; z-index: 100; pointer-events: none; }
         
-        /* Terminal Background Grid */
-        .terminal-grid-bg {
-            background-image:
-                linear-gradient(to right, rgba(0, 255, 65, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -2;
-            opacity: 0.8;
-        }
-
-        /* Scanline Effect */
-        .scanline {
-            position: fixed; top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(to right, transparent, rgba(0, 243, 255, 0.5), transparent);
-            box-shadow: 0 0 10px #00f3ff;
-            animation: scan 8s linear infinite;
-            z-index: 50; pointer-events: none;
-        }
-        @keyframes scan {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
-        }
-
-        /* Drachen-Grundkörper (nur mit Box-Schatten für Pixel-Effekt) */
-        .dragon {
-            position: absolute;
-            width: 30px; height: 30px;
-            background-color: transparent; /* unsichtbarer Container */
-            top: 40%; left: 10%;
-            transform-origin: center;
-            animation: dragon-fly 10s linear infinite alternate;
-            z-index: 10;
-        }
-
         .dragon-body {
-            position: absolute;
-            width: 30px; height: 30px;
-            background: #00ff41; /* Grüner Drachenkörper */
-            border-radius: 50%;
+            width: 40px; height: 25px;
+            background: #00ff41;
             box-shadow: 
-                -10px 0px 0 #00ff41, /* Kopf */
-                -20px 0px 0 #00ff41, /* Schnauze */
-                10px 0px 0 #00ff41, /* Schwanzansatz */
-                20px 0px 0 #00ff41, /* Schwanzmitte */
-                30px 0px 0 #00ff41; /* Schwanzspitze */
+                -10px -10px 0 #00ff41, /* Kopf */
+                -20px -10px 0 #00ff41, /* Schnauze */
+                10px 5px 0 #00ff41,    /* Rücken */
+                20px 10px 0 #00ff41;   /* Schwanz */
+            position: relative;
         }
 
-        /* Kopf-Details (Augen) */
-        .dragon-eye {
-            position: absolute;
-            width: 4px; height: 4px;
-            background: #ff0040; /* Rote Augen */
-            border-radius: 50%;
-            top: 8px; left: -18px; /* Position auf dem Kopf-Box-Schatten */
-            z-index: 1;
+        .eye {
+            position: absolute; width: 4px; height: 4px;
+            background: #ff0040; top: -8px; left: -12px;
+            box-shadow: 0 0 5px #ff0040;
         }
-        .dragon-eye.right { left: -8px; }
 
-        /* Flügel (einfach gehalten) */
-        .dragon-wing {
-            position: absolute;
-            width: 20px; height: 15px;
-            background: rgba(0, 243, 255, 0.5); /* Cyan Flügel */
-            border-radius: 0 10px 0 10px;
-            top: -15px; left: 5px;
-            transform: skewY(-20deg);
+        .wing {
+            position: absolute; width: 20px; height: 20px;
+            background: rgba(0, 243, 255, 0.4);
+            top: -25px; left: 10px;
+            clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+            animation: flap 0.4s ease-in-out infinite alternate;
         }
-        .dragon-wing.right { left: auto; right: 5px; transform: skewY(20deg); }
 
+        @keyframes flap { from { transform: rotateX(0deg); } to { transform: rotateX(60deg); } }
 
-        /* Feuerball */
-        .dragon-fire {
-            position: absolute;
-            width: 15px; height: 15px;
-            background: radial-gradient(circle at center, #f0f000 0%, #ff0040 70%, transparent 100%);
-            border-radius: 50%;
-            top: 5px; left: -30px; /* Vom Kopf des Drachen */
-            opacity: 0;
-            transform-origin: left center;
-            animation: dragon-fire 1.5s ease-in-out infinite;
+        .fire-ball {
+            position: absolute; width: 12px; height: 12px;
+            background: #ff0040; border-radius: 50%;
+            left: -30px; top: -8px; opacity: 0;
+            box-shadow: 0 0 15px #ff0040, 0 0 30px #f0f000;
         }
-        
-        /* Zustand, wenn Feuer aktiv ist */
-        .dragon.spitting-fire .dragon-fire {
-            animation: fire 1.5s ease-out forwards; /* Nur einmal abspielen */
-        }
+
+        .fire-active { animation: fire-move 1.2s ease-out forwards; }
     </style>
 </head>
-<body class="font-mono antialiased">
+<body class="font-mono terminal-grid min-h-screen">
 
-    <div class="terminal-grid-bg"></div>
-    
-    <div class="scanline"></div>
-    
-    <nav class="fixed top-0 w-full z-50 bg-cyber-black/80 backdrop-blur-md border-b border-cyber-cyan/20">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
+    <div id="dragon" class="dragon-container animate-dragon-fly">
+        <div class="dragon-body">
+            <div class="eye"></div>
+            <div class="wing"></div>
+            <div id="fire" class="fire-ball"></div>
+        </div>
+    </div>
+
+    <nav class="p-6 border-b border-cyber-green/20 bg-black/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
                 <i data-lucide="terminal" class="text-cyber-green animate-pulse"></i>
-                <span class="font-display font-bold text-xl tracking-tighter">CODEY_<span class="text-cyber-green">DRAGON</span></span>
+                <h1 class="font-display font-black text-2xl tracking-tighter">GH0ST_<span class="text-cyber-green">SQUAD</span></h1>
             </div>
-            <div class="text-xs text-cyber-green hidden md:block">
-                SYSTEM_STATUS: <span class="animate-pulse">DRAGON_ACTIVE</span> // ESOL_LOG_1.1
+            <div class="text-[10px] text-cyber-green/50 uppercase tracking-widest hidden md:block">
+                Sector: Dragon_Lair // Auth: Volkan_Admin
             </div>
         </div>
     </nav>
 
-    <main class="pt-32 pb-20 px-4 relative min-h-screen">
-        <div class="max-w-4xl mx-auto">
-            
-            <div id="codey-dragon" class="dragon">
-                <div class="dragon-body">
-                    <div class="dragon-eye"></div>
-                    <div class="dragon-eye right"></div>
-                    <div class="dragon-wing"></div>
-                    <div class="dragon-wing right"></div>
-                    <div class="dragon-fire" id="fireball"></div>
-                </div>
+    <main class="max-w-4xl mx-auto pt-20 px-6 relative">
+        <div class="bg-cyber-dark/80 p-8 rounded-lg border border-cyber-green/30 shadow-[0_0_30px_rgba(0,255,65,0.1)]">
+            <header class="mb-10 text-center">
+                <h2 class="text-4xl font-display font-black mb-4 uppercase italic">Security Terminal</h2>
+                <p class="text-cyber-green/70">Überwachung des digitalen Sektors läuft...</p>
+            </header>
+
+            <div class="bg-black p-6 rounded border border-gray-800 font-mono text-sm h-64 overflow-y-auto mb-8" id="log">
+                <div class="text-cyber-green">> System initialized.</div>
+                <div class="text-cyber-green">> Scanners active.</div>
+                <div class="text-cyber-green">> Codey-Dragon patrolling...</div>
             </div>
 
-            <div class="relative bg-cyber-dark p-8 rounded-xl neon-border text-center overflow-hidden mb-12">
-                <div class="absolute top-2 left-4 text-[10px] text-gray-600 uppercase">Pet_ID: 56 6f 6c 6b 61 6e</div>
-                
-                <h1 class="font-display text-4xl font-black text-white mb-2 tracking-widest uppercase">
-                    Codey <span class="text-cyber-green">the Dragon</span>
-                </h1>
-                
-                <div class="flex justify-center gap-4 mb-6">
-                    <span class="px-3 py-1 bg-cyber-green/10 text-cyber-green border border-cyber-green text-[10px]">APACHE_2.0</span>
-                    <span class="px-3 py-1 bg-cyber-pink/10 text-cyber-pink border border-cyber-pink text-[10px]">ESOL_LOGGING</span>
-                </div>
-
-                <div class="bg-black/50 p-4 rounded border border-gray-800 text-left text-sm">
-                    <div class="flex items-center gap-2 text-gray-500 mb-2 border-b border-gray-800 pb-1 text-xs">
-                        <i data-lucide="terminal" class="w-3 h-3"></i> DRAGON_LOG
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 border border-gray-800 hover:border-cyber-pink transition-colors cursor-pointer group">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i data-lucide="shield-alert" class="text-cyber-pink"></i>
+                        <span class="font-bold uppercase">Scam Detector</span>
                     </div>
-                    <div class="text-cyber-green" id="terminal-feed">
-                        > Booting Codey-OS v1.0...<br>
-                        > Initializing Pixel-Dragon sequence...<br>
-                        > Welcome, Volkan! (01010110 01101111 01101100 01101011 01100001 01101110) 
+                    <p class="text-xs text-gray-500">Drache verbrennt betrügerische Header-Daten automatisch.</p>
+                </div>
+                <div class="p-4 border border-gray-800 hover:border-cyber-cyan transition-colors cursor-pointer">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i data-lucide="flame" class="text-cyber-red"></i>
+                        <span class="font-bold uppercase">Firewall Mode</span>
                     </div>
+                    <p class="text-xs text-gray-500">Echtes Feuer gegen Fake-Accounts. Apache 2.0 zertifiziert.</p>
                 </div>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-cyber-dark p-6 border border-gray-800 hover:border-cyber-green transition-all group">
-                    <i data-lucide="flame" class="text-cyber-red mb-4"></i>
-                    <h3 class="text-white font-bold mb-2">Fire Breath</h3>
-                    <p class="text-gray-500 text-xs leading-relaxed">Codey protects logs with digital firewalls.</p>
-                </div>
-                <div class="bg-cyber-dark p-6 border border-gray-800 hover:border-cyber-cyan transition-all">
-                    <i data-lucide="cloud-lightning" class="text-cyber-cyan mb-4"></i>
-                    <h3 class="text-white font-bold mb-2">Cloud Agility</h3>
-                    <p class="text-gray-500 text-xs leading-relaxed">Drache navigiert durch digitale Landschaften.</p>
-                </div>
-                <div class="bg-cyber-dark p-6 border border-gray-800 hover:border-cyber-pink transition-all">
-                    <i data-lucide="wand" class="text-cyber-pink mb-4"></i>
-                    <h3 class="text-white font-bold mb-2">Ancient Lore</h3>
-                    <p class="text-gray-500 text-xs leading-relaxed">Powered by ancient wisdom, Apache 2.0.</p>
-                </div>
-            </div>
-
         </div>
     </main>
-
-    <footer class="border-t border-gray-900 py-10 text-center text-[10px] text-gray-600 tracking-[0.2em] uppercase">
-        © 2026 Codey Dragon Project // Volkan_Jr (56 6f 6c 6b 61 6e 5f 4a 72)
-    </footer>
 
     <script>
         lucide.createIcons();
         
-        const terminalFeed = document.getElementById('terminal-feed');
-        const dragonElement = document.getElementById('codey-dragon');
-        const fireball = document.getElementById('fireball');
-        const logMessages = [
-            "> Dragon awake and patrolling sectors...",
-            "> Detecting network anomalies...",
-            "> Log integrity check: PASSED",
-            "> Deploying firewall: INITIATED",
-            "> Threat neutralized with flame breath!",
-            "> System health: OPTIMAL",
-            "> Awaiting next command..."
+        const log = document.getElementById('log');
+        const fire = document.getElementById('fire');
+        const messages = [
+            "Drache hat Schwachstelle gefunden.",
+            "Feuerstoß in Sektor 7 ausgelöst!",
+            "Scammer-IP neutralisiert.",
+            "Volkan_Jr Log: System stabil.",
+            "Pixel-Flügel-Effizienz bei 98%."
         ];
-        let messageIndex = 0;
 
-        function updateTerminalFeed() {
-            terminalFeed.innerHTML += `<br>> ${logMessages[messageIndex]}`;
-            terminalFeed.scrollTop = terminalFeed.scrollHeight; // Auto-scroll
-            messageIndex = (messageIndex + 1) % logMessages.length;
+        function addLog() {
+            const msg = messages[Math.floor(Math.random() * messages.length)];
+            const div = document.createElement('div');
+            div.className = 'text-cyber-green mt-1';
+            div.innerHTML = `> ${msg}`;
+            log.appendChild(div);
+            log.scrollTop = log.scrollHeight;
 
-            // Trigger fire animation every few updates
-            if (Math.random() > 0.6) { // 40% Chance
-                triggerFireBreath();
+            // Drache spuckt Feuer wenn geloggt wird
+            if(Math.random() > 0.4) {
+                fire.classList.add('fire-active');
+                setTimeout(() => fire.classList.remove('fire-active'), 1200);
             }
         }
 
-        function triggerFireBreath() {
-            fireball.style.animation = 'none'; // Reset animation
-            void fireball.offsetWidth; // Trigger reflow
-            fireball.style.animation = 'fire 1.5s ease-out forwards'; // Play animation
-        }
-
-        setInterval(updateTerminalFeed, 3000); // Update every 3 seconds
-
-        // Start with initial message
-        updateTerminalFeed();
+        setInterval(addLog, 4000);
     </script>
 </body>
 </html>
