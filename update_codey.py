@@ -259,8 +259,8 @@ def fetch_all_repos_for_user(owner):
     return all_repos
 
 def get_all_data_for_user(owner):
-    """FIXED: Fetch ALL events with pagination for accurate commit counting"""
-    # FIXED: Paginate through ALL events (up to 300)
+    """FIXED: Fetch ALL events including ORG events for accurate commit counting"""
+    # FIXED: Paginate through ALL user events (up to 300)
     all_events = []
     page = 1
     while page <= 10:  # GitHub allows max 300 events (10 pages)
@@ -276,7 +276,35 @@ def get_all_data_for_user(owner):
         all_events.extend(events_page)
         page += 1
     
-    print(f"✓ Fetched {len(all_events)} events for commit analysis")
+    print(f"✓ Fetched {len(all_events)} user events")
+    
+    # NEW: Fetch events from all organizations the user is part of
+    ok_orgs, orgs_data = get_json_safe(f'https://api.github.com/users/{owner}/orgs')
+    if ok_orgs and isinstance(orgs_data, list):
+        print(f"✓ Found {len(orgs_data)} organizations")
+        for org in orgs_data:
+            org_login = org.get('login')
+            if not org_login:
+                continue
+            
+            # Fetch org events for this user
+            page = 1
+            while page <= 3:  # Limit to 3 pages per org to avoid rate limits
+                params = {'per_page': 30, 'page': page}
+                ok_org, org_events = get_json_safe(f'https://api.github.com/users/{owner}/events/orgs/{org_login}', params=params)
+                
+                if not ok_org or not isinstance(org_events, list):
+                    break
+                
+                if not org_events:
+                    break
+                
+                all_events.extend(org_events)
+                page += 1
+            
+            print(f"  ✓ Fetched org events from {org_login}")
+    
+    print(f"✓ Total events (user + orgs): {len(all_events)}")
 
     repos_list = fetch_all_repos_for_user(owner)
 
