@@ -1,5 +1,3 @@
-# FUCK IT WORKS LOCAL! WHY NOT HERE! HAHAHA
-
 #!/usr/bin/env python3
 # update_codey.py - No mercy EDITION for casual devs!
 # MINIMAL FIX - only seasonal display + API events
@@ -261,8 +259,8 @@ def fetch_all_repos_for_user(owner):
     return all_repos
 
 def get_all_data_for_user(owner):
-    """FIXED: Fetch ALL events including ORG events for accurate commit counting"""
-    # FIXED: Paginate through ALL user events (up to 300)
+    """Enhanced data collection - USER REPOS ONLY"""
+    # Fetch ALL user events (up to 300)
     all_events = []
     page = 1
     while page <= 10:  # GitHub allows max 300 events (10 pages)
@@ -272,48 +270,13 @@ def get_all_data_for_user(owner):
         if not ok or not isinstance(events_page, list):
             break
         
-        if not events_page:  # FIXED: Only break if page is actually empty
+        if not events_page:
             break
         
         all_events.extend(events_page)
         page += 1
     
-    print(f"✓ Fetched {len(all_events)} user events")
-    
-    # NEW: Fetch events from all organizations the user is part of
-    ok_orgs, orgs_data = get_json_safe(f'https://api.github.com/users/{owner}/orgs')
-    if ok_orgs and isinstance(orgs_data, list):
-        print(f"✓ Found {len(orgs_data)} organizations")
-        org_events_fetched = 0
-        for org in orgs_data:
-            org_login = org.get('login')
-            if not org_login:
-                continue
-            
-            # Fetch org events for this user
-            page = 1
-            while page <= 3:  # Limit to 3 pages per org to avoid rate limits
-                params = {'per_page': 30, 'page': page}
-                ok_org, org_events = get_json_safe(f'https://api.github.com/users/{owner}/events/orgs/{org_login}', params=params)
-                
-                if not ok_org:
-                    # Org events require read:org token permission - skip if not available
-                    break
-                
-                if not isinstance(org_events, list) or not org_events:
-                    break
-                
-                all_events.extend(org_events)
-                org_events_fetched += len(org_events)
-                page += 1
-            
-            if ok_org:
-                print(f"  ✓ Fetched org events from {org_login}")
-        
-        if org_events_fetched == 0:
-            print(f"  ⚠️  No org events (token needs 'read:org' permission for org commits)")
-    
-    print(f"✓ Total events (user + orgs): {len(all_events)}")
+    print(f"✓ Fetched {len(all_events)} events for commit analysis")
 
     repos_list = fetch_all_repos_for_user(owner)
 
