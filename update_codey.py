@@ -1,3 +1,5 @@
+# FUCK IT WORKS LOCAL! WHY NOT HERE! HAHAHA
+
 #!/usr/bin/env python3
 # update_codey.py - No mercy EDITION for casual devs!
 # MINIMAL FIX - only seasonal display + API events
@@ -282,6 +284,7 @@ def get_all_data_for_user(owner):
     ok_orgs, orgs_data = get_json_safe(f'https://api.github.com/users/{owner}/orgs')
     if ok_orgs and isinstance(orgs_data, list):
         print(f"✓ Found {len(orgs_data)} organizations")
+        org_events_fetched = 0
         for org in orgs_data:
             org_login = org.get('login')
             if not org_login:
@@ -293,16 +296,22 @@ def get_all_data_for_user(owner):
                 params = {'per_page': 30, 'page': page}
                 ok_org, org_events = get_json_safe(f'https://api.github.com/users/{owner}/events/orgs/{org_login}', params=params)
                 
-                if not ok_org or not isinstance(org_events, list):
+                if not ok_org:
+                    # Org events require read:org token permission - skip if not available
                     break
                 
-                if not org_events:
+                if not isinstance(org_events, list) or not org_events:
                     break
                 
                 all_events.extend(org_events)
+                org_events_fetched += len(org_events)
                 page += 1
             
-            print(f"  ✓ Fetched org events from {org_login}")
+            if ok_org:
+                print(f"  ✓ Fetched org events from {org_login}")
+        
+        if org_events_fetched == 0:
+            print(f"  ⚠️  No org events (token needs 'read:org' permission for org commits)")
     
     print(f"✓ Total events (user + orgs): {len(all_events)}")
 
@@ -570,7 +579,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
     # FIXED: Seasonal display with proper width and padding
     seasonal_display = ''
     if seasonal_bonus:
-        bonus_width = 135  # Wider box for readability
+        bonus_width = 150  # Even wider for all month names
         bonus_x_start = 120 - (bonus_width / 2)
         bonus_y_start = 10
         seasonal_display = f'''<g><rect x="{bonus_x_start}" y="{bonus_y_start}" width="{bonus_width}" height="35" rx="17.5" fill="{colors['tier']}" opacity="0.9" stroke="{colors['border']}" stroke-width="1.5"/>
