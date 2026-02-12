@@ -29,14 +29,14 @@
   <!-- Stat bars -->
   <g transform="translate(205, 120)">
     <text x="0" y="20"   fill="#f0f6fc" font-weight="bold" font-size="14">❤️ Health</text>
-    <text x="330" y="20" fill="#8b949e" font-size="12" text-anchor="end">35%</text>
+    <text x="330" y="20" fill="#8b949e" font-size="12" text-anchor="end">34%</text>
     <rect x="0" y="25"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="25"   width="113.894" height="12" fill="#f85149" rx="6"/>
+    <rect x="0" y="25"   width="110.93362499999999" height="12" fill="#f85149" rx="6"/>
 
     <text x="0" y="55"   fill="#f0f6fc" font-weight="bold" font-size="14">🍖 Hunger</text>
-    <text x="330" y="55" fill="#8b949e" font-size="12" text-anchor="end">4%</text>
+    <text x="330" y="55" fill="#8b949e" font-size="12" text-anchor="end">13%</text>
     <rect x="0" y="60"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="60"   width="11.681999999999999" height="12" fill="#ffa657" rx="6"/>
+    <rect x="0" y="60"   width="44.050875" height="12" fill="#ffa657" rx="6"/>
 
     <text x="0" y="90"   fill="#f0f6fc" font-weight="bold" font-size="14">😊 Happiness</text>
     <text x="330" y="90" fill="#8b949e" font-size="12" text-anchor="end">0%</text>
@@ -44,9 +44,9 @@
     <rect x="0" y="95"   width="0.0" height="12" fill="#a855f7" rx="6"/>
 
     <text x="0" y="125"   fill="#f0f6fc" font-weight="bold" font-size="14">⚡ Energy</text>
-    <text x="330" y="125" fill="#8b949e" font-size="12" text-anchor="end">100%</text>
+    <text x="330" y="125" fill="#8b949e" font-size="12" text-anchor="end">88%</text>
     <rect x="0" y="130"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="130"   width="330" height="12" fill="#3fb950" rx="6"/>
+    <rect x="0" y="130"   width="288.75" height="12" fill="#3fb950" rx="6"/>
 
     <text x="0" y="160"   fill="#f0f6fc" font-weight="bold" font-size="14">👥 Social</text>
     <text x="330" y="160" fill="#8b949e" font-size="12" text-anchor="end">1.25</text>
@@ -71,14 +71,12 @@
   </g>
   <g transform="translate(315, 413)">
     <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="14">
-      🗓️ 0 day streak • 📊 0 commits
-    </text>
-    <text x="0" y="18" text-anchor="middle" fill="#8b949e" font-size="12">
-      ⭐ 694 stars • 🐛 3 issues closed
+      🗓️ 1 day streak • 📊 7 commits
+      • ⭐ 694 stars • 🐛 3 issues closed
     </text>
   </g>
   <text x="315" y="438" text-anchor="middle"
         fill="#8b949e" font-size="12">
-    Last Update: 2026-02-12 21:46 UTC • Dominant: Python
+    Last Update: 2026-02-12 21:54 UTC • Dominant: Python
   </text>
 </svg>
