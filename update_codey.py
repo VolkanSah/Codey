@@ -1,9 +1,29 @@
 #!/usr/bin/env python3
+# =============================================================================
 # update_codey.py - No Mercy EDITION
-# Refactored + Bugs marked + Issue analysis added
-# Bugs marked with: # BUG: description
-# New code marked with: # NEW: description
-# Improvements marked with: # IMPROVED: description
+# =============================================================================
+# Codey is a neutral quality pet/tool for GitHub and GitLab.
+# It shows the world that not everything is scam and AI-generated garbage.
+# Codey scores Developer integrity — you can't fake it, you have to earn it.
+#
+# This tool is considered a security tool under ESOL v1.1:
+# it audits developer behavior, code quality and social engineering patterns.
+# Public audit available on GitHub — transparent, community-verified.
+#
+# Free to use on GitHub and GitLab.
+# Selling this script or using it for reputation manipulation is prohibited.
+#
+# Licensed under Apache 2.0 + Ethical Security Operations License (ESOL v1.1)
+# Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.
+# https://github.com/VolkanSah/ESOL
+#
+# Copyright (c) 2026 VolkanSah & BadTin and some Cats 🐱
+# =============================================================================
+# Refactored + Bugs fixed + Issue analysis added
+# BUG:      marks fixed bugs
+# NEW:      marks new features
+# IMPROVED: marks improvements
+# =============================================================================
 
 import requests
 import json
@@ -871,9 +891,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
   <g transform="translate(315, 413)">
     <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="14">
       🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits
-    </text>
-    <text x="0" y="18" text-anchor="middle" fill="{colors['secondary_text']}" font-size="12">
-      ⭐ {brutal_stats.get('total_stars', 0)} stars{issue_line}
+      • ⭐ {brutal_stats.get('total_stars', 0)} stars{issue_line}
     </text>
   </g>
   <text x="315" y="438" text-anchor="middle"
