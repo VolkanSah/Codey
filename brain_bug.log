@@ -1,0 +1,64 @@
+#!/bin/bash
+# -----------------------------------------------------------------------
+# brain_bug.log - Session 2026-02-12 
+# Project: Codey No Mercy EDITION — Refactor & Debug Session
+# Devs:    VolkanSah (The Architect) + Claude (The Rubber-Duck)
+# Status:  "Wallah" Branch merged & bugs smashed
+# -----------------------------------------------------------------------
+
+[SESSION_START]
+# Objective: Merge "Baby-Code" (Commits/Streak) with "Brutal-Code" (Everything else).
+# Challenge: Fix logic loops and API-blindness.
+
+[BUG_01] STREAK_DOUBLE_PENALTY
+# Symptom:  Streak decayed at 2x speed. Codey was dying for no reason.
+# Cause:    Redundant logic. 'calculate_skill_decay()' AND 'update_brutal_stats()' 
+#           were both decrementing the streak counter simultaneously.
+# Fix:      Removed streak manipulation from 'calculate_skill_decay()'. 
+#           Streak is now exclusively handled by 'update_brutal_stats()'.
+# Note:     Overlooked for months. Gravity is a bitch.
+
+[BUG_02] WEEKEND_BONUS_INFLATION
+# Symptom:  Levels spiking too fast; 'total_commits' was artificial.
+# Cause:    The weekend multiplier was applied to 'daily_activity' BEFORE
+#           adding it to the 'total_commits' counter.
+# Fix:      Passed 'raw_commits' separately. Bonuses now apply only to XP
+#           and rewards, keeping the historical commit count honest.
+# Verdict:  Shared guilt between Human and AI.
+
+[BUG_03] THE_SILENT_COMMIT_CRASH
+# Symptom:  Daily_commits = 0. Streak never triggered.
+# Cause:    Refactor swapped '/repos/{repo}/commits' for 'Events API'.
+#           Events API is blind to private/org commits.
+# Fix:      Hybrid approach: Use Events API for speed, fallback to direct 
+#           Commit API for the full truth. 
+# Verdict:  Claude broke the "Baby-Code". Fixed by Volkan.
+
+[NEW_FEATURES]
+# - Advanced Issue Analysis:
+#   * Open/Close ratio tracking.
+#   * Keyword scoring (Bugs/Features = +XP | 'asdf' = Trash/Penalty).
+#   * XP_PER_ISSUE_CLOSED set to 8.
+# - Achievement Unlocked: 🐛 Bug Slayer.
+# - UI: Added 'issue_line' to the SVG footer.
+
+[DESIGN_DECISIONS]
+# - No Private/Orga Repos: Prevents stat padding through hidden noise.
+# - No PRs: Weak signal for solo devs.
+# - Issues = High Signal: Represents maintenance and responsibility.
+# - Codey Goal: An unfakeable quality seal in the "Dead Internet" era.
+
+[LEGAL_STUFF]
+# License:      Apache 2.0 + ESOL v1.1
+# Jurisdiction: Berlin, Germany (StGB §202a/b/c - Don't touch, it bites!)
+# Copyright:    VolkanSah & BadTin & The Cats 🐱
+
+[ROADMAP_NEXT]
+# 1. GitLab & HuggingFace integration.
+# 2. Integrate 'brain_bug.log' as a core feature.
+# 3. Traffic API: Clone/Star ratio analysis.
+# 4. ESOL v1.2: Explicit anti-reputation-manipulation clauses.
+
+[SESSION_END]
+# Status: Commits visible. Streak recovery pending check.
+# Summary: We aren't stupid, but the bugs were definitely "No Mercy".
