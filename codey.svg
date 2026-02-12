@@ -72,11 +72,13 @@
   <g transform="translate(315, 413)">
     <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="14">
       🗓️ 0 day streak • 📊 0 commits
-      • ⭐ 694 stars • 🐛 3 issues closed
+    </text>
+    <text x="0" y="18" text-anchor="middle" fill="#8b949e" font-size="12">
+      ⭐ 694 stars • 🐛 3 issues closed
     </text>
   </g>
   <text x="315" y="438" text-anchor="middle"
         fill="#8b949e" font-size="12">
-    Last Update: 2026-02-12 21:39 UTC • Dominant: Python
+    Last Update: 2026-02-12 21:46 UTC • Dominant: Python
   </text>
 </svg>
