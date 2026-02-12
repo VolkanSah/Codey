@@ -871,7 +871,9 @@ def generate_brutal_svg(codey, seasonal_bonus):
   <g transform="translate(315, 413)">
     <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="14">
       🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits
-      • ⭐ {brutal_stats.get('total_stars', 0)} stars{issue_line}
+    </text>
+    <text x="0" y="18" text-anchor="middle" fill="{colors['secondary_text']}" font-size="12">
+      ⭐ {brutal_stats.get('total_stars', 0)} stars{issue_line}
     </text>
   </g>
   <text x="315" y="438" text-anchor="middle"
