@@ -1,71 +1,71 @@
 # 🐾 Codey - Your Brutally Honest GitHub Pet
-###### RPG "No Mercy" Edition - Where Your Code Gets Judged For Real
-testing from 08.02-18.02.2026 
+###### RPG "No Mercy" Edition v2.1 - Where Your Code Gets Judged For Real
 
 [![Codey - Your GitHub Pet](codey.svg)](https://volkansah.github.io/Codey/)
 
-
-
-**Codey isn't your typical GitHub stats badge.** This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy, and evolves into different creatures based on what you actually code. 
+**Codey isn't your typical GitHub stats badge.** This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy,
+and evolves into different creatures based on what you actually code.
 
 No fake motivation. No participation trophies. Just raw, unfiltered feedback on your dev life.
 
-Daily updates via GitHub Actions. Tracks commits, stars, languages, streaks, and more — then brutally scores you on traits like creativity, curiosity, and teamwork. Your pet evolves (or devolves) based on your real GitHub behavior.
+Daily updates via GitHub Actions. Tracks commits, stars, languages, streaks, and more — then brutally scores you on traits like social integrity, code quality, 
+and consistency. Your pet evolves (or devolves) based on your real GitHub behavior.
 
-> **⚠️ Current Status:** Dev build, needs testers brave enough to face the truth! But Codey dies! Must fix it!
+> **⚠️ Current Status:** Testing phase 08.02–18.02.2026 — needs testers brave enough to face the truth!
 
-
+---
 
 ## Why Codey is Different
 
-**Standard GitHub stats:** "Wow, you made 500 commits! 🎉"  
+**Standard GitHub stats:** "Wow, you made 500 commits!"  
 **Codey:** "500 commits, 2 stars, 0 followers. Are you coding in a cave?"
 
-This isn't about counting contributions. It's about **revealing your true coding personality** through a harsh but rewarding RPG system that tracks:
+This isn't about counting contributions. It's about **revealing your true coding personality** through a harsh but fair RPG system that tracks:
 
-- **Social Status** — Based on total stars earned (not given)
-- **Personality Type** — Calculated from follower/following ratio (Influencer? Explorer? Balanced?)
-- **Dominant Language** — Your pet evolves based on what you actually code (🐍 Python dragon, 🦊 JavaScript fox, 🦀 Rust crab, etc.)
-- **Professional Traits** — Creativity, curiosity, teamwork — tracked and displayed
-- **Achievements** — Unlock badges for real milestones: `🔥 Monthly Warrior`, `💯 Commit Master`, `⭐ Social Star`
-- **Prestige System** — Hit max level? Reset everything for exclusive rewards and flex harder
+- **Social Score** — Follower/following ratio, fork behavior, star quality. Spam followers get detected and penalized.
+- **Commit Quality** — Message analysis. `fix fix fix oops wip` won't save you here.
+- **Issue Integrity** — Open/close ratio + keyword scoring. Closing issues earns XP. Ignoring them kills your score.
+- **Dominant Language** — Your pet evolves based on what you actually code.
+- **Tier System** — noob → developer → veteran → elder. The older your account, the higher the bar.
+- **Prestige System** — Hit max level? Reset for exclusive rewards and prove you're a coding veteran.
 
 ### What Codey Actually Tracks
 
-- Daily & all-time commit counts
-- Stars earned (across ALL your repos)
-- Code streak (consecutive days coding)
-- Most-used programming language
-- Social metrics (followers, following, forks)
-- Weekend warrior status (yes, Saturday commits count double)
-- Seasonal event participation (Hacktoberfest, Advent of Code)
+- Daily commits via Events API with direct `/commits` fallback
+- Streak (consecutive days coding) — only one place handles this, no double penalties
+- Stars earned across ALL your own repos (forks don't count)
+- Code quality from commit message analysis
+- Issue activity: open/close ratio + keyword patterns
+- Social engineering detection: FFR ratio, fork leeching, repo spamming
+- Weekend warrior bonus (Saturday/Sunday commits)
+- Seasonal events (Hacktoberfest, Advent of Code, and more)
 
 **Important:** Codey only counts stars on YOUR repos. Forking popular projects won't save you here.
 
-
+---
 
 ## The No Mercy System
 
-Codey uses an **unforgiving leveling algorithm** where:
+Codey uses an **unforgiving but honest algorithm** where:
 
-- **Low activity** = Your pet gets sad, tired, or dies (temporarily)
+- **Low activity** = Your pet gets sad, tired, or temporarily dies
 - **Inconsistent commits** = Streak breaks, XP penalties
-- **No stars on repos** = Social status tanks
-- **Weekend coding** = Energy boost, level gains
-- **Seasonal events** = Special bonuses and visual upgrades
-
-Your pet has **health, energy, mood, and advanced RPG stats** that change based on real behavior:
+- **Lazy commit messages** = Quality score drops
+- **Spam following** = Social score tanks hard
+- **Fork leeching** = Heavy penalty
+- **Weekend coding** = Energy boost
+- **Closing issues** = XP reward — taking responsibility matters
 
 ```
 Mood States:
-😊 happy → ☕ tired → 😰 stressed → 😡 angry → 💀 dead
-           ↘️ 🤔 bored → 😴 sleepy → 😵 overwhelmed
-                          ↘️ ✨ inspired
+😊 happy → 😤 grinding → 😰 struggling → 😵 exhausted → 🤯 overwhelmed
+         ↘️ 😎 elite (high social score)
+         ↘️ 🧐 wise (elder tier + healthy)
 ```
 
 The exact formulas and brutal penalties are documented in [Behind the Scenes](Behind-the-Scenes.md) — if you dare to look.
 
-
+---
 
 ## Pet Evolution System
 
@@ -73,32 +73,45 @@ Your Codey evolves based on your **dominant programming language**:
 
 | Language | Pet Form | Why |
 |----------|----------|-----|
-| Python | 🐍 Dragon | Classic, powerful |
-| JavaScript | 🦊 Fox | Quick, adaptable |
+| Python | 🐍 Snake | Classic, powerful |
+| JavaScript | 🦔 Hedgehog | Quick, adaptable |
 | Rust | 🦀 Crab | Memory-safe beast |
 | Go | 🐹 Gopher | Fast, concurrent |
-| TypeScript | 🦅 Eagle | Type-safe ruler |
+| TypeScript | 🦋 Butterfly | Type-safe elegance |
 | Ruby | 💎 Gem Guardian | Elegant, refined |
 | PHP | 🐘 Elephant | Never forgets |
-| C/C++ | ⚔️ Knight | Low-level warrior |
-| Java | ☕ Coffee Spirit | Enterprise soul |
-| *...and more* | 🐲 Mythical forms | Unlock legendary creatures |
+| C/C++ | 🦫 Beaver | Low-level builder |
+| Java | 🦧 Primate | Enterprise soul |
+| Shell/Bash | 🦬 Bison | Raw power |
+| *...and more* | 🐲 Dragon | Unlock legendary forms |
 
-**Prestige Mode:** After maxing out, reset your stats to unlock **mythical forms** and special visual badges that prove you're a coding veteran.
+**Prestige Mode:** After maxing out, reset your stats to unlock mythical forms and special badges that prove you're a coding veteran.
 
+---
 
+## Tier System — The Older You Are, The Harder It Gets
+
+| Tier | GitHub Age | XP Multiplier | Requirements |
+|------|-----------|---------------|--------------|
+| 🌱 Noob | < 2 years | 1.0x | Base |
+| 💻 Developer | 2–5 years | 0.67x | 1.5x harder |
+| ⚔️ Veteran | 5–8 years | 0.40x | 2.5x harder |
+| 🧙 Elder | 8+ years | 0.20x | 4x harder |
+
+You've been around long enough. One commit shouldn't level you up.
+
+---
 
 ## Setup - Make Codey Your Pet
 
-### Quick Start (3 Steps)
+### Quick Start
 
 1. **Fork or copy** this repo
-2. **Configure** tracking mode in `.github/workflows/update_codey.yml`
+2. **Configure** your token and tracking mode
 3. **Add the badge** to your README
 
 ### Step 1: Get the Files
 
-Copy these into your repo:
 ```
 your-repo/
 ├── .github/
@@ -108,219 +121,174 @@ your-repo/
 └── requirements.txt
 ```
 
-Ah shit, ich brauch die Datei! Moment:Netzwerk disabled! Ich mach dir die Änderungen direkt als Text:
+### Step 2: Configure GitHub Token
 
----
+Create a Personal Access Token for full tracking:
 
-## 📝 README Updates:
-
-### Step 2: Configure GitHub Token (Required for Org Support)
-
-For tracking commits in **organization repositories**, create a Personal Access Token:
-
-1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+1. GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
 2. Generate new token with these scopes:
-   - ✅ `repo` (Full control of repositories)
-   - ✅ `read:org` (Read org and team membership) ← **Required for org events!**
-   - ✅ `read:user` (Read user profile data)
-3. Add token as repository secret: Settings → Secrets → Actions → `GIT_TOKEN`
+   - `repo` — Full control of repositories
+   - `read:org` — Required for organization repos
+   - `read:user` — User profile data
+3. Add as repository secret: Settings → Secrets → Actions → `GIT_TOKEN`
 
-**Without `read:org`:** Only your personal repos will be tracked  
-**With `read:org`:** All repos including organizations you're member of! 🚀
+Without `read:org`: only personal public repos are tracked.  
+With `read:org`: personal repos + all organizations you're a member of.
 
-### Step 3: Choose Your Tracking Mode
+### Step 3: Choose Tracking Mode
 
-Edit the workflow's `env` section:
-
-**Option A - Track Single Repo:**
+**Option A — Single Repo:**
 ```yaml
 env:
   GIT_REPOSITORY: 'YourUsername/YourProject'
   GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 ```
 
-**Option B - Track Entire Account + Organizations (Recommended):**
+**Option B — Entire Account (Recommended):**
 ```yaml
 env:
   GIT_REPOSITORY: 'YourUsername'
   GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 ```
 
-> 💡 **Pro Tip:** Option B with `read:org` token tracks ALL your activity - personal repos AND organizations!
-```
-
-**Update "Step 3: Embed in Your README" → wird "Step 4"**
-
----
-
-## 📝 CHANGELOG Addition (ans Ende):
+### Step 4: Embed in Your README
 
 ```markdown
-## Changelog
-
-### [2.1.0] - 2026-02-08
-#### Added
-- **Organization Support**: Track commits in organization repositories
-- Token requirement: `read:org` permission for org events
-- Enhanced event fetching: Up to 300 events with pagination
-- Fallback handling when org token permission missing
-- Seasonal display improvements: Wider box, better readability
-
-#### Fixed
-- Event pagination bug (was stopping at < 30 events per page)
-- Seasonal bonus text overflow in SVG
-- Commit counting for organization repositories
-
-#### Changed
-- Requires `GIT_TOKEN` with `read:org` for full tracking
-- Font size increased to 12px for seasonal events
-- Box width increased to 135px for better text display
-
-### [2.0.0] - 2026-02-XX
-#### Changed
-- Complete rewrite with brutal RPG system
-- No Mercy Edition mechanics
+[![Codey - Your GitHub Pet](codey.svg)](https://github.com/YourUsername/YourRepo)
 ```
 
 ---
 
+## Achievements
 
+- 🧙 **Elder Council** — 8+ years on GitHub
+- 💀 **Decade Survivor** — 10+ years on GitHub
+- 👑 **Social Elite** — Social score > 1.2
+- 💎 **Quality Craftsman** — Repo quality > 0.8
+- 🔥 **Century Streak** — 100 day streak
+- 🐛 **Bug Slayer** — 5+ issues closed with 80%+ close ratio
+- ⭐ **Prestige Master** — Completed prestige
 
-## What Gets Tracked
+---
 
-### Daily Stats
-- Commits today
-- Current streak
-- Energy level
-- Mood state
+## Seasonal Events
 
-### All-Time Stats
-- Total commits
-- Total stars earned
-- Level & XP
-- Achievements unlocked
-- Prestige rank (if applicable)
+| Month | Event | Bonus |
+|-------|-------|-------|
+| October | 🎃 Hacktoberfest | 1.5x |
+| December | 🎄 Advent | 1.3x |
+| July | 🔥 Grind Season | 1.4x |
+| May | 🚀 Deploy Month | 1.3x |
+| January | 🎯 New Year | 1.2x |
+| ...and more | every month has a bonus | — |
 
-### Professional Traits
-- **Creativity** — Based on project diversity
-- **Curiosity** — Following/exploring new repos
-- **Teamwork** — Collaboration metrics
+---
 
-### Personality Type
-Calculated from your social graph:
-- **Influencer** — High followers, low following
-- **Explorer** — Low followers, high following  
-- **Balanced** — Even ratio
+## Roadmap
 
-
-
-## Achievements & Seasonal Events
-
-Unlock special badges for major milestones:
-
-- 🔥 **Monthly Warrior** — 20+ commits this month
-- 💯 **Commit Master** — 100+ total commits
-- ⭐ **Social Star** — 50+ stars earned
-- 🌙 **Night Owl** — Commits after midnight
-- 🏆 **Weekend Warrior** — Saturday/Sunday coding
-
-**Seasonal Boosts:**
-- 🎃 **Hacktoberfest** (October) — Double XP for PRs
-- 🎄 **Advent of Code** (December) — Special daily challenges
-- 🎂 **Repo Birthday** — Bonus on your repo's anniversary
-
-
-
-##  Roadmap
-
-- [ ] PostgreSQL integration for historical tracking
-- [ ] Multi-language pet forms (more creatures!)
-- [ ] Team/organization support cost to much calculate power
+- [ ] GitLab support
+- [ ] Backround accelator integration (Codey gets a real brain)
+- [ ] brain_bug.log as official feature (when Brain is ready)
 - [ ] API endpoint for live stats
-- [x] More brutal judging algorithms (yes, really)
-- [x] Community leaderboards (compare your pain)
+- [ ] PostgreSQL integration for historical tracking
+- [x] Issue quality analysis
+- [x] Fallback commit detection for private/org repos
+- [x] Double streak penalty bug fixed
+- [x] Weekend bonus inflation bug fixed
 
+---
 
-## 🐛 Known Issues (Fixed)
+## Known Issues
 
+- ✅ ~~Streak was penalized twice~~ — Fixed: single source of truth
+- ✅ ~~Weekend bonus inflated total_commits~~ — Fixed: raw commits tracked separately
+- ✅ ~~Commits always 0 in org repos~~ — Fixed: direct /commits fallback
 - ✅ ~~Everyone was a dragon~~ — Evolution system fixed
-- ✅ ~~Codey on drugs~~ — Energy calculation normalized  
-- ✅ ~~Some dragons~~ — Species diversity restored
-- ✅ Codey testing start 08-02-2026 sorry!
-- Thinking about new an better hybrid tech!
+- ✅ ~~Codey on drugs~~ — Energy calculation normalized
+- ✅ ~~Seasonal text overflow in SVG~~ — Fixed: wider box
 
+---
 
-
-## 🤝 Contributing
+## Contributing
 
 Found a bug? Want to add features? PRs welcome!
 
-**Ways to contribute:**
 - Test the No Mercy Edition and report issues
 - Add new pet forms for different languages
 - Improve the brutal scoring algorithm
 - Design new achievements
 - Write better insults for low performers (kidding... or am I?)
 
-
+---
 
 ## License
 
-Apache 2.0 License by Volkan Kücükbudak
+This project is dual-licensed under **Apache 2.0** and the **Ethical Security Operations License (ESOL v1.1)**.
 
-Use it, fork it, judge yourself with it. Just keep the attribution and don't blame me when Codey roasts you.
+The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in ESOL v1.1.
 
+> Free to use and modify. Selling this script or using it for reputation manipulation is explicitly prohibited.  
+> Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
+> [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
+> Read code header why!
 
+---
 
-## 💬 About the Author
+## Changelog
 
-Built by **[Volkan Sah](https://github.com/volkansah)** — A developer who believes in honest feedback, even when it hurts.
+### [2.1.0]
+#### Added
+- Issue quality analysis via IssuesEvent (open/close ratio + keyword scoring)
+- XP reward for closing issues
+- Bug Slayer achievement
+- Direct `/commits` API fallback when Events API returns 0 (org/private repos)
+- brain_bug.log documents the real dev workflow of this session
 
-**Other projects:**
-- [GitHub Profile](https://github.com/volkansah)
-- [More brutal tools](https://github.com/volkansah?tab=repositories)
+#### Fixed
+- **Streak double penalty** — `calculate_skill_decay()` was also decrementing streak,
+  causing double punishment combined with `update_brutal_stats()`.
+  Note: core logic was always correct — architectural conflict between two functions.
+- **Weekend bonus inflating total_commits** — bonus now only affects XP/rewards,
+  raw commit count tracked separately for accurate leveling.
+- Seasonal bonus text overflow in SVG
+- Commit counting for organization repositories
 
+#### Changed
+- Events API with direct `/commits` fallback for reliability
+- `GIT_TOKEN` with `read:org` recommended for full tracking
 
-
-## ⚠️ Disclaimer
-
-Codey is brutally honest. If you have thin skin about your coding habits, maybe stick to regular GitHub stats. 
-
-This pet will:
-- Call out your inconsistency
-- Judge your commit frequency  
-- Question your star count
-- Mock your broken streaks
-
-But it will also:
-- Celebrate real achievements
-- Reward consistent effort
-- Evolve with your skills
-- Make you a better developer (probably)
-
-**Remember:** Codey is just code. But if it makes you code more, mission accomplished. 🎯
-
-
-
-### Live Example
-
-Check out my Codey in action: [volkansah.github.io/Codey](https://volkansah.github.io/Codey/)
-
-**Spoiler:** Even I get roasted sometimes. That's the point.
+### [2.0.0] 
+#### Changed
+- Complete rewrite: No Mercy Edition
+- Tier system, social engineering detection, commit quality analysis
+- Prestige system, achievements, skill decay
 
 
+### [idea] baby codey
+---
 
-<div align="center">
+## About
 
-**Made with ☕ and brutal honesty**
+Built by **[Volkan Sah](https://github.com/volkansah)** — a developer who believes in honest feedback, even when it hurts.
 
-[⭐ Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
+v2.1 refactored and bugs fixed with assistance of **Claude (Anthropic)** — AI-assisted, human-verified. The core logic was always right. brain_bug.log proves no AI wrote this alone.
 
-</div>
+---
+
+## Disclaimer
+
+Codey is brutally honest. If you have thin skin about your coding habits, maybe stick to regular GitHub stats.
+
+This pet will call out your inconsistency, judge your commit frequency, question your star count, and mock your broken streaks.
+
+But it will also celebrate real achievements, reward consistent effort, and make you a better developer. Probably.
+
+**Codey is just code. But if it makes you code more, mission accomplished.**
+
+---
 
 
+**Made with coffee and brutal honesty**
 
-
-
-
-
+- [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
+- [volkansah.github.io/Codey](https://volkansah.github.io/Codey/)
