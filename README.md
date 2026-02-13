@@ -1,5 +1,9 @@
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![Version](https://img.shields.io/badge/VERSION-2.1-3670A0?style=for-the-badge)
+![Issues](https://img.shields.io/github/issues/VolkanSah/Codey?style=for-the-badge&color=red&label=ISSUES%20TRACKER)
+
 # 🐾 Codey - Your Brutally Honest GitHub Pet
-###### RPG "No Mercy" Edition v2.1 - Where Your Code Gets Judged For Real
 
 [![Codey - Your GitHub Pet](codey.svg)](https://volkansah.github.io/Codey/)
 
@@ -12,6 +16,9 @@ Daily updates via GitHub Actions. Tracks commits, stars, languages, streaks, and
 and consistency. Your pet evolves (or devolves) based on your real GitHub behavior.
 
 > **⚠️ Current Status:** Testing phase 08.02–18.02.2026 — needs testers brave enough to face the truth!
+
+---
+
 
 ---
 
@@ -304,9 +311,12 @@ But it will also celebrate real achievements, reward consistent effort, and make
 ---
 
 
-**Made with coffee and brutal honesty**
+**Made with coffee and brutal honesty** ![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)
 
 - [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 - [volkansah.github.io/Codey](https://volkansah.github.io/Codey/)
+
+
+
 
 
