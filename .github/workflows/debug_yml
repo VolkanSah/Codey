@@ -1,3 +1,5 @@
+# do not use, wasother stuf! code not public!
+
 - name: Debug auth
   run: |
     git remote -v
