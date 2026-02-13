@@ -178,7 +178,7 @@ env:
 ### Bro if you are realy realy rich,  i am not!
 
 ```markdown
-Buy me a coffee or pink donuts and world domination is mine, Pinky! 🍩 Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires Codey Sidekick Level 30 to understand Boolean Engineering.
+Buy me a coffee or pink donuts and world domination is mine, Pinky! 🍩 Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires Codey Sidekick Level 30 to understand full pinkys Boolean Engineering. maybe real funny for childs and younf teens.
 ```
 
 
@@ -221,12 +221,13 @@ Buy me a coffee or pink donuts and world domination is mine, Pinky! 🍩 Check o
 - [ ] Backround accelator integration (Codey gets a real brain) idea on hf only for hock .js i mean. repo klosed for core on codey-lab
 - [ ] brain_bug.log as official feature (when Brain is ready) (start tests)
 - [x] API endpoint for live stats, yes and no! 
-- [ ] PostgreSQL integration for historical tracking
-- [x] Issue quality analysis
+- [ ] PostgreSQL integration for historical tracking for Issue quality analysis testening backround
+- [ ] Issue quality analysis, must fixsome stuff. i found new pattern
 - [x] Fallback commit detection for private/org repos
 - [x] Double streak penalty bug fixed
 - [x] Weekend bonus inflation bug fixed
-- [ ] Heartbeat skin, logik test (most not publik sorry.) 
+- [ ] Heartbeat skin, logik test (most not publik sorry.)
+> - [x] yeah i see i hate python! i love PHP! Pros know why check up soon my new PDF-CVE format. no its not an PDF! The funtions was clean! see history
 
 ---
 
@@ -268,7 +269,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 ---
 <details>
 <summary> - Changelog - </summary> 
-13.02.2026 , sorry real only docu and some ideas i made publik,i will tell later why this all. best read :D im the 🐻 who explains  
+13.02.2026 , sorry real only docu and some ideas i made publik,i will tell later why this all. best read :D im the 🐻 who explains  , se blobb
 ### [2.1.0]
 #### Added
 - Issue quality analysis via IssuesEvent (open/close ratio + keyword scoring)
@@ -308,7 +309,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 
 Built by **[Volkan Sah](https://github.com/volkansah)** — a developer who believes in honest feedback, even when it hurts.
 
-v2.1 refactored and bugs fixed with assistance of **Claude (Anthropic)** — AI-assisted, human-verified. The core logic was always right. brain_bug.log proves no AI wrote this alone.
+v2.1 dumpy bugs fixed with assistance of **Claude (Anthropic)** — AI-assisted, human-verified. The core logic was always right. brain_bug.log (soon in codey) proves no AI wrote this alone.
 
 ---
 
@@ -325,10 +326,14 @@ But it will also celebrate real achievements, reward consistent effort, and make
 ---
 
 
-**Made with coffee and brutal honesty** ![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)
+**Made with coffee and brutal honesty**
 
 - [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
-- [volkansah.github.io/Codey](https://volkansah.github.io/Codey/)
+- [Star this repo](https://github.com/Codey-LAB/.github) to spreed love and freedom for open source! Don`t be evil morty! Dont be , i get you! 
+- [volkansah.github.io/Codey](https://volkansah.github.io/Codey/) , my codey... oh i am terrible sorry codey! ⚠️
+ use version on https://github.com/Codey-LAB/
+  > will be updatet by ai sitecick later. thanks for reading still here and hoplly you codey is fun 🤟
+
 
 
 
