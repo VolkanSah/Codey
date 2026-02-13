@@ -2,15 +2,15 @@
 
 [![Codey - Your GitHub Pet](codey.svg)](https://volkansah.github.io/Codey/)
 
-**Codey isn't your typical GitHub stats badge.** This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy,
+**Codey isn't your typical stats badge.** This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy,
 and evolves into different creatures based on what you actually code.
 
 No fake motivation. No participation trophies. Just raw, unfiltered feedback on your dev life.
 
-Daily updates via GitHub Actions. Tracks commits, stars, languages, streaks, and more — then brutally scores you on traits like social integrity, code quality, 
+Daily updates via Actions (still yet github, sorry). Tracks commits, stars, languages, streaks, and more — then brutally scores you on traits like social integrity, code quality, 
 and consistency. Your pet evolves (or devolves) based on your real GitHub behavior.
 
-> **⚠️ Current Status:** Testing phase 08.02–18.02.2026 — needs testers brave enough to face the truth!
+> **⚠️ Current Status:** Testing phase 08.02–18.02.2026 — needs testers brave enough to face the truth! i dont want feet codey wit fake data! 
 
 ---
 
@@ -168,6 +168,22 @@ env:
 [![Codey - Your GitHub Pet](codey.svg)](https://github.com/YourUsername/YourRepo)
 ```
 
+
+### or if you realy love the visio of our codey
+
+```markdown
+[![Codey - Your GitHub Pet](codey.svg)](https://github.com/Codey-LAB)
+```
+
+### Bro if you are realy realy rich,  i am not!
+
+```markdown
+Buy me a coffee or pink donuts and world domination is mine, Pinky! 🍩 Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires Codey Sidekick Level 30 to understand Boolean Engineering.
+```
+
+
+
+
 </details> 
 
 
@@ -175,8 +191,9 @@ env:
 
 ## Achievements
 
-- 🧙 **Elder Council** — 8+ years on GitHub
+> real ? is a hobby if i have time i mean there learn more about me @volkansah
 - 💀 **Decade Survivor** — 10+ years on GitHub
+- 🧙 **Elder Council** — 8+ years on GitHub
 - 👑 **Social Elite** — Social score > 1.2
 - 💎 **Quality Craftsman** — Repo quality > 0.8
 - 🔥 **Century Streak** — 100 day streak
@@ -201,9 +218,9 @@ env:
 ## Roadmap
 
 - [ ] GitLab support
-- [ ] Backround accelator integration (Codey gets a real brain)
-- [ ] brain_bug.log as official feature (when Brain is ready)
-- [ ] API endpoint for live stats
+- [ ] Backround accelator integration (Codey gets a real brain) idea on hf only for hock .js i mean. repo klosed for core on codey-lab
+- [ ] brain_bug.log as official feature (when Brain is ready) (start tests)
+- [x] API endpoint for live stats, yes and no! 
 - [ ] PostgreSQL integration for historical tracking
 - [x] Issue quality analysis
 - [x] Fallback commit detection for private/org repos
@@ -220,6 +237,7 @@ env:
 - ✅ ~~Everyone was a dragon~~ — Evolution system fixed
 - ✅ ~~Codey on drugs~~ — Energy calculation normalized
 - ✅ ~~Seasonal text overflow in SVG~~ — Fixed: wider box
+- ✅ some stuf if i have time.. ist test time
 
 ---
 
@@ -249,7 +267,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 ---
 <details>
 <summary> - Changelog - </summary> 
-
+only docu. 
 ### [2.1.0]
 #### Added
 - Issue quality analysis via IssuesEvent (open/close ratio + keyword scoring)
@@ -310,6 +328,7 @@ But it will also celebrate real achievements, reward consistent effort, and make
 
 - [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 - [volkansah.github.io/Codey](https://volkansah.github.io/Codey/)
+
 
 
 
