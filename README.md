@@ -15,7 +15,11 @@ and consistency. Your pet evolves (or devolves) based on your real GitHub behavi
 
 ---
 
-## Why Codey is Different
+
+<details>
+<summary> -  Why Codey is Differentt - </summary> 
+
+### Listen:
 
 **Standard GitHub stats:** "Wow, you made 500 commits!"  
 **Codey:** "500 commits, 2 stars, 0 followers. Are you coding in a cave?"
@@ -42,6 +46,8 @@ This isn't about counting contributions. It's about **revealing your true coding
 
 **Important:** Codey only counts stars on YOUR repos. Forking popular projects won't save you here.
 
+</details>
+         
 ---
 
 ## The No Mercy System
@@ -102,9 +108,10 @@ You've been around long enough. One commit shouldn't level you up.
 
 ---
 
+<details>
+<summary> - Setup - Make Codey Your Pet - </summary> 
 
 
-## Setup - Make Codey Your Pet
 
 ### Quick Start
 
@@ -158,6 +165,9 @@ env:
 ```markdown
 [![Codey - Your GitHub Pet](codey.svg)](https://github.com/YourUsername/YourRepo)
 ```
+
+</details> 
+
 
 ---
 
@@ -298,4 +308,5 @@ But it will also celebrate real achievements, reward consistent effort, and make
 
 - [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 - [volkansah.github.io/Codey](https://volkansah.github.io/Codey/)
+
 
