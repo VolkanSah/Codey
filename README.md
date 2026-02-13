@@ -1,6 +1,7 @@
 
 
 [![Codey - Your GitHub Pet](codey.svg)](https://volkansah.github.io/Codey/)
+> Read PHILOSOPHY.md please!
 
 **Codey isn't your typical stats badge.** This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy,
 and evolves into different creatures based on what you actually code.
@@ -335,6 +336,7 @@ But it will also celebrate real achievements, reward consistent effort, and make
 - [volkansah.github.io/Codey](https://volkansah.github.io/Codey/) , my codey... oh i am terrible sorry codey! ⚠️
  use version on https://github.com/Codey-LAB/
   > will be updatet by ai sitecick later. thanks for reading still here and hoplly you codey is fun 🤟
+
 
 
 
