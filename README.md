@@ -339,7 +339,8 @@ But it will also celebrate real achievements, reward consistent effort, and make
 
 ##### Export notes 
 > **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
-> Export ~1600
+> Export for branche/github-pages-codey-lab
+
 
 
 
