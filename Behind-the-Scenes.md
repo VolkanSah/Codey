@@ -1,39 +1,62 @@
-## 💻 Behind the Scenes: How Codey Calculates Your Stats
+# 🐾 Codey - Your Brutally Honest GitHub Pet
+#### Behind the Scenes: Codey Mechanics
 
-Codey's stats are a brutal reflection of your coding habits and contributions. This isn't just about showing your stats—it's about earning them.
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![Version](https://img.shields.io/badge/VERSION-2.1-3670A0?style=for-the-badge)
+![Issues](https://img.shields.io/github/issues/VolkanSah/Codey?style=for-the-badge&color=red&label=ISSUES%20TRACKER)
 
-### Pet's Well-being
 
-These stats represent your pet's current, volatile state. They are directly influenced by your recent activity, with no room for laziness.
 
-* **Health ❤️**: The average of your pet's hunger, happiness, and energy. A low score in any one area will drag your pet's overall health down.
-* **Hunger 🍖**: Increases sharply with daily activity (commits and PRs) and decays aggressively. Your pet is always hungry for code.
-* **Happiness 😊**: Increases with merged pull requests (PRs), but also drops quickly with unmerged or rejected changes. You are only as happy as your last successful contribution.
-* **Energy ⚡**: Drains with every line of code you write and is only minimally replenished daily. Burnout is a real possibility.
+Codey is a state-driven engine that translates GitHub activity into visual evolution. All logic is executed via `update_codey.py`.
+
+## Core Engine Operations (`update_codey.py`)
+
+The script acts as a data auditor, filtering noise to calculate the entity's current status.
+
+### 1. Data Acquisition & Audit
+
+The engine queries the GitHub API to perform a deep-scan of your profile:
+
+* **Substance Extraction:** Only productive code and organic growth are factored.
+* **Language Profiling:** Analyzes cumulative byte counts across all repositories to determine the dominant language.
+* **Star Validation:** Aggregates stars from original repositories while filtering out forks to ensure genuine reputation tracking.
+* **Social Ratio:** Analyzes followers vs. following to determine the `Personality` trait.
+
+### 2. RPG & Vital Logic
+
+Based on the raw data, the engine computes the entity's state:
+
+* **XP & Leveling:** Experience is gained through commits. Levels scale at `current_level * 50` XP.
+* **Health ❤️:** The average of Hunger, Happiness, and Energy.
+* **Hunger 🍖:** Driven by commit frequency; decays rapidly during inactivity.
+* **Happiness 😊:** Tied to repository stars and successful contributions.
+* **Energy ⚡:** Consumed by coding activity; requires recovery periods to prevent burnout.
+
+### 3. Trait Calculation
+
+Codey audits specific developer behaviors to define your profile:
+
+* **Creativity:** `total_own_repos / 5`
+* **Curiosity:** `total_forks / 10`
+* **Teamwork:** `total_prs_created / 3`
+* **Perfectionism:** `total_issues_closed / max(total_issues_opened, 1)`
+
+## Dynamic SVG Architecture
+
+Codey is code-generated XML, not a static asset.
+
+* **Direct Injection:** The engine injects XP, levels, and path data directly into the SVG structure.
+* **Evolution Tiers:** Triggers graphical transformations once XP thresholds are met.
+* **Mood Mapping:** Correlates visual expressions with the calculated vital stats.
+
+## Automation & Integrity
+
+1. **Trigger:** GitHub Action executes at 06:00 UTC.
+2. **Audit:** `update_codey.py` processes real-time GitHub data.
+3. **Prestige Check:** Evaluates eligibility for stat resets and mythic rewards.
+4. **Deploy:** Automated commit of the updated SVG to the repository.
 
 ---
 
-### Core RPG Stats
-
-These are the long-term stats that define your pet's "character." They reflect your all-time contributions and are a permanent record of your coding journey.
-
-* **Personality**: Calculated based on your **follower-to-following ratio**.
-    * **`influencer`**: `followers / following > 2`. You are a magnet for followers.
-    * **`explorer`**: `followers / following < 0.5`. You focus on discovering and contributing to many projects, not just your own.
-    * **`balanced`**: All other cases. You maintain a good mix of following and being followed.
-* **Social Status**: `min(10, total_stars // 100)`. A simple, merciless score based on the total number of stars across all your public repositories, capped at a maximum of 10.
-* **Dominant Language & Pet Evolution**: Your pet's form evolves based on the total bytes of code written in each language across your repositories. The script finds the language with the highest cumulative byte count to determine your true form.
-* **Prestige System**: A new, unforgiving mechanic. Once you meet a set of harsh criteria (e.g., reaching a certain level or number of stars), you can prestige. This resets your pet's stats to zero but unlocks permanent visual rewards and an increased XP multiplier, forcing you to prove your worth all over again.
-
----
-
-### Advanced Traits
-
-These traits provide a more detailed, and often critical, look at your developer profile.
-
-* **Creativity**: `total_own_repos / 5`. This measures your tendency to create new projects and is scaled by the number of repositories you own.
-* **Curiosity**: `total_forks / 10`. This reflects your interest in exploring and experimenting with other people's projects.
-* **Teamwork**: `total_prs_created / 3`. This rewards your collaborative efforts and contributions to external projects.
-* **Perfectionism**: `total_issues_closed / max(total_issues_opened, 1)`. A ratio that indicates your focus on resolving issues.
-
-The values of these traits, along with your pet's well-being, directly influence its **mood** and overall health. For example, a high stress level from too many open issues can make your pet `overwhelmed`—and there's no easy fix.
+**Codey Engine v2.1** | **Heartbeat:** `686561727462656174` | **Integrity: Verified (ESOL v1.1)**
