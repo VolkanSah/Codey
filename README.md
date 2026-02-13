@@ -226,6 +226,7 @@ Buy me a coffee or pink donuts and world domination is mine, Pinky! 🍩 Check o
 - [x] Fallback commit detection for private/org repos
 - [x] Double streak penalty bug fixed
 - [x] Weekend bonus inflation bug fixed
+- [ ] Heartbeat skin, logik test (most not publik sorry.) 
 
 ---
 
@@ -243,13 +244,13 @@ Buy me a coffee or pink donuts and world domination is mine, Pinky! 🍩 Check o
 
 ## Contributing
 
-Found a bug? Want to add features? PRs welcome!
+Found a bug? oh no Codey kan die!  Want to add features? PRs welcome!
 
-- Test the No Mercy Edition and report issues
+- Test the No Mercy Edition and report issues, please or 💔
 - Add new pet forms for different languages
 - Improve the brutal scoring algorithm
-- Design new achievements
-- Write better insults for low performers (kidding... or am I?)
+- Design new achievements (soon  promise)
+- Write better insults for low performers (kidding... or am I? hmm... finger cross behind back :S)
 
 ---
 
@@ -262,12 +263,12 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Free to use and modify. Selling this script or using it for reputation manipulation is explicitly prohibited.  
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
-> Read code header why!
+> Read code header why for codey too!!! its not a game its an open source audit!
 
 ---
 <details>
 <summary> - Changelog - </summary> 
-only docu. 
+13.02.2026 , sorry real only docu and some ideas i made publik,i will tell later why this all. best read :D im the 🐻 who explains  
 ### [2.1.0]
 #### Added
 - Issue quality analysis via IssuesEvent (open/close ratio + keyword scoring)
@@ -328,6 +329,7 @@ But it will also celebrate real achievements, reward consistent effort, and make
 
 - [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 - [volkansah.github.io/Codey](https://volkansah.github.io/Codey/)
+
 
 
 
