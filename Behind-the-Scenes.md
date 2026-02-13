@@ -32,6 +32,9 @@ Based on the raw data, the engine computes the entity's state:
 * **Hunger 🍖:** Driven by commit frequency; decays rapidly during inactivity.
 * **Happiness 😊:** Tied to repository stars and successful contributions.
 * **Energy ⚡:** Consumed by coding activity; requires recovery periods to prevent burnout.
+* ** Social 👥: **eg. building pattern** See logs.
+* **Quality 💎:  ** Quality Score**
+* and some other secrets 😅
 
 ### 3. Trait Calculation
 
