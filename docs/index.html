@@ -1,252 +1,590 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codey - Your Personal GitHub Pet</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        github: {
-                            dark: '#0d1117',
-                            darker: '#010409',
-                            border: '#30363d',
-                            text: '#c9d1d9',
-                            highlight: '#1f6feb',
-                            accent: '#58a6ff',
-                        }
-                    }
-                }
+    <title>CODEY // GITHUB_PET_V1.1 // ECG_MOD (NO TAILWIND)</title>
+    <!-- Lucide Icons (bleibt) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts (bleibt) -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==== KEIN TAILWIND – NUR PURES CSS ==== */
+        /* EXAKT GLEICHER LOOK WIE VORHER – HACKER/KRANKENHAUS */
+
+        :root {
+            --cyber-black: #0a0a0f;
+            --cyber-dark: #12121a;
+            --cyber-cyan: #00f3ff;
+            --cyber-pink: #ff00ff;
+            --cyber-green: #00ff41;
+            --gray-800: #1f1f2a;
+            --gray-600: #4a4a5a;
+            --gray-500: #6b6b7a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--cyber-black);
+            color: #e0e0e0;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Layout – zentriert, max-width */
+        .max-w-7xl {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .max-w-4xl {
+            max-width: 1024px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            height: 64px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-left i {
+            color: var(--cyber-cyan);
+            animation: pulse 1s infinite;
+        }
+
+        .nav-left span {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.25rem;
+            letter-spacing: -0.05em;
+        }
+
+        .nav-left .cyan {
+            color: var(--cyber-cyan);
+        }
+
+        .nav-right {
+            display: none;
+            color: var(--cyber-green);
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        @media (min-width: 768px) {
+            .nav-right {
+                display: block;
             }
         }
-    </script>
-    <style>
-        body {
-            scroll-behavior: smooth;
+
+        /* Hauptinhalt */
+        main {
+            padding-top: 8rem;
+            padding-bottom: 5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
-        .github-card {
-            background-color: rgba(13, 17, 23, 0.8);
-            backdrop-filter: blur(10px);
+
+        /* Cyber-Karte */
+        .cyber-card {
+            background: var(--cyber-dark);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+            border: 1px solid rgba(0, 243, 255, 0.5);
         }
-        .language-dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-        #main-content {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-        #main-content.loaded {
-            opacity: 1;
-        }
-        #noscript-message {
+
+        .pet-id {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #010409;
-            color: #c9d1d9;
+            top: 0.5rem;
+            left: 1rem;
+            font-size: 10px;
+            color: #4a4a5a;
+            text-transform: uppercase;
+        }
+
+        /* Codey SVG Container */
+        .codey-svg {
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .codey-svg svg {
+            filter: drop-shadow(0 0 10px #00f3ff);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .cyber-green {
+            color: var(--cyber-green);
+        }
+
+        .badge-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            flex-direction: column;
-            padding: 2rem;
-            z-index: 999;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
-        #noscript-message h1, #noscript-message p {
-            max-width: 80%;
-            margin: 0 auto;
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            font-size: 10px;
+            border-width: 1px;
+            border-style: solid;
+            background: rgba(0, 255, 65, 0.1);
+            color: var(--cyber-green);
+            border-color: var(--cyber-green);
+        }
+
+        .badge-pink {
+            background: rgba(255, 0, 255, 0.1);
+            color: var(--cyber-pink);
+            border-color: var(--cyber-pink);
+        }
+
+        /* EKG-Monitor */
+        .ekg-container {
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            background: rgba(0, 0, 0, 0.6);
+            margin-bottom: 1.5rem;
+        }
+
+        .ekg-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--cyber-green);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+
+        .ekg-header i {
+            width: 12px;
+            height: 12px;
+            animation: pulse 1s infinite;
+        }
+
+        .ekg-header span {
+            margin-left: auto;
+            font-size: 8px;
+            color: rgba(0, 255, 65, 0.7);
+        }
+
+        .ekg-canvas {
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+            width: 100%;
+            height: auto;
+            background: #0a0a0f;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            display: block;
+        }
+
+        .ekg-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 8px;
+            color: rgba(0, 255, 65, 0.6);
+            margin-top: 0.25rem;
+        }
+
+        /* Terminal */
+        .terminal {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid #1f1f2a;
+            text-align: left;
+            font-size: 0.875rem;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b6b7a;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #1f1f2a;
+            padding-bottom: 0.25rem;
+            font-size: 0.75rem;
+        }
+
+        .terminal-content {
+            color: var(--cyber-green);
+            line-height: 1.5;
+        }
+
+        /* Drei Karten */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .feature-card {
+            background: var(--cyber-dark);
+            padding: 1.5rem;
+            border: 1px solid #1f1f2a;
+            transition: all 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--cyber-pink);
+        }
+
+        .feature-card i {
+            color: var(--cyber-pink);
+            width: 24px;
+            height: 24px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .feature-card p {
+            color: #6b6b7a;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .card-cyan i {
+            color: var(--cyber-cyan);
+        }
+        .card-cyan:hover {
+            border-color: var(--cyber-cyan);
+        }
+        .card-green i {
+            color: var(--cyber-green);
+        }
+        .card-green:hover {
+            border-color: var(--cyber-green);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #1a1a1f;
+            padding-top: 2.5rem;
+            padding-bottom: 2.5rem;
+            text-align: center;
+            font-size: 10px;
+            color: #4a4a5a;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* Animationen */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px #00f3ff); }
+            to { filter: drop-shadow(0 0 20px #00f3ff); }
+        }
+
+        .animate-pulse {
+            animation: pulse 1s infinite;
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite alternate;
         }
     </style>
 </head>
-<body class="bg-github-darker text-github-text min-h-screen">
-    <div id="noscript-message">
-        <h1 class="text-3xl font-bold mb-4">JavaScript ist deaktiviert.</h1>
-        <p class="text-xl">Diese Seite erfordert JavaScript, um korrekt zu funktionieren. Bitte aktivieren Sie es, um fortzufahren.</p>
-        <p class="mt-4 text-sm text-gray-500">Für eine Suchmaschine: Dies ist die statische Version der Seite. Der Inhalt wird nach dem Laden von JavaScript gerendert.</p>
-    </div>
-    <div id="main-content">
-        <nav class="bg-github-dark border-b border-github-border sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <span class="text-github-accent font-bold text-xl">🐾 Codey</span>
-                        </div>
-                        <div class="hidden md:block">
-                            <div class="ml-10 flex items-baseline space-x-4">
-                                <a href="#" class="bg-github-highlight text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                                <a href="behind-the-scenes.html" class="text-gray-300 hover:bg-github-dark hover:text-white px-3 py-2 rounded-md text-sm font-medium">Behind the Scenes</a>
-                            </div>
-                        </div>
+<body>
+
+    <!-- NAVIGATION (identisch, ohne Tailwind) -->
+    <nav>
+        <div class="max-w-7xl nav-container">
+            <div class="nav-left">
+                <i data-lucide="bot" class="w-5 h-5"></i>
+                <span>CODEY_<span class="cyan">LAB</span></span>
+            </div>
+            <div class="nav-right">
+                SYSTEM_STATUS: <span class="animate-pulse">STABLE</span> // VOLKAN_AUTH_ACTIVE
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="max-w-4xl">
+            
+            <!-- HAUPT-CARD mit EKG -->
+            <div class="cyber-card">
+                <div class="pet-id">Pet_Identifier: 56 6f 6c 6b 61 6e</div>
+                
+                <!-- Codey SVG -->
+                <div class="codey-svg">
+                    <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#00f3ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3v19M5 8v3M19 8v3M3 15a9 9 0 0 1 18 0M7 15v2M17 15v2M9 18v3M15 18v3"></path>
+                        <path d="M10 9.5V11m4-1.5V11"></path>
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M8 8c0-2.2 1.8-4 4-4s4 1.8 4 4c0 3-4 6-4 6s-4-3-4-6Z" fill="rgba(0, 243, 255, 0.2)"></path>
+                    </svg>
+                </div>
+
+                <h1>Codey <span class="cyber-green">v1.1</span></h1>
+                
+                <div class="badge-container">
+                    <span class="badge">APACHE_2.0</span>
+                    <span class="badge badge-pink">ESOL_LOGGING</span>
+                </div>
+
+                <!-- EKG-MONITOR (wie Krankenhaus) -->
+                <div class="ekg-container">
+                    <div class="ekg-header">
+                        <i data-lucide="activity" class="w-3 h-3"></i>
+                        HEARTBEAT_MONITOR // 48 65 61 72 74
+                        <span>BPM: 72</span>
                     </div>
-                    <div class="hidden md:block">
-                        <div class="ml-4 flex items-center md:ml-6">
-                            <a href="https://github.com/VolkanSah/Codey" target="_blank" class="bg-github-highlight hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center">
-                                <i data-feather="github" class="mr-2 w-4 h-4"></i> GitHub
-                            </a>
-                        </div>
+                    <canvas id="ekgCanvas" width="300" height="100" class="ekg-canvas"></canvas>
+                    <div class="ekg-footer">
+                        <span>▁▂▃▄▅▆▇█</span>
+                        <span>SINUS_RHYTHMUS</span>
+                        <span>HRV: 0.04</span>
+                    </div>
+                </div>
+
+                <!-- TERMINAL FEED -->
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <i data-lucide="terminal" class="w-3 h-3"></i> live_pet_heartbeat
+                    </div>
+                    <div class="terminal-content" id="terminal-feed">
+                        > Initializing Codey heartbeat...<br>
+                        > Loading Binary: Volkan_V1
                     </div>
                 </div>
             </div>
-        </nav>
-        <header class="bg-github-dark border-b border-github-border">
-            <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                    <span class="block">🐾 Codey</span>
-                    <span class="block text-github-accent">Your Personal GitHub Pet</span>
-                </h1>
-                <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
-                    A brutally honest script that transforms your GitHub activity into an unforgiving digital pet.
-                </p>
-                <div class="mt-10 flex justify-center">
-                    <img src="https://raw.githubusercontent.com/VolkanSah/Codey/refs/heads/main/codey.svg" alt="Codey">
+
+            <!-- DREI KARTEN -->
+            <div class="grid-3">
+                <div class="feature-card">
+                    <i data-lucide="activity"></i>
+                    <h3>Activity</h3>
+                    <p>Monitoring commits & repo health.</p>
+                </div>
+                <div class="feature-card card-cyan">
+                    <i data-lucide="database"></i>
+                    <h3>ESOL Logs</h3>
+                    <p>Immutable standards for evolution.</p>
+                </div>
+                <div class="feature-card card-green">
+                    <i data-lucide="shield"></i>
+                    <h3>License</h3>
+                    <p>Protected by Apache 2.0.</p>
                 </div>
             </div>
-        </header>
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <section class="mb-16">
-                <h2 class="text-3xl font-bold text-white mb-8 border-b border-github-border pb-4">✨ Features</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-blue-900/30 text-blue-400 mr-4">
-                                <i data-feather="activity"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Daily & All-Time Stats</h3>
-                        </div>
-                        <p class="text-gray-400">Automatically updates your pet's stats every day, tracking both your recent activity and your overall contributions.</p>
-                    </div>
-                                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="100">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-purple-900/30 text-purple-400 mr-4">
-                                <i data-feather="bar-chart-2"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Brutal RPG Stats</h3>
-                        </div>
-                        <p class="text-gray-400">Personality, Social Status, Dominant Language & Pet Evolution, and Advanced Traits that shape your pet's character.</p>
-                    </div>
-                                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="200">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-green-900/30 text-green-400 mr-4">
-                                <i data-feather="smile"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Dynamic Moods</h3>
-                        </div>
-                        <p class="text-gray-400">Codey's mood reacts to your traits and well-being, showing emotions like overwhelmed and inspired.</p>
-                    </div>
-                                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-yellow-900/30 text-yellow-400 mr-4">
-                                <i data-feather="award"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Achievements System</h3>
-                        </div>
-                        <p class="text-gray-400">Unlock special badges for major milestones like Monthly Warrior, Commit Master, and Social Star.</p>
-                    </div>
-                                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="100">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-red-900/30 text-red-400 mr-4">
-                                <i data-feather="calendar"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Seasonal Events</h3>
-                        </div>
-                        <p class="text-gray-400">Special visual bonuses and boosts during events like Hacktoberfest and Advent of Code.</p>
-                    </div>
-                                    <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up" data-aos-delay="200">
-                        <div class="flex items-center mb-4">
-                            <div class="p-3 rounded-full bg-indigo-900/30 text-indigo-400 mr-4">
-                                <i data-feather="star"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Prestige System</h3>
-                        </div>
-                        <p class="text-gray-400">Reset your stats for special rewards and a visual prestige icon, a truly brutal test of skill.</p>
-                    </div>
-                </div>
-            </section>
-            <section class="mb-16">
-                <h2 class="text-3xl font-bold text-white mb-8 border-b border-github-border pb-4">🚀 How to Use Codey</h2>
-                <div class="github-card p-6 rounded-lg border border-github-border mb-8" data-aos="fade-up">
-                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                        <i data-feather="git-branch" class="mr-2"></i> Set Up the Workflow
-                    </h3>
-                    <p class="text-gray-400 mb-4">Copy the <code class="bg-github-dark px-2 py-1 rounded text-sm">update_codey.py</code> script and the <code class="bg-github-dark px-2 py-1 rounded text-sm">.github/workflows/update_codey.yml</code> file into your own repository.</p>
-                </div>
-                                <div class="github-card p-6 rounded-lg border border-github-border mb-8" data-aos="fade-up">
-                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                        <i data-feather="settings" class="mr-2"></i> Configure Your Tracking Mode
-                    </h3>
-                    <p class="text-gray-400 mb-4">The script uses the <code class="bg-github-dark px-2 py-1 rounded text-sm">GIT_REPOSITORY</code> environment variable to determine what to track.</p>
-                                    <div class="mb-6">
-                        <h4 class="text-lg font-medium text-white mb-2">Option A: Track a Single Repository</h4>
-                        <div class="bg-github-dark p-4 rounded-lg">
-                            <pre class="text-gray-300 overflow-x-auto"><code>env:  GIT_REPOSITORY: 'YourUsername/YourProject'</code></pre>
-                        </div>
-                    </div>
-                                    <div>
-                        <h4 class="text-lg font-medium text-white mb-2">Option B: Track Your Entire Account</h4>
-                        <div class="bg-github-dark p-4 rounded-lg">
-                            <pre class="text-gray-300 overflow-x-auto"><code>env:  GIT_REPOSITORY: 'YourUsername'</code></pre>
-                        </div>
-                    </div>
-                </div>
-                                <div class="github-card p-6 rounded-lg border border-github-border" data-aos="fade-up">
-                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                        <i data-feather="file-text" class="mr-2"></i> Add the Badge to Your README
-                    </h3>
-                    <p class="text-gray-400 mb-4">Once the workflow is set up, add this to your <code class="bg-github-dark px-2 py-1 rounded text-sm">README.md</code>:</p>
-                    <div class="bg-github-dark p-4 rounded-lg">
-                        <pre class="text-gray-300 overflow-x-auto"><code>![Codey - Your GitHub Pet](https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/main/codey.svg)</code></pre>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <footer class="bg-github-dark border-t border-github-border py-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div class="mb-4 md:mb-0">
-                        <span class="text-github-accent font-bold text-lg">🐾 Codey</span>
-                        <p class="text-gray-400 text-sm mt-1">Your Personal GitHub Pet (RPG No Mercy Edition)</p>
-                    </div>
-                    <div class="flex space-x-6">
-                        <a href="behind-the-scenes.html" class="text-gray-400 hover:text-white">Behind the Scenes</a>
-                        <a href="https://github.com/VolkanSah/Codey" target="_blank" class="text-gray-400 hover:text-white flex items-center">
-                            <i data-feather="github" class="mr-1 w-4 h-4"></i> GitHub
-                        </a>
-                    </div>
-                </div>
-                <div class="mt-8 text-center text-gray-500 text-sm">
-                    <p>Licensed under the Apache 2 License by Volkan Kücükbudak</p>
-                </div>
-            </div>
-        </footer>
-    </div>
+
+        </div>
+    </main>
+
+    <footer>
+        © 2026 Codey Project // Created by Volkan & Son // 56 6f 6c 6b 61 6e
+    </footer>
+
     <script>
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true
-        });
-        feather.replace();
-        const mainContent = document.getElementById('main-content');
-        const noscriptMessage = document.getElementById('noscript-message');
-        window.onload = function() {
-            mainContent.classList.add('loaded');
-            noscriptMessage.style.display = 'none';
-        };
+        // Icons rendern (lucide)
+        lucide.createIcons();
+
+        // --- Terminal Feed (gleicher Code) ---
+        const feed = document.getElementById('terminal-feed');
+        const lines = [
+            "Fetching GitHub activity...",
+            "Stats synchronized: +15XP",
+            "Mood: [STABLE]",
+            "Power level: 9001",
+            "Cleaning cache...",
+            "Dragon protocol active",
+            "Volkan's pet is breathing...",
+            "Scanning dependencies...",
+            "All systems nominal.",
+            "Heartbeat: 72 BPM",
+            "QRS: 98ms",
+            "ST segment: normal"
+        ];
+        
+        const maxLines = 5;
+
+        function updateTerminal() {
+            const nextLine = lines[Math.floor(Math.random() * lines.length)];
+            const currentContent = feed.innerHTML.split('<br>');
+            
+            if (currentContent.length >= maxLines) {
+                currentContent.shift();
+            }
+            
+            currentContent.push(`> ${nextLine}`);
+            feed.innerHTML = currentContent.join('<br>');
+        }
+
+        setInterval(updateTerminal, 2500);
+
+        // --- EKG-HEARTBEAT (Krankenhaus-Monitor) ---
+        const canvas = document.getElementById('ekgCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        const W = 300, H = 100;
+        canvas.width = W;
+        canvas.height = H;
+
+        // EKG-Ringpuffer
+        const BUFFER_SIZE = W;
+        let ekgBuffer = new Array(BUFFER_SIZE).fill(H/2);
+        let time = 0;
+
+        function drawGrid() {
+            ctx.strokeStyle = '#00ff4110';
+            ctx.lineWidth = 0.5;
+            for (let x = 0; x < W; x += 30) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, H);
+                ctx.strokeStyle = '#00ff4120';
+                ctx.stroke();
+            }
+            for (let y = 0; y < H; y += 20) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(W, y);
+                ctx.strokeStyle = '#00ff4120';
+                ctx.stroke();
+            }
+        }
+
+        function generateHeartbeatValue(t) {
+            let base = H/2 + Math.sin(t * 0.02) * 3;
+            let beat = 0;
+            let phase = (t % 80) / 80;
+            
+            if (phase < 0.1) {
+                beat = -15 * (1 - phase*10); 
+            } else if (phase < 0.15) {
+                beat = -15 + 30 * ((phase-0.1)*20);
+            } else if (phase < 0.25) {
+                beat = 15 - 25 * ((phase-0.15)*10);
+            } else {
+                beat = Math.sin(phase * 10) * 2;
+            }
+            return Math.max(5, Math.min(H-5, base + beat));
+        }
+
+        function drawEKG() {
+            ctx.fillStyle = '#0a0a0f40';
+            ctx.fillRect(0, 0, W, H);
+            drawGrid();
+            
+            ctx.beginPath();
+            ctx.strokeStyle = '#00ff41';
+            ctx.lineWidth = 1.8;
+            ctx.shadowColor = '#00ff41';
+            ctx.shadowBlur = 6;
+            
+            for (let x = 0; x < BUFFER_SIZE; x++) {
+                let y = ekgBuffer[x];
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+            
+            ctx.fillStyle = '#00ff41';
+            ctx.shadowBlur = 8;
+            ctx.beginPath();
+            ctx.arc(BUFFER_SIZE-1, ekgBuffer[BUFFER_SIZE-1], 2, 0, 2*Math.PI);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+
+        function updateEKG() {
+            let newValue = generateHeartbeatValue(time);
+            ekgBuffer.shift();
+            ekgBuffer.push(newValue);
+            time++;
+            if (time > 100000) time = 0;
+        }
+
+        function ekgLoop() {
+            updateEKG();
+            drawEKG();
+            setTimeout(ekgLoop, 50);
+        }
+
+        ekgLoop();
     </script>
 </body>
 </html>
