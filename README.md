@@ -178,8 +178,10 @@ env:
 ### Bro if you are realy realy rich,  i am not!
 
 ```markdown
-Buy me a coffee or pink donuts and world domination is mine, Pinky! 🍩 Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires Codey Sidekick Level 30 to understand full pinkys Boolean Engineering. maybe real funny for childs and younf teens.
+Buy me a coffee or pink donuts and world domination is mine, Pinky! 🍩
 ```
+
+Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires Codey Sidekick Level 30 to understand full pinkys Boolean Engineering. maybe real funny for childs and young teens and { if else } older for learning to, you are ll welcome to meet PinkyDB engine :D .
 
 
 
@@ -333,6 +335,7 @@ But it will also celebrate real achievements, reward consistent effort, and make
 - [volkansah.github.io/Codey](https://volkansah.github.io/Codey/) , my codey... oh i am terrible sorry codey! ⚠️
  use version on https://github.com/Codey-LAB/
   > will be updatet by ai sitecick later. thanks for reading still here and hoplly you codey is fun 🤟
+
 
 
 
