@@ -102,6 +102,8 @@ You've been around long enough. One commit shouldn't level you up.
 
 ---
 
+
+
 ## Setup - Make Codey Your Pet
 
 ### Quick Start
@@ -233,8 +235,8 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Read code header why!
 
 ---
-
-## Changelog
+<details>
+<summary> - Changelog - </summary> 
 
 ### [2.1.0]
 #### Added
@@ -265,6 +267,10 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 
 
 ### [idea] baby codey
+
+</details>
+
+
 ---
 
 ## About
@@ -292,3 +298,4 @@ But it will also celebrate real achievements, reward consistent effort, and make
 
 - [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 - [volkansah.github.io/Codey](https://volkansah.github.io/Codey/)
+
