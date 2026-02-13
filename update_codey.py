@@ -25,12 +25,6 @@
 # IMPROVED: marks improvements
 # =============================================================================
 
-#!/usr/bin/env python3
-# update_codey.py - No Mercy EDITION
-# Refactored + Bugs marked + Issue analysis added
-# Bugs marked with: # BUG: description
-# New code marked with: # NEW: description
-# Improvements marked with: # IMPROVED: description
 
 import requests
 import json
