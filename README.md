@@ -329,7 +329,7 @@ But it will also celebrate real achievements, reward consistent effort, and make
 ---
 
 
-**Made with coffee and brutal honesty**
+**Made with much coffee and brutal honesty**
 
 - [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 - [Star this repo](https://github.com/Codey-LAB/.github) to spreed love and freedom for open source! Don`t be evil morty! Dont be , i get you! 
@@ -337,9 +337,10 @@ But it will also celebrate real achievements, reward consistent effort, and make
  use version on https://github.com/Codey-LAB/
   > will be updatet by ai sitecick later. thanks for reading still here and hoplly you codey is fun 🤟
 
-# Export notes 
+##### Export notes 
 > **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
 > Export ~1600
+
 
 
 
