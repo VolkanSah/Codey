@@ -1,9 +1,4 @@
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-![Version](https://img.shields.io/badge/VERSION-2.1-3670A0?style=for-the-badge)
-![Issues](https://img.shields.io/github/issues/VolkanSah/Codey?style=for-the-badge&color=red&label=ISSUES%20TRACKER)
 
-# 🐾 Codey - Your Brutally Honest GitHub Pet
 
 [![Codey - Your GitHub Pet](codey.svg)](https://volkansah.github.io/Codey/)
 
@@ -315,6 +310,7 @@ But it will also celebrate real achievements, reward consistent effort, and make
 
 - [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
 - [volkansah.github.io/Codey](https://volkansah.github.io/Codey/)
+
 
 
 
