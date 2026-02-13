@@ -18,25 +18,25 @@
     <circle cx="120" cy="225" r="25" fill="#21262d"
             stroke="#30363d" stroke-width="1"/>
     <text x="120" y="230" text-anchor="middle" font-size="25">
-      😰
+      😵
     </text>
     <text x="120" y="260" text-anchor="middle"
           fill="#8b949e" font-size="11">
-      Struggling • 9.9y
+      Exhausted • 9.9y
     </text>
   </g>
 
   <!-- Stat bars -->
   <g transform="translate(205, 120)">
     <text x="0" y="20"   fill="#f0f6fc" font-weight="bold" font-size="14">❤️ Health</text>
-    <text x="330" y="20" fill="#8b949e" font-size="12" text-anchor="end">21%</text>
+    <text x="330" y="20" fill="#8b949e" font-size="12" text-anchor="end">33%</text>
     <rect x="0" y="25"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="25"   width="68.24124999999998" height="12" fill="#f85149" rx="6"/>
+    <rect x="0" y="25"   width="110.0" height="12" fill="#f85149" rx="6"/>
 
     <text x="0" y="55"   fill="#f0f6fc" font-weight="bold" font-size="14">🍖 Hunger</text>
-    <text x="330" y="55" fill="#8b949e" font-size="12" text-anchor="end">42%</text>
+    <text x="330" y="55" fill="#8b949e" font-size="12" text-anchor="end">100%</text>
     <rect x="0" y="60"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="60"   width="138.72374999999997" height="12" fill="#ffa657" rx="6"/>
+    <rect x="0" y="60"   width="330" height="12" fill="#ffa657" rx="6"/>
 
     <text x="0" y="90"   fill="#f0f6fc" font-weight="bold" font-size="14">😊 Happiness</text>
     <text x="330" y="90" fill="#8b949e" font-size="12" text-anchor="end">0%</text>
@@ -44,9 +44,9 @@
     <rect x="0" y="95"   width="0.0" height="12" fill="#a855f7" rx="6"/>
 
     <text x="0" y="125"   fill="#f0f6fc" font-weight="bold" font-size="14">⚡ Energy</text>
-    <text x="330" y="125" fill="#8b949e" font-size="12" text-anchor="end">20%</text>
+    <text x="330" y="125" fill="#8b949e" font-size="12" text-anchor="end">0%</text>
     <rect x="0" y="130"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="130"   width="66.0" height="12" fill="#3fb950" rx="6"/>
+    <rect x="0" y="130"   width="0.0" height="12" fill="#3fb950" rx="6"/>
 
     <text x="0" y="160"   fill="#f0f6fc" font-weight="bold" font-size="14">👥 Social</text>
     <text x="330" y="160" fill="#8b949e" font-size="12" text-anchor="end">1.25</text>
@@ -71,12 +71,12 @@
   </g>
   <g transform="translate(315, 413)">
     <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="14">
-      🗓️ 2 day streak • 📊 36 commits
+      🗓️ 3 day streak • 📊 91 commits
       • ⭐ 694 stars • 🐛 3 issues closed
     </text>
   </g>
   <text x="315" y="438" text-anchor="middle"
         fill="#8b949e" font-size="12">
-    Last Update: 2026-02-13 07:02 UTC • Dominant: Python
+    Last Update: 2026-02-13 15:05 UTC • Dominant: Python
   </text>
 </svg>
