@@ -1,0 +1,51 @@
+# Workflow to update Codey pet stats
+name: Update Codey
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-codey:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        persist-credentials: true
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install requests; fi
+
+    - name: Update Codey
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+        GIT_REPOSITORY: ${{ vars.GIT_REPOSITORY }}
+      run: python update_codey.py
+
+    - name: Commit
+      run: |
+        git config --local user.name "Codey Bot"
+        git config --local user.email "action@github.com"
+
+        # Attempt to stage generated assets (suppress errors if missing)
+        git add codey.svg codey.json 2>/dev/null || true
+
+        # Commit and push only if changes are detected in index
+        if git diff --cached --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "🐾 Daily Codey update"
+          git push
+        fi
