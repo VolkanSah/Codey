@@ -5,7 +5,7 @@
 
   <g><rect x="45.0" y="10" width="150" height="35" rx="17.5" fill="#f59e0b" opacity="0.9" stroke="#30363d" stroke-width="1.5"/><text x="120" y="33" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">💖 OS Love</text></g>
   <text x="40" y="75" fill="#f0f6fc" font-size="18" font-weight="bold">
-    🧙‍♂️ CODEY Level 1
+    🧙‍♂️ CODEY Level 2
   </text>
   
   <text x="462.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">🧙‍♂️</text><text x="507.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">👑</text><text x="552.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">💎</text>
@@ -56,7 +56,7 @@
     <text x="0" y="195"   fill="#f0f6fc" font-weight="bold" font-size="14">💎 Quality</text>
     <text x="330" y="195" fill="#8b949e" font-size="12" text-anchor="end">0.83</text>
     <rect x="0" y="200"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="200"   width="274.0546875000003" height="12" fill="#a855f7" rx="6"/>
+    <rect x="0" y="200"   width="273.2812500000003" height="12" fill="#a855f7" rx="6"/>
   </g>
 
   <!-- Footer -->
@@ -71,12 +71,12 @@
   </g>
   <g transform="translate(315, 413)">
     <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="14">
-      🗓️ 3 day streak • 📊 91 commits
-      • ⭐ 694 stars • 🐛 3 issues closed
+      🗓️ 4 day streak • 📊 119 commits
+      • ⭐ 692 stars • 🐛 3 issues closed
     </text>
   </g>
   <text x="315" y="438" text-anchor="middle"
         fill="#8b949e" font-size="12">
-    Last Update: 2026-02-13 15:05 UTC • Dominant: Python
+    Last Update: 2026-02-14 06:55 UTC • Dominant: Python
   </text>
 </svg>
