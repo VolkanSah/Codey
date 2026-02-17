@@ -29,14 +29,14 @@
   <!-- Stat bars -->
   <g transform="translate(205, 120)">
     <text x="0" y="20"   fill="#f0f6fc" font-weight="bold" font-size="14">❤️ Health</text>
-    <text x="330" y="20" fill="#8b949e" font-size="12" text-anchor="end">33%</text>
+    <text x="330" y="20" fill="#8b949e" font-size="12" text-anchor="end">31%</text>
     <rect x="0" y="25"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="25"   width="110.0" height="12" fill="#f85149" rx="6"/>
+    <rect x="0" y="25"   width="103.18659999999998" height="12" fill="#f85149" rx="6"/>
 
     <text x="0" y="55"   fill="#f0f6fc" font-weight="bold" font-size="14">🍖 Hunger</text>
-    <text x="330" y="55" fill="#8b949e" font-size="12" text-anchor="end">100%</text>
+    <text x="330" y="55" fill="#8b949e" font-size="12" text-anchor="end">94%</text>
     <rect x="0" y="60"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="60"   width="330" height="12" fill="#ffa657" rx="6"/>
+    <rect x="0" y="60"   width="309.5598" height="12" fill="#ffa657" rx="6"/>
 
     <text x="0" y="90"   fill="#f0f6fc" font-weight="bold" font-size="14">😊 Happiness</text>
     <text x="330" y="90" fill="#8b949e" font-size="12" text-anchor="end">0%</text>
@@ -56,7 +56,7 @@
     <text x="0" y="195"   fill="#f0f6fc" font-weight="bold" font-size="14">💎 Quality</text>
     <text x="330" y="195" fill="#8b949e" font-size="12" text-anchor="end">0.83</text>
     <rect x="0" y="200"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="200"   width="273.2812500000003" height="12" fill="#a855f7" rx="6"/>
+    <rect x="0" y="200"   width="274.0546875000003" height="12" fill="#a855f7" rx="6"/>
   </g>
 
   <!-- Footer -->
@@ -71,12 +71,12 @@
   </g>
   <g transform="translate(315, 413)">
     <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="14">
-      🗓️ 4 day streak • 📊 149 commits
+      🗓️ 5 day streak • 📊 157 commits
       • ⭐ 695 stars • 🐛 3 issues closed
     </text>
   </g>
   <text x="315" y="438" text-anchor="middle"
         fill="#8b949e" font-size="12">
-    Last Update: 2026-02-16 07:12 UTC • Dominant: Python
+    Last Update: 2026-02-17 07:07 UTC • Dominant: Python
   </text>
 </svg>
