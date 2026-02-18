@@ -41,3 +41,17 @@
 # ─────────────────────────────────────────────
 # SVG GENERATOR LOGIC STARTS HERE
 # ─────────────────────────────────────────────
+
+
+#
+
+
+# ─────────────────────────────────────────────
+# END OF SVG GENERATOR LOGIC
+# ─────────────────────────────────────────────
+
+# If you like or love Codey, give him a hug! 
+# Show some support by starring the repository and following my profile. 
+# Thanks, and have fun!
+# ─────────────────────────────────────────────
+# Crafted with passion by VolkanSah (2026)
