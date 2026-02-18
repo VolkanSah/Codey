@@ -1,0 +1,45 @@
+name: "Codey Audit Collector"
+
+on:
+  workflow_dispatch: # Manueller Start im "Actions" Tab
+
+permissions:
+  contents: write
+
+jobs:
+  collect-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GIT_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Fetch and Format Audit Data
+        env:
+          GH_TOKEN: ${{ secrets.GIT_TOKEN }}
+        run: |
+          # 1. API Endpoints abfragen
+          gh api /rate_limit > rate_limit.json
+          gh api /user > user_info.json
+          gh api /repos/${{ github.repository }}/actions/workflows > workflows.json
+          
+          # 2. GraphQL Check
+          gh api graphql -f query='query { viewer { login } repository(owner: "${{ github.repository_owner }}", name: "${{ github.event.repository.name }}") { diskUsage stargazers { totalCount } } }' > graphql_check.json
+          
+          # 3. Skript ausführen
+          python3 scripts/format_audit.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "Codey Audit Bot"
+          git config user.email "audit@codey.lab"
+          git add AUDIT_DATA.md
+          # [skip ci] verhindert, dass die Action sich selbst neu triggert
+          git commit -m "Update Audit Data [skip ci]" || echo "No changes to commit"
+          git push
