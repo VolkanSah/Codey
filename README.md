@@ -8,7 +8,7 @@
 
 
 
-> Read [PHILOSOPHY.md](PHILOSOPHY.md) if you want to understand "Why i craft Codey?
+> 🌠 this repo to hug codey 
 
 ---
 
@@ -492,6 +492,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
