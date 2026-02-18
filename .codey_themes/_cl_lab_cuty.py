@@ -1,7 +1,6 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # CUTY SKIN GENERATOR - V5 ENGINE (FINAL REVISION)
 # ─────────────────────────────────────────────────────────────────────────────
-from datetime import datetime
 
 def generate_cuty_svg(codey, seasonal_bonus):
     brutal_stats = codey.get('brutal_stats', {})
