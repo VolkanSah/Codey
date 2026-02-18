@@ -186,11 +186,16 @@
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
+
+
    Copyright [2026] [Volkan Kücükbudak]
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+   This project is dual-licensed under **Apache 2.0** and the **Ethical Security Operations License (ESOL v1.1)**.
+  The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in ESOL v1.1.
+> Free to use and modify. Selling this script or using it for reputation manipulation is explicitly prohibited.  
+> Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
+> [ESOL v1.1](https://github.com/ESOL-License/ESOL/) Or ESOl File.
+> Read code header why for codey too!!! its not a game its an open source audit!
 
        http://www.apache.org/licenses/LICENSE-2.0
 
