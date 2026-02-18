@@ -308,7 +308,11 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 
 <details>
 <summary> - Changelog - </summary> 
-13.02.2026 , sorry real only docu and some ideas i made publik,i will tell later why this all. best read :D im the 🐻 who explains  , se blobb
+
+### [2.2.0]
+#### Added Theme
+- cuty released
+
 ### [2.1.0]
 #### Added
 - Issue quality analysis via IssuesEvent (open/close ratio + keyword scoring)
@@ -453,6 +457,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
