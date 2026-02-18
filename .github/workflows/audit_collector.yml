@@ -24,19 +24,27 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GIT_TOKEN }}
         run: |
-          # Temporäre Files im Audit-Ordner sammeln
+          # Ensure the audit directory exists
+          mkdir -p .codey_audit
+
+          # 1. Fetch REST Data
           gh api /rate_limit > .codey_audit/rate_limit.json
           gh api /user > .codey_audit/user_info.json
           gh api /repos/${{ github.repository }}/actions/workflows > .codey_audit/workflows.json
           
-          # Skript aus dem Unterordner starten
+          # 2. Fetch GraphQL Data (Crucial for the report)
+          gh api graphql -f query='query { viewer { login } repository(owner: "${{ github.repository_owner }}", name: "${{ github.event.repository.name }}") { diskUsage stargazers { totalCount } } }' > .codey_audit/graphql_check.json
+          
+          # 3. Run the "No Mercy" formatter
           python3 .codey_audit/scripts/format_audit.py
 
       - name: Commit and Push Changes
         run: |
           git config user.name "Codey Audit Bot"
           git config user.email "audit@codey.lab"
-          # Nur den spezifischen Ordner adden
+          
+          # Add only the MD file and potentially the JSONs (if you want them stored)
           git add .codey_audit/AUDIT_DATA.md
-          git commit -m "Update Codey Audit Data [skip ci]" || echo "No changes"
+          
+          git commit -m "Update Codey Audit Data [skip ci]" || echo "No changes to commit"
           git push
