@@ -1,0 +1,30 @@
+# =============================================================================
+# .codey-lab — Global Project Configuration v1
+# Single source of truth for all workflows, apps, scripts and pipelines.
+# WHY: Best speed · More secure · Hardcoded references · Easy to update
+# =============================================================================
+# SYNTAX RULES:
+#   - All values in double quotes "value"  → universal: bash / python / js / yaml
+#   - Secret placeholders: "_cl_NAME"      → internal codey-lab handle
+#   - Token alias: YOUR_TOKEN_ALIAS        → maps your actual secret name → _cl_*
+#   - Empty/unused values: ""              → never leave bare =
+#   - Comment-out unused sections with #  → keep structure, parsers need it!
+#   - DO NOT DELETE headers or [X_END]    → parsers rely on these markers
+# =============================================================================
+# SETUP TIERS — choose your effort level:
+#   LAZY:       fill [PROVIDER] only                    → works
+#   NORMAL:     + uncomment [ORGA_ID] [GIT]             → works better
+#   PRODUCTIVE: + uncomment everything you need          → full power
+# =============================================================================
+# DO NOT DELETE — file identifier used by all parsers
+[CODEY_LAB_FILE = .codey-lab]
+
+# =============================================================================
+# API_REGISTRY — All external API base URLs, centrally maintained
+# Reference these in workflows via: cfg "KEY" — never hardcode URLs again!
+# Uncomment only what you use. Update here = updated everywhere.
+# =============================================================================
+# SOOOOON!
+[API_REGISTRY]
+some stuff
+[API_REGISTRY_END]
