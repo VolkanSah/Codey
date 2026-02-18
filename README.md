@@ -17,10 +17,13 @@
 <details>
 <summary>- What is Codey ? -</summary>
 
-**Codey isn't your typical stats badge.** This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy,
-and evolves into different creatures based on what you actually code.
+### **Codey isn't your typical stats badge!** 
+**This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy,
+and evolves into different creatures based on what you actually code.**
 
-No fake motivation. No participation trophies. Just raw, unfiltered feedback on your dev life.
+- No fake motivation.
+- No participation trophies.
+- Just raw, unfiltered feedback on your dev life.
 
 Daily updates via Actions (still yet github, sorry). Tracks commits, stars, languages, streaks, and more — then brutally scores you on traits like social integrity, code quality, 
 and consistency. Your pet evolves (or devolves) based on your real GitHub behavior.
@@ -69,7 +72,7 @@ This isn't about counting contributions. It's about **revealing your true coding
 <details>
 <summary>- The No Mercy System -</summary>
 
-##### Codey uses an **unforgiving but honest algorithm** where:
+#### Codey uses an **unforgiving but honest algorithm** where:
 
 - **Low activity** = Your pet gets sad, tired, or temporarily dies
 - **Inconsistent commits** = Streak breaks, XP penalties
@@ -90,7 +93,7 @@ The exact formulas and brutal penalties are documented in [Behind the Scenes](Be
 
 ---
 
-## Pet Evolution System
+### Pet Evolution System
 
 Your Codey evolves based on your **dominant programming language**:
 
@@ -112,7 +115,7 @@ Your Codey evolves based on your **dominant programming language**:
 
 ---
 
-## Tier System — The Older You Are, The Harder It Gets
+### Tier System — The Older You Are, The Harder It Gets
 
 | Tier | GitHub Age | XP Multiplier | Requirements |
 |------|-----------|---------------|--------------|
@@ -128,7 +131,7 @@ You've been around long enough. One commit shouldn't level you up.
 
 
 
-## Achievements
+### Achievements
 
 > real ? is a hobby if i have time i mean there learn more about me @volkansah
 - 💀 **Decade Survivor** — 10+ years on GitHub
@@ -141,7 +144,7 @@ You've been around long enough. One commit shouldn't level you up.
 
 ---
 
-## Seasonal Events
+### Seasonal Events
 
 | Month | Event | Bonus |
 |-------|-------|-------|
@@ -244,7 +247,7 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 <details>
 <summary>- Roadmap -</summary>
 
-##### What to do whith codey
+#### What to do whith codey
 
 - [ ] GitLab support
 - [ ] Backround accelator integration (Codey gets a real brain) idea on hf only for hock .js i mean. repo klosed for core on codey-lab
@@ -268,7 +271,7 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 <summary>- Known Issues -</summary>
 
 
-##### I know, I know it ... its okey! Comon help me!
+#### I know, I know it ... its okey! Comon help me!
 
 - ✅ ~~Streak was penalized twice~~ — Fixed: single source of truth
 - ✅ ~~Weekend bonus inflated total_commits~~ — Fixed: raw commits tracked separately
@@ -288,7 +291,7 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 <details>
 <summary>- Contributing -</summary>
 
-##### Found a bug? oh no Codey kan die!  Want to add features? PRs welcome!
+#### Found a bug? oh no Codey kan die!  Want to add features? PRs welcome!
 
 - Test the No Mercy Edition and report issues, please or 💔
 - Add new pet forms for different languages
@@ -449,6 +452,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
