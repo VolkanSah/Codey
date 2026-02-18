@@ -1,4 +1,5 @@
 
+# 🐾 Codey - Your Brutally Honest GitHub Pet
 <p align="center">
   <a href="https://github.com/codey-lab">
     <img src="codey.svg" width="99%">
@@ -6,8 +7,15 @@
 </p>
 
 
-[![Codey - Your GitHub Pet](codey.svg)](https://volkansah.github.io/Codey/)
-> Read PHILOSOPHY.md please!
+
+> Read [PHILOSOPHY.md](PHILOSOPHY.md) if you want to understand "Why i craft Codey?
+
+---
+
+
+
+<details>
+<summary>-- What is Codey ? --</summary>
 
 **Codey isn't your typical stats badge.** This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy,
 and evolves into different creatures based on what you actually code.
@@ -17,16 +25,15 @@ No fake motivation. No participation trophies. Just raw, unfiltered feedback on 
 Daily updates via Actions (still yet github, sorry). Tracks commits, stars, languages, streaks, and more — then brutally scores you on traits like social integrity, code quality, 
 and consistency. Your pet evolves (or devolves) based on your real GitHub behavior.
 
-> **⚠️ Current Status:** Testing phase 08.02–18.02.2026 — needs testers brave enough to face the truth! i dont want feet codey wit fake data! 
+> **⚠️ Current Status:** Testing phase 08.02–28.02.2026 — needs testers brave enough to face the truth! i dont want feet codey wit fake data!
 
----
-
+</details>
 
 ---
 
 
 <details>
-<summary> -  Why Codey is Differentt - </summary> 
+<summary> --  Why Codey is Differentt -- </summary> 
 
 ### Listen:
 
@@ -59,9 +66,10 @@ This isn't about counting contributions. It's about **revealing your true coding
          
 ---
 
-## The No Mercy System
+<details>
+<summary>-- The No Mercy System --</summary>
 
-Codey uses an **unforgiving but honest algorithm** where:
+##### Codey uses an **unforgiving but honest algorithm** where:
 
 - **Low activity** = Your pet gets sad, tired, or temporarily dies
 - **Inconsistent commits** = Streak breaks, XP penalties
@@ -116,6 +124,39 @@ Your Codey evolves based on your **dominant programming language**:
 You've been around long enough. One commit shouldn't level you up.
 
 ---
+
+
+
+
+## Achievements
+
+> real ? is a hobby if i have time i mean there learn more about me @volkansah
+- 💀 **Decade Survivor** — 10+ years on GitHub
+- 🧙 **Elder Council** — 8+ years on GitHub
+- 👑 **Social Elite** — Social score > 1.2
+- 💎 **Quality Craftsman** — Repo quality > 0.8
+- 🔥 **Century Streak** — 100 day streak
+- 🐛 **Bug Slayer** — 5+ issues closed with 80%+ close ratio
+- ⭐ **Prestige Master** — Completed prestige
+
+---
+
+## Seasonal Events
+
+| Month | Event | Bonus |
+|-------|-------|-------|
+| October | 🎃 Hacktoberfest | 1.5x |
+| December | 🎄 Advent | 1.3x |
+| July | 🔥 Grind Season | 1.4x |
+| May | 🚀 Deploy Month | 1.3x |
+| January | 🎯 New Year | 1.2x |
+| ...and more | every month has a bonus | — |
+
+
+</details>
+
+---
+
 
 <details>
 <summary> - Setup - Make Codey Your Pet - </summary> 
@@ -198,33 +239,12 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 
 ---
 
-## Achievements
 
-> real ? is a hobby if i have time i mean there learn more about me @volkansah
-- 💀 **Decade Survivor** — 10+ years on GitHub
-- 🧙 **Elder Council** — 8+ years on GitHub
-- 👑 **Social Elite** — Social score > 1.2
-- 💎 **Quality Craftsman** — Repo quality > 0.8
-- 🔥 **Century Streak** — 100 day streak
-- 🐛 **Bug Slayer** — 5+ issues closed with 80%+ close ratio
-- ⭐ **Prestige Master** — Completed prestige
 
----
+<details>
+<summary>-- Roadmap --</summary>
 
-## Seasonal Events
-
-| Month | Event | Bonus |
-|-------|-------|-------|
-| October | 🎃 Hacktoberfest | 1.5x |
-| December | 🎄 Advent | 1.3x |
-| July | 🔥 Grind Season | 1.4x |
-| May | 🚀 Deploy Month | 1.3x |
-| January | 🎯 New Year | 1.2x |
-| ...and more | every month has a bonus | — |
-
----
-
-## Roadmap
+##### What to do whith codey
 
 - [ ] GitLab support
 - [ ] Backround accelator integration (Codey gets a real brain) idea on hf only for hock .js i mean. repo klosed for core on codey-lab
@@ -238,9 +258,17 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 - [ ] Heartbeat skin, logik test (most not publik sorry.)
 > - [x] yeah i see i hate python! i love PHP! Pros know why check up soon my new PDF-CVE format. no its not an PDF! The funtions was clean! see history
 
+</details> 
+
 ---
 
-## Known Issues
+
+
+<details>
+<summary>-- Known Issues --</summary>
+
+
+##### I know, I know it ... its okey! Comon help me!
 
 - ✅ ~~Streak was penalized twice~~ — Fixed: single source of truth
 - ✅ ~~Weekend bonus inflated total_commits~~ — Fixed: raw commits tracked separately
@@ -250,17 +278,25 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 - ✅ ~~Seasonal text overflow in SVG~~ — Fixed: wider box
 - ✅ some stuf if i have time.. ist test time
 
+
+</details> 
+
 ---
 
-## Contributing
 
-Found a bug? oh no Codey kan die!  Want to add features? PRs welcome!
+
+<details>
+<summary>-- Contributing --</summary>
+
+##### Found a bug? oh no Codey kan die!  Want to add features? PRs welcome!
 
 - Test the No Mercy Edition and report issues, please or 💔
 - Add new pet forms for different languages
 - Improve the brutal scoring algorithm
 - Design new achievements (soon  promise)
 - Write better insults for low performers (kidding... or am I? hmm... finger cross behind back :S)
+
+</details> 
 
 ---
 
@@ -346,6 +382,7 @@ But it will also celebrate real achievements, reward consistent effort, and make
 ##### Export notes 
 > **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
 > Export ~1600
+
 
 
 
