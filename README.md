@@ -250,6 +250,7 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 #### What to do whith codey
 
 - [ ] GitLab support
+- [x] Theming in SVG (first manual) 
 - [ ] Backround accelator integration (Codey gets a real brain) idea on hf only for hock .js i mean. repo klosed for core on codey-lab
 - [ ] brain_bug.log as official feature (when Brain is ready) (start tests)
 - [x] API endpoint for live stats, yes and no! 
@@ -452,6 +453,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
