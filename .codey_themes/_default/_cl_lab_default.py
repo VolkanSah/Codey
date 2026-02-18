@@ -1,3 +1,13 @@
+### Codey Default them
+
+# License under Apche 2 and Esol license
+# 18:02:2026
+
+
+### Codey default template file : _cl_lab_default.py iam crafting and dont like chaos! this is and will be always the man core themplate , if i change codey core than i will change here first the outputs. 
+### thill that it will be only an replacmend for code.. soon.
+
+### -------------------------------------------------------- Replace this line ------------------------------------------------------------------------
 # ─────────────────────────────────────────────
 # SVG GENERATOR
 # ─────────────────────────────────────────────
@@ -177,3 +187,7 @@ def generate_brutal_svg(codey, seasonal_bonus):
   </text>
 </svg>'''
     return svg
+
+
+### -------------------------------------------------------- Replace this line END------------------------------------------------------------------------ have fun
+
