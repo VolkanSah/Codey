@@ -15,7 +15,7 @@
 
 
 <details>
-<summary>-- What is Codey ? --</summary>
+<summary>- What is Codey ? -</summary>
 
 **Codey isn't your typical stats badge.** This is a full-blown RPG system that analyzes your entire coding personality, judges your contributions with zero mercy,
 and evolves into different creatures based on what you actually code.
@@ -33,7 +33,7 @@ and consistency. Your pet evolves (or devolves) based on your real GitHub behavi
 
 
 <details>
-<summary> --  Why Codey is Differentt -- </summary> 
+<summary> -  Why Codey is Differentt - </summary> 
 
 ### Listen:
 
@@ -67,7 +67,7 @@ This isn't about counting contributions. It's about **revealing your true coding
 ---
 
 <details>
-<summary>-- The No Mercy System --</summary>
+<summary>- The No Mercy System -</summary>
 
 ##### Codey uses an **unforgiving but honest algorithm** where:
 
@@ -242,7 +242,7 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 
 
 <details>
-<summary>-- Roadmap --</summary>
+<summary>- Roadmap -</summary>
 
 ##### What to do whith codey
 
@@ -265,7 +265,7 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 
 
 <details>
-<summary>-- Known Issues --</summary>
+<summary>- Known Issues -</summary>
 
 
 ##### I know, I know it ... its okey! Comon help me!
@@ -286,7 +286,7 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 
 
 <details>
-<summary>-- Contributing --</summary>
+<summary>- Contributing -</summary>
 
 ##### Found a bug? oh no Codey kan die!  Want to add features? PRs welcome!
 
@@ -298,20 +298,10 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 
 </details> 
 
----
 
-## License
-
-This project is dual-licensed under **Apache 2.0** and the **Ethical Security Operations License (ESOL v1.1)**.
-
-The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in ESOL v1.1.
-
-> Free to use and modify. Selling this script or using it for reputation manipulation is explicitly prohibited.  
-> Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
-> [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
-> Read code header why for codey too!!! its not a game its an open source audit!
 
 ---
+
 <details>
 <summary> - Changelog - </summary> 
 13.02.2026 , sorry real only docu and some ideas i made publik,i will tell later why this all. best read :D im the 🐻 who explains  , se blobb
@@ -349,35 +339,6 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 
 
 ---
-
-## About
-
-Built by **[Volkan Sah](https://github.com/volkansah)** — a developer who believes in honest feedback, even when it hurts.
-
-v2.1 dumpy bugs fixed with assistance of **Claude (Anthropic)** — AI-assisted, human-verified. The core logic was always right. brain_bug.log (soon in codey) proves no AI wrote this alone.
-
----
-
-## Disclaimer
-
-Codey is brutally honest. If you have thin skin about your coding habits, maybe stick to regular GitHub stats.
-
-This pet will call out your inconsistency, judge your commit frequency, question your star count, and mock your broken streaks.
-
-But it will also celebrate real achievements, reward consistent effort, and make you a better developer. Probably.
-
-**Codey is just code. But if it makes you code more, mission accomplished.**
-
----
-
-
-**Made with much coffee and brutal honesty**
-
-- [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
-- [Star this repo](https://github.com/Codey-LAB/.github) to spreed love and freedom for open source! Don`t be evil morty! Dont be , i get you! 
-- [volkansah.github.io/Codey](https://volkansah.github.io/Codey/) , my codey... oh i am terrible sorry codey! ⚠️
- use version on https://github.com/Codey-LAB/
-  > will be updatet by ai sitecick later. thanks for reading still here and hoplly you codey is fun 🤟
 
 
 
@@ -439,6 +400,56 @@ soon
 > **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
 
 </details>
+
+
+
+
+
+
+---
+
+## About
+
+Built by **[Volkan Sah](https://github.com/volkansah)** — a developer who believes in honest feedback, even when it hurts.
+
+v2.1 dumpy bugs fixed with assistance of **Claude (Anthropic)** — AI-assisted, human-verified. The core logic was always right. brain_bug.log (soon in codey) proves no AI wrote this alone.
+
+---
+
+## Disclaimer
+
+Codey is brutally honest. If you have thin skin about your coding habits, maybe stick to regular GitHub stats.
+
+This pet will call out your inconsistency, judge your commit frequency, question your star count, and mock your broken streaks.
+
+But it will also celebrate real achievements, reward consistent effort, and make you a better developer. Probably.
+
+**Codey is just code. But if it makes you code more, mission accomplished.**
+
+---
+
+
+**Made with much coffee and brutal honesty**
+
+- [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
+- [Star this repo](https://github.com/Codey-LAB/.github) to spreed love and freedom for open source! Don`t be evil morty! Dont be , i get you! 
+- [volkansah.github.io/Codey](https://volkansah.github.io/Codey/) , my codey... oh i am terrible sorry codey! ⚠️
+ use version on https://github.com/Codey-LAB/
+  > will be updatet by ai sitecick later. thanks for reading still here and hoplly you codey is fun 🤟
+
+---
+
+## License
+
+This project is dual-licensed under **Apache 2.0** and the **Ethical Security Operations License (ESOL v1.1)**.
+
+The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in ESOL v1.1.
+
+> Free to use and modify. Selling this script or using it for reputation manipulation is explicitly prohibited.  
+> Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
+> [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
+> Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
