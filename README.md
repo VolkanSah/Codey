@@ -245,10 +245,17 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 
 <details>
 <summary> - Themes for Codey - </summary> 
-- default (retro)
-- Cuty
-- Codey
-- CyberCat
+  
+![Codey_Retro](.codey_themes/_cl_lab_default.svg)
+  
+  ---
+  
+![Cuty_Dummy](.codey_themes/codey_lab_cuty.svg)
+
+  ---
+  
+![CyberCat](.codey_themes/codey_lab_cat.svg)
+
 
 </details> 
 
@@ -469,6 +476,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
