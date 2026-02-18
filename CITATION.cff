@@ -1,1 +1,10 @@
 
+cff-version: 1.2.0
+message: "If you use Codey in your security research, please cite it as follows."
+authors:
+- family-names: "Sah"
+  given-names: "Volkan"
+title: "Codey: Developer Integrity & Security Tool"
+version: 2.2.0
+date-released: 2026-02-18
+url: "https://github.com/VolkanSah/Codey"
