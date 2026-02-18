@@ -244,20 +244,30 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 
 
 <details>
-<summary> - Themes for Codey - </summary> 
   
-![Codey_Retro](.codey_themes/_cl_lab_default.svg)
+<summary> ? Themes for Codey ? </summary>
   
-  ---
-  
-![Cuty_Dummy](.codey_themes/codey_lab_cuty.svg)
+#### Keep it Simple
 
-  ---
-  
-![CyberCat](.codey_themes/codey_lab_cat.svg)
+Before I develop any engine (will not do it!), I am releasing a few initial styles. These basics are now public while the core components remain hidden for the upcoming v24 engine release.
+
+The Retro styles should work smoothly. However, the Cyberpunk SVG assets may be resource-intensive on some mobile devices; please adjust them according to your needs. You are welcome to store your own themes in the hidden [.codey_themes](.codey_themes) folder. Please read the contribution guide within that folder for more details.
+
+### from the idea an my loved skin 🐻
+- [Codey_Retro (orginal)](.codey_themes/_cl_lab_default.svg)
+
+#### Girls + Divers (very cute! is swaer i love it so much)
+- [Cuty_Dummy](.codey_themes/codey_lab_cuty.svg)
+- [CyberCat](.codey_themes/codey_lab_cat.svg)
+
+</details>
 
 
-</details> 
+
+
+
+
+
 
 ---
 
@@ -435,15 +445,12 @@ soon
 
 ---
 
-## About
 
-Built by **[Volkan Sah](https://github.com/volkansah)** — a developer who believes in honest feedback, even when it hurts.
 
-v2.1 dumpy bugs fixed with assistance of **Claude (Anthropic)** — AI-assisted, human-verified. The core logic was always right. brain_bug.log (soon in codey) proves no AI wrote this alone.
+<details>
+<summary>- Disclaimer -</summary>
 
----
-
-## Disclaimer
+#### lets be honest ...!
 
 Codey is brutally honest. If you have thin skin about your coding habits, maybe stick to regular GitHub stats.
 
@@ -453,8 +460,17 @@ But it will also celebrate real achievements, reward consistent effort, and make
 
 **Codey is just code. But if it makes you code more, mission accomplished.**
 
+</details>
+
 ---
 
+## About
+
+Built by **[Volkan Sah](https://github.com/volkansah)** — a developer who believes in honest feedback, even when it hurts.
+
+v2.2.1 new theme? Oh my gosh! WTF so cute 😅 OMG!
+
+---
 
 **Made with much coffee and brutal honesty**
 
@@ -476,6 +492,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
