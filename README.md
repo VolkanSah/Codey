@@ -279,8 +279,9 @@ The Retro styles should work smoothly. However, the Cyberpunk SVG assets may be 
 #### What to do whith codey
 
 - [ ] GitLab support
+- [x] .codey_audit for later needed clean workflow (see below)
 - [x] Theming in SVG (first manual) 
-- [ ] Backround accelator integration (Codey gets a real brain) idea on hf only for hock .js i mean. repo klosed for core on codey-lab
+
 - [ ] brain_bug.log as official feature (when Brain is ready) (start tests)
 - [x] API endpoint for live stats, yes and no! 
 - [ ] PostgreSQL integration for historical tracking for Issue quality analysis testening backround
@@ -310,6 +311,8 @@ The Retro styles should work smoothly. However, the Cyberpunk SVG assets may be 
 - ✅ ~~Codey on drugs~~ — Energy calculation normalized
 - ✅ ~~Seasonal text overflow in SVG~~ — Fixed: wider box
 - ✅ some stuf if i have time.. ist test time
+- ✅ Dont need any more, new plan :D
+    - [ ] Backround accelator integration (Codey gets a real brain) idea on hf only for hock .js i mean. repo klosed for core on codey-lab
 
 
 </details> 
@@ -492,6 +495,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
