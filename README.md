@@ -379,9 +379,67 @@ But it will also celebrate real achievements, reward consistent effort, and make
  use version on https://github.com/Codey-LAB/
   > will be updatet by ai sitecick later. thanks for reading still here and hoplly you codey is fun 🤟
 
-##### Export notes 
+
+
+
+
+
+<details>
+<summary>Friends</summary>
+soon
+
+</details>
+
+
+
+---
+
+<details> 
+<summary>Contact</summary>
+
+
+#### **For legitimate inquiries:**
+- Legal requests: Through proper legal channels
+-  Security concerns: See [SECURITY.md](SECURITY.md)
+- **Security Concerns:** minigrex@proton.me
+
+
+## Community (WoS)
+
+- WoS **Discussions:** Global [GitHub Discussions](https://github.com/orgs/Wall-of-Shames/discussions)
+- **Report a Scam:** [Open an Issue](https://github.com/Wall-of-Shames/scammer-analysis-guide/issues/new)
+- WoS **Discussions:** Scam [Scammer Analysis Guide -Discussions](https://github.com/Wall-of-Shames/scammer-analysis-guide/discussions)
+- WoS Security:  NemesisCyberForce@proton.me
+
+---
+
+**For scammers:**
+- Your site is archived 💀
+- Your violations are documented ☠️
+- Your lies won't work here 😆
+
+</details> 
+
+
+
+---
+
+<details>
+<summary>Legal & Disclamer</summary>
+soon
+
+</details>
+
+---
+
+<details>
+<summary>Last words</summary>
+
+##### Remember!
 > **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
-> Export ~1600
+
+</details>
+
 
 
 
