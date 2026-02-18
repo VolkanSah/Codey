@@ -2,6 +2,8 @@
 
 This document outlines the structure and logic of the `_cl_lab_default.py` theme.
 
+![_cl_lab_default.svg](_cl_lab_default.svg)
+
 ---
 
 ## Technical Structure
