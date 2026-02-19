@@ -249,16 +249,7 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
   
 #### Keep it Simple
 
-Before I develop any engine (will not do it!), I am releasing a few initial styles. These basics are now public while the core components remain hidden for the upcoming v24 engine release.
-
-The Retro styles should work smoothly. However, the Cyberpunk SVG assets may be resource-intensive on some mobile devices; please adjust them according to your needs. You are welcome to store your own themes in the hidden [.codey_themes](.codey_themes) folder. Please read the contribution guide within that folder for more details.
-
-### from the idea an my loved skin 🐻
-- [Codey_Retro (orginal)](.codey_themes/_cl_lab_default.svg)
-
-#### Girls + Divers (very cute! is swaer i love it so much)
-- [Cuty_Dummy](.codey_themes/codey_lab_cuty.svg)
-- [CyberCat](.codey_themes/codey_lab_cat.svg)
+see [.codey_themes](.codey_themes) folder
 
 </details>
 
@@ -499,6 +490,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
