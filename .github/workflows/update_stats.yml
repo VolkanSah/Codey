@@ -1,0 +1,39 @@
+name: Update Stats v2 (2026)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 1 * *'   # 1st of month  06:00 UTC
+    - cron: '0 6 15 * *'  # 15th of month 06:00 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GIT_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - run: pip install requests
+
+      - name: Run stats collector
+        env:
+          GIT_TOKEN:          ${{ secrets.GIT_TOKEN }}
+          GITHUB_REPOSITORY:  ${{ github.repository }}
+        run: python .codey/scripts/update_stats.py
+
+      - name: Commit results
+        run: |
+          git config user.name  "Codey Bot"
+          git config user.email "codey@bot"
+          git add STAR_REPORT.md .codey/stats_history.jsonl
+          git diff --staged --quiet || git commit -m "stats: update [skip ci]"
+          git push
