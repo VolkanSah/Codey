@@ -41,8 +41,8 @@
   <rect width="630" height="473" fill="url(#grid)"/>
   <rect x="15" y="15" width="600" height="443" fill="#0c0018" stroke="#bf00ff" stroke-width="1.5"/>
 
-  <text x="26" y="34" fill="#e0aaff" font-family="Courier New" font-size="12" font-weight="bold">root@codey:~$ ./status --user ELDER --lvl 2 --prestige 0</text>
-  <text x="608" y="34" text-anchor="end" fill="#bf00ff" font-family="Courier New" font-size="10" opacity="0.5">2026-02-18 12:31 UTC</text>
+  <text x="26" y="34" fill="#e0aaff" font-family="Courier New" font-size="12" font-weight="bold">root@codey:~$ ./status --user ELDER --lvl 3 --prestige 0</text>
+  <text x="608" y="34" text-anchor="end" fill="#bf00ff" font-family="Courier New" font-size="10" opacity="0.5">2026-02-19 07:08 UTC</text>
   <rect class="scanline" x="15" y="43" width="600" height="5" fill="#bf00ff" opacity="0"/>
 
   <g class="bot-body">
@@ -90,7 +90,7 @@
 
   <g transform="translate(232, 50)" font-family="Courier New" fill="#e0aaff">
     <rect x="0" y="22" width="376" height="34" rx="4" fill="#f59e0b" opacity="0.1" stroke="#f59e0b" stroke-width="1"/>
-    <text x="8" y="35" font-size="11" font-weight="bold">[ELDER] LVL 2 •  PRESTIGE 0</text>
+    <text x="8" y="35" font-size="11" font-weight="bold">[ELDER] LVL 3 •  PRESTIGE 0</text>
     
     <g transform="translate(0,64)" font-size="12">
       <text x="0" y="0" opacity="0.65">health</text><text x="80" y="0">[█████░░░░░░░░░░░░░░░]</text><text x="374" y="0" text-anchor="end" fill="#ff88dd">28%</text>
@@ -102,7 +102,7 @@
     </g>
 
     <g transform="translate(0,198)" font-size="12">
-      <text x="0" y="20">STREAK=8d • COMMITS=195</text>
+      <text x="0" y="20">STREAK=9d • COMMITS=211</text>
       <text x="0" y="40">DOMINANT=Python 🐍 • TIER=ELDER</text>
       <text x="0" y="80" fill="#ff88dd">SEASON=💖 OS Love +10%</text>
     </g>
