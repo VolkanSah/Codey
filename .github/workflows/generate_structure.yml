@@ -3,13 +3,16 @@ name: Generate Repo Structure
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   structure:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GIT_TOKEN || secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GIT_TOKEN }}
 
       - uses: actions/setup-python@v5
         with:
@@ -23,5 +26,5 @@ jobs:
           git config user.name  "Codey Bot"
           git config user.email "codey@bot"
           git add PROJECT_STRUCTURE.md
-          git diff --staged --quiet || git commit -m "📁 update project structure"
+          git diff --staged --quiet || git commit -m "📁 update project structure [skip ci]"
           git push
