@@ -273,9 +273,11 @@ see [.codey_themes](.codey_themes) folder
 - [x] .codey_audit for later needed clean workflow (see below)
 - [x] Theming (Skin) in SVG Animation
 - [x] adds codey.config.example for (e.g.Skin, ...)
-- [x] Theme Loader
-
-
+- [x] Theme Loader + Demos
+- [x] Codey Actions (Helpers) addedfor all your Projects 😍
+    - [x] Starreport (Full + Markdown)
+    - [x] Codey Audit Collector (Basics)
+    - [x] Generate Repo Structure
 - [x] API endpoint for live stats, yes and no! 
 - [ ] PostgreSQL integration for historical tracking for Issue quality analysis testening backround
 - [ ] Issue quality analysis, must fixsome stuff. i found new pattern
@@ -490,6 +492,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
