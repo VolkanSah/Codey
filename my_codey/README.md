@@ -1,6 +1,9 @@
-##### here will be soon yourexportet codey. by volkan
+# Own Are
+##### [dev] idea
+>  Will not be overwritten after merge/updates/upgradeact
 
-### to do
-- 365,25 days
-- json + for week
-- jsonl for weekend backup. 
+
+- actions folder = your own actions for codey
+- backup_data = soon
+- backup_logs = soon
+
