@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codey — My GitHub Pet</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── CODEY OVERRIDES on top of WoS base ── */
+    :root {
+      --primary:   #bf00ff;
+      --accent:    #ff88dd;
+      --cyan:      #00ffff;
+      --bg:        #080010;
+      --bg2:       #0c0018;
+      --border:    rgba(191,0,255,0.35);
+      --text:      #e0aaff;
+      --text-dim:  rgba(224,170,255,0.5);
+      --glow:      0 0 12px rgba(191,0,255,0.5);
+      --glow-pink: 0 0 12px rgba(255,136,221,0.5);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* grid bg */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(191,0,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(191,0,255,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* scanline */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.08),
+        rgba(0,0,0,0.08) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(8,0,16,0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1rem; font-weight: 700;
+      color: var(--primary); text-shadow: var(--glow);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-logo span { color: var(--accent); }
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+      box-shadow: var(--glow-pink);
+    }
+    .nav-links { display: flex; gap: 1.5rem; font-size: 0.8rem; color: var(--text-dim); }
+    .nav-links a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── LAYOUT ── */
+    main { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+    section { padding: 5rem 0 3rem; }
+
+    /* ── HERO ── */
+    .hero {
+      padding-top: 6rem;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-pet {
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .hero-pet img, .hero-pet object {
+      width: 100%; max-width: 220px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      box-shadow: var(--glow);
+    }
+    .mood-badge {
+      font-size: 0.75rem; font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border: 1px solid var(--primary);
+      background: rgba(191,0,255,0.1);
+      color: var(--primary);
+      text-shadow: var(--glow);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .hero-info h1 {
+      font-size: 2rem; font-weight: 700;
+      color: var(--primary);
+      text-shadow: var(--glow);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .hero-info h1 span { color: var(--accent); }
+    .hero-meta {
+      font-size: 0.8rem; color: var(--text-dim);
+      margin-bottom: 1.5rem;
+      line-height: 2;
+    }
+    .hero-meta strong { color: var(--accent); }
+
+    /* tier pill */
+    .tier-pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--primary);
+      background: rgba(191,0,255,0.08);
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: var(--glow);
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── GLASS CARD ── */
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: attr(data-label);
+      position: absolute; top: -1px; left: 12px;
+      background: var(--bg2);
+      padding: 0 8px;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+    .card-title {
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    /* ── VITALS ── */
+    .vitals-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .stat-row { margin-bottom: 1rem; }
+    .stat-label {
+      font-size: 0.7rem; color: var(--text-dim);
+      display: flex; justify-content: space-between;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label strong { color: var(--accent); }
+    .stat-bar {
+      height: 6px;
+      background: rgba(191,0,255,0.1);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      box-shadow: var(--glow);
+      transition: width 1s ease;
+    }
+    .stat-fill.low { background: linear-gradient(90deg, #ff2200, #ff6600); }
+    .stat-fill.mid { background: linear-gradient(90deg, #ffaa00, var(--accent)); }
+
+    .counters {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .counter-box {
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      text-align: center;
+      background: rgba(191,0,255,0.04);
+    }
+    .counter-val {
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--primary);
+      text-shadow: var(--glow);
+      display: block;
+    }
+    .counter-key {
+      font-size: 0.65rem; color: var(--text-dim);
+      letter-spacing: 1px;
+      margin-top: 0.2rem;
+    }
+
+    /* ── EKG ── */
+    .ekg-wrap {
+      margin-top: 1rem;
+      position: relative;
+    }
+    .ekg-label {
+      font-size: 0.65rem; color: var(--text-dim);
+      margin-bottom: 0.5rem;
+      display: flex; justify-content: space-between;
+    }
+    #ekg-canvas {
+      width: 100%; height: 80px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.4);
+      display: block;
+    }
+
+    /* ── BRUTAL STATS ── */
+    .brutal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .b-item {
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      background: rgba(191,0,255,0.03);
+    }
+    .b-key { font-size: 0.65rem; color: var(--text-dim); letter-spacing: 1px; }
+    .b-val { font-size: 1rem; font-weight: 700; color: var(--accent); margin-top: 0.2rem; }
+
+    .penalties { margin-top: 1rem; }
+    .penalty-tag {
+      display: inline-block;
+      font-size: 0.65rem; padding: 0.2rem 0.5rem;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      margin: 0.2rem;
+      letter-spacing: 1px;
+    }
+    .penalty-tag.good { border-color: #00ff88; color: #00ff88; }
+
+    /* ── ACHIEVEMENTS ── */
+    .achievement-row {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .achievement {
+      border: 1px solid var(--primary);
+      background: rgba(191,0,255,0.08);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      box-shadow: var(--glow);
+    }
+
+    /* ── STAR REPORT ── */
+    .star-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .star-box {
+      border: 1px solid var(--border);
+      padding: 0.75rem; text-align: center;
+      background: rgba(191,0,255,0.04);
+    }
+    .star-val { font-size: 1.6rem; font-weight: 700; color: var(--primary); text-shadow: var(--glow); }
+    .star-key { font-size: 0.65rem; color: var(--text-dim); margin-top: 0.2rem; letter-spacing: 1px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin-top: 1rem; }
+    thead tr { border-bottom: 1px solid var(--border); }
+    th { color: var(--text-dim); font-weight: 400; padding: 0.4rem 0.5rem; text-align: left; letter-spacing: 1px; font-size: 0.65rem; }
+    td { padding: 0.4rem 0.5rem; border-bottom: 1px solid rgba(191,0,255,0.08); }
+    tr:hover td { background: rgba(191,0,255,0.05); }
+    .star-count { color: var(--accent); font-weight: 700; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sec-header h2 {
+      font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 3px; color: var(--primary);
+      text-shadow: var(--glow);
+    }
+    .sec-header span { font-size: 0.65rem; color: var(--text-dim); }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 2;
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+    footer a { color: var(--primary); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .fade-up:nth-child(2) { animation-delay: 0.1s; }
+    .fade-up:nth-child(3) { animation-delay: 0.2s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-pet { max-width: 180px; margin: 0 auto; }
+      .vitals-grid, .brutal-grid, .star-summary { grid-template-columns: 1fr 1fr; }
+      .counters { grid-template-columns: repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="status-dot"></div>
+      🐾 <span id="nav-user">user</span>/Codey
+    </div>
+    <div class="nav-links">
+      <a href="#vitals">Vitals</a>
+      <a href="#brutal">Stats</a>
+      <a href="#report">Stars</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section class="hero fade-up">
+    <div class="hero-pet">
+      <img src="../codey.svg" alt="My Codey" onerror="this.src='https://via.placeholder.com/220x220/0c0018/bf00ff?text=codey.svg'">
+      <div class="mood-badge" id="mood-badge">LOADING</div>
+    </div>
+    <div class="hero-info">
+      <div class="tier-pill" id="tier-pill">
+        <span>●</span> ELDER TIER • 9.9 YEARS
+      </div>
+      <h1>Meet my <span>Codey</span> 🐾</h1>
+      <div class="hero-meta" id="hero-meta">
+        Loading stats...<br>
+      </div>
+      <div class="achievement-row" id="achievements"></div>
+    </div>
+  </section>
+
+  <!-- ── VITALS ── -->
+  <section id="vitals">
+    <div class="sec-header">
+      <h2>// VITALS</h2>
+      <span id="last-update">last update: —</span>
+    </div>
+    <div class="vitals-grid">
+      <div class="card" data-label="[ STATS ]">
+        <div id="stat-bars"></div>
+      </div>
+      <div class="card" data-label="[ ACTIVITY ]">
+        <div class="counters" id="counters"></div>
+        <div class="ekg-wrap" style="margin-top:1.5rem">
+          <div class="ekg-label">
+            <span>health history (last 30)</span>
+            <span id="ekg-range">—</span>
+          </div>
+          <canvas id="ekg-canvas" height="80"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BRUTAL STATS ── -->
+  <section id="brutal">
+    <div class="sec-header">
+      <h2>// BRUTAL STATS</h2>
+      <span>no mercy, no filters</span>
+    </div>
+    <div class="card" data-label="[ ANALYSIS ]">
+      <div class="brutal-grid" id="brutal-grid"></div>
+      <div class="penalties" id="penalties"></div>
+    </div>
+  </section>
+
+  <!-- ── STAR REPORT ── -->
+  <section id="report">
+    <div class="sec-header">
+      <h2>// STAR REPORT</h2>
+      <span>from CODEY_STAR_REPORT.md</span>
+    </div>
+    <div class="card" data-label="[ STARS ]">
+      <div class="star-summary" id="star-summary">
+        <div class="star-box"><div class="star-val" id="s-own">—</div><div class="star-key">OWN REPOS</div></div>
+        <div class="star-box"><div class="star-val" id="s-stars">—</div><div class="star-key">OWN STARS</div></div>
+        <div class="star-box"><div class="star-val" id="s-forks">—</div><div class="star-key">FORK REPOS</div></div>
+        <div class="star-box"><div class="star-val" id="s-total">—</div><div class="star-key">GRAND TOTAL</div></div>
+      </div>
+      <div id="top10-wrap">
+        <div class="card-title">TOP 10 REPOS</div>
+        <table>
+          <thead><tr><th>#</th><th>REPOSITORY</th><th>STARS</th></tr></thead>
+          <tbody id="top10-body"></tbody>
+        </table>
+      </div>
+      <div style="margin-top:1rem; font-size:0.7rem; color:var(--text-dim)">
+        <a href="CODEY_STAR_REPORT.md" style="color:var(--primary)">→ full report</a>
+        &nbsp;•&nbsp;
+        <a href="https://github.com/Codey-LAB/" style="color:var(--primary)" target="_blank">→ Codey-LAB</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Powered by <a href="https://github.com/Codey-LAB/" target="_blank">Codey</a> — brutally honest GitHub RPG pet.<br>
+  No mercy. No participation trophies. Just raw truth.</p>
+</footer>
+
+<script>
+// ── HELPERS ──
+const $ = id => document.getElementById(id);
+const pct = v => Math.round(Math.max(0, Math.min(100, v)));
+const fillClass = v => v < 30 ? 'low' : v < 60 ? 'mid' : '';
+
+function bar(label, value, max=100) {
+  const p = pct((value/max)*100);
+  return `
+  <div class="stat-row">
+    <div class="stat-label"><span>${label}</span><strong>${typeof value === 'number' ? (max===100 ? p+'%' : value.toFixed(2)) : value}</strong></div>
+    <div class="stat-bar"><div class="stat-fill ${fillClass(p)}" style="width:${p}%"></div></div>
+  </div>`;
+}
+
+// ── LOAD codey.json ──
+async function loadCodey() {
+  let data;
+  try {
+    const r = await fetch('../codey.json');
+    data = await r.json();
+  } catch(e) {
+    // DEMO fallback — remove when deployed
+    data = {"health":29.4,"hunger":68.1,"happiness":0,"energy":20,"level":3,"streak":11,"total_commits":259,"mood":"struggling","achievements":["🧙‍♂️ Elder Council","👑 Social Elite","💎 Quality Craftsman"],"brutal_stats":{"tier":"elder","github_years":9.97,"social_score":1.25,"social_penalties":["quality_curator"],"avg_repo_quality":0.83,"commit_quality_score":1.0,"total_stars":697,"dominant_language":"Python","issues_closed":3,"issue_close_ratio":0.6,"issue_score":1.18,"can_prestige":false,"prestige_missing":["Need Level 10"]},"history":[{"timestamp":"2026-02-08T01:35:25Z","health":50,"daily_commits":0},{"timestamp":"2026-02-12T21:54:08Z","health":34.5,"daily_commits":7},{"timestamp":"2026-02-13T07:02:10Z","health":33.6,"daily_commits":29},{"timestamp":"2026-02-13T15:05:01Z","health":20.7,"daily_commits":55},{"timestamp":"2026-02-14T06:55:26Z","health":33.3,"daily_commits":42},{"timestamp":"2026-02-15T06:58:37Z","health":33.3,"daily_commits":0},{"timestamp":"2026-02-16T07:12:40Z","health":34.5,"daily_commits":30},{"timestamp":"2026-02-17T07:07:26Z","health":33.3,"daily_commits":8},{"timestamp":"2026-02-18T07:09:31Z","health":31.3,"daily_commits":2},{"timestamp":"2026-02-18T12:27:16Z","health":26.5,"daily_commits":18},{"timestamp":"2026-02-19T07:08:35Z","health":28.1,"daily_commits":16},{"timestamp":"2026-02-19T13:24:30Z","health":28.3,"daily_commits":0}],"last_update":"2026-02-19T13:24:30.003816+00:00"};
+  }
+  renderCodey(data);
+}
+
+function renderCodey(d) {
+  const bs = d.brutal_stats || {};
+  const username = window.location.hostname.split('.')[0] || 'user';
+  $('nav-user').textContent = username;
+
+  // mood + tier
+  $('mood-badge').textContent = (d.mood || 'unknown').toUpperCase();
+  $('tier-pill').innerHTML = `<span>●</span> ${(bs.tier||'?').toUpperCase()} TIER • ${(bs.github_years||0).toFixed(1)} YEARS`;
+
+  // last update
+  if (d.last_update) {
+    const dt = new Date(d.last_update);
+    $('last-update').textContent = 'last update: ' + dt.toUTCString().replace(' GMT','') + ' UTC';
+  }
+
+  // hero meta
+  $('hero-meta').innerHTML = `
+    Level <strong>${d.level||1}</strong> &nbsp;•&nbsp;
+    Streak <strong>${d.streak||0}d</strong> &nbsp;•&nbsp;
+    Commits <strong>${d.total_commits||0}</strong><br>
+    Language <strong>${bs.dominant_language||'?'}</strong> &nbsp;•&nbsp;
+    Stars <strong>${bs.total_stars||0}</strong>
+  `;
+
+  // achievements
+  const ach = d.achievements || [];
+  $('achievements').innerHTML = ach.map(a => `<div class="achievement">${a}</div>`).join('');
+
+  // stat bars
+  $('stat-bars').innerHTML =
+    bar('health',    d.health    || 0) +
+    bar('hunger',    d.hunger    || 0) +
+    bar('happiness', d.happiness || 0) +
+    bar('energy',    d.energy    || 0) +
+    bar('social',    bs.social_score || 0, 2) +
+    bar('quality',   bs.avg_repo_quality || 0, 1);
+
+  // counters
+  $('counters').innerHTML = `
+    <div class="counter-box"><span class="counter-val">${d.level||1}</span><div class="counter-key">LEVEL</div></div>
+    <div class="counter-box"><span class="counter-val">${d.streak||0}</span><div class="counter-key">STREAK</div></div>
+    <div class="counter-box"><span class="counter-val">${d.total_commits||0}</span><div class="counter-key">COMMITS</div></div>
+  `;
+
+  // brutal grid
+  $('brutal-grid').innerHTML = [
+    ['TIER',        (bs.tier||'?').toUpperCase()],
+    ['YEARS',       (bs.github_years||0).toFixed(1)],
+    ['SOCIAL',      (bs.social_score||0).toFixed(2)+'x'],
+    ['QUALITY',     (bs.avg_repo_quality||0).toFixed(2)],
+    ['ISSUES',      bs.issues_closed||0],
+    ['XP MULTI',    (bs.multipliers?.xp||0).toFixed(2)+'x'],
+  ].map(([k,v]) => `
+    <div class="b-item">
+      <div class="b-key">${k}</div>
+      <div class="b-val">${v}</div>
+    </div>
+  `).join('');
+
+  // penalties
+  const pen = bs.social_penalties || [];
+  const prestige = bs.prestige_missing || [];
+  $('penalties').innerHTML = pen.map(p =>
+    `<span class="penalty-tag ${p==='quality_curator'?'good':''}">${p}</span>`
+  ).join('') + (bs.can_prestige
+    ? '<span class="penalty-tag good">★ PRESTIGE READY</span>'
+    : prestige.map(m => `<span class="penalty-tag">${m}</span>`).join('')
+  );
+
+  // EKG canvas
+  drawEKG(d.history || []);
+}
+
+function drawEKG(history) {
+  const canvas = $('ekg-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || 600;
+  const H = 80;
+  canvas.width = W;
+  canvas.height = H;
+
+  if (!history.length) return;
+
+  const vals = history.map(h => h.health || 0);
+  const min = Math.min(...vals);
+  const max = Math.max(...vals) || 1;
+
+  $('ekg-range').textContent = `min: ${min.toFixed(0)}  max: ${max.toFixed(0)}`;
+
+  // grid lines
+  ctx.strokeStyle = 'rgba(191,0,255,0.1)';
+  ctx.lineWidth = 1;
+  [25,50,75].forEach(y => {
+    const py = H - (y/100)*H;
+    ctx.beginPath(); ctx.moveTo(0,py); ctx.lineTo(W,py); ctx.stroke();
+  });
+
+  // EKG line
+  const step = W / (vals.length - 1 || 1);
+  ctx.beginPath();
+  ctx.strokeStyle = '#bf00ff';
+  ctx.lineWidth = 2;
+  ctx.shadowColor = '#bf00ff';
+  ctx.shadowBlur = 8;
+
+  vals.forEach((v, i) => {
+    const x = i * step;
+    const y = H - ((v - min) / (max - min || 1)) * (H - 10) - 5;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // dots
+  ctx.shadowBlur = 0;
+  vals.forEach((v, i) => {
+    const x = i * step;
+    const y = H - ((v - min) / (max - min || 1)) * (H - 10) - 5;
+    ctx.beginPath();
+    ctx.arc(x, y, 3, 0, Math.PI*2);
+    ctx.fillStyle = '#ff88dd';
+    ctx.fill();
+  });
+}
+
+// ── LOAD STAR REPORT ──
+async function loadStarReport() {
+  try {
+    const r = await fetch('../CODEY_STAR_REPORT.md');
+    const text = await r.text();
+    parseStarReport(text);
+  } catch(e) {
+    // demo values
+    $('s-own').textContent   = '123';
+    $('s-stars').textContent = '697';
+    $('s-forks').textContent = '82';
+    $('s-total').textContent = '771';
+    renderTop10Demo();
+  }
+}
+
+function parseStarReport(text) {
+  const lines = text.split('\n');
+  const get = key => {
+    const l = lines.find(l => l.startsWith(key+':'));
+    return l ? l.split(':')[1].trim() : '—';
+  };
+  $('s-own').textContent   = get('own_repos_active');
+  $('s-stars').textContent = get('own_stars_active');
+  $('s-forks').textContent = get('fork_repos_active');
+  $('s-total').textContent = get('grand_total_stars');
+
+  // top10 — between [OWN_REPOS] and [OWN_REPOS_END]
+  const start = lines.findIndex(l => l.trim() === '[OWN_REPOS]');
+  const end   = lines.findIndex(l => l.trim() === '[OWN_REPOS_END]');
+  if (start > -1 && end > -1) {
+    const repos = lines.slice(start+2, end)
+      .filter(l => l.trim().startsWith('-') || (l.trim() && !l.includes('name')))
+      .slice(0,10);
+    renderTop10(repos);
+  }
+}
+
+function renderTop10(repos) {
+  const tbody = $('top10-body');
+  tbody.innerHTML = repos.map((line, i) => {
+    const parts = line.trim().replace(/^-?\s*/,'').split(/\s{2,}/);
+    const name  = parts[0] || '—';
+    const stars = parts[parts.length-1] || '—';
+    return `<tr><td>${i+1}</td><td>${name}</td><td class="star-count">⭐ ${stars}</td></tr>`;
+  }).join('');
+}
+
+function renderTop10Demo() {
+  const demo = [
+    ['GPT-API-Integration-in-HTML-CSS-with-JS-PHP', 87],
+    ['Exploring-the-Code-Interpreter-in-OpenAI-GPT', 44],
+    ['AI-API-Security-Best-Practices', 32],
+    ['optimize-MySQL-MariaDB', 28],
+    ['WordPress-Security-Scanner-advanced-use', 22],
+    ['ModSecurity-Webserver-Protection-Guide', 22],
+    ['aicc-comments-reply', 22],
+    ['Auto-Proxy-Fetcher', 19],
+    ['PoisonIvory', 16],
+    ['Bitcoin-Lottery-Miner', 12],
+  ];
+  $('top10-body').innerHTML = demo.map(([n,s],i) =>
+    `<tr><td>${i+1}</td><td>${n}</td><td class="star-count">⭐ ${s}</td></tr>`
+  ).join('');
+}
+
+// ── INIT ──
+loadCodey();
+loadStarReport();
+
+// redraw EKG on resize
+window.addEventListener('resize', () => {
+  fetch('../codey.json')
+    .then(r=>r.json())
+    .then(d=>drawEKG(d.history||[]))
+    .catch(()=>{});
+});
+</script>
+</body>
+</html>
