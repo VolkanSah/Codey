@@ -43,7 +43,8 @@ from datetime import datetime
 # SVG GENERATOR LOGIC STARTS HERE!
 # ─────────────────────────────────────────────
 
-def generate_brutal_svg(codey, seasonal_bonus):
+### def generate_brutal_svg(codey, seasonal_bonus): # old
+def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     brutal_stats = codey.get('brutal_stats', {})
     tier         = brutal_stats.get('tier', 'noob')
 
