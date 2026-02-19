@@ -746,20 +746,32 @@ def is_weekend_warrior():
 import importlib.util
 from pathlib import Path
 
-def load_theme_config(config_path: str = "codey.config") -> str:
-    """Reads THEME= from codey.config — fallback to 'default'."""
+def load_theme_config(config_path: str = "codey.config") -> tuple:
+    """Reads THEME= and ANIMATION_POWER= from codey.config.
+    Env var ANIMATION_POWER always wins over config (GitHub Actions).
+    Returns (theme: str, cycles: int)
+    """
+    theme = "default"
+    power = None
     try:
         for line in Path(config_path).read_text().splitlines():
             line = line.strip()
-            if line.startswith("THEME") and not line.startswith("#"):
-                return line.split("=")[1].strip().strip('"').strip("'")
+            if line.startswith("#"):
+                continue
+            if line.startswith("THEME"):
+                theme = line.split("=")[1].strip().strip('"').strip("'")
+            if line.startswith("ANIMATION_POWER"):
+                power = line.split("=")[1].strip().strip('"').strip("'")
     except FileNotFoundError:
         pass
-    return "default"
+    # GitHub Actions env wins over codey.config
+    power  = os.environ.get('ANIMATION_POWER', power or 'normal')
+    cycles = {'light': 2, 'normal': 4, 'full': 8}.get(power, 4)
+    print(f"⚙️  Animation power: {power} ({cycles} cycles)")
+    return theme, cycles
 
 def load_generate_fn(theme: str):
     """Loads generate_brutal_svg from theme folder. Fallback to default."""
-    # Builtin themes: _default_cuty, _default_cat, _default etc.
     candidates = [
         Path(f".codey_themes/_default_{theme}/_cl_lab_{theme}.py"),
         Path(f".codey_themes/{theme}/_cl_lab_{theme}.py"),      # community themes
@@ -837,9 +849,9 @@ if __name__ == "__main__":
         json.dump(codey, f, indent=2)
     print("\n💾 codey.json written.")
 
-    theme       = load_theme_config()
-    generate_fn = load_generate_fn(theme)
-    svg         = generate_fn(codey, seasonal_bonus)
+    theme, cycles = load_theme_config()
+    generate_fn   = load_generate_fn(theme)
+    svg           = generate_fn(codey, seasonal_bonus, cycles)
     with open('codey.svg', 'w', encoding='utf-8') as f:
         f.write(svg)
     print("🎨 codey.svg written.")
