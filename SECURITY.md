@@ -8,11 +8,13 @@ Codey is a neutral quality pet/tool for GitHub and GitLab.
 
 * It shows the world that not everything is scam and AI-generated garbage.
 * Codey scores Developer integrity — you can't fake it, you have to earn it.
+* Heart, Brain, Skin: A dead Codey doesn't lie. Authenticity is the only currency.
 
 ##### This tool is considered a security tool under ESOL v1.1:
 
 * It audits developer behavior, code quality and social engineering patterns.
 * Public audit available on GitHub — transparent, community-verified.
+* Any attempt to game the scoring system is flagged as a security violation.
 
 Free to use on GitHub and GitLab and similar Portals.
 Selling this script or using it for reputation manipulation is prohibited.
@@ -28,13 +30,13 @@ BUG: marks fixed bugs
 NEW: marks new features
 IMPROVED: marks improvements
 
-# =============================================================================
+---
 
-# Security Policy
+## Security Policy
 
-## Supported Versions
+### Supported Versions
 
-Codey is actively maintained. Please use the latest version for the most secure experience.
+Codey is a living immune system. Only the latest version is supported and monitored.
 
 | Version | Supported |
 | --- | --- |
@@ -43,7 +45,8 @@ Codey is actively maintained. Please use the latest version for the most secure 
 
 ## Reporting a Vulnerability
 
-If you find a security bug, please don't open a public issue.
+In accordance with our anti-fraud mission, security bugs must be reported privately. Public disclosure of vulnerabilities aids scammers and is considered a violation of the project's safety.
+
 Reports should be sent to the following security contacts:
 
 * Primary: minigrex@proton.me
@@ -52,7 +55,7 @@ Reports should be sent to the following security contacts:
 
 ## Integrity Audit
 
-Our automated system integrity reports are available here:
+Every audit is archived. Manipulation of the "Proof of Life" metrics will result in a permanent record within the Wall of Shames.
 [View Audit Data](https://www.google.com/search?q=./.codey_audit/AUDIT_DATA.md)
 
 ---
@@ -61,7 +64,7 @@ Our automated system integrity reports are available here:
 
 #### For legitimate inquiries:
 
-* Legal requests: Through proper legal channels
+* Legal requests: Through proper legal channels (Berlin Jurisdiction)
 * Security concerns: See contacts above or mail minigrex@proton.me
 
 ## Community
@@ -77,15 +80,14 @@ Our automated system integrity reports are available here:
 * Your site is archived
 * Your violations are documented
 * Your lies won't work here
+* You cannot delete the record of what you did
 
 ---
 
-*Last updated: 19.02.2026 09:35 MEZ by VolkanSah*
+*Last updated: 19.02.2026 09:40 MEZ by VolkanSah*
+
+
 
 ---
 
-##### Wall of Shames (c) 2024-2026 by NCF & SDCPT
-
-*Licensed under CC BY-SA 4.0 (Documentation), MIT (Code) + ESOL v1.1 (Ethical Security Operations License)*
-
-> Every word verified. Every claim documented. Every archive secured.
+Soll ich dir als nächsten Schritt ein Template für die **AUDIT_DATA.md** erstellen, damit die Integritäts-Logs genau so brutal und professionell aussehen?
