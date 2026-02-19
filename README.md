@@ -280,17 +280,19 @@ The Retro styles should work smoothly. However, the Cyberpunk SVG assets may be 
 
 - [ ] GitLab support
 - [x] .codey_audit for later needed clean workflow (see below)
-- [x] Theming in SVG (first manual) 
+- [x] Theming (Skin) in SVG Animation
+- [x] adds codey.config.example for (e.g.Skin, ...)
+- [x] Theme Loader
 
-- [ ] brain_bug.log as official feature (when Brain is ready) (start tests)
+
 - [x] API endpoint for live stats, yes and no! 
 - [ ] PostgreSQL integration for historical tracking for Issue quality analysis testening backround
 - [ ] Issue quality analysis, must fixsome stuff. i found new pattern
 - [x] Fallback commit detection for private/org repos
 - [x] Double streak penalty bug fixed
 - [x] Weekend bonus inflation bug fixed
-- [ ] Heartbeat skin, logik test (most not publik sorry.)
-> - [x] yeah i see i hate python! i love PHP! Pros know why check up soon my new PDF-CVE format. no its not an PDF! The funtions was clean! see history
+- [ ] Heartbeat, logik test (most not publik sorry.)
+- [ ] brain_bug.log as official feature (when Brain is ready) (start tests)
 
 </details> 
 
@@ -342,8 +344,10 @@ The Retro styles should work smoothly. However, the Cyberpunk SVG assets may be 
 <summary> - Changelog - </summary> 
 
 ### [2.2.0]
-#### Added Theme
-- cuty released
+#### Added 
+- Theme Loader
+- Themes/Skins (Area & demos)
+- cutey released ❤️
 
 ### [2.1.0]
 #### Added
@@ -495,6 +499,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
