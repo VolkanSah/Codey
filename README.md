@@ -251,6 +251,13 @@ Check out PinkyDB: a crazy way to teach Pinky Boolean logic. Warning: Requires C
 
 see [.codey_themes](.codey_themes) folder
 
+- Default (original)
+- Cuty (cute robot)
+- CyberCat (neon)
+- Evil Robot (dark) — neu
+- Ghost (blue/green) — neu
+- + Community themes welcome
+
 </details>
 
 
@@ -338,9 +345,13 @@ see [.codey_themes](.codey_themes) folder
 
 ### [2.2.0]
 #### Added 
-- Theme Loader
-- Themes/Skins (Area & demos)
-- cutey released ❤️
+- Theme Loader — dynamic plugin system
+- codey.config — one-line theme switching
+- Animation Power — light/normal/full via Actions env
+- Codey Star Report — bi-monthly stats collector
+- codey_star_report.py + workflow
+- Ghost theme demo
+- Evil Robot theme demo
 
 ### [2.1.0]
 #### Added
@@ -492,6 +503,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
