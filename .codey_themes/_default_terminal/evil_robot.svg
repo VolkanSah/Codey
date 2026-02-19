@@ -1,0 +1,398 @@
+<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0L0 0 0 20" fill="none" stroke="#ff2200" stroke-width="0.3" opacity="0.1"/>
+    </pattern>
+    <pattern id="scanlines" width="1" height="3" patternUnits="userSpaceOnUse">
+      <rect width="1" height="1" fill="#000000" opacity="0.25"/>
+    </pattern>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-hard">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="redshift">
+      <feColorMatrix type="matrix"
+        values="1.2 0.1 0   0 0
+                0   0.1 0   0 0
+                0   0   0.1 0 0
+                0   0   0   1 0"/>
+    </filter>
+    <radialGradient id="bodygrad" cx="35%" cy="25%" r="65%">
+      <stop offset="0%"   stop-color="#2a0800"/>
+      <stop offset="100%" stop-color="#0d0200"/>
+    </radialGradient>
+    <radialGradient id="headgrad" cx="35%" cy="25%" r="65%">
+      <stop offset="0%"   stop-color="#3a0a00"/>
+      <stop offset="100%" stop-color="#150300"/>
+    </radialGradient>
+    <radialGradient id="eyegrad" cx="30%" cy="30%" r="65%">
+      <stop offset="0%"   stop-color="#ff4400"/>
+      <stop offset="100%" stop-color="#660000"/>
+    </radialGradient>
+    <radialGradient id="pupilgrad" cx="35%" cy="35%" r="60%">
+      <stop offset="0%"   stop-color="#ff8800"/>
+      <stop offset="100%" stop-color="#330000"/>
+    </radialGradient>
+    <radialGradient id="shadowgrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ff2200" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ff2200" stop-opacity="0"/>
+    </radialGradient>
+    <!-- icon overlay gradient - 85% theme color -->
+    <linearGradient id="iconoverlay">
+      <stop offset="0%"   stop-color="#ff2200" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#cc1100" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="630" height="473" fill="#080000"/>
+  <rect width="630" height="473" fill="url(#grid)"/>
+  <ellipse cx="108" cy="240" rx="140" ry="160" fill="#ff2200" opacity="0.04" filter="url(#softglow)"/>
+
+  <!-- Card -->
+  <rect x="15" y="15" width="600" height="443" fill="#0a0000" stroke="#ff2200" stroke-width="1.5"/>
+  <rect x="12" y="12" width="606" height="449" fill="none" stroke="#ff2200" stroke-width="0.8" stroke-dasharray="6 3" opacity="0.25"/>
+  <!-- corner brackets — sharp, aggressive -->
+  <polyline points="15,35 15,15 35,15"      fill="none" stroke="#ff4400" stroke-width="2.5"/>
+  <polyline points="615,35 615,15 595,15"   fill="none" stroke="#ff4400" stroke-width="2.5"/>
+  <polyline points="15,438 15,458 35,458"   fill="none" stroke="#ff4400" stroke-width="2.5"/>
+  <polyline points="615,438 615,458 595,458" fill="none" stroke="#ff4400" stroke-width="2.5"/>
+
+  <!-- Header -->
+  <rect x="15" y="15" width="600" height="28" fill="#ff2200" opacity="0.07"/>
+  <line x1="15" y1="43" x2="615" y2="43" stroke="#ff2200" stroke-width="1" opacity="0.5"/>
+  <text x="26" y="34" fill="#ff4400" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user VETERAN --lvl 42 --prestige 2</text>
+  <text x="608" y="34" text-anchor="end" fill="#ff2200" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-02-18 00:29 UTC</text>
+
+  <!-- scanline over header -->
+  <rect x="15" y="43" width="600" height="5" fill="#ff2200" opacity="0">
+    <animate attributeName="y" values="43;263" dur="3.8s" repeatCount="4" fill="freeze"/>
+    <animate attributeName="opacity" values="0;0.15;0.15;0" keyTimes="0;0.05;0.95;1" dur="3.8s" repeatCount="4" fill="freeze"/>
+  </rect>
+
+  <!-- Divider -->
+  <line x1="220" y1="44" x2="220" y2="455" stroke="#ff2200" stroke-width="1" stroke-dasharray="4 3" opacity="0.25"/>
+
+  <!-- ══════════════════════════
+       EVIL ROBOT
+  ══════════════════════════ -->
+  <g>
+    <!-- walk toward viewer: scale up from 1.0 to 1.12, 4 cycles then freeze -->
+    <animateTransform attributeName="transform" type="translate"
+      values="0 0;-7 -8;0 0;-7 -8;0 0"
+      dur="3.2s" repeatCount="4" fill="freeze"
+      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <animateTransform attributeName="transform" type="scale"
+      values="1;1.06;1;1.06;1"
+      dur="3.2s" repeatCount="4" fill="freeze" additive="sum"
+      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+
+    <!-- ambient -->
+    <ellipse cx="108" cy="250" rx="85" ry="95" fill="#ff2200" opacity="0.06" filter="url(#softglow)"/>
+    <ellipse cx="108" cy="336" rx="50" ry="9"  fill="url(#shadowgrad)"/>
+
+    <!-- ── LEGS ── -->
+    <rect x="86"  y="295" width="18" height="33" rx="6" fill="url(#bodygrad)" stroke="#ff2200" stroke-width="1" filter="url(#glow)"/>
+    <rect x="112" y="295" width="18" height="33" rx="6" fill="url(#bodygrad)" stroke="#ff2200" stroke-width="1" filter="url(#glow)"/>
+    <!-- feet — wide, stompy -->
+    <rect x="76"  y="323" width="32" height="12" rx="4" fill="#1a0400" stroke="#ff2200" stroke-width="1" filter="url(#glow)"/>
+    <rect x="108" y="323" width="32" height="12" rx="4" fill="#1a0400" stroke="#ff2200" stroke-width="1" filter="url(#glow)"/>
+    <!-- foot claws -->
+    <line x1="80"  y1="335" x2="77"  y2="344" stroke="#ff4400" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+    <line x1="88"  y1="335" x2="88"  y2="345" stroke="#ff4400" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+    <line x1="96"  y1="335" x2="99"  y2="344" stroke="#ff4400" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+    <line x1="113" y1="335" x2="110" y2="344" stroke="#ff4400" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+    <line x1="121" y1="335" x2="121" y2="345" stroke="#ff4400" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+    <line x1="129" y1="335" x2="132" y2="344" stroke="#ff4400" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+
+    <!-- ── BODY ── -->
+    <rect x="70" y="212" width="76" height="88" rx="16" fill="url(#bodygrad)" stroke="#ff2200" stroke-width="1.5" filter="url(#glow)"/>
+    <!-- body highlight -->
+    <ellipse cx="94" cy="225" rx="26" ry="12" fill="#ff2200" opacity="0.08"/>
+    <!-- body panel — dark screen -->
+    <rect x="82" y="226" width="52" height="42" rx="8" fill="#050000" stroke="#ff2200" stroke-width="1" opacity="0.9"/>
+    <!-- circuit lines animated -->
+    <line x1="88" y1="242" x2="108" y2="242" stroke="#ff4400" stroke-width="1" opacity="0.6"
+          stroke-dasharray="20">
+      <animate attributeName="stroke-dashoffset" values="20;0" dur="2.6s" repeatCount="5" fill="freeze"/>
+    </line>
+    <line x1="108" y1="242" x2="108" y2="254" stroke="#ff4400" stroke-width="1" opacity="0.5"/>
+    <line x1="128" y1="254" x2="108" y2="254" stroke="#ff4400" stroke-width="1" opacity="0.6"
+          stroke-dasharray="20">
+      <animate attributeName="stroke-dashoffset" values="0;20" dur="3.2s" repeatCount="4" fill="freeze"/>
+    </line>
+    <!-- belly icon — pet emoji with red overlay -->
+    <text x="108" y="262" text-anchor="middle" font-size="20" filter="url(#redshift)">🦀</text>
+    <!-- overlay rect to tint emoji 85% red -->
+    <rect x="94" y="244" width="28" height="22" rx="3" fill="#ff2200" opacity="0.55"/>
+
+    <!-- ── LEFT ARM — raised with claw ── -->
+    <rect x="32" y="218" width="40" height="15" rx="7" fill="url(#bodygrad)" stroke="#ff2200" stroke-width="1" filter="url(#glow)"/>
+    <circle cx="32" cy="225" r="13" fill="#1a0400" stroke="#ff2200" stroke-width="1.2" filter="url(#glow)"/>
+    <!-- claws left -->
+    <line x1="22" y1="220" x2="16" y2="212" stroke="#ff4400" stroke-width="2.2" stroke-linecap="round" filter="url(#glow)"/>
+    <line x1="28" y1="215" x2="24" y2="206" stroke="#ff4400" stroke-width="2.2" stroke-linecap="round" filter="url(#glow)"/>
+    <line x1="35" y1="213" x2="33" y2="204" stroke="#ff4400" stroke-width="2.2" stroke-linecap="round" filter="url(#glow)"/>
+
+    <!-- ── RIGHT ARM — pointing forward menacingly ── -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate"
+        values="0 174 162;-15 174 162;0 174 162;-8 174 162;0 174 162"
+        dur="3s" repeatCount="4" fill="freeze"
+        calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+      <rect x="146" y="218" width="40" height="15" rx="7" fill="url(#bodygrad)" stroke="#ff2200" stroke-width="1" filter="url(#glow)"/>
+      <circle cx="186" cy="225" r="13" fill="#1a0400" stroke="#ff2200" stroke-width="1.2" filter="url(#glow)"/>
+      <!-- claws right -->
+      <line x1="192" y1="218" x2="200" y2="210" stroke="#ff4400" stroke-width="2.2" stroke-linecap="round" filter="url(#glow)"/>
+      <line x1="196" y1="224" x2="205" y2="218" stroke="#ff4400" stroke-width="2.2" stroke-linecap="round" filter="url(#glow)"/>
+      <line x1="196" y1="231" x2="205" y2="228" stroke="#ff4400" stroke-width="2.2" stroke-linecap="round" filter="url(#glow)"/>
+    </g>
+
+    <!-- ── NECK — spiked ── -->
+    <rect x="102" y="202" width="12" height="14" rx="3" fill="#1a0400" stroke="#ff2200" stroke-width="1"/>
+    <!-- neck spikes -->
+    <polygon points="102,202 98,194 106,198" fill="#ff4400" filter="url(#glow)"/>
+    <polygon points="114,202 110,198 118,194" fill="#ff4400" filter="url(#glow)"/>
+
+    <!-- ── HEAD ── -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate"
+        values="0 108 170;3 108 170;-3 108 170;0 108 170"
+        dur="5s" repeatCount="3" fill="freeze"
+        calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+
+      <!-- head shape — angular, not round -->
+      <rect x="62" y="128" width="92" height="76" rx="14" fill="url(#headgrad)" stroke="#ff2200" stroke-width="1.8" filter="url(#glow)"/>
+      <!-- head highlight -->
+      <ellipse cx="92" cy="140" rx="30" ry="12" fill="#ff2200" opacity="0.08"/>
+
+      <!-- ── HORNS — evil detail ── -->
+      <polygon points="78,128 70,105 88,122"  fill="#1a0400" stroke="#ff4400" stroke-width="1.5" filter="url(#glow)"/>
+      <polygon points="138,128 148,105 128,122" fill="#1a0400" stroke="#ff4400" stroke-width="1.5" filter="url(#glow)"/>
+      <!-- horn glow tips -->
+      <circle cx="70"  cy="105" r="3" fill="#ff4400" filter="url(#glow-hard)"/>
+      <circle cx="148" cy="105" r="3" fill="#ff4400" filter="url(#glow-hard)"/>
+
+      <!-- ── EAR NUBS — spiky ── -->
+      <circle cx="70"  cy="142" r="14" fill="url(#headgrad)" stroke="#ff2200" stroke-width="1" filter="url(#glow)"/>
+      <circle cx="70"  cy="142" r="8"  fill="#330000" opacity="0.8"/>
+      <circle cx="70"  cy="142" r="4"  fill="#ff2200" opacity="0.4"/>
+      <circle cx="146" cy="142" r="14" fill="url(#headgrad)" stroke="#ff2200" stroke-width="1" filter="url(#glow)"/>
+      <circle cx="146" cy="142" r="8"  fill="#330000" opacity="0.8"/>
+      <circle cx="146" cy="142" r="4"  fill="#ff2200" opacity="0.4"/>
+
+      <!-- ── FACE SCREEN — dark ── -->
+      <rect x="72" y="140" width="72" height="54" rx="10" fill="#030000" stroke="#ff2200" stroke-width="1.2"/>
+      <!-- face scanlines -->
+      <rect x="72" y="140" width="72" height="54" rx="10" fill="url(#scanlines)" opacity="0.8"/>
+      <!-- screen flicker -->
+      <rect x="72" y="140" width="72" height="54" rx="10" fill="#ff2200" opacity="0">
+        <animate attributeName="opacity" values="0;0;0.04;0;0;0.02;0" keyTimes="0;0.3;0.32;0.34;0.7;0.72;1"
+                 dur="4s" repeatCount="4" fill="freeze"/>
+      </rect>
+
+      <!-- ── EYES — angry slanted ── -->
+      <!-- left eye -->
+      <circle cx="89"  cy="168" r="14" fill="url(#eyegrad)" filter="url(#glow)"/>
+      <circle cx="89"  cy="168" r="9"  fill="url(#pupilgrad)"/>
+      <circle cx="89"  cy="168" r="4"  fill="#110000"/>
+      <circle cx="85"  cy="164" r="2.5" fill="#ff6600" opacity="0.7"/>
+      <!-- blink: eyelid rect slides down over eye, no jumping -->
+      <rect x="75" y="154" width="28" height="0" fill="#150300">
+        <animate attributeName="height" values="0;28;0" keyTimes="0;0.5;1"
+                 dur="5s" begin="1s" repeatCount="3" fill="freeze"/>
+      </rect>
+      <!-- angry brow left -->
+      <line x1="78" y1="154" x2="100" y2="159" stroke="#ff4400" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+
+      <!-- right eye -->
+      <circle cx="127" cy="168" r="14" fill="url(#eyegrad)" filter="url(#glow)"/>
+      <circle cx="127" cy="168" r="9"  fill="url(#pupilgrad)"/>
+      <circle cx="127" cy="168" r="4"  fill="#110000"/>
+      <circle cx="123" cy="164" r="2.5" fill="#ff6600" opacity="0.7"/>
+      <!-- blink right -->
+      <rect x="113" y="154" width="28" height="0" fill="#150300">
+        <animate attributeName="height" values="0;28;0" keyTimes="0;0.5;1"
+                 dur="5s" begin="1.1s" repeatCount="3" fill="freeze"/>
+      </rect>
+      <!-- angry brow right -->
+      <line x1="116" y1="159" x2="138" y2="154" stroke="#ff4400" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+
+      <!-- ── MOUTH — evil grin, teeth ── -->
+      <path d="M 96 186 Q 108 196 120 186" fill="none" stroke="#ff4400" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+      <!-- teeth -->
+      <rect x="100" y="186" width="5"  height="5" rx="1" fill="#ff4400" opacity="0.8" filter="url(#glow)"/>
+      <rect x="108" y="186" width="5"  height="6" rx="1" fill="#ff4400" opacity="0.8" filter="url(#glow)"/>
+      <rect x="116" y="186" width="5"  height="5" rx="1" fill="#ff4400" opacity="0.8" filter="url(#glow)"/>
+
+      <!-- ── FOREHEAD LEDs — red/orange alternating ── -->
+      <circle cx="96"  cy="145" r="3" fill="#ff2200" filter="url(#glow)">
+        <animate attributeName="r" values="3;4.5;3" dur="0.9s" repeatCount="8" fill="freeze"/>
+        <animate attributeName="opacity" values="1;0.2;1" dur="0.9s" repeatCount="8" fill="freeze"/>
+      </circle>
+      <circle cx="106" cy="143" r="3" fill="#ff6600" filter="url(#glow)">
+        <animate attributeName="r" values="3;4.5;3" dur="1.3s" begin="0.3s" repeatCount="6" fill="freeze"/>
+        <animate attributeName="opacity" values="1;0.2;1" dur="1.3s" begin="0.3s" repeatCount="6" fill="freeze"/>
+      </circle>
+      <circle cx="116" cy="143" r="3" fill="#ff2200" filter="url(#glow)">
+        <animate attributeName="r" values="3;4.5;3" dur="1.1s" begin="0.6s" repeatCount="7" fill="freeze"/>
+        <animate attributeName="opacity" values="1;0.2;1" dur="1.1s" begin="0.6s" repeatCount="7" fill="freeze"/>
+      </circle>
+      <circle cx="126" cy="145" r="3" fill="#ff6600" filter="url(#glow)">
+        <animate attributeName="r" values="3;4.5;3" dur="0.7s" begin="0.1s" repeatCount="10" fill="freeze"/>
+        <animate attributeName="opacity" values="1;0.2;1" dur="0.7s" begin="0.1s" repeatCount="10" fill="freeze"/>
+      </circle>
+
+      <!-- ── ANTENNA — cracked/broken style ── -->
+      <line x1="108" y1="128" x2="104" y2="108" stroke="#ff2200" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+      <line x1="104" y1="108" x2="108" y2="96"  stroke="#ff2200" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+      <!-- antenna rings -->
+      <circle cx="108" cy="94" r="8" fill="none" stroke="#ff4400" stroke-width="1.5" opacity="0">
+        <animate attributeName="r"       values="8;22"  dur="2s" repeatCount="5" fill="freeze"/>
+        <animate attributeName="opacity" values="0.8;0" dur="2s" repeatCount="5" fill="freeze"/>
+      </circle>
+      <circle cx="108" cy="94" r="8" fill="none" stroke="#ff6600" stroke-width="1" opacity="0">
+        <animate attributeName="r"       values="8;22"  dur="2s" begin="1s" repeatCount="4" fill="freeze"/>
+        <animate attributeName="opacity" values="0.8;0" dur="2s" begin="1s" repeatCount="4" fill="freeze"/>
+      </circle>
+      <!-- antenna tip -->
+      <circle cx="108" cy="94" r="8" fill="#ff2200" filter="url(#glow-hard)">
+        <animate attributeName="r"    values="8;10;8"  dur="1.5s" repeatCount="8" fill="freeze"/>
+        <animate attributeName="fill" values="#ff2200;#ff6600;#ff2200" dur="1.5s" repeatCount="8" fill="freeze"/>
+      </circle>
+      <circle cx="105" cy="91" r="2.5" fill="#ff8800" opacity="0.6"/>
+
+    </g><!-- head -->
+
+    <!-- ── FLOATING SKULL — instead of heart ── -->
+    <text x="164" y="150" font-size="20" text-anchor="middle" filter="url(#redshift)" opacity="0">💀
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.65;0.7;0.85;1"
+               dur="5s" repeatCount="3" fill="freeze"/>
+      <animateTransform attributeName="transform" type="scale"
+        values="0 0;0 0;1.3 1.3;1 1;0.6 0.6" keyTimes="0;0.65;0.7;0.82;0.95"
+        dur="5s" begin="0.8s" repeatCount="3" fill="freeze"
+        additive="sum"/>
+    </text>
+    <!-- skull red overlay -->
+    <rect x="154" y="132" width="22" height="22" rx="3" fill="#ff2200" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.6;0.6;0" keyTimes="0;0.65;0.7;0.85;1"
+               dur="5s" repeatCount="3" fill="freeze"/>
+    </rect>
+
+    <!-- ── FLOATING ⚡ — instead of star ── -->
+    <text x="50" y="158" font-size="16" text-anchor="middle" filter="url(#redshift)" opacity="0">⚡
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.8;0.85;0.95;1"
+               dur="7s" begin="2s" repeatCount="2" fill="freeze"/>
+    </text>
+    <rect x="42" y="143" width="18" height="18" rx="2" fill="#ff2200" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.55;0.55;0" keyTimes="0;0.8;0.85;0.95;1"
+               dur="7s" begin="2s" repeatCount="2" fill="freeze"/>
+    </rect>
+
+    <!-- mood -->
+    <text x="108" y="362" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#ff4400" opacity="0.85" filter="url(#glow)">GRINDING • 2.3y</text>
+
+  </g><!-- evil robot -->
+
+  <!-- ══════════════════════════
+       STATS PANEL
+  ══════════════════════════ -->
+  <g transform="translate(232, 50)" font-family="Courier New,monospace" fill="#ff4400">
+
+    <text x="0" y="16" font-size="13" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
+
+    <!-- tier badge -->
+    <rect x="0" y="22" width="376" height="34" rx="0" fill="#ff2200" opacity="0.08" stroke="#ff2200" stroke-width="1"/>
+    <rect x="0" y="22" width="3"   height="34" fill="#ff4400" rx="1"/>
+    <text x="8" y="35" font-size="11" font-weight="bold">[VETERAN] LVL 42 • 2.3y • XP=1.85x • ★★ PRESTIGE 2 ★★</text>
+    <text x="8" y="50" font-size="11" font-weight="bold" fill="#ff6600">MOOD=GRINDING</text>
+
+    <!-- stat bars -->
+    <g transform="translate(0,64)" font-size="12">
+      <text x="0"   y="0"   opacity="0.65">health   </text>
+      <text x="80"  y="0"  >[█████████████████░░░]</text>
+      <text x="374" y="0"   font-size="11" opacity="0.7" text-anchor="end" fill="#ff6600">87%</text>
+
+      <text x="0"   y="22"  opacity="0.65">hunger   </text>
+      <text x="80"  y="22" >[████████░░░░░░░░░░░░]</text>
+      <text x="374" y="22"  font-size="11" opacity="0.7" text-anchor="end" fill="#ff6600">42%</text>
+
+      <text x="0"   y="44"  opacity="0.65">happiness</text>
+      <text x="80"  y="44" >[████████████░░░░░░░░]</text>
+      <text x="374" y="44"  font-size="11" opacity="0.7" text-anchor="end" fill="#ff6600">63%</text>
+
+      <text x="0"   y="66"  opacity="0.65">energy   </text>
+      <text x="80"  y="66" >[██████████████████░░]</text>
+      <text x="374" y="66"  font-size="11" opacity="0.7" text-anchor="end" fill="#ff6600">91%</text>
+
+      <text x="0"   y="88"  opacity="0.65">social   </text>
+      <text x="80"  y="88" >[██████████████░░░░░░]</text>
+      <text x="374" y="88"  font-size="11" opacity="0.7" text-anchor="end" fill="#ff6600">1.47</text>
+
+      <text x="0"   y="110" opacity="0.65">quality  </text>
+      <text x="80"  y="110">[████████████████░░░░]</text>
+      <text x="374" y="110" font-size="11" opacity="0.7" text-anchor="end" fill="#ff6600">0.81</text>
+    </g>
+
+    <line x1="0" y1="190" x2="376" y2="190" stroke="#ff2200" stroke-width="1" stroke-dasharray="3 3" opacity="0.35"/>
+
+    <g transform="translate(0,198)" font-size="12">
+      <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
+      <text x="0" y="20">STREAK=1337d  •  COMMITS=9000  •  STARS=42</text>
+      <text x="0" y="40">DOMINANT=Rust 🦀  •  TIER=VETERAN</text>
+      <text x="0" y="60">PENALTIES=quality_curator</text>
+      <text x="0" y="80" fill="#ff6600">SEASON=💖 Open Source Love +10%</text>
+    </g>
+    <!-- icon overlays in activity log -->
+    <rect x="232" y="230" width="18" height="16" rx="2" fill="#ff2200" opacity="0.55" transform="translate(0,198)"/>
+    <rect x="0"   y="72"  width="22" height="16" rx="2" fill="#ff2200" opacity="0.55" transform="translate(0,198)"/>
+
+    <line x1="0" y1="292" x2="376" y2="292" stroke="#ff2200" stroke-width="1" stroke-dasharray="3 3" opacity="0.35"/>
+
+    <!-- achievements -->
+    <g transform="translate(0,300)">
+      <text x="0" y="0" font-size="11" opacity="0.5">$ ls ./achievements/</text>
+      <circle cx="22"  cy="30" r="19" fill="#0a0000" stroke="#ff4400" stroke-width="1.5" filter="url(#glow)"/>
+      <!-- icon + overlay -->
+      <text x="22"  y="37" text-anchor="middle" font-size="17" filter="url(#redshift)">🔥</text>
+      <circle cx="22"  cy="30" r="19" fill="#ff2200" opacity="0.5"/>
+
+      <circle cx="68"  cy="30" r="19" fill="#0a0000" stroke="#ff6600" stroke-width="1.5" filter="url(#glow)"/>
+      <text x="68"  y="37" text-anchor="middle" font-size="17" filter="url(#redshift)">💀</text>
+      <circle cx="68"  cy="30" r="19" fill="#ff2200" opacity="0.5"/>
+
+      <circle cx="114" cy="30" r="19" fill="#0a0000" stroke="#ff4400" stroke-width="1.5" filter="url(#glow)"/>
+      <text x="114" y="37" text-anchor="middle" font-size="17" filter="url(#redshift)">👾</text>
+      <circle cx="114" cy="30" r="19" fill="#ff2200" opacity="0.5"/>
+
+      <circle cx="160" cy="30" r="19" fill="#0a0000" stroke="#ff6600" stroke-width="1.5" filter="url(#glow)"/>
+      <text x="160" y="37" text-anchor="middle" font-size="17" filter="url(#redshift)">⭐</text>
+      <circle cx="160" cy="30" r="19" fill="#ff2200" opacity="0.5"/>
+
+      <circle cx="206" cy="30" r="19" fill="#0a0000" stroke="#ff4400" stroke-width="1.5" filter="url(#glow)"/>
+      <text x="206" y="37" text-anchor="middle" font-size="17" filter="url(#redshift)">💖</text>
+      <circle cx="206" cy="30" r="19" fill="#ff2200" opacity="0.5"/>
+    </g>
+
+    <line x1="0" y1="358" x2="376" y2="358" stroke="#ff2200" stroke-width="1" stroke-dasharray="3 3" opacity="0.35"/>
+
+    <g transform="translate(0,366)">
+      <text x="0" y="16" font-size="13" font-weight="bold">$ _<tspan fill="#ff4400">
+        <animate attributeName="opacity" values="1;0;1;0;1;0;1;0;1;0;1;0;1"
+                 keyTimes="0;0.08;0.16;0.25;0.33;0.41;0.5;0.58;0.66;0.75;0.83;0.91;1"
+                 dur="6s" begin="0.5s" repeatCount="3" fill="freeze"/>█</tspan>
+      </text>
+      <text x="374" y="16" font-size="10" opacity="0.4" text-anchor="end" fill="#ff2200">2026-02-18 00:29 UTC</text>
+    </g>
+
+  </g>
+
+</svg>
