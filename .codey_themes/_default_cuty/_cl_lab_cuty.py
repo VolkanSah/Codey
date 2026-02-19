@@ -42,9 +42,8 @@ from datetime import datetime
 # ─────────────────────────────────────────────
 # SVG GENERATOR LOGIC STARTS HERE!
 # ─────────────────────────────────────────────
-# from datetime import datetime
-
-def generate_brutal_svg(codey, seasonal_bonus):
+### def generate_brutal_svg(codey, seasonal_bonus): # old
+def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     # 1. DATEN-VORBEREITUNG & MAPPINGS
     brutal_stats = codey.get('brutal_stats', {})
     tier = brutal_stats.get('tier', 'noob')
