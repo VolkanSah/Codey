@@ -1,4 +1,5 @@
 # Default terminal svg theme
 
-##### from idea (2.2.x)  to 999.9.x
+##### from idea (xxx.x)  to 999.9.x
+Soon .  For the evils :D 
 
