@@ -19,7 +19,7 @@ jobs:
           python-version: '3.11'
 
       - name: Generate structure
-        run: python generate_structure.py
+        run: python .codey/scripts/generate_structure.py
 
       - name: Commit structure
         run: |
