@@ -56,7 +56,7 @@ Reports should be sent to the following security contacts:
 ## Integrity Audit
 
 Every audit is archived. Manipulation of the "Proof of Life" metrics will result in a permanent record within the Wall of Shames.
-[View Audit Data](https://www.google.com/search?q=./.codey_audit/AUDIT_DATA.md)
+[View Audit Data](/.codey_audit/AUDIT_DATA.md)
 
 ---
 
