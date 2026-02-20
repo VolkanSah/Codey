@@ -1,29 +1,44 @@
-# Core — wird bei update/merge überschrieben
-.codey
-.brain_bug
-.codey_themes
-.codey_audit
+# =============================================================================
+# .gitignore — Codey No Mercy Edition
+# =============================================================================
+# RULE: Codey Core = NEVER ignore (must be updatable via merge)
+#       User Data   = ALWAYS ignore (never overwrite)
+# =============================================================================
 
-# ABER history behalten!
-!.codey/stats_history.jsonl
-
-# User config — nie überschreiben
+# ── USER DATA — root ──
 codey.config
+codey.json
+codey.svg
+CODEY_STAR_REPORT.md
+PROJECT_STRUCTURE.md
 
-# Python
+# ── USER DATA — folders ──
+my_codey/
+
+# ── CORE DATA — ignore only the generated/user parts ──
+.codey/stats_history.jsonl
+.codey_audit/AUDIT_DATA.md
+
+# ── DOCS — user owned ──
+docs/index.html
+docs/user_assets/
+
+# ── PYTHON ──
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
 *.egg-info/
 *.egg
 venv/
 ENV/
 
-# IDE
+# ── IDE ──
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# OS
+# ── OS ──
 .DS_Store
 Thumbs.db
