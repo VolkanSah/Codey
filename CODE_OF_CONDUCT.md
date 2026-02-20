@@ -142,16 +142,16 @@ No forms. No applications. No "please review my PR."
 
 We are specifically here for:
 
-- **Young developers** who are just starting out and deserve honest guidance, not scam tutorials
+- **Young developers** who are just starting out and deserve honest guidance, not scam tutorials!
 - **Beginners** who don't yet have the technical knowledge to spot a wrapper from a real tool
 - **Non-technical users** who trust a star count and a flashy README
-- **The open source community** whose reputation gets damaged every time a scam repo goes viral
+- **The open source community** whose reputation gets damaged every time a scam repo goes viral 💔
 
 We are not the fun police. We have nothing against AI tools, automation, or even unconventional approaches to development. We have everything against people who exploit curiosity and trust for a quick crypto payment.
 
 ---
 
-## Why Open Source?
+## Why is Codey Open Source?
 
 Because the answer to open source fraud is better open source. Not paywalls. Not closed platforms. Not "trust us."
 
