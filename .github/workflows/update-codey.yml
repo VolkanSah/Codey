@@ -1,51 +1,81 @@
-# Workflow to update Codey pet stats
+# =============================================================================
+# WORKFLOW: Codey Integrity Guard - [Update Codey]
+# PART OF:  Codey - No Mercy EDITION
+# =============================================================================
+# Role:        Automated Audit & Compliance (ESOL v1.1)
+# Copyright:   (c) 2026 VolkanSah
+# License:     Apache 2.0 + ESOL v1.1 (https://github.com/VolkanSah/ESOL)
+# Enforcement: Jurisdiction Berlin, Germany (StGB & DSGVO)
+# =============================================================================
+
+# Define the name of the workflow as it appears in the Actions tab
 name: Update Codey
 
+# Define the triggers for this workflow
 on:
+  # Run automatically at 06:00 UTC every day (Cron syntax)
   schedule:
     - cron: '0 6 * * *'
+  # Allow manual triggering of the workflow from the UI
   workflow_dispatch:
 
+# Define the execution logic
 jobs:
+  # Job identifier
   update-codey:
+    # Use the latest Ubuntu runner provided by GitHub
     runs-on: ubuntu-latest
+    # Grant permission to write/push changes back to the repository
     permissions:
       contents: write
 
     steps:
+    # Step 1: Clone the repository to the runner
     - uses: actions/checkout@v4
       with:
+        # Use the default GITHUB_TOKEN for authentication
         token: ${{ secrets.GITHUB_TOKEN }}
+        # Keep credentials stored to allow git commands later
         persist-credentials: true
 
+    # Step 2: Prepare the Python environment
     - uses: actions/setup-python@v4
       with:
+        # Specify the exact Python version for consistency
         python-version: '3.11'
 
+    # Step 3: Setup required libraries
     - name: Install dependencies
       run: |
+        # Upgrade the package installer first
         python -m pip install --upgrade pip
+        # Install from file if it exists, otherwise fallback to 'requests'
         if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install requests; fi
 
+    # Step 4: Execute the actual "No Mercy" audit/update script
     - name: Update Codey
       env:
+        # Pass secrets and variables as environment variables to Python
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
         GIT_REPOSITORY: ${{ vars.GIT_REPOSITORY }}
       run: python update_codey.py
 
+    # Step 5: Save changes back to the repository
     - name: Commit
       run: |
+        # Set local identity for the commit
         git config --local user.name "Codey Bot"
         git config --local user.email "action@github.com"
 
-        # Attempt to stage generated assets (suppress errors if missing)
+        # Attempt to stage generated assets (suppress errors if files don't exist yet)
         git add codey.svg codey.json 2>/dev/null || true
 
-        # Commit and push only if changes are detected in index
+        # Check if there are actual changes to avoid empty/failing commits
         if git diff --cached --quiet; then
           echo "No changes to commit"
         else
-          git commit -m "🐾 Daily Codey update"
+          # Commit with a friendly message and push to the branch
+          git commit -m "🐾 Daily Codey update 🐾"
           git push
         fi
