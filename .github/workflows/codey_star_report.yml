@@ -1,39 +1,72 @@
+# =============================================================================
+# WORKFLOW: Codey Star Report - [Codey Star Report]
+# PART OF:  Codey - No Mercy EDITION
+# =============================================================================
+# Role:        Automated Audit & Compliance (ESOL v1.1)
+# Copyright:   (c) 2026 VolkanSah
+# License:     Apache 2.0 + ESOL v1.1 (https://github.com/VolkanSah/ESOL)
+# Enforcement: Jurisdiction Berlin, Germany (StGB & DSGVO)
+# =============================================================================
+
+# Define the name for this specific reporting workflow
 name: Codey Star Report
 
+# Define trigger events
 on:
+  # Allows manual start from the Actions tab
   workflow_dispatch:
+  # Automated schedule using Cron syntax
   schedule:
-    - cron: '0 6 1  * *'   # 1st  of month 06:00 UTC
-    - cron: '0 6 15 * *'   # 15th of month 06:00 UTC
+    - cron: '0 6 1  * *'   # Runs on the 1st of every month at 06:00 UTC
+    - cron: '0 6 15 * *'   # Runs on the 15th of every month at 06:00 UTC
 
+# Permissions: Needed to commit the generated report and history back to the repo
 permissions:
   contents: write
 
 jobs:
+  # Job definition for the reporting task
   star-report:
+    # Use the most recent Ubuntu runner
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Clone the repository onto the runner
       - uses: actions/checkout@v4
         with:
+          # Use a custom token for authentication to avoid rate limits
           token: ${{ secrets.GIT_TOKEN }}
 
+      # Step 2: Set up the Python environment
       - uses: actions/setup-python@v5
         with:
+          # Using version 3.11 for performance and stability
           python-version: '3.11'
+          # Caching 'pip' dependencies speeds up subsequent runs significantly
           cache: 'pip'
 
+      # Step 3: Install the only required external library
       - run: pip install requests
 
+      # Step 4: Execute the core logic script
       - name: Run Codey Star Report
         env:
+          # Map secrets to environment variables for the Python script
           GIT_TOKEN:         ${{ secrets.GIT_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: python .codey/scripts/codey_star_report.py
 
+      # Step 5: Save the generated report and data history
       - name: Commit results
         run: |
+          # Configure the local Git identity for this job
           git config user.name  "Codey Bot"
           git config user.email "codey@bot"
+          
+          # Stage the Markdown report and the append-only JSONL history file
           git add CODEY_STAR_REPORT.md .codey/stats_history.jsonl
+          
+          # Only commit if there are actual differences; [skip ci] prevents re-triggering workflows
           git diff --staged --quiet || git commit -m "report: codey star report [skip ci]"
+          
+          # Push the changes back to the repository
           git push
