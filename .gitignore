@@ -11,6 +11,7 @@ codey.json
 codey.svg
 CODEY_STAR_REPORT.md
 PROJECT_STRUCTURE.md
+README.md
 
 # ── USER DATA — folders ──
 my_codey/
@@ -21,7 +22,7 @@ my_codey/
 
 # ── DOCS — user owned ──
 docs/index.html
-docs/user_assets/
+docs/assets/
 
 # ── PYTHON ──
 __pycache__/
