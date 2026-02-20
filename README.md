@@ -511,21 +511,71 @@ The software is provided "as is". If Codey's Action fails and your streak breaks
 
 ## About
 
-Built by **[Volkan Sah](https://github.com/volkansah)** — a developer who believes in honest feedback, even when it hurts.
+Built with logic, laziness, and help from AI by **[Volkan Sah](https://github.com/volkansah)** 
+with coffee and brutal honesty — a developer who believes in honest feedback, even when it hurts.
 
-v2.2.1 new theme? Oh my gosh! WTF so cute 😅 OMG!
+v2.2.1 new theme? Oh my gosh! WTF so cute 😅 OMG!  
+Ok ok!
+
+<details>
+<summary>- AI Usage - please read the truth -</summary>
+
+AI is just a child, a child who growsup with your hole bullshist , now they start on github and gitla to! so here you learn in this projekt following from me: 
+
+##### Yes, I used AI. No, I don't care who knows. cause i am not a kiddi!
+
+**Gemini** — documentation drafts, boring cleanup work. Gemini is stupid for devs, GPT is more worst!  
+**Claude** — architecture brainstorming, 2am brain freeze moments , sometimes he get crazy but i feel with him :D
+**Me** — everything that actually matters, just Me, your nightmare or your best friend, chose self :D 
+
+##### Note for Wannabes and MArketing Gurus:
+This is exactly how AI should be used:
+as a tool by someone who knows what they're doing —
+not as a replacement for thinking.
+
+Codey detects AI-generated fake repos.
+Transparency is the least I can do.
+
+**The logic is mine. The coffee was real. The Codey is honest.**
+
+</details>
+
+### If you love Codey & Cuty then give them a Hug! Star this repo... Oh where is Codey? Have you seen him?
+- [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)  
+or my profile repo to see my upcoming freaky minds :D
+
+
+
 
 ---
 
-**Made with much coffee and brutal honesty**
+<details>
+<summary>------ Last words ------</summary>
 
-- [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)
-- [Star this repo](https://github.com/Codey-LAB/.github) to spreed love and freedom for open source! Don`t be evil morty! Dont be , i get you! 
-- [volkansah.github.io/Codey](https://volkansah.github.io/Codey/) , my codey... oh i am terrible sorry codey! ⚠️
- use version on https://github.com/Codey-LAB/
-  > will be updatet by ai sitecick later. thanks for reading still here and hoplly you codey is fun 🤟
+#### I scrolled through ...
+Facebook, Instagram, TikTok one day.
+Hundreds of thousands of scam accounts. "Ethical hackers". 
+Coding courses. Make money with AI. Cybersecurity "experts".
+18+ channels — pure bullshit. Maybe 2 real ones.
+
+And a beginner sees THIS first. Before a single real developer.
+
+Someone asked me: why don't professionals speak up?
+
+So I spent 3 weeks of my free time building something 
+that hunts these people instead.
+
+Not a rant. Not a post. A tool with teeth.
+
+**That's Codey. That's Wall of Shames. That's why.**
+
+</details>
+
+
 
 ---
+
+
 
 ## License
 
@@ -538,17 +588,6 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
 
-
-
----
-
-<details>
-<summary>Last words</summary>
-
-##### Remember!
-> **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
-
-</details>
 
 
 
