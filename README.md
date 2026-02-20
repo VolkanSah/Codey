@@ -511,26 +511,51 @@ The software is provided "as is". If Codey's Action fails and your streak breaks
 
 ## About
 
-Built with logic, laziness, and help from AI by **[Volkan Sah](https://github.com/volkansah)** 
+Built with logic, laziness, and help from AI by **[Volkan Sah](https://github.com/volkansah)**  
 with coffee and brutal honesty — a developer who believes in honest feedback, even when it hurts.
 
-v2.2.1 new theme? Oh my gosh! WTF so cute 😅 OMG!  
-Ok ok!
+v2.2.1 — new theme? Oh my gosh! WTF so cute 😅 OMG! Ok ok!
+
+---
+
+### The Story
+
+I scrolled through Facebook, Instagram, TikTok one day.
+Hundreds of thousands of scam accounts. "Ethical hackers".
+Coding courses. Make money with AI. Cybersecurity "experts".
+18+ channels — pure bullshit. Maybe 2 real ones.
+
+And a beginner sees THIS first. Before a single real developer.
+
+Someone asked me: *why don't professionals speak up?*
+
+So I spent 3 weeks of my free time — with coffee, AI tools,
+and coding tricks that don't exist in any best practice guide —
+building something that hunts these people instead.
+
+Not a rant. Not a post. **A tool with teeth.**
+
+One side documents the fraud. The other side makes it irrelevant.  
+That's Codey. That's Wall of Shames. That's why.
+
+---
 
 <details>
 <summary>- AI Usage - please read the truth -</summary>
 
-AI is just a child, a child who growsup with your hole bullshist , now they start on github and gitla to! so here you learn in this projekt following from me: 
+AI is just a child — a child who grows up with your whole bullshit.
+Now they start on GitHub and GitLab too. So here's what you learn from me:
 
-##### Yes, I used AI. No, I don't care who knows. cause i am not a kiddi!
+##### Yes, I used AI. No, I don't care who knows. Cause I am not a kiddie!
 
-**Gemini** — documentation drafts, boring cleanup work. Gemini is stupid for devs, GPT is more worst!  
-**Claude** — architecture brainstorming, 2am brain freeze moments , sometimes he get crazy but i feel with him :D
-**Me** — everything that actually matters, just Me, your nightmare or your best friend, chose self :D 
+**Gemini** — documentation drafts, boring cleanup work. Gemini is stupid for devs, GPT is even worse!  
+**Claude** — architecture brainstorming, 2am brain freeze moments. Sometimes he gets crazy but I feel with him :D  
+**Me** — everything that actually matters. Just me. Your nightmare or your best friend — choose yourself :D
 
-##### Note for Wannabes and MArketing Gurus:
-This is exactly how AI should be used:
-as a tool by someone who knows what they're doing —
+##### Note for Wannabes and Marketing Gurus:
+
+This is exactly how AI should be used —
+as a tool by someone who knows what they're doing,
 not as a replacement for thinking.
 
 Codey detects AI-generated fake repos.
@@ -540,38 +565,11 @@ Transparency is the least I can do.
 
 </details>
 
-### If you love Codey & Cuty then give them a Hug! Star this repo... Oh where is Codey? Have you seen him?
-- [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)  
-or my profile repo to see my upcoming freaky minds :D
+### If you love Codey & Cuty then give them a Hug! 
+⭐ [Star this repo](https://github.com/VolkanSah/Codey) if Codey made you cry (in a good way)  
+or check my profile repo to see my upcoming freaky minds :D
 
-
-
-
----
-
-<details>
-<summary>------ Last words ------</summary>
-
-#### I scrolled through ...
-Facebook, Instagram, TikTok one day.
-Hundreds of thousands of scam accounts. "Ethical hackers". 
-Coding courses. Make money with AI. Cybersecurity "experts".
-18+ channels — pure bullshit. Maybe 2 real ones.
-
-And a beginner sees THIS first. Before a single real developer.
-
-Someone asked me: why don't professionals speak up?
-
-So I spent 3 weeks of my free time building something 
-that hunts these people instead.
-
-Not a rant. Not a post. A tool with teeth.
-
-**That's Codey. That's Wall of Shames. That's why.**
-
-</details>
-
-
+*Oh where is Codey? Have you seen him?* 🐾
 
 ---
 
@@ -579,7 +577,7 @@ Not a rant. Not a post. A tool with teeth.
 
 ## License
 
-This project is dual-licensed under **Apache 2.0** and the **Ethical Security Operations License (ESOL v1.1)**.
+This project is dual-licensed under **Apache 2.0** and the **Ethical Security Operations License (ESOL v1.1)** byV Volkan K-Budak (VolkanSah).
 
 The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in ESOL v1.1.
 
@@ -587,6 +585,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
