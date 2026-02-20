@@ -278,23 +278,30 @@ see [.codey_themes](.codey_themes) folder
 
 #### What to do whith codey
 
-- [ ] GitLab support
-- [x] .codey_audit for later needed clean workflow (see below)
+## Roadmap
+
+#### What's done
+- [x] .codey_audit — clean workflow foundation
 - [x] Theming (Skin) in SVG Animation
-- [x] adds codey.config.example for (e.g.Skin, ...)
-- [x] Theme Loader + Demos
-- [x] Codey Actions (Helpers) addedfor all your Projects 😍
-    - [x] Starreport (Full + Markdown)
-    - [x] Codey Audit Collector (Basics)
-    - [x] Generate Repo Structure
-- [x] API endpoint for live stats, yes and no! 
-- [ ] PostgreSQL integration for historical tracking for Issue quality analysis testening backround
-- [ ] Issue quality analysis, must fixsome stuff. i found new pattern
+- [x] codey.config.example — one-line theme switching
+- [x] Theme Loader + Demos — sooo cute :D
 - [x] Fallback commit detection for private/org repos
 - [x] Double streak penalty bug fixed
 - [x] Weekend bonus inflation bug fixed
-- [ ] Heartbeat, logik test (most not publik sorry.)
-- [ ] brain_bug.log as official feature (when Brain is ready) (start tests)
+- [x] Codey Actions (Helpers) for all your Projects 😍
+    - [x] Star Report (Full + Markdown)
+    - [x] Codey Audit Collector (Basics)
+    - [x] Generate Repo Structure
+- [x] API endpoint — yes and no, you'll see :D
+
+#### In progress
+- [ ] Issue quality analysis — found new patterns, needs fixing
+- [ ] Heartbeat — logic test (mostly not public, sorry)
+- [ ] brain_bug.log as official feature (when Brain is ready)
+
+#### Planned
+- [ ] GitLab support
+- [ ] PostgreSQL integration for historical Issue quality tracking
 
 </details> 
 
@@ -346,17 +353,32 @@ see [.codey_themes](.codey_themes) folder
 <summary> - Changelog - </summary> 
 
 ### [2.2.0]
-#### Added 
-- Theme Loader — dynamic plugin system
-- codey.config — one-line theme switching
-- Animation Power — light/normal/full via Actions env
+#### Added
+- Theme Loader — very simple system
+- codey.config — one-line theme switching (and soon other stuff)
+- Animation Power — [experimental]
 - Codey Star Report — bi-monthly stats collector
-- codey_star_report.py + workflow
-- Sort files
-- Evil Robot theme demo
+- Sort files + clean structure
+- Evil Robot theme demo only
+- Ghost theme demo                    ← soon
+- docs/ + example.index.html          ← dev-demo
 - Update Toolbox - added some tools (actions)
-- Update Text #comments with AI (Geminie/Claude)
+- Update Text #comments with AI (Gemini/Claude)
 - waiting for world domination 😸
+
+#### Roadmap done:
+- [x] .codey_audit for later needed clean workflow
+- [x] Theming (Skin) in SVG Animation
+- [x] adds codey.config.example
+- [x] Theme Loader + Demos sooo cute :D
+- [x] Codey Actions (Helpers) for all your Projects 😍
+    - [x] Star Report (Full + Markdown)
+    - [x] Codey Audit Collector (Basics)
+    - [x] Generate PROJECT_STRUCTURE from repo
+
+Feature: PR your themes to Codeys global theme folder and share the love worldwide! 🌍
+     
+Feature of repo, now PR your themes to codeys glabal theme folder and share the love world wide :D 
 
 ### [2.1.0]
 #### Added
@@ -538,6 +560,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
 
 </details>
+
 
 
 
