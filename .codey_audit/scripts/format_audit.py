@@ -1,42 +1,59 @@
-import json
-import os
-from datetime import datetime
+# =============================================================================
+# SCRIPT:      format_audit.py
+# EDITION:     No Mercy / Security Tooling
+# -----------------------------------------------------------------------------
+# PURPOSE:     Transforms raw JSON API data into a verified Markdown Audit.
+# LEGAL:       Subject to ESOL v1.1 | No Reputation Manipulation Allowed.
+# REPO:        https://github.com/VolkanSah/ESOL
+# COPYRIGHT:   (c) 2026 VolkanSah
+# =============================================================================
+
+import json # Standard library to parse JSON data
+import os # Standard library for file and directory path operations
+from datetime import datetime # Library to handle timestamps
 
 # Basis-Verzeichnis relativ zum Root des Repos
 BASE_DIR = ".codey_audit"
 
 def load_json(filename):
+    """Safely loads a JSON file and returns a dictionary. Handles missing or corrupt files."""
     path = os.path.join(BASE_DIR, filename)
     if os.path.exists(path):
         with open(path, 'r', encoding='utf-8') as f:
             try:
                 return json.load(f)
             except Exception:
+                # Return error dict if JSON parsing fails
                 return {"error": "Corrupt JSON"}
+    # Return offline status if the file is not found
     return {"status": "offline/missing"}
 
 def get_status_icon(data):
+    """Returns a visual status indicator based on the data availability."""
     if isinstance(data, dict) and data.get("status") == "offline/missing":
         return "🔴"
     return "🟢"
 
 def generate_markdown():
+    """Main function to parse API results and write the AUDIT_DATA.md file."""
+    # Loading the data sources
     rate_limit = load_json('rate_limit.json')
     user_info  = load_json('user_info.json')
     workflows  = load_json('workflows.json')
     graphql    = load_json('graphql_check.json')
 
+    # Formatting current time
     now = datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')
     
-    # Resource metrics
+    # Extracting core resource metrics
     core = rate_limit.get('resources', {}).get('core', {})
     core_rem = core.get('remaining', 0)
     core_lim = core.get('limit', 1)
     
-    # GraphQL metrics
+    # Extracting repository data from GraphQL nested structure
     repo_data = graphql.get('data', {}).get('repository', {}) or {}
     
-    # Header & API Status
+    # Building the Markdown content list
     md_content = [
         "## 🛡️ CODEY SYSTEM AUDIT | NO MERCY EDITION",
         f"> **Audit Timestamp:** `{now}`",
@@ -62,6 +79,7 @@ def generate_markdown():
         "",
         "### ⚡ RESOURCE QUOTA",
         "```text",
+        # Calculation for percentage of remaining API calls
         f"CORE API:    [{core_rem}/{core_lim}] -> {int((core_rem/max(1, core_lim))*100)}% Available",
         f"GRAPHQL:     [{rate_limit.get('resources', {}).get('graphql', {}).get('remaining', 0)} Remaining]",
         f"SEARCH API:  [{rate_limit.get('resources', {}).get('search', {}).get('remaining', 0)} Remaining]",
@@ -72,12 +90,12 @@ def generate_markdown():
         "| :--- | :--- | :---: |"
     ]
 
-    # Add workflows
+    # Iterating through workflows to add table rows
     for wf in workflows.get('workflows', []):
         state_icon = "🔵" if wf['state'] == 'active' else "⚪"
         md_content.append(f"| {wf['name']} | `{wf['path']}` | {state_icon} `{wf['state']}` |")
 
-    # Insights & Glossary
+    # Adding insights and the legal glossary
     md_content.extend([
         "",
         "## 📊 REPOSITORY INSIGHTS (GRAPHQL)",
@@ -96,9 +114,11 @@ def generate_markdown():
         "**_End of Audit Report_**"
     ])
 
+    # Defining output path and writing the file
     output_path = os.path.join(BASE_DIR, "AUDIT_DATA.md")
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write("\n".join(md_content))
 
+# Script execution entry point
 if __name__ == "__main__":
     generate_markdown()
