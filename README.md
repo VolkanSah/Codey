@@ -220,10 +220,10 @@ env:
 ```
 
 
-### or if you realy love the visio of our codey
+### or if you realy love the vision of our codey
 
 ```markdown
-[![Codey - Your GitHub Pet](codey.svg)](https://github.com/Codey-LAB)
+[![Codey - Your GitHub Pet](codey.svg)](https://github.com/volkansah/codey/)
 ```
 
 ### Bro if you are realy realy rich,  i am not!
@@ -257,6 +257,7 @@ see [.codey_themes](.codey_themes) folder
 - Evil Robot (dark) — neu
 - Ghost (blue/green) — neu
 - + Community themes welcome
+> please, set theme/skin in `example.codey.config` and rename it to `codey.config`
 
 </details>
 
@@ -503,6 +504,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
