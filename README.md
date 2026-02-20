@@ -1,5 +1,6 @@
 
 # 🐾 Codey - Your Brutally Honest GitHub Pet
+
 <p align="center">
   <a href="https://github.com/codey-lab">
     <img src="codey.svg" width="99%">
@@ -8,7 +9,7 @@
 
 
 
-> 🌠 this repo to hug codey 
+> ... with some actions toolbox you will ❤️ **NOTE: [dev]-status!**
 
 ---
 
@@ -537,6 +538,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
 
 </details>
+
 
 
 
