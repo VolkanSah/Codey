@@ -255,8 +255,8 @@ see [.codey_themes](.codey_themes) folder
 - Default (original)
 - Cuty (cute robot)
 - CyberCat (neon)
-- Evil Robot (dark) — neu
-- Ghost (blue/green) — neu
+- Evil Robot (dark) — soon
+- Ghost (blue/green) — soon
 - + Community themes welcome
 > please, set theme/skin in `example.codey.config` and rename it to `codey.config`
 
@@ -538,6 +538,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
 
 </details>
+
 
 
 
