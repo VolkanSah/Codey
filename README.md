@@ -366,19 +366,8 @@ see [.codey_themes](.codey_themes) folder
 - Update Text #comments with AI (Gemini/Claude)
 - waiting for world domination 😸
 
-#### Roadmap done:
-- [x] .codey_audit for later needed clean workflow
-- [x] Theming (Skin) in SVG Animation
-- [x] adds codey.config.example
-- [x] Theme Loader + Demos sooo cute :D
-- [x] Codey Actions (Helpers) for all your Projects 😍
-    - [x] Star Report (Full + Markdown)
-    - [x] Codey Audit Collector (Basics)
-    - [x] Generate PROJECT_STRUCTURE from repo
+New simple "Feature": PR your themes to Codeys global theme folder and share the love worldwide! 🌍
 
-Feature: PR your themes to Codeys global theme folder and share the love worldwide! 🌍
-     
-Feature of repo, now PR your themes to codeys glabal theme folder and share the love world wide :D 
 
 ### [2.1.0]
 #### Added
@@ -560,6 +549,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
 
 </details>
+
 
 
 
