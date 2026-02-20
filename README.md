@@ -315,7 +315,7 @@ see [.codey_themes](.codey_themes) folder
 - ✅ ~~Seasonal text overflow in SVG~~ — Fixed: wider box
 - ✅ some stuf if i have time.. ist test time
 - ✅ Dont need any more, new plan :D
-    - [ ] Backround accelator integration (Codey gets a real brain) idea on hf only for hock .js i mean. repo klosed for core on codey-lab
+    - [x] Backround accelator integration (Codey gets a real brain) idea on hf only for hock .js i mean. repo klosed for core on codey-lab
 
 
 </details> 
@@ -351,8 +351,11 @@ see [.codey_themes](.codey_themes) folder
 - Animation Power — light/normal/full via Actions env
 - Codey Star Report — bi-monthly stats collector
 - codey_star_report.py + workflow
-- Ghost theme demo
+- Sort files
 - Evil Robot theme demo
+- Update Toolbox - added some tools (actions)
+- Update Text #comments with AI (Geminie/Claude)
+- waiting for world domination 😸
 
 ### [2.1.0]
 #### Added
@@ -395,7 +398,9 @@ see [.codey_themes](.codey_themes) folder
 
 
 <details>
-<summary>Friends</summary>
+<summary>- Friends -</summary>
+
+##### Our Friends
 soon
 
 </details>
@@ -405,7 +410,7 @@ soon
 ---
 
 <details> 
-<summary>Contact</summary>
+<summary>- Contact -</summary>
 
 
 #### **For legitimate inquiries:**
@@ -434,33 +439,10 @@ soon
 
 ---
 
-<details>
-<summary>Legal & Disclamer</summary>
-soon
-
-</details>
-
----
-
-<details>
-<summary>Last words</summary>
-
-##### Remember!
-> **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
-
-</details>
-
-
-
-
-
-
----
-
 
 
 <details>
-<summary>- Disclaimer -</summary>
+<summary>- Codey is brutally honest! -</summary>
 
 #### lets be honest ...!
 
@@ -471,6 +453,45 @@ This pet will call out your inconsistency, judge your commit frequency, question
 But it will also celebrate real achievements, reward consistent effort, and make you a better developer. Probably.
 
 **Codey is just code. But if it makes you code more, mission accomplished.**
+
+</details>
+
+---
+
+<details>
+<summary><b>- Legal & Disclaimer -</b></summary>
+
+#### 1. Data Processing (DSGVO / GDPR)
+
+Codey is a mirror, not a spy. It only processes data that you have already made public on GitHub or granted access to via your GIT_TOKEN.
+
+- Storage: All stats are stored locally in your own repository (codey.json). We do not host a central database of your coding habits.
+
+- Right to be Forgotten: Want Codey to forget you? Delete your fork and the codey.json. Poof. Gone.
+
+#### 2. No Liability for "Hurt Feelings"
+
+Codey is an automated RPG system. If Codey calls you a "Noob" or says your commit messages are "lazy", this is a mathematical result of the algorithm, not a personal attack. By using Codey, you waive the right to be offended by a digital snake, crab, or dragon.
+
+#### 3. Ethical Use (ESOL v1.1)
+
+This software is governed by the Ethical Security Operations License.
+
+- Prohibited: Using Codey to harass other developers, manipulate reputations for job applications, or create fake "Pro-Developer" bot accounts.
+
+- Audit Purpose: Codey is an Open Source Audit tool. Its primary goal is to promote transparency and honest work.
+
+#### 4. German Jurisdiction (StGB)
+
+As this project is maintained in Berlin, Germany, the following applies:
+
+- § 202a/b/c StGB: Any attempt to use Codey-LAB tools to gain unauthorized access to data (Hacking) or to bypass security measures is strictly prohibited.
+
+- Ownership: You are responsible for the token you provide. Do not give Codey a token with more permissions than you are willing to risk.
+
+#### 5. No Warranty
+
+The software is provided "as is". If Codey's Action fails and your streak breaks, or if Codey "dies" because of a GitHub API hiccup — we are not responsible for your lost XP or broken heart.
 
 </details>
 
@@ -506,6 +527,16 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Read code header why for codey too!!! its not a game its an open source audit!
 
 
+
+---
+
+<details>
+<summary>Last words</summary>
+
+##### Remember!
+> **Licensing Statement:** > This Work is dual-licensed under the **[APACHE](LICENSE)** and the **Ethical Security Operations License [ESOL v1.1](ESOL)**. The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in the ESOL v1.1.
+
+</details>
 
 
 
