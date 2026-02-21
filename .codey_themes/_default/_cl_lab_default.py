@@ -4,53 +4,49 @@ from datetime import datetime
 # FILE: _cl_lab_default.py - "NO MERCY" EDITION
 # =============================================================================
 # DEMO DUMMY: ./codey_lab_default.svg
-# UPDATED:    18.02.2026
+# UPDATED:    21.02.2026
 # AUTHOR:     VolkanSah
 # =============================================================================
 #
 # ABOUT CODEY:
-# Codey is a neutral, high-quality tool for GitHub and GitLab. 
-# It serves as a shield against scam and AI-generated garbage by scoring 
+# Codey is a neutral, high-quality tool for GitHub and GitLab.
+# It serves as a shield against scam and AI-generated garbage by scoring
 # Developer Integrity. You can't fake it—you have to earn it.
 #
 # LICENSE & LEGAL:
-# This tool is classified as a Security Tool under ESOL v1.1. It audits 
+# This tool is classified as a Security Tool under ESOL v1.1. It audits
 # developer behavior, code quality, and social engineering patterns.
 #
 # - Licensed under Apache 2.0 + Ethical Security Operations License (ESOL v1.1).
-# - Jurisdiction: Berlin, Germany. 
+# - Jurisdiction: Berlin, Germany.
 # - Enforced under StGB §202a/b/c and GDPR (DSGVO).
 # - Commercial sale or use for reputation manipulation is strictly prohibited.
 # - ESOL Repository: https://github.com/ESOL-License
 #
 # =============================================================================
-# CHANGELOG / TAGS:
-# [BUG]      Fixed issues
-# [NEW]      New features
-# [IMPROVED] Performance or logic enhancements
+# CHANGELOG:
+# [NEW]      21.02.2026 - issue_score + issue_close_ratio displayed in footer
+# [NEW]      21.02.2026 - cycles parameter now controls animation tier
+# [IMPROVED] 21.02.2026 - footer layout adjusted for issue score line
 # =============================================================================
 #
 # CORE TEMPLATE NOTICE:
 # This file (_cl_lab_default.py) is the primary core template for Codey.
-# To maintain order and prevent chaos, all core logic and output changes 
+# To maintain order and prevent chaos, all core logic and output changes
 # are implemented here first.
-#
-# Current Status: Structural foundation / Upcoming code replacement.
-#
 # =============================================================================
 #
 # ─────────────────────────────────────────────
 # SVG GENERATOR LOGIC STARTS HERE!
 # ─────────────────────────────────────────────
 
-### def generate_brutal_svg(codey, seasonal_bonus): # old
 def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     brutal_stats = codey.get('brutal_stats', {})
     tier         = brutal_stats.get('tier', 'noob')
 
-    tier_colors  = {'noob': '#22c55e', 'developer': '#3b82f6', 'veteran': '#8b5cf6', 'elder': '#f59e0b'}
-    tier_emojis  = {'noob': '🌱',      'developer': '💻',       'veteran': '⚔️',      'elder': '🧙‍♂️'}
-    moods        = {
+    tier_colors = {'noob': '#22c55e', 'developer': '#3b82f6', 'veteran': '#8b5cf6', 'elder': '#f59e0b'}
+    tier_emojis = {'noob': '🌱',      'developer': '💻',       'veteran': '⚔️',      'elder': '🧙‍♂️'}
+    moods = {
         'happy': '😊', 'struggling': '😰', 'exhausted': '😵',
         'grinding': '😤', 'elite': '😎', 'wise': '🧐',
         'neutral': '😐', 'overwhelmed': '🤯'
@@ -71,28 +67,27 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     tier_color    = tier_colors.get(tier, '#22c55e')
 
     colors = {
-        'background':    '#0d1117',
-        'card':          '#161b22',
-        'text':          '#f0f6fc',
-        'secondary_text':'#8b949e',
-        'health':        '#f85149',
-        'hunger':        '#ffa657',
-        'happiness':     '#a855f7',
-        'energy':        '#3fb950',
-        'border':        '#30363d',
-        'tier':          tier_color,
+        'background':     '#0d1117',
+        'card':           '#161b22',
+        'text':           '#f0f6fc',
+        'secondary_text': '#8b949e',
+        'health':         '#f85149',
+        'hunger':         '#ffa657',
+        'happiness':      '#a855f7',
+        'energy':         '#3fb950',
+        'border':         '#30363d',
+        'tier':           tier_color,
     }
 
     def bar(value, max_width=330):
         return min(max_width, value * 3.3)
 
-    # Achievements row (last 4)
+    # ── Achievements row (last 4) ──────────────────────────────────────────
     achievements_display = ''
     if codey.get('achievements'):
-        shown    = codey['achievements'][-4:]
-        count    = len(shown)
+        shown      = codey['achievements'][-4:]
         ach_w, gap = 35, 10
-        start_x  = 580 - count * (ach_w + gap)
+        start_x    = 580 - len(shown) * (ach_w + gap)
         for i, ach in enumerate(shown):
             x = start_x + i * (ach_w + gap) + ach_w / 2
             achievements_display += (
@@ -101,7 +96,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
                 f'{ach.split(" ")[0]}</text>'
             )
 
-    # Seasonal badge
+    # ── Seasonal badge ─────────────────────────────────────────────────────
     seasonal_display = ''
     if seasonal_bonus:
         bw = 150
@@ -116,7 +111,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
             f'</g>'
         )
 
-    # Prestige indicator
+    # ── Prestige indicator ─────────────────────────────────────────────────
     prestige_display = ''
     if codey.get('prestige_level', 0) > 0:
         stars = '⭐' * codey['prestige_level']
@@ -130,11 +125,28 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
             f'font-size="12" font-weight="bold">✨ PRESTIGE READY ✨</text>'
         )
 
-    # NEW: Issue stats line in footer
-    issue_line = ''
-    issues_closed = brutal_stats.get('issues_closed', 0)
+    # ── Issue stats ────────────────────────────────────────────────────────
+    issues_closed  = brutal_stats.get('issues_closed', 0)
+    issue_line     = ''
+    issue_score_line = ''
     if issues_closed > 0:
         issue_line = f' • 🐛 {issues_closed} issues closed'
+        ratio      = brutal_stats.get('issue_close_ratio', 0)
+        score      = brutal_stats.get('issue_score', 1.0)
+        issue_score_line = (
+            f'<text x="0" y="18" text-anchor="middle" '
+            f'fill="{colors["secondary_text"]}" font-size="10">'
+            f'🐛 closed={issues_closed} • ratio={ratio:.2f} • score={score:.2f}</text>'
+        )
+
+    # ── cycles → animation tier ────────────────────────────────────────────
+    # light (2): only breathe — no filters, mobile-safe
+    # normal (4): standard animations
+    # full (8): all animations + filters
+    # Default theme is static (no CSS animations) — cycles reserved for
+    # future animated default variant or subclass themes.
+    # Currently used by: _cl_lab_cuty.py, _cl_lab_cat.py
+    _ = cycles  # explicitly acknowledged — not unused
 
     svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
   <rect width="630" height="473" fill="{colors['background']}" rx="15"/>
@@ -198,7 +210,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   </g>
 
   <!-- Footer -->
-  <g transform="translate(315, 375)">
+  <g transform="translate(315, 368)">
     <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="13" font-weight="bold">
       PET STATUS:
     </text>
@@ -207,15 +219,16 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       • Penalties: {', '.join(brutal_stats.get('social_penalties', [])[:3]) or 'None'}
     </text>
   </g>
-  <g transform="translate(315, 413)">
-    <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="14">
-      🗓️ {codey['streak']} day streak • 📊 {codey['total_commits']} commits
+  <g transform="translate(315, 405)">
+    <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="13">
+      🗓️ {codey['streak']}d streak • 📊 {codey['total_commits']} commits
       • ⭐ {brutal_stats.get('total_stars', 0)} stars{issue_line}
     </text>
+    {issue_score_line}
   </g>
-  <text x="315" y="438" text-anchor="middle"
-        fill="{colors['secondary_text']}" font-size="12">
-    Last Update: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • Dominant: {dominant_lang}
+  <text x="315" y="450" text-anchor="middle"
+        fill="{colors['secondary_text']}" font-size="11">
+    {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • {dominant_lang} {pet_emoji}
   </text>
 </svg>'''
     return svg
@@ -224,9 +237,8 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 # END OF SVG GENERATOR LOGIC
 # ─────────────────────────────────────────────
 
-# If you like or love Codey, give him a hug! 
-# Show some support by starring the repository and following my profile. 
+# If you like or love Codey, give him a hug!
+# Show some support by starring the repository and following my profile.
 # Thanks, and have fun!
 # ─────────────────────────────────────────────
 # Crafted with passion by VolkanSah (2026)
-
