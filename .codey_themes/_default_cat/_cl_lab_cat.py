@@ -50,18 +50,9 @@ from datetime import datetime
 # ─────────────────────────────────────────────────────────────────────────────
 
 def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
-    brutal_stats = codey.get('brutal_stats', {})
-    tier         = brutal_stats.get('tier', 'noob')
+    brutal_stats  = codey.get('brutal_stats', {})
+    tier          = brutal_stats.get('tier', 'noob')
 
-    tier_colors = {
-        'noob': '#22c55e', 'developer': '#3b82f6',
-        'veteran': '#8b5cf6', 'elder': '#f59e0b'
-    }
-    moods = {
-        'happy': '😊', 'struggling': '😰', 'exhausted': '😵',
-        'grinding': '😤', 'elite': '😎', 'wise': '🧐',
-        'neutral': '😐', 'overwhelmed': '🤯'
-    }
     pets = {
         'C': '🦫', 'C++': '🐬', 'C#': '🦊', 'Java': '🦧', 'PHP': '🐘',
         'Python': '🐍', 'JavaScript': '🦔', 'TypeScript': '🦋', 'Ruby': '💎',
@@ -75,7 +66,6 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 
     dominant_lang = brutal_stats.get('dominant_language', 'unknown')
     pet_emoji     = pets.get(dominant_lang, '🐲')
-    tier_color    = tier_colors.get(tier, '#8b5cf6')
     prestige_lv   = codey.get('prestige_level', 0)
     stars         = '★' * prestige_lv
     xp_mult       = brutal_stats.get('multipliers', {}).get('xp', 1.0)
@@ -254,30 +244,26 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 
   <!-- ══ CAT PET — 1:1 original ══ -->
   <g class="cat-body">
-    <ellipse cx="117" cy="250" rx="75" ry="85" fill="#ff44cc" opacity="0.06" filter="url(#softglow)"/>
+    <ellipse cx="117" cy="250" rx="75" ry="85" fill="#ff44cc" opacity="0.06" {body_filter}/>
     <ellipse cx="117" cy="328" rx="45" ry="7"  fill="#ff44cc" opacity="0.12"/>
 
-    <!-- Tail -->
     <g class="tail">
       <path d="M 82 298 Q 30 310 22 270 Q 14 230 50 220 Q 68 214 72 228"
             fill="none" stroke="#ff44cc" stroke-width="8" stroke-linecap="round" filter="url(#glow)"/>
       <circle cx="71" cy="226" r="7" fill="#ff88ee" filter="url(#glow)"/>
     </g>
 
-    <!-- Body -->
     <ellipse cx="117" cy="278" rx="52" ry="62" fill="#1a0820" stroke="#ff44cc" stroke-width="1.8" filter="url(#glow)"/>
     <ellipse cx="117" cy="268" rx="28" ry="36" fill="#ff44cc" opacity="0.08"/>
     <line class="circ1" x1="96"  y1="258" x2="117" y2="258" stroke="#ff44cc" stroke-width="1" opacity="0.5"/>
     <line               x1="117" y1="258" x2="117" y2="272" stroke="#ff44cc" stroke-width="1" opacity="0.4"/>
     <line class="circ2" x1="138" y1="272" x2="117" y2="272" stroke="#ff44cc" stroke-width="1" opacity="0.5"/>
 
-    <!-- Belly screen -->
     <rect x="96" y="263" width="42" height="32" rx="5" fill="#0a0008" stroke="#ff44cc" stroke-width="1"/>
     <text x="117" y="276" text-anchor="middle" font-family="Courier New,monospace" font-size="7"   fill="#ff44cc">{dominant_lang}</text>
     <text x="117" y="287" text-anchor="middle" font-family="Courier New,monospace" font-size="6.5" fill="#ff44cc" opacity="0.75">{codey.get('mood', 'neutral').upper()}</text>
     <text x="117" y="298" text-anchor="middle" font-family="Courier New,monospace" font-size="7"   fill="#ff44cc">$<tspan class="cursor"> █</tspan></text>
 
-    <!-- Paws -->
     <g class="paw-l">
       <ellipse cx="90"  cy="322" rx="18" ry="11" fill="#1a0820" stroke="#ff44cc" stroke-width="1.3"/>
       <circle cx="82"  cy="319" r="3.5" fill="#ff44cc" opacity="0.6"/>
@@ -294,11 +280,9 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     <!-- Head neon rings (static hint, no animation — ringpulse removed) -->
     <circle cx="117" cy="200" r="19" fill="none" stroke="#ff44cc" stroke-width="0.5" opacity="0.15"/>
 
-    <!-- Head -->
     <circle cx="117" cy="200" r="58" fill="#1a0820" stroke="#ff44cc" stroke-width="2" filter="url(#glow)"/>
     <circle cx="117" cy="196" r="46" fill="#ff44cc" opacity="0.04"/>
 
-    <!-- Ears -->
     <g class="ear-l">
       <polygon points="72,158 84,118 108,155" fill="#1a0820" stroke="#ff44cc" stroke-width="2" filter="url(#glow)"/>
       <polygon points="80,152 88,128 104,150" fill="#ff44cc" opacity="0.35"/>
@@ -308,7 +292,6 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       <polygon points="130,150 148,128 158,152" fill="#ff44cc" opacity="0.35"/>
     </g>
 
-    <!-- Eyes -->
     <g class="eye-l">
       <circle cx="95"  cy="198" r="17" fill="#0a0008" stroke="#00ffff" stroke-width="1.5" filter="url(#glow)"/>
       <circle cx="95"  cy="198" r="12" fill="#00ffff" opacity="0.9" filter="url(#glow)"/>
@@ -322,14 +305,10 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       <circle cx="140" cy="193" r="3.5" fill="url(#eyeshine)"/>
     </g>
 
-    <!-- Nose -->
     <polygon points="117,218 111,226 123,226" fill="#ff44cc" opacity="0.9" filter="url(#glow)"/>
-
-    <!-- Mouth -->
     <path d="M111 226 Q106 234 100 230" fill="none" stroke="#ff44cc" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
     <path d="M123 226 Q128 234 134 230" fill="none" stroke="#ff44cc" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
 
-    <!-- Whiskers -->
     <g class="whisker-l">
       <line x1="95"  y1="222" x2="44"  y2="214" stroke="#ff88ee" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
       <line x1="95"  y1="226" x2="44"  y2="226" stroke="#ff88ee" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
@@ -341,18 +320,15 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       <line x1="145" y1="230" x2="196" y2="238" stroke="#ff88ee" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
     </g>
 
-    <!-- Forehead LEDs -->
     <circle cx="103" cy="170" r="2.5" fill="#ff44cc"><animate attributeName="opacity" values="1;0.2;1" dur="0.9s" repeatCount="indefinite"/></circle>
     <circle cx="112" cy="168" r="2.5" fill="#00ffff"><animate attributeName="opacity" values="1;0.2;1" dur="1.3s" repeatCount="indefinite" begin="0.4s"/></circle>
     <circle cx="121" cy="168" r="2.5" fill="#ff44cc"><animate attributeName="opacity" values="1;0.2;1" dur="1.0s" repeatCount="indefinite" begin="0.8s"/></circle>
     <circle cx="130" cy="170" r="2.5" fill="#00ffff"><animate attributeName="opacity" values="0.2;1;0.2" dur="0.7s" repeatCount="indefinite"/></circle>
 
-    <!-- Floating heart -->
     <g class="heart">
       <text x="158" y="155" font-size="20" fill="#ff44cc" text-anchor="middle" filter="url(#glow-hard)">♥</text>
     </g>
 
-    <!-- Mood label -->
     <text x="117" y="358" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#ff44cc" filter="url(#glow)">{codey.get('mood', 'neutral').upper()} • {brutal_stats.get('github_years', 1):.1f}y</text>
 
   </g><!-- cat-body -->
