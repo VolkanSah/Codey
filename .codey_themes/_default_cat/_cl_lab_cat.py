@@ -4,7 +4,7 @@ from datetime import datetime
 # FILE: _cl_lab_cat.py - "NO MERCY" EDITION
 # =============================================================================
 # DEMO DUMMY: ./codey_lab_cat.svg
-# UPDATED:    21.02.2026
+# UPDATED:    23.02.2026
 # AUTHOR:     VolkanSah
 # =============================================================================
 #
@@ -25,40 +25,26 @@ from datetime import datetime
 #
 # =============================================================================
 # CHANGELOG:
-# [NEW]      21.02.2026 - Terminal UI renders once (scanline/circ = repeatCount=1)
-# [NEW]      21.02.2026 - Cat animations loop forever (mobile-friendly by design)
-# [NEW]      21.02.2026 - cycles controls cat animation tier only
-# [NEW]      21.02.2026 - issue_score + close_ratio in stats panel
-# [IMPROVED] 21.02.2026 - GPU load: after ~4s only cat animates
-# [IMPROVED] 21.02.2026 - Achievement icons r=19→15 (-21%), font 17→13 (-24%)
-#                         spacing 46→38px — frees +10px gap between mood and bars
+# [NEW]      23.02.2026 - scanline: 1 cycle + forwards (no pink bar after stop)
+# [NEW]      23.02.2026 - circ1/circ2: 1 cycle one-shot boot
+# [NEW]      23.02.2026 - cycles controls cat animation tier
+# [NEW]      23.02.2026 - issue_score + close_ratio in activity log
+# [IMPROVED] 23.02.2026 - scanline opacity="0" attr bug fixed (was killing anim)
+# [IMPROVED] 23.02.2026 - cycles=8 removed, 4 is max
+# [IMPROVED] 23.02.2026 - neon-rings removed (ringpulse expensive, barely visible)
+# [IMPROVED] 23.02.2026 - achievement icons r=19->15 (-21%), spacing 46->38px
 # =============================================================================
 #
 # ANIMATION STRATEGY:
 # ─────────────────────────────────────────────────────────────────────────────
-# ONE-SHOT  (repeatCount="1") : scanline, circ1, circ2
-#   → Terminal "boots up" once, then static. Zero ongoing GPU cost.
+# ONE-SHOT:
+#   scanline  -> 1 cycle + forwards (sweeps once, freezes at opacity:0)
+#   circ1/2   -> 1 cycle (body circuit boot, then static)
 #
-# LOOP (infinite) — controlled by cycles:
-#   cycles=2 (light)  : breathe only             → ultra mobile-safe
-#   cycles=3 (sweet)  : breathe + tail + cursor   → sweet spot
-#   cycles=4 (normal) : + blink, ears, paws, whiskers, heart, LEDs
-#   cycles=8 (full)   : + neon-rings, softglow body filter
-#
-# LAYOUT MATH (stats panel local coords, parent translate(232,50)):
-#   prompt:         y=16
-#   tier badge:     y=22  h=34  → bottom=56
-#   mood inside:    y=50
-#   GAP:            +18px  (was +8px → +10px breathing room gained)
-#   bars start:     y=74
-#   bars:           6 × 22px = 132  → bottom=206
-#   separator:      y=212
-#   activity:       y=220  5 lines × 22 = 110  → bottom=330
-#                   +1 optional issue line → bottom=352
-#   separator:      y=336 / y=358
-#   achievements:   y=344 / y=366  r=15 h≈44  → bottom=388/410
-#   separator:      y=394 / y=416
-#   cursor:         y=402 / y=424  → abs=452/474  (card bottom=458)
+# LOOP — controlled by cycles (max=4):
+#   cycles=2 (light)  : breathe only                         -> ultra mobile-safe
+#   cycles=3 (sweet)  : breathe + tail + cursor               -> sweet spot mobile
+#   cycles=4 (normal) : + blink, ears, paws, whiskers, heart  -> full desktop
 #
 # Loader (update_codey.py) does NOT need changes — signature unchanged.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -94,34 +80,32 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 
     # ── Issue stats ────────────────────────────────────────────────────────
     issues_closed = brutal_stats.get('issues_closed', 0)
-    issue_line = ''
+    issue_line    = ''
     if issues_closed > 0:
         ratio      = brutal_stats.get('issue_close_ratio', 0)
         score      = brutal_stats.get('issue_score', 1.0)
         issue_line = f'ISSUES=closed:{issues_closed} • ratio:{ratio:.2f} • score:{score:.2f}'
 
-    # ── Dynamic Y positions based on issue_line presence ──────────────────
-    has_issues   = bool(issue_line)
-    sep1_y       = 358 if has_issues else 336
-    ach_y        = 366 if has_issues else 344
-    sep2_y       = 416 if has_issues else 394
-    cursor_y     = 424 if has_issues else 402
-    issue_xml    = f'<text x="0" y="100" fill="#00ffff" font-size="11">{issue_line}</text>' if has_issues else ''
+    # ── Dynamic Y positions ────────────────────────────────────────────────
+    has_issues = bool(issue_line)
+    sep1_y     = 212
+    sep2_y     = 358 if has_issues else 336
+    ach_y      = 366 if has_issues else 344
+    sep3_y     = 416 if has_issues else 394
+    cursor_y   = 424 if has_issues else 402
+    issue_xml  = f'<text x="0" y="100" fill="#00ffff" font-size="11">{issue_line}</text>' if has_issues else ''
 
-    # ── cycles → animation config ──────────────────────────────────────────
-    tail_anim  = 'tailswing 2.4s ease-in-out infinite'      if cycles >= 3 else 'none'
-    blink_l    = 'blink 5.5s ease-in-out infinite'          if cycles >= 4 else 'none'
-    blink_r    = 'blink 5.5s ease-in-out infinite 0.1s'     if cycles >= 4 else 'none'
-    ear_l_anim = 'eartwitch 4s ease-in-out infinite'        if cycles >= 4 else 'none'
-    ear_r_anim = 'eartwitch 4s ease-in-out infinite 1.8s'   if cycles >= 4 else 'none'
-    paw_l_anim = 'pawbob 3.2s ease-in-out infinite 0.4s'    if cycles >= 4 else 'none'
-    paw_r_anim = 'pawbob 3.2s ease-in-out infinite 1.1s'    if cycles >= 4 else 'none'
-    wsk_l_anim = 'whiskerwave 2.8s ease-in-out infinite'    if cycles >= 4 else 'none'
+    # ── cycles -> animation config (max=4, neon-rings removed) ────────────
+    tail_anim  = 'tailswing 2.4s ease-in-out infinite'        if cycles >= 3 else 'none'
+    blink_l    = 'blink 5.5s ease-in-out infinite'            if cycles >= 4 else 'none'
+    blink_r    = 'blink 5.5s ease-in-out infinite 0.1s'       if cycles >= 4 else 'none'
+    ear_l_anim = 'eartwitch 4s ease-in-out infinite'          if cycles >= 4 else 'none'
+    ear_r_anim = 'eartwitch 4s ease-in-out infinite 1.8s'     if cycles >= 4 else 'none'
+    paw_l_anim = 'pawbob 3.2s ease-in-out infinite 0.4s'      if cycles >= 4 else 'none'
+    paw_r_anim = 'pawbob 3.2s ease-in-out infinite 1.1s'      if cycles >= 4 else 'none'
+    wsk_l_anim = 'whiskerwave 2.8s ease-in-out infinite'      if cycles >= 4 else 'none'
     wsk_r_anim = 'whiskerwave 2.8s ease-in-out infinite 1.4s' if cycles >= 4 else 'none'
-    heart_anim = 'heartpop 4s ease-in-out infinite 1s'      if cycles >= 4 else 'none'
-    ring_anim  = 'ringpulse 2s ease-out infinite'           if cycles >= 8 else 'none'
-    ring2_anim = 'ringpulse 2s ease-out infinite 1s'        if cycles >= 8 else 'none'
-    body_filter = 'filter="url(#softglow)"'                 if cycles >= 8 else ''
+    heart_anim = 'heartpop 4s ease-in-out infinite 1s'        if cycles >= 4 else 'none'
 
     # ── ASCII bars ─────────────────────────────────────────────────────────
     def bar(value, segments=20):
@@ -203,29 +187,21 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         85%         {{ transform: scale(1);   opacity:1; }}
         95%         {{ transform: scale(0.8); opacity:0; }}
       }}
-      @keyframes ringpulse {{
-        0%   {{ r:19; opacity:0.8; stroke-width:1.5; }}
-        100% {{ r:28; opacity:0;   stroke-width:0.5; }}
-      }}
-      @keyframes neonpulse {{
-        0%,100% {{ opacity:1;   }}
-        50%     {{ opacity:0.4; }}
-      }}
       @keyframes scanline {{
         0%   {{ transform: translateY(-8px); opacity:0;   }}
         10%  {{ opacity:0.35; }}
         90%  {{ opacity:0.35; }}
         100% {{ transform: translateY(220px); opacity:0; }}
       }}
-      @keyframes cur   {{ 0%,49%{{opacity:1}} 50%,100%{{opacity:0}} }}
-      @keyframes circ  {{ 0%{{stroke-dashoffset:60}} 100%{{stroke-dashoffset:0}} }}
+      @keyframes cur  {{ 0%,49%{{opacity:1}} 50%,100%{{opacity:0}} }}
+      @keyframes circ {{ 0%{{stroke-dashoffset:60}} 100%{{stroke-dashoffset:0}} }}
 
-      /* ONE-SHOT: terminal boots once, then static */
-      .scanline {{ animation: scanline 3.5s linear 1; fill-opacity:0; }}
+      /* ONE-SHOT: boots once, forwards freezes at opacity:0 — no pink bar */
+      .scanline {{ animation: scanline 3.5s linear 1 forwards; }}
       .circ1    {{ stroke-dasharray:60; animation: circ 2.6s linear 1; }}
       .circ2    {{ stroke-dasharray:50; animation: circ 3.2s linear 1 0.9s; }}
 
-      /* CAT LOOP — controlled by cycles */
+      /* CAT LOOP — controlled by cycles (max=4) */
       .cat-body  {{ animation: breathe 3.2s ease-in-out infinite; }}
       .tail      {{ animation: {tail_anim};   transform-origin: 68px 298px; }}
       .eye-l     {{ animation: {blink_l};     transform-origin: 95px 212px; }}
@@ -237,8 +213,6 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       .whisker-l {{ animation: {wsk_l_anim};  transform-origin: 95px 228px; }}
       .whisker-r {{ animation: {wsk_r_anim};  transform-origin: 145px 228px; }}
       .heart     {{ animation: {heart_anim};  transform-origin: 170px 148px; }}
-      .neon-ring  {{ animation: {ring_anim};  }}
-      .neon-ring2 {{ animation: {ring2_anim}; }}
       .cursor    {{ animation: cur 1s step-end infinite; }}
     </style>
   </defs>
@@ -262,7 +236,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <text x="26" y="34" fill="#ff44cc" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --pet CAT --user {tier.upper()} --prestige {prestige_lv}</text>
   <text x="608" y="34" text-anchor="end" fill="#00ffff" font-family="Courier New,monospace" font-size="10" opacity="0.5">{datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}</text>
 
-  <!-- ONE-SHOT scanline -->
+  <!-- ONE-SHOT scanline — no opacity attr, CSS + forwards handles visibility -->
   <rect class="scanline" x="15" y="43" width="600" height="6" fill="#ff44cc"/>
 
   <!-- Divider -->
@@ -303,8 +277,8 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       <circle cx="152" cy="319" r="3.5" fill="#ff44cc" opacity="0.6"/>
     </g>
 
-    <circle class="neon-ring"  cx="117" cy="200" r="19" fill="none" stroke="#ff44cc" stroke-width="1.5" opacity="0"/>
-    <circle class="neon-ring2" cx="117" cy="200" r="19" fill="none" stroke="#00ffff" stroke-width="1"   opacity="0"/>
+    <!-- Head neon rings (static hint, no animation — ringpulse removed) -->
+    <circle cx="117" cy="200" r="19" fill="none" stroke="#ff44cc" stroke-width="0.5" opacity="0.15"/>
 
     <circle cx="117" cy="200" r="58" fill="#1a0820" stroke="#ff44cc" stroke-width="2" filter="url(#glow)"/>
     <circle cx="117" cy="196" r="46" fill="#ff44cc" opacity="0.04"/>
@@ -364,7 +338,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 
     <text x="0" y="16" font-size="13" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
 
-    <!-- Tier badge: y=22 h=34 → bottom=56, mood at y=50 -->
+    <!-- Tier badge: y=22 h=34 -> bottom=56 -->
     <rect x="0" y="22" width="376" height="34" rx="0" fill="#ff44cc" opacity="0.08" stroke="#ff44cc" stroke-width="1"/>
     <rect x="0" y="22" width="3"   height="34" fill="#ff44cc"/>
     <text x="8" y="35" font-size="11" font-weight="bold">[{tier.upper()}] LVL {codey['level']} • {brutal_stats.get('github_years', 1):.1f}y • XP={xp_mult:.2f}x • {stars} PRESTIGE {prestige_lv}</text>
@@ -397,32 +371,27 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       <text x="374" y="110" font-size="11" opacity="0.6" text-anchor="end" fill="#00ffff">{q_val:.2f}</text>
     </g>
 
-    <!-- separator: 74+132=206 +6=212 -->
-    <line x1="0" y1="212" x2="376" y2="212" stroke="#ff44cc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="0" y1="{sep1_y}" x2="376" y2="{sep1_y}" stroke="#ff44cc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-    <!-- Activity: y=220 -->
     <g transform="translate(0,220)" font-size="12">
       <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
       <text x="0" y="20">STREAK={codey.get('streak', 0)}d  •  COMMITS={codey.get('total_commits', 0)}  •  STARS={brutal_stats.get('total_stars', 0)}</text>
       <text x="0" y="40">DOMINANT={dominant_lang} {pet_emoji}  •  TIER={tier.upper()}</text>
       <text x="0" y="60">PENALTIES={penalties}</text>
-      <text x="0" y="80">{season_info}</text>
+      <text x="0" y="80" fill="#ff44cc">{season_info}</text>
       {issue_xml}
     </g>
 
-    <!-- separator: dynamic -->
-    <line x1="0" y1="{sep1_y}" x2="376" y2="{sep1_y}" stroke="#ff44cc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="0" y1="{sep2_y}" x2="376" y2="{sep2_y}" stroke="#ff44cc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-    <!-- Achievements: r=15 (-21%), font-size=13 (-24%), spacing=38px -->
+    <!-- Achievements: r=15 (-21%), font-size=13, spacing=38px -->
     <g transform="translate(0,{ach_y})">
       <text x="0" y="0" font-size="11" opacity="0.5">$ ls ./achievements/</text>
       {ach_xml}
     </g>
 
-    <!-- separator: dynamic -->
-    <line x1="0" y1="{sep2_y}" x2="376" y2="{sep2_y}" stroke="#ff44cc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="0" y1="{sep3_y}" x2="376" y2="{sep3_y}" stroke="#ff44cc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-    <!-- Cursor: dynamic, abs = 50+cursor_y+16 ≤ 458 ✓ -->
     <g transform="translate(0,{cursor_y})">
       <text x="0"   y="16" font-size="13" font-weight="bold">$ _<tspan class="cursor">█</tspan></text>
       <text x="374" y="16" font-size="10" opacity="0.45" text-anchor="end" fill="#00ffff">{datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}</text>
@@ -436,8 +405,8 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 # END OF SVG GENERATOR LOGIC
 # ─────────────────────────────────────────────
 
-# If you like or love Codey, give him a hug! 
-# Show some support by starring the repository and following my profile. 
+# If you like or love Codey, give him a hug!
+# Show some support by starring the repository and following my profile.
 # Thanks, and have fun!
 # ─────────────────────────────────────────────
 # Crafted with passion by VolkanSah (2026)
