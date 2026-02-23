@@ -4,55 +4,56 @@ from datetime import datetime
 # FILE: _cl_lab_cuty.py - "NO MERCY" EDITION
 # =============================================================================
 # DEMO DUMMY: ./codey_lab_cuty.svg
-# UPDATED:    18.02.2026
+# UPDATED:    23.02.2026
 # AUTHOR:     VolkanSah
 # =============================================================================
 #
 # ABOUT CODEY:
-# Codey is a neutral, high-quality tool for GitHub and GitLab. 
-# It serves as a shield against scam and AI-generated garbage by scoring 
+# Codey is a neutral, high-quality tool for GitHub and GitLab.
+# It serves as a shield against scam and AI-generated garbage by scoring
 # Developer Integrity. You can't fake it—you have to earn it.
 #
 # LICENSE & LEGAL:
-# This tool is classified as a Security Tool under ESOL v1.1. It audits 
+# This tool is classified as a Security Tool under ESOL v1.1. It audits
 # developer behavior, code quality, and social engineering patterns.
 #
 # - Licensed under Apache 2.0 + Ethical Security Operations License (ESOL v1.1).
-# - Jurisdiction: Berlin, Germany. 
+# - Jurisdiction: Berlin, Germany.
 # - Enforced under StGB §202a/b/c and GDPR (DSGVO).
 # - Commercial sale or use for reputation manipulation is strictly prohibited.
 # - ESOL Repository: https://github.com/ESOL-License
 #
 # =============================================================================
-# CHANGELOG / TAGS:
-# [BUG]      Fixed issues
-# [NEW]      New features
-# [IMPROVED] Performance or logic enhancements
+# CHANGELOG:
+# [NEW]      23.02.2026 - scanline: 2 cycles (scanner effect) then stops
+# [NEW]      23.02.2026 - circ1/circ2: 1 cycle (one-shot boot)
+# [NEW]      23.02.2026 - cycles controls bot animation tier
+# [IMPROVED] 23.02.2026 - MOOD removed from stats panel (shown under figure)
+# [IMPROVED] 23.02.2026 - issue_score + close_ratio in activity log
 # =============================================================================
 #
-# CORE TEMPLATE NOTICE:
-# This file (_cl_lab_default.py) is the primary core template for Codey.
-# To maintain order and prevent chaos, all core logic and output changes 
-# are implemented here first.
+# ANIMATION STRATEGY:
+# ─────────────────────────────────────────────────────────────────────────────
+# ONE-SHOT:
+#   scanline  → 2 cycles (looks like a real scanner sweep, then done)
+#   circ1/2   → 1 cycle  (body circuit boot, then static)
 #
-# Current Status: Structural foundation / Upcoming code replacement.
+# LOOP — controlled by cycles:
+#   cycles=2 (light)  : breathe only                    → ultra mobile-safe
+#   cycles=3 (sweet)  : breathe + arm-wave + cursor      → sweet spot
+#   cycles=4 (normal) : + blink, headbob, blush, LEDs, heart, star, antpulse
+#   cycles=8 (full)   : + antring, softglow filter
 #
-# =============================================================================
-#
-# ─────────────────────────────────────────────
-# SVG GENERATOR LOGIC STARTS HERE!
-# ─────────────────────────────────────────────
-### def generate_brutal_svg(codey, seasonal_bonus): # old
+# Loader (update_codey.py) does NOT need changes — signature unchanged.
+# ─────────────────────────────────────────────────────────────────────────────
+
 def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
-    # 1. DATEN-VORBEREITUNG & MAPPINGS
     brutal_stats = codey.get('brutal_stats', {})
-    tier = brutal_stats.get('tier', 'noob')
+    tier         = brutal_stats.get('tier', 'noob')
 
     tier_colors = {
-        'noob': '#22c55e',
-        'developer': '#3b82f6',
-        'veteran': '#8b5cf6',
-        'elder': '#f59e0b'
+        'noob': '#22c55e', 'developer': '#3b82f6',
+        'veteran': '#8b5cf6', 'elder': '#f59e0b'
     }
     moods = {
         'happy': '😊', 'struggling': '😰', 'exhausted': '😵',
@@ -76,50 +77,86 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     tier_color    = tier_colors.get(tier, '#bf00ff')
     prestige_lv   = codey.get('prestige_level', 0)
     stars         = '★' * prestige_lv
+    xp_mult       = brutal_stats.get('multipliers', {}).get('xp', 1.0)
+    penalties     = ', '.join(brutal_stats.get('social_penalties', [])[:3]) or 'none'
+    s_val         = brutal_stats.get('social_score', 1.0)
+    q_val         = brutal_stats.get('avg_repo_quality', 0.5)
 
-    # 2. ASCII-BALKEN
-    def get_ascii_bar(value, segments=20):
-        filled = int((max(0, min(100, value)) / 100) * segments)
-        return '█' * filled + '░' * (segments - filled)
-
-    h_bar  = get_ascii_bar(codey.get('health', 0))
-    m_bar  = get_ascii_bar(codey.get('hunger', 0))
-    ha_bar = get_ascii_bar(codey.get('happiness', 0))
-    e_bar  = get_ascii_bar(codey.get('energy', 0))
-    s_val  = brutal_stats.get('social_score', 1.0)
-    s_bar  = get_ascii_bar(min(100, s_val * 50))
-    q_val  = brutal_stats.get('avg_repo_quality', 0.5)
-    q_bar  = get_ascii_bar(q_val * 100)
-
-    # 3. ACHIEVEMENTS
-    ach_xml = ''
-    if codey.get('achievements'):
-        for i, ach in enumerate(codey['achievements'][-5:]):
-            x   = 22 + i * 46
-            col = '#e0aaff' if i % 2 == 0 else '#ff88dd'
-            ach_xml += (
-                f'<circle cx="{x}" cy="30" r="19" fill="#0c0018" stroke="{col}" '
-                f'stroke-width="1.5" filter="url(#glow)"/>'
-                f'<text x="{x}" y="37" text-anchor="middle" font-size="17">'
-                f'{ach.split(" ")[0]}</text>'
-            )
-
-    # 4. SEASON / PRESTIGE / ISSUES
     season_info = (
         f'SEASON={seasonal_bonus["emoji"]} {seasonal_bonus["name"]} +10%'
         if seasonal_bonus else 'SEASON=OFFLINE'
     )
-    prestige_badge = ''
-    if prestige_lv > 0:
-        prestige_badge = f'<text x="8" y="50" font-size="11" font-weight="bold" fill="#ff88dd">★★ PRESTIGE {prestige_lv} ★★</text>'
 
-    issue_line = ''
+    # ── Issue stats ────────────────────────────────────────────────────────
     issues_closed = brutal_stats.get('issues_closed', 0)
+    issue_line    = ''
     if issues_closed > 0:
-        issue_line = f' • 🐛 {issues_closed} issues'
+        ratio      = brutal_stats.get('issue_close_ratio', 0)
+        score      = brutal_stats.get('issue_score', 1.0)
+        issue_line = f'ISSUES=closed:{issues_closed} • ratio:{ratio:.2f} • score:{score:.2f}'
 
-    xp_mult = brutal_stats.get('multipliers', {}).get('xp', 1.0)
-    penalties = ', '.join(brutal_stats.get('social_penalties', [])[:3]) or 'none'
+    # ── Dynamic Y positions ────────────────────────────────────────────────
+    # Stats panel translate(232, 50)
+    # tier badge:    y=22 h=34 → bottom=56
+    # gap:           +18px (no mood line here anymore)
+    # bars start:    y=74
+    # bars:          6×22=132 → bottom=206
+    # sep1:          y=212
+    # activity:      y=220  base 5 lines×22=110 → bottom=330
+    #                +1 issue line → bottom=352
+    # sep2:          y=336 / y=358
+    # achievements:  y=344 / y=366  r=15 h≈44
+    # sep3:          y=394 / y=416
+    # cursor:        y=402 / y=424  → abs=452/474 ✓
+    has_issues = bool(issue_line)
+    sep1_y     = 212
+    sep2_y     = 358 if has_issues else 336
+    ach_y      = 366 if has_issues else 344
+    sep3_y     = 416 if has_issues else 394
+    cursor_y   = 424 if has_issues else 402
+    issue_xml  = f'<text x="0" y="100" fill="#ff88dd" font-size="11">{issue_line}</text>' if has_issues else ''
+
+    # ── cycles → animation config ──────────────────────────────────────────
+    wave_anim    = 'wave 2.2s ease-in-out infinite'        if cycles >= 3 else 'none'
+    blink_l      = 'blink 5s ease-in-out infinite'         if cycles >= 4 else 'none'
+    blink_r      = 'blink 5s ease-in-out infinite 0.1s'    if cycles >= 4 else 'none'
+    headbob_anim = 'headbob 4.5s ease-in-out infinite'     if cycles >= 4 else 'none'
+    blush_anim   = 'blush 3.2s ease-in-out infinite'       if cycles >= 4 else 'none'
+    heart_anim   = 'heartpop 5s ease-in-out infinite 0.8s' if cycles >= 4 else 'none'
+    star_anim    = 'starpop 7s ease-in-out infinite 2s'    if cycles >= 4 else 'none'
+    ant_anim     = 'antpulse 1.5s ease-in-out infinite'    if cycles >= 4 else 'none'
+    led1_anim    = 'ledpop 0.9s ease-in-out infinite'      if cycles >= 4 else 'none'
+    led2_anim    = 'ledpop 1.3s ease-in-out infinite 0.3s' if cycles >= 4 else 'none'
+    led3_anim    = 'ledpop 1.1s ease-in-out infinite 0.7s' if cycles >= 4 else 'none'
+    led4_anim    = 'ledpop 0.7s ease-in-out infinite 0.1s' if cycles >= 4 else 'none'
+    ring_anim    = 'ringexpand 2s ease-out infinite'       if cycles >= 8 else 'none'
+    ring2_anim   = 'ringexpand 2s ease-out infinite 1s'    if cycles >= 8 else 'none'
+    body_filter  = 'filter="url(#softglow)"'               if cycles >= 8 else ''
+
+    # ── ASCII bars ─────────────────────────────────────────────────────────
+    def bar(value, segments=20):
+        filled = int((max(0, min(100, value)) / 100) * segments)
+        return '█' * filled + '░' * (segments - filled)
+
+    h_bar  = bar(codey.get('health', 0))
+    m_bar  = bar(codey.get('hunger', 0))
+    ha_bar = bar(codey.get('happiness', 0))
+    e_bar  = bar(codey.get('energy', 0))
+    s_bar  = bar(min(100, s_val * 50))
+    q_bar  = bar(q_val * 100)
+
+    # ── Achievements — r=15, font-size=13, spacing=38px ───────────────────
+    ach_xml = ''
+    if codey.get('achievements'):
+        for i, ach in enumerate(codey['achievements'][-5:]):
+            x   = 17 + i * 38
+            col = '#e0aaff' if i % 2 == 0 else '#ff88dd'
+            ach_xml += (
+                f'<circle cx="{x}" cy="22" r="15" fill="#0c0018" stroke="{col}" '
+                f'stroke-width="1.5" filter="url(#glow)"/>'
+                f'<text x="{x}" y="28" text-anchor="middle" font-size="13">'
+                f'{ach.split(" ")[0]}</text>'
+            )
 
     svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -176,8 +213,8 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         50%     {{ r:10; opacity:0.5; fill:#ffaaee; }}
       }}
       @keyframes wave {{
-        0%,100% {{ transform: rotate(0deg);  }}
-        25%     {{ transform: rotate(22deg); }}
+        0%,100% {{ transform: rotate(0deg);   }}
+        25%     {{ transform: rotate(22deg);  }}
         75%     {{ transform: rotate(-12deg); }}
       }}
       @keyframes headbob {{
@@ -216,25 +253,29 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         0%,100% {{ r:3;   opacity:1;   }}
         50%     {{ r:4.5; opacity:0.3; }}
       }}
-      .bot-body  {{ animation: breathe 3.2s ease-in-out infinite; }}
-      .head-bob  {{ animation: headbob 4.5s ease-in-out infinite; transform-origin: 108px 185px; }}
-      .eye-l     {{ animation: blink 5s ease-in-out infinite;       transform-origin: 89px 185px; }}
-      .eye-r     {{ animation: blink 5s ease-in-out infinite 0.1s;  transform-origin: 127px 185px; }}
-      .arm-wave  {{ animation: wave 2.2s ease-in-out infinite;      transform-origin: 174px 162px; }}
-      .anttip    {{ animation: antpulse 1.5s ease-in-out infinite; }}
-      .antring   {{ animation: ringexpand 2s ease-out infinite; }}
-      .antring2  {{ animation: ringexpand 2s ease-out infinite 1s; }}
-      .blush     {{ animation: blush 3.2s ease-in-out infinite; }}
-      .heart     {{ animation: heartpop 5s ease-in-out infinite 0.8s; transform-origin: 162px 148px; }}
-      .star      {{ animation: starpop 7s ease-in-out infinite 2s;   transform-origin: 56px 158px; }}
-      .cursor    {{ animation: cur 1s step-end infinite; }}
-      .circ1     {{ stroke-dasharray:60; animation: circ 2.6s linear infinite; }}
-      .circ2     {{ stroke-dasharray:50; animation: circ 3.2s linear infinite 0.9s; }}
-      .scanline  {{ animation: scanline 3.8s linear infinite; }}
-      .led1      {{ animation: ledpop 0.9s ease-in-out infinite; }}
-      .led2      {{ animation: ledpop 1.3s ease-in-out infinite 0.3s; }}
-      .led3      {{ animation: ledpop 1.1s ease-in-out infinite 0.7s; }}
-      .led4      {{ animation: ledpop 0.7s ease-in-out infinite 0.1s; }}
+
+      /* ONE-SHOT: 2 scanner sweeps, circuit boots once */
+      .scanline {{ animation: scanline 3.8s linear 2; fill-opacity:0; }}
+      .circ1    {{ stroke-dasharray:60; animation: circ 2.6s linear 1; }}
+      .circ2    {{ stroke-dasharray:50; animation: circ 3.2s linear 1 0.9s; }}
+
+      /* BOT LOOP — controlled by cycles */
+      .bot-body {{ animation: breathe 3.2s ease-in-out infinite; }}
+      .head-bob {{ animation: {headbob_anim}; transform-origin: 108px 185px; }}
+      .eye-l    {{ animation: {blink_l};      transform-origin: 89px 185px; }}
+      .eye-r    {{ animation: {blink_r};      transform-origin: 127px 185px; }}
+      .arm-wave {{ animation: {wave_anim};    transform-origin: 174px 162px; }}
+      .anttip   {{ animation: {ant_anim}; }}
+      .antring  {{ animation: {ring_anim}; }}
+      .antring2 {{ animation: {ring2_anim}; }}
+      .blush    {{ animation: {blush_anim}; }}
+      .heart    {{ animation: {heart_anim}; transform-origin: 162px 148px; }}
+      .star     {{ animation: {star_anim};  transform-origin: 56px 158px; }}
+      .cursor   {{ animation: cur 1s step-end infinite; }}
+      .led1     {{ animation: {led1_anim}; }}
+      .led2     {{ animation: {led2_anim}; }}
+      .led3     {{ animation: {led3_anim}; }}
+      .led4     {{ animation: {led4_anim}; }}
     </style>
   </defs>
 
@@ -246,9 +287,9 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <!-- Card -->
   <rect x="15" y="15" width="600" height="443" fill="#0c0018" stroke="{tier_color}" stroke-width="1.5"/>
   <rect x="12" y="12" width="606" height="449" fill="none" stroke="{tier_color}" stroke-width="0.8" stroke-dasharray="6 3" opacity="0.3"/>
-  <polyline points="15,35 15,15 35,15"      fill="none" stroke="#e0aaff" stroke-width="2"/>
-  <polyline points="615,35 615,15 595,15"   fill="none" stroke="#e0aaff" stroke-width="2"/>
-  <polyline points="15,438 15,458 35,458"   fill="none" stroke="#e0aaff" stroke-width="2"/>
+  <polyline points="15,35 15,15 35,15"       fill="none" stroke="#e0aaff" stroke-width="2"/>
+  <polyline points="615,35 615,15 595,15"    fill="none" stroke="#e0aaff" stroke-width="2"/>
+  <polyline points="15,438 15,458 35,458"    fill="none" stroke="#e0aaff" stroke-width="2"/>
   <polyline points="615,438 615,458 595,458" fill="none" stroke="#e0aaff" stroke-width="2"/>
 
   <!-- Header -->
@@ -256,14 +297,16 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <line x1="15" y1="43" x2="615" y2="43" stroke="{tier_color}" stroke-width="1" opacity="0.5"/>
   <text x="26" y="34" fill="#e0aaff" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user {tier.upper()} --lvl {codey['level']} --prestige {prestige_lv}</text>
   <text x="608" y="34" text-anchor="end" fill="{tier_color}" font-family="Courier New,monospace" font-size="10" opacity="0.5">{datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}</text>
-  <rect class="scanline" x="15" y="43" width="600" height="5" fill="#bf00ff" opacity="0"/>
+
+  <!-- ONE-SHOT scanline: 2 sweeps = scanner effect, then done -->
+  <rect class="scanline" x="15" y="43" width="600" height="5" fill="#bf00ff"/>
 
   <!-- Divider -->
   <line x1="220" y1="44" x2="220" y2="455" stroke="#bf00ff" stroke-width="1" stroke-dasharray="4 3" opacity="0.3"/>
 
-  <!-- ══ CUTE ROBOT ══ -->
+  <!-- ══ CUTE ROBOT — 1:1 original ══ -->
   <g class="bot-body">
-    <ellipse cx="108" cy="255" rx="80" ry="90" fill="#bf00ff" opacity="0.05" filter="url(#softglow)"/>
+    <ellipse cx="108" cy="255" rx="80" ry="90" fill="#bf00ff" opacity="0.05" {body_filter}/>
     <ellipse cx="108" cy="336" rx="48" ry="8" fill="url(#shadowgrad)"/>
 
     <!-- Legs -->
@@ -279,7 +322,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     <ellipse cx="97" cy="228" rx="24" ry="12" fill="white" opacity="0.12"/>
     <rect x="82" y="228" width="52" height="38" rx="10" fill="#3d0066" opacity="0.6"/>
     <line class="circ1" x1="88" y1="242" x2="108" y2="242" stroke="#e0aaff" stroke-width="1" opacity="0.5"/>
-    <line x1="108" y1="242" x2="108" y2="252" stroke="#e0aaff" stroke-width="1" opacity="0.4"/>
+    <line               x1="108" y1="242" x2="108" y2="252" stroke="#e0aaff" stroke-width="1" opacity="0.4"/>
     <line class="circ2" x1="128" y1="252" x2="108" y2="252" stroke="#e0aaff" stroke-width="1" opacity="0.5"/>
     <text x="108" y="260" text-anchor="middle" font-size="20" fill="#ff88dd" opacity="0.9" filter="url(#glow)">{pet_emoji}</text>
 
@@ -380,23 +423,24 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       <text x="52" y="162" font-size="16" fill="#e0aaff" text-anchor="middle" filter="url(#glow)">✦</text>
     </g>
 
-    <!-- Mood label -->
+    <!-- Mood label (bleibt unter der Figur) -->
     <text x="108" y="358" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#e0aaff" opacity="0.8">{codey.get('mood', 'neutral').upper()} • {brutal_stats.get('github_years', 1):.1f}y</text>
+
   </g><!-- bot-body -->
 
-  <!-- ══ STATS PANEL ══ -->
+  <!-- ══ STATS PANEL — translate(232, 50) ══ -->
   <g transform="translate(232, 50)" font-family="Courier New,monospace" fill="#e0aaff">
 
     <text x="0" y="16" font-size="13" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
 
-    <!-- Tier badge -->
+    <!-- Tier badge: y=22 h=34 → bottom=56. MOOD removed (shown under figure) -->
     <rect x="0" y="22" width="376" height="34" rx="4" fill="{tier_color}" opacity="0.1" stroke="{tier_color}" stroke-width="1"/>
     <rect x="0" y="22" width="3"   height="34" fill="#e0aaff" rx="1"/>
     <text x="8" y="35" font-size="11" font-weight="bold">[{tier.upper()}] LVL {codey['level']} • {brutal_stats.get('github_years', 1):.1f}y • XP={xp_mult:.2f}x • {stars} PRESTIGE {prestige_lv}</text>
-    <text x="8" y="50" font-size="11" font-weight="bold" fill="#ff88dd">MOOD={codey.get('mood', 'neutral').upper()}</text>
+    <text x="8" y="50" font-size="11" font-weight="bold" fill="#ff88dd">{mood_emoji} {codey.get('mood', 'neutral').upper()}</text>
 
-    <!-- Stat bars -->
-    <g transform="translate(0,64)" font-size="12">
+    <!-- Stat bars: y=74 (+18px gap from badge bottom=56) -->
+    <g transform="translate(0,74)" font-size="12">
       <text x="0"   y="0"   opacity="0.65">health   </text>
       <text x="80"  y="0"  >[{h_bar}]</text>
       <text x="374" y="0"   font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{codey.get('health', 0):.0f}%</text>
@@ -422,27 +466,30 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       <text x="374" y="110" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{q_val:.2f}</text>
     </g>
 
-    <line x1="0" y1="190" x2="376" y2="190" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+    <!-- separator: 74+132=206 +6=212 -->
+    <line x1="0" y1="{sep1_y}" x2="376" y2="{sep1_y}" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-    <g transform="translate(0,198)" font-size="12">
+    <!-- Activity: y=220 -->
+    <g transform="translate(0,220)" font-size="12">
       <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
       <text x="0" y="20">STREAK={codey.get('streak', 0)}d  •  COMMITS={codey.get('total_commits', 0)}  •  STARS={brutal_stats.get('total_stars', 0)}</text>
       <text x="0" y="40">DOMINANT={dominant_lang} {pet_emoji}  •  TIER={tier.upper()}</text>
       <text x="0" y="60">PENALTIES={penalties}</text>
       <text x="0" y="80" fill="#ff88dd">{season_info}</text>
+      {issue_xml}
     </g>
 
-    <line x1="0" y1="292" x2="376" y2="292" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="0" y1="{sep2_y}" x2="376" y2="{sep2_y}" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-    <!-- Achievements -->
-    <g transform="translate(0,300)">
+    <!-- Achievements: r=15 (-21%), font-size=13, spacing=38px -->
+    <g transform="translate(0,{ach_y})">
       <text x="0" y="0" font-size="11" opacity="0.5">$ ls ./achievements/</text>
       {ach_xml}
     </g>
 
-    <line x1="0" y1="358" x2="376" y2="358" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="0" y1="{sep3_y}" x2="376" y2="{sep3_y}" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-    <g transform="translate(0,366)">
+    <g transform="translate(0,{cursor_y})">
       <text x="0"   y="16" font-size="13" font-weight="bold">$ _<tspan class="cursor">█</tspan></text>
       <text x="374" y="16" font-size="10" opacity="0.45" text-anchor="end" fill="{tier_color}">{datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}</text>
     </g>
@@ -450,12 +497,8 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   </g>
 </svg>'''
     return svg
+
 # ─────────────────────────────────────────────
 # END OF SVG GENERATOR LOGIC
-# ─────────────────────────────────────────────
-
-# If you like or love Codey, give him a hug! 
-# Show some support by starring the repository and following my profile. 
-# Thanks, and have fun!
 # ─────────────────────────────────────────────
 # Crafted with passion by VolkanSah (2026)
