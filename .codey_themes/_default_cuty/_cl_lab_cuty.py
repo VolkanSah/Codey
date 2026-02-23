@@ -261,7 +261,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       }}
 
       /* ONE-SHOT: 2 scanner sweeps, circuit boots once */
-      .scanline {{ animation: scanline 3.8s linear 2; }}
+      .scanline {{ animation: scanline 3.8s linear 2 forwards; }}
       .circ1    {{ stroke-dasharray:60; animation: circ 2.6s linear 1; }}
       .circ2    {{ stroke-dasharray:50; animation: circ 3.2s linear 1 0.9s; }}
 
