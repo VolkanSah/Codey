@@ -1,12 +1,12 @@
 {
-  "health": 30.001250000000002,
-  "hunger": 67.50375000000001,
+  "health": 27.174583333333334,
+  "hunger": 81.52375,
   "happiness": 0.0,
-  "energy": 22.5,
+  "energy": 0,
   "level": 4,
-  "streak": 10,
-  "total_commits": 311,
-  "mood": "elite",
+  "streak": 11,
+  "total_commits": 333,
+  "mood": "struggling",
   "rpg_stats": {},
   "achievements": [
     "\ud83e\uddd9\u200d\u2642\ufe0f Elder Council",
@@ -14,15 +14,6 @@
     "\ud83d\udc8e Quality Craftsman"
   ],
   "history": [
-    {
-      "timestamp": "2026-02-08T01:55:26.001382+00:00",
-      "daily_commits": 0,
-      "daily_prs": 0,
-      "health": 46.0,
-      "mood": "elite",
-      "streak": 0,
-      "tier": "elder"
-    },
     {
       "timestamp": "2026-02-08T02:02:20.822963+00:00",
       "daily_commits": 0,
@@ -283,11 +274,20 @@
       "mood": "struggling",
       "streak": 11,
       "tier": "elder"
+    },
+    {
+      "timestamp": "2026-02-23T23:07:13.898569+00:00",
+      "daily_commits": 22,
+      "daily_prs": 0,
+      "health": 30.001250000000002,
+      "mood": "elite",
+      "streak": 10,
+      "tier": "elder"
     }
   ],
   "brutal_stats": {
     "tier": "elder",
-    "github_years": 9.973990417522245,
+    "github_years": 9.976728268309378,
     "social_score": 1.25,
     "social_penalties": [
       "quality_curator"
@@ -302,15 +302,15 @@
     },
     "total_stars": 699,
     "language_diversity_penalty": 0.9,
-    "xp_earned": 6.21,
+    "xp_earned": 68.04,
     "dominant_language": "Python",
-    "issues_closed": 3,
-    "issue_close_ratio": 0.5,
-    "issue_score": 1.15,
+    "issues_closed": 4,
+    "issue_close_ratio": 0.6666666666666666,
+    "issue_score": 1.2,
     "can_prestige": false,
     "prestige_missing": [
       "Need Level 10"
     ]
   },
-  "last_update": "2026-02-23T07:13:53.077789+00:00"
+  "last_update": "2026-02-23T23:07:13.898569+00:00"
 }

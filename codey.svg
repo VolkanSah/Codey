@@ -53,8 +53,8 @@
         50%     { r:10; opacity:0.5; fill:#ffaaee; }
       }
       @keyframes wave {
-        0%,100% { transform: rotate(0deg);  }
-        25%     { transform: rotate(22deg); }
+        0%,100% { transform: rotate(0deg);   }
+        25%     { transform: rotate(22deg);  }
         75%     { transform: rotate(-12deg); }
       }
       @keyframes headbob {
@@ -85,33 +85,35 @@
       @keyframes circ  { 0%{stroke-dashoffset:60} 100%{stroke-dashoffset:0} }
       @keyframes scanline {
         0%   { transform:translateY(-8px); opacity:0;   }
-        8%   { opacity:0.2; }
-        92%  { opacity:0.2; }
+        8%   { opacity:0.25; }
+        92%  { opacity:0.25; }
         100% { transform:translateY(220px); opacity:0; }
       }
       @keyframes ledpop {
         0%,100% { r:3;   opacity:1;   }
         50%     { r:4.5; opacity:0.3; }
       }
-      .bot-body  { animation: breathe 3.2s ease-in-out infinite; }
-      .head-bob  { animation: headbob 4.5s ease-in-out infinite; transform-origin: 108px 185px; }
-      .eye-l     { animation: blink 5s ease-in-out infinite;       transform-origin: 89px 185px; }
-      .eye-r     { animation: blink 5s ease-in-out infinite 0.1s;  transform-origin: 127px 185px; }
-      .arm-wave  { animation: wave 2.2s ease-in-out infinite;      transform-origin: 174px 162px; }
-      .anttip    { animation: antpulse 1.5s ease-in-out infinite; }
-      .antring   { animation: ringexpand 2s ease-out infinite; }
-      .antring2  { animation: ringexpand 2s ease-out infinite 1s; }
-      .blush     { animation: blush 3.2s ease-in-out infinite; }
-      .heart     { animation: heartpop 5s ease-in-out infinite 0.8s; transform-origin: 162px 148px; }
-      .star      { animation: starpop 7s ease-in-out infinite 2s;   transform-origin: 56px 158px; }
-      .cursor    { animation: cur 1s step-end infinite; }
-      .circ1     { stroke-dasharray:60; animation: circ 2.6s linear infinite; }
-      .circ2     { stroke-dasharray:50; animation: circ 3.2s linear infinite 0.9s; }
-      .scanline  { animation: scanline 3.8s linear infinite; }
-      .led1      { animation: ledpop 0.9s ease-in-out infinite; }
-      .led2      { animation: ledpop 1.3s ease-in-out infinite 0.3s; }
-      .led3      { animation: ledpop 1.1s ease-in-out infinite 0.7s; }
-      .led4      { animation: ledpop 0.7s ease-in-out infinite 0.1s; }
+
+      /* ONE-SHOT: 2 scanner sweeps, circuit boots once */
+      .scanline { animation: scanline 3.8s linear 2 forwards; }
+      .circ1    { stroke-dasharray:60; animation: circ 2.6s linear 1; }
+      .circ2    { stroke-dasharray:50; animation: circ 3.2s linear 1 0.9s; }
+
+      /* BOT LOOP — controlled by cycles (max=4) */
+      .bot-body { animation: breathe 3.2s ease-in-out infinite; }
+      .head-bob { animation: headbob 4.5s ease-in-out infinite; transform-origin: 108px 185px; }
+      .eye-l    { animation: blink 5s ease-in-out infinite;      transform-origin: 89px 185px; }
+      .eye-r    { animation: blink 5s ease-in-out infinite 0.1s;      transform-origin: 127px 185px; }
+      .arm-wave { animation: wave 2.2s ease-in-out infinite;    transform-origin: 174px 162px; }
+      .anttip   { animation: antpulse 1.5s ease-in-out infinite; }
+      .blush    { animation: blush 3.2s ease-in-out infinite; }
+      .heart    { animation: heartpop 5s ease-in-out infinite 0.8s; transform-origin: 162px 148px; }
+      .star     { animation: starpop 7s ease-in-out infinite 2s;  transform-origin: 56px 158px; }
+      .cursor   { animation: cur 1s step-end infinite; }
+      .led1     { animation: ledpop 0.9s ease-in-out infinite; }
+      .led2     { animation: ledpop 1.3s ease-in-out infinite 0.3s; }
+      .led3     { animation: ledpop 1.1s ease-in-out infinite 0.7s; }
+      .led4     { animation: ledpop 0.7s ease-in-out infinite 0.1s; }
     </style>
   </defs>
 
@@ -123,31 +125,33 @@
   <!-- Card -->
   <rect x="15" y="15" width="600" height="443" fill="#0c0018" stroke="#f59e0b" stroke-width="1.5"/>
   <rect x="12" y="12" width="606" height="449" fill="none" stroke="#f59e0b" stroke-width="0.8" stroke-dasharray="6 3" opacity="0.3"/>
-  <polyline points="15,35 15,15 35,15"      fill="none" stroke="#e0aaff" stroke-width="2"/>
-  <polyline points="615,35 615,15 595,15"   fill="none" stroke="#e0aaff" stroke-width="2"/>
-  <polyline points="15,438 15,458 35,458"   fill="none" stroke="#e0aaff" stroke-width="2"/>
+  <polyline points="15,35 15,15 35,15"       fill="none" stroke="#e0aaff" stroke-width="2"/>
+  <polyline points="615,35 615,15 595,15"    fill="none" stroke="#e0aaff" stroke-width="2"/>
+  <polyline points="15,438 15,458 35,458"    fill="none" stroke="#e0aaff" stroke-width="2"/>
   <polyline points="615,438 615,458 595,458" fill="none" stroke="#e0aaff" stroke-width="2"/>
 
   <!-- Header -->
   <rect x="15" y="15" width="600" height="28" fill="#bf00ff" opacity="0.08"/>
   <line x1="15" y1="43" x2="615" y2="43" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
   <text x="26" y="34" fill="#e0aaff" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user ELDER --lvl 4 --prestige 0</text>
-  <text x="608" y="34" text-anchor="end" fill="#f59e0b" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-02-23 07:13 UTC</text>
-  <rect class="scanline" x="15" y="43" width="600" height="5" fill="#bf00ff" opacity="0"/>
+  <text x="608" y="34" text-anchor="end" fill="#f59e0b" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-02-23 23:07 UTC</text>
+
+  <!-- ONE-SHOT scanline: 2 sweeps = scanner effect, then done -->
+  <rect class="scanline" x="15" y="43" width="600" height="5" fill="#bf00ff"/>
 
   <!-- Divider -->
   <line x1="220" y1="44" x2="220" y2="455" stroke="#bf00ff" stroke-width="1" stroke-dasharray="4 3" opacity="0.3"/>
 
-  <!-- ══ CUTE ROBOT ══ -->
+  <!-- ══ CUTE ROBOT — 1:1 original ══ -->
   <g class="bot-body">
-    <ellipse cx="108" cy="255" rx="80" ry="90" fill="#bf00ff" opacity="0.05" filter="url(#softglow)"/>
+    <ellipse cx="108" cy="255" rx="80" ry="90" fill="#bf00ff" opacity="0.05"/>
     <ellipse cx="108" cy="336" rx="48" ry="8" fill="url(#shadowgrad)"/>
 
-    <!-- Legs -->
-    <rect x="88"  y="295" width="16" height="30" rx="8" fill="url(#bodygrad)" filter="url(#glow)"/>
-    <rect x="116" y="295" width="16" height="30" rx="8" fill="url(#bodygrad)" filter="url(#glow)"/>
-    <ellipse cx="96"  cy="328" rx="14" ry="8" fill="#9922cc" filter="url(#glow)"/>
-    <ellipse cx="124" cy="328" rx="14" ry="8" fill="#9922cc" filter="url(#glow)"/>
+    <!-- Legs (no glow filter — occluded by body, saves GPU) -->
+    <rect x="88"  y="295" width="16" height="30" rx="8" fill="url(#bodygrad)"/>
+    <rect x="116" y="295" width="16" height="30" rx="8" fill="url(#bodygrad)"/>
+    <ellipse cx="96"  cy="328" rx="14" ry="8" fill="#9922cc"/>
+    <ellipse cx="124" cy="328" rx="14" ry="8" fill="#9922cc"/>
     <ellipse cx="92"  cy="325" rx="5"  ry="3" fill="#e0aaff" opacity="0.3"/>
     <ellipse cx="120" cy="325" rx="5"  ry="3" fill="#e0aaff" opacity="0.3"/>
 
@@ -156,19 +160,19 @@
     <ellipse cx="97" cy="228" rx="24" ry="12" fill="white" opacity="0.12"/>
     <rect x="82" y="228" width="52" height="38" rx="10" fill="#3d0066" opacity="0.6"/>
     <line class="circ1" x1="88" y1="242" x2="108" y2="242" stroke="#e0aaff" stroke-width="1" opacity="0.5"/>
-    <line x1="108" y1="242" x2="108" y2="252" stroke="#e0aaff" stroke-width="1" opacity="0.4"/>
+    <line               x1="108" y1="242" x2="108" y2="252" stroke="#e0aaff" stroke-width="1" opacity="0.4"/>
     <line class="circ2" x1="128" y1="252" x2="108" y2="252" stroke="#e0aaff" stroke-width="1" opacity="0.5"/>
     <text x="108" y="260" text-anchor="middle" font-size="20" fill="#ff88dd" opacity="0.9" filter="url(#glow)">🐍</text>
 
-    <!-- Left arm -->
-    <rect x="36"  y="222" width="38" height="16" rx="8" fill="url(#bodygrad)" filter="url(#glow)"/>
-    <circle cx="36" cy="230" r="12" fill="#9922cc" filter="url(#glow)"/>
+    <!-- Left arm (no glow — behind body) -->
+    <rect x="36"  y="222" width="38" height="16" rx="8" fill="url(#bodygrad)"/>
+    <circle cx="36" cy="230" r="12" fill="#9922cc"/>
     <ellipse cx="32" cy="227" rx="5" ry="3" fill="#e0aaff" opacity="0.35"/>
 
-    <!-- Right arm waving -->
+    <!-- Right arm waving (no glow on arm itself — saves GPU during animation) -->
     <g class="arm-wave">
-      <rect x="142" y="222" width="38" height="16" rx="8" fill="url(#bodygrad)" filter="url(#glow)"/>
-      <circle cx="180" cy="230" r="12" fill="#9922cc" filter="url(#glow)"/>
+      <rect x="142" y="222" width="38" height="16" rx="8" fill="url(#bodygrad)"/>
+      <circle cx="180" cy="230" r="12" fill="#9922cc"/>
       <ellipse cx="176" cy="227" rx="5" ry="3" fill="#e0aaff" opacity="0.35"/>
     </g>
 
@@ -239,11 +243,9 @@
       <circle class="led3" cx="118" cy="143" r="3" fill="#ff88dd"/>
       <circle class="led4" cx="128" cy="145" r="3" fill="#e0aaff"/>
 
-      <!-- Antenna -->
+      <!-- Antenna (antring removed — expanding blur rings too expensive) -->
       <line x1="108" y1="130" x2="108" y2="102" stroke="#cc44ff" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
-      <circle class="antring"  cx="108" cy="94" r="8" fill="none" stroke="#ff88dd" stroke-width="1.2" opacity="0"/>
-      <circle class="antring2" cx="108" cy="94" r="8" fill="none" stroke="#e0aaff" stroke-width="1"   opacity="0"/>
-      <circle class="anttip"   cx="108" cy="94" r="8" fill="#ff44cc" filter="url(#glow-hard)"/>
+      <circle class="anttip" cx="108" cy="94" r="8" fill="#ff44cc" filter="url(#glow-hard)"/>
       <circle cx="105" cy="91" r="2.5" fill="white" opacity="0.7"/>
 
     </g><!-- head-bob -->
@@ -257,38 +259,39 @@
       <text x="52" y="162" font-size="16" fill="#e0aaff" text-anchor="middle" filter="url(#glow)">✦</text>
     </g>
 
-    <!-- Mood label -->
-    <text x="108" y="358" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#e0aaff" opacity="0.8">ELITE • 10.0y</text>
+    <!-- Mood label (bleibt unter der Figur) -->
+    <text x="108" y="358" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#e0aaff" opacity="0.8">STRUGGLING • 10.0y</text>
+
   </g><!-- bot-body -->
 
-  <!-- ══ STATS PANEL ══ -->
+  <!-- ══ STATS PANEL — translate(232, 50) ══ -->
   <g transform="translate(232, 50)" font-family="Courier New,monospace" fill="#e0aaff">
 
     <text x="0" y="16" font-size="13" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
 
-    <!-- Tier badge -->
+    <!-- Tier badge: y=22 h=34 → bottom=56. MOOD removed (shown under figure) -->
     <rect x="0" y="22" width="376" height="34" rx="4" fill="#f59e0b" opacity="0.1" stroke="#f59e0b" stroke-width="1"/>
     <rect x="0" y="22" width="3"   height="34" fill="#e0aaff" rx="1"/>
     <text x="8" y="35" font-size="11" font-weight="bold">[ELDER] LVL 4 • 10.0y • XP=0.25x •  PRESTIGE 0</text>
-    <text x="8" y="50" font-size="11" font-weight="bold" fill="#ff88dd">MOOD=ELITE</text>
+    <text x="8" y="50" font-size="11" font-weight="bold" fill="#ff88dd">😰 STRUGGLING</text>
 
-    <!-- Stat bars -->
-    <g transform="translate(0,64)" font-size="12">
+    <!-- Stat bars: y=74 (+18px gap from badge bottom=56) -->
+    <g transform="translate(0,74)" font-size="12">
       <text x="0"   y="0"   opacity="0.65">health   </text>
-      <text x="80"  y="0"  >[██████░░░░░░░░░░░░░░]</text>
-      <text x="374" y="0"   font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">30%</text>
+      <text x="80"  y="0"  >[█████░░░░░░░░░░░░░░░]</text>
+      <text x="374" y="0"   font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">27%</text>
 
       <text x="0"   y="22"  opacity="0.65">hunger   </text>
-      <text x="80"  y="22" >[█████████████░░░░░░░]</text>
-      <text x="374" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">68%</text>
+      <text x="80"  y="22" >[████████████████░░░░]</text>
+      <text x="374" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">82%</text>
 
       <text x="0"   y="44"  opacity="0.65">happiness</text>
       <text x="80"  y="44" >[░░░░░░░░░░░░░░░░░░░░]</text>
       <text x="374" y="44"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0%</text>
 
       <text x="0"   y="66"  opacity="0.65">energy   </text>
-      <text x="80"  y="66" >[████░░░░░░░░░░░░░░░░]</text>
-      <text x="374" y="66"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">22%</text>
+      <text x="80"  y="66" >[░░░░░░░░░░░░░░░░░░░░]</text>
+      <text x="374" y="66"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0%</text>
 
       <text x="0"   y="88"  opacity="0.65">social   </text>
       <text x="80"  y="88" >[████████████░░░░░░░░]</text>
@@ -299,29 +302,32 @@
       <text x="374" y="110" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0.83</text>
     </g>
 
-    <line x1="0" y1="190" x2="376" y2="190" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+    <!-- separator: 74+132=206 +6=212 -->
+    <line x1="0" y1="212" x2="376" y2="212" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-    <g transform="translate(0,198)" font-size="12">
+    <!-- Activity: y=220 -->
+    <g transform="translate(0,220)" font-size="12">
       <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
-      <text x="0" y="20">STREAK=10d  •  COMMITS=311  •  STARS=699</text>
+      <text x="0" y="20">STREAK=11d  •  COMMITS=333  •  STARS=699</text>
       <text x="0" y="40">DOMINANT=Python 🐍  •  TIER=ELDER</text>
       <text x="0" y="60">PENALTIES=quality_curator</text>
       <text x="0" y="80" fill="#ff88dd">SEASON=💖 OS Love +10%</text>
-    </g>
-
-    <line x1="0" y1="292" x2="376" y2="292" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
-
-    <!-- Achievements -->
-    <g transform="translate(0,300)">
-      <text x="0" y="0" font-size="11" opacity="0.5">$ ls ./achievements/</text>
-      <circle cx="22" cy="30" r="19" fill="#0c0018" stroke="#e0aaff" stroke-width="1.5" filter="url(#glow)"/><text x="22" y="37" text-anchor="middle" font-size="17">🧙‍♂️</text><circle cx="68" cy="30" r="19" fill="#0c0018" stroke="#ff88dd" stroke-width="1.5" filter="url(#glow)"/><text x="68" y="37" text-anchor="middle" font-size="17">👑</text><circle cx="114" cy="30" r="19" fill="#0c0018" stroke="#e0aaff" stroke-width="1.5" filter="url(#glow)"/><text x="114" y="37" text-anchor="middle" font-size="17">💎</text>
+      <text x="0" y="100" fill="#ff88dd" font-size="11">ISSUES=closed:4 • ratio:0.67 • score:1.20</text>
     </g>
 
     <line x1="0" y1="358" x2="376" y2="358" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
+    <!-- Achievements: r=15 (-21%), font-size=13, spacing=38px -->
     <g transform="translate(0,366)">
+      <text x="0" y="0" font-size="11" opacity="0.5">$ ls ./achievements/</text>
+      <circle cx="17" cy="22" r="15" fill="#0c0018" stroke="#e0aaff" stroke-width="1.5" filter="url(#glow)"/><text x="17" y="28" text-anchor="middle" font-size="13">🧙‍♂️</text><circle cx="55" cy="22" r="15" fill="#0c0018" stroke="#ff88dd" stroke-width="1.5" filter="url(#glow)"/><text x="55" y="28" text-anchor="middle" font-size="13">👑</text><circle cx="93" cy="22" r="15" fill="#0c0018" stroke="#e0aaff" stroke-width="1.5" filter="url(#glow)"/><text x="93" y="28" text-anchor="middle" font-size="13">💎</text>
+    </g>
+
+    <line x1="0" y1="416" x2="376" y2="416" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+
+    <g transform="translate(0,424)">
       <text x="0"   y="16" font-size="13" font-weight="bold">$ _<tspan class="cursor">█</tspan></text>
-      <text x="374" y="16" font-size="10" opacity="0.45" text-anchor="end" fill="#f59e0b">2026-02-23 07:13 UTC</text>
+      <text x="374" y="16" font-size="10" opacity="0.45" text-anchor="end" fill="#f59e0b">2026-02-23 23:07 UTC</text>
     </g>
 
   </g>
