@@ -354,7 +354,26 @@ see [.codey_themes](.codey_themes) folder
 ### [2.2.1]
 #### Fixes
 - update_codey workflow now works an all branches
-- Tunning Cuty & Cat Skins (see file logs)
+  
+##### Cat & Cuty Theme Optimization
+
+**Performance**
+- Scanline animation now one-shot (`forwards`) — no lingering color bar after sweep
+- Fixed scanline `opacity="0"` attribute bug that silently killed the animation
+- Removed `ringpulse` / `antring` animations — expensive blur filters, barely visible
+- Removed `filter="url(#glow)"` from legs & arms (occluded by body anyway)
+- Dropped `cycles=8` — `cycles=4` is now max, nobody needs the extra GPU cost
+
+**Animation control**
+- All cat/bot animations now controlled by `cycles` parameter
+- `cycles=2` breathe only · `cycles=3` + tail/arm · `cycles=4` full
+- Terminal boot (scanline, circ1/2) always one-shot regardless of cycles
+
+**Stats panel**
+- Added `issue_score` + `close_ratio` to activity log
+- Achievement icons reduced ~21% (r=19→15) — frees breathing room above stat bars
+- Dynamic Y layout: all positions recalculated when issue line is present
+
 
 ### [2.2.0]
 #### Added
@@ -589,6 +608,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
