@@ -251,8 +251,8 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       @keyframes circ  {{ 0%{{stroke-dashoffset:60}} 100%{{stroke-dashoffset:0}} }}
       @keyframes scanline {{
         0%   {{ transform:translateY(-8px); opacity:0;   }}
-        8%   {{ opacity:0.2; }}
-        92%  {{ opacity:0.2; }}
+        8%   {{ opacity:0.25; }}
+        92%  {{ opacity:0.25; }}
         100% {{ transform:translateY(220px); opacity:0; }}
       }}
       @keyframes ledpop {{
@@ -261,7 +261,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       }}
 
       /* ONE-SHOT: 2 scanner sweeps, circuit boots once */
-      .scanline {{ animation: scanline 3.8s linear 2; fill-opacity:0; }}
+      .scanline {{ animation: scanline 3.8s linear 2; }}
       .circ1    {{ stroke-dasharray:60; animation: circ 2.6s linear 1; }}
       .circ2    {{ stroke-dasharray:50; animation: circ 3.2s linear 1 0.9s; }}
 
