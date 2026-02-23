@@ -77,5 +77,6 @@ jobs:
         else
           # Commit with a friendly message and push to the branch
           git commit -m "🐾 Daily Codey update 🐾"
+          git pull --rebase origin _creator_tests_svg  # 
           git push
         fi
