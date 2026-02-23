@@ -30,19 +30,26 @@ from datetime import datetime
 # [NEW]      23.02.2026 - cycles controls bot animation tier
 # [IMPROVED] 23.02.2026 - MOOD removed from stats panel (shown under figure)
 # [IMPROVED] 23.02.2026 - issue_score + close_ratio in activity log
+# [IMPROVED] 23.02.2026 - cycles=8 removed (nobody needs it, too expensive)
+# [IMPROVED] 23.02.2026 - glow filter removed from legs/arms (hidden behind body)
+# [IMPROVED] 23.02.2026 - antring removed from loop (cycles=4 is now max)
 # =============================================================================
 #
 # ANIMATION STRATEGY:
 # ─────────────────────────────────────────────────────────────────────────────
 # ONE-SHOT:
-#   scanline  → 2 cycles (looks like a real scanner sweep, then done)
+#   scanline  → 2 cycles (real scanner sweep, then done)
 #   circ1/2   → 1 cycle  (body circuit boot, then static)
 #
-# LOOP — controlled by cycles:
+# LOOP — controlled by cycles (max=4, 8 removed):
 #   cycles=2 (light)  : breathe only                    → ultra mobile-safe
-#   cycles=3 (sweet)  : breathe + arm-wave + cursor      → sweet spot
+#   cycles=3 (sweet)  : breathe + arm-wave + cursor      → sweet spot mobile
 #   cycles=4 (normal) : + blink, headbob, blush, LEDs, heart, star, antpulse
-#   cycles=8 (full)   : + antring, softglow filter
+#
+# CPU OPTIMIZATIONS (design untouched):
+#   - filter="url(#glow)" removed from legs + arms (occluded by body anyway)
+#   - antring (expanding rings) removed — expensive, barely visible
+#   - softglow on ambient ellipse always off (background effect, not worth it)
 #
 # Loader (update_codey.py) does NOT need changes — signature unchanged.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -117,6 +124,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     issue_xml  = f'<text x="0" y="100" fill="#ff88dd" font-size="11">{issue_line}</text>' if has_issues else ''
 
     # ── cycles → animation config ──────────────────────────────────────────
+    # cycles=8 removed — 4 is max, nobody needs the extra GPU cost
     wave_anim    = 'wave 2.2s ease-in-out infinite'        if cycles >= 3 else 'none'
     blink_l      = 'blink 5s ease-in-out infinite'         if cycles >= 4 else 'none'
     blink_r      = 'blink 5s ease-in-out infinite 0.1s'    if cycles >= 4 else 'none'
@@ -129,9 +137,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     led2_anim    = 'ledpop 1.3s ease-in-out infinite 0.3s' if cycles >= 4 else 'none'
     led3_anim    = 'ledpop 1.1s ease-in-out infinite 0.7s' if cycles >= 4 else 'none'
     led4_anim    = 'ledpop 0.7s ease-in-out infinite 0.1s' if cycles >= 4 else 'none'
-    ring_anim    = 'ringexpand 2s ease-out infinite'       if cycles >= 8 else 'none'
-    ring2_anim   = 'ringexpand 2s ease-out infinite 1s'    if cycles >= 8 else 'none'
-    body_filter  = 'filter="url(#softglow)"'               if cycles >= 8 else ''
+    # antring + softglow removed — expensive blur filters, barely visible
 
     # ── ASCII bars ─────────────────────────────────────────────────────────
     def bar(value, segments=20):
@@ -259,15 +265,13 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       .circ1    {{ stroke-dasharray:60; animation: circ 2.6s linear 1; }}
       .circ2    {{ stroke-dasharray:50; animation: circ 3.2s linear 1 0.9s; }}
 
-      /* BOT LOOP — controlled by cycles */
+      /* BOT LOOP — controlled by cycles (max=4) */
       .bot-body {{ animation: breathe 3.2s ease-in-out infinite; }}
       .head-bob {{ animation: {headbob_anim}; transform-origin: 108px 185px; }}
       .eye-l    {{ animation: {blink_l};      transform-origin: 89px 185px; }}
       .eye-r    {{ animation: {blink_r};      transform-origin: 127px 185px; }}
       .arm-wave {{ animation: {wave_anim};    transform-origin: 174px 162px; }}
       .anttip   {{ animation: {ant_anim}; }}
-      .antring  {{ animation: {ring_anim}; }}
-      .antring2 {{ animation: {ring2_anim}; }}
       .blush    {{ animation: {blush_anim}; }}
       .heart    {{ animation: {heart_anim}; transform-origin: 162px 148px; }}
       .star     {{ animation: {star_anim};  transform-origin: 56px 158px; }}
@@ -306,14 +310,14 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 
   <!-- ══ CUTE ROBOT — 1:1 original ══ -->
   <g class="bot-body">
-    <ellipse cx="108" cy="255" rx="80" ry="90" fill="#bf00ff" opacity="0.05" {body_filter}/>
+    <ellipse cx="108" cy="255" rx="80" ry="90" fill="#bf00ff" opacity="0.05"/>
     <ellipse cx="108" cy="336" rx="48" ry="8" fill="url(#shadowgrad)"/>
 
-    <!-- Legs -->
-    <rect x="88"  y="295" width="16" height="30" rx="8" fill="url(#bodygrad)" filter="url(#glow)"/>
-    <rect x="116" y="295" width="16" height="30" rx="8" fill="url(#bodygrad)" filter="url(#glow)"/>
-    <ellipse cx="96"  cy="328" rx="14" ry="8" fill="#9922cc" filter="url(#glow)"/>
-    <ellipse cx="124" cy="328" rx="14" ry="8" fill="#9922cc" filter="url(#glow)"/>
+    <!-- Legs (no glow filter — occluded by body, saves GPU) -->
+    <rect x="88"  y="295" width="16" height="30" rx="8" fill="url(#bodygrad)"/>
+    <rect x="116" y="295" width="16" height="30" rx="8" fill="url(#bodygrad)"/>
+    <ellipse cx="96"  cy="328" rx="14" ry="8" fill="#9922cc"/>
+    <ellipse cx="124" cy="328" rx="14" ry="8" fill="#9922cc"/>
     <ellipse cx="92"  cy="325" rx="5"  ry="3" fill="#e0aaff" opacity="0.3"/>
     <ellipse cx="120" cy="325" rx="5"  ry="3" fill="#e0aaff" opacity="0.3"/>
 
@@ -326,15 +330,15 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     <line class="circ2" x1="128" y1="252" x2="108" y2="252" stroke="#e0aaff" stroke-width="1" opacity="0.5"/>
     <text x="108" y="260" text-anchor="middle" font-size="20" fill="#ff88dd" opacity="0.9" filter="url(#glow)">{pet_emoji}</text>
 
-    <!-- Left arm -->
-    <rect x="36"  y="222" width="38" height="16" rx="8" fill="url(#bodygrad)" filter="url(#glow)"/>
-    <circle cx="36" cy="230" r="12" fill="#9922cc" filter="url(#glow)"/>
+    <!-- Left arm (no glow — behind body) -->
+    <rect x="36"  y="222" width="38" height="16" rx="8" fill="url(#bodygrad)"/>
+    <circle cx="36" cy="230" r="12" fill="#9922cc"/>
     <ellipse cx="32" cy="227" rx="5" ry="3" fill="#e0aaff" opacity="0.35"/>
 
-    <!-- Right arm waving -->
+    <!-- Right arm waving (no glow on arm itself — saves GPU during animation) -->
     <g class="arm-wave">
-      <rect x="142" y="222" width="38" height="16" rx="8" fill="url(#bodygrad)" filter="url(#glow)"/>
-      <circle cx="180" cy="230" r="12" fill="#9922cc" filter="url(#glow)"/>
+      <rect x="142" y="222" width="38" height="16" rx="8" fill="url(#bodygrad)"/>
+      <circle cx="180" cy="230" r="12" fill="#9922cc"/>
       <ellipse cx="176" cy="227" rx="5" ry="3" fill="#e0aaff" opacity="0.35"/>
     </g>
 
@@ -405,11 +409,9 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       <circle class="led3" cx="118" cy="143" r="3" fill="#ff88dd"/>
       <circle class="led4" cx="128" cy="145" r="3" fill="#e0aaff"/>
 
-      <!-- Antenna -->
+      <!-- Antenna (antring removed — expanding blur rings too expensive) -->
       <line x1="108" y1="130" x2="108" y2="102" stroke="#cc44ff" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
-      <circle class="antring"  cx="108" cy="94" r="8" fill="none" stroke="#ff88dd" stroke-width="1.2" opacity="0"/>
-      <circle class="antring2" cx="108" cy="94" r="8" fill="none" stroke="#e0aaff" stroke-width="1"   opacity="0"/>
-      <circle class="anttip"   cx="108" cy="94" r="8" fill="#ff44cc" filter="url(#glow-hard)"/>
+      <circle class="anttip" cx="108" cy="94" r="8" fill="#ff44cc" filter="url(#glow-hard)"/>
       <circle cx="105" cy="91" r="2.5" fill="white" opacity="0.7"/>
 
     </g><!-- head-bob -->
