@@ -68,14 +68,22 @@ jobs:
         git config --local user.name "Codey Bot"
         git config --local user.email "action@github.com"
 
-        # Attempt to stage generated assets (suppress errors if files don't exist yet)
+        # Stage generated assets (suppress errors if files don't exist yet)
         git add codey.svg codey.json 2>/dev/null || true
 
-        # Check if there are actual changes to avoid empty/failing commits
+        # Skip commit if nothing changed
         if git diff --cached --quiet; then
-          echo "No changes to commit"
-        else
-          # Commit with a friendly message and push to the branch
-          git commit -m "🐾 Daily Codey update 🐾"
-          git push
+          echo "No changes to commit — skipping."
+          exit 0
         fi
+
+        # Commit the update
+        git commit -m "🐾 Daily Codey update 🐾"
+
+        # Pull remote changes first to avoid push conflicts
+        # Uses current branch name automatically — works on main, PRs, test branches
+        git pull --rebase origin ${{ github.ref_name }}
+
+        # Push — never fails the workflow (e.g. protected branches, race conditions)
+        git push || echo "⚠️ Push skipped (protected branch or no permission)"
+
