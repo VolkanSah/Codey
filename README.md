@@ -351,6 +351,15 @@ see [.codey_themes](.codey_themes) folder
 
 <details>
 <summary> - Changelog - </summary> 
+### [2.2.1]
+#### Fixes
+- update_codey workflow now works an all branches
+- Tunning Cutty
+```
+cycles=2  → breathe only           (ultra low-end mobile)
+cycles=3  → breathe + arm-wave     (sweet spot mobile)  
+cycles=4  → alles ← MAX, kein 8 mehr
+```
 
 ### [2.2.0]
 #### Added
@@ -585,6 +594,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
