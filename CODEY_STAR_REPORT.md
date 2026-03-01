@@ -2,7 +2,7 @@
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
-> Generated: 2026-02-19 15:21 UTC  
+> Generated: 2026-03-01 06:51 UTC  
 > Powered by [Codey](https://github.com/VolkanSah/Codey)
 
 ---
@@ -12,13 +12,13 @@
 
 | | Active | Archived | Total |
 |---|---|---|---|
-| Own Repos | 123 | 4 | 127 |
-| Own Stars | 629 | 68 | 697 |
-| Forks | 82 | 0 | 82 |
-| Fork Stars | 74 | 0 | 74 |
-| **Grand Total Stars** | | | **771** |
+| Own Repos | 124 | 4 | 128 |
+| Own Stars | 641 | 68 | 709 |
+| Forks | 85 | 0 | 85 |
+| Fork Stars | 75 | 0 | 75 |
+| **Grand Total Stars** | | | **784** |
 
-- Fork Ratio: 0.67 — clean
+- Fork Ratio: 0.69 — clean
 - Repos with 0 stars: 5
 
 </details>
@@ -30,10 +30,10 @@
 |---|---|
 | GPT-API-Integration-in-HTML-CSS-with-JS-PHP | 87 |
 | Exploring-the-Code-Interpreter-in-OpenAI-GPT | 44 |
-| AI-API-Security-Best-Practices | 32 |
-| optimize-MySQL-MariaDB | 28 |
-| WordPress-Security-Scanner-advanced-use | 22 |
-| ModSecurity-Webserver-Protection-Guide | 22 |
+| AI-API-Security-Best-Practices | 33 |
+| optimize-MySQL-MariaDB | 31 |
+| WordPress-Security-Scanner-advanced-use | 23 |
+| ModSecurity-Webserver-Protection-Guide | 23 |
 | aicc-comments-reply | 22 |
 | Auto-Proxy-Fetcher | 19 |
 | PoisonIvory | 16 |
@@ -48,20 +48,20 @@
 |---|---|
 | GPT-API-Integration-in-HTML-CSS-with-JS-PHP | 87 |
 | Exploring-the-Code-Interpreter-in-OpenAI-GPT | 44 |
-| AI-API-Security-Best-Practices | 32 |
-| optimize-MySQL-MariaDB | 28 |
-| WordPress-Security-Scanner-advanced-use | 22 |
-| ModSecurity-Webserver-Protection-Guide | 22 |
+| AI-API-Security-Best-Practices | 33 |
+| optimize-MySQL-MariaDB | 31 |
+| WordPress-Security-Scanner-advanced-use | 23 |
+| ModSecurity-Webserver-Protection-Guide | 23 |
 | aicc-comments-reply | 22 |
 | Auto-Proxy-Fetcher | 19 |
 | PoisonIvory | 16 |
 | Bitcoin-Lottery-Miner | 12 |
 | Implementing-AI-Systems-Whitepaper | 10 |
 | NMAP-Black-Python | 9 |
+| SherlocksHome | 9 |
+| XSSPY-NCF | 9 |
 | Multiple-Isolated-Tor-Instances-for-Hidden-Services | 8 |
-| SherlocksHome | 8 |
 | OpenAI-Cost-Calculator | 8 |
-| XSSPY-NCF | 8 |
 | VolkanSah | 7 |
 | Python-Modules-Overview | 7 |
 | The_Extractor.py | 7 |
@@ -81,6 +81,7 @@
 | Tor-Network-Application-with-Stem-and-Scapy | 5 |
 | intelligent-Proxy-Management-System | 5 |
 | Debug-Logger-Pro | 5 |
+| Detection-Labs-for-Palantir-Style-Activity | 5 |
 | writethrough-caching | 4 |
 | WP-Facebook-Engagement-Metrics | 4 |
 | PHP-Libraries-Overview | 4 |
@@ -90,8 +91,8 @@
 | Twitter-X-AINewsBot | 4 |
 | How-to-use-fcrackzip | 4 |
 | OpenAi-GPT-GUI | 4 |
+| Security-Headers-Guide | 4 |
 | STEP-Viewer-Pro | 4 |
-| Detection-Labs-for-Palantir-Style-Activity | 4 |
 | advanced-RAM-use-on-Bash-installed-systems | 3 |
 | Apache2-with-Nginx-Reverse-Proxy-and-Let-s-Encrypt-SSL-on-Debian-Ubuntu | 3 |
 | Instagram-Suspicious-Followers-Detection | 3 |
@@ -121,7 +122,6 @@
 | Dev-Server-Toolbox | 2 |
 | How-to-Kill-Crypto-Money | 2 |
 | Super-Sexy-Custom-Buttons | 2 |
-| Security-Headers-Guide | 2 |
 | CryptGuardian | 2 |
 | External-DB-Dummy-Plugin-for-WordPress | 2 |
 | CLI-Baseline | 2 |
@@ -160,6 +160,7 @@
 | brain.sh | 1 |
 | Awesome-Audio-Visualizer | 1 |
 | Dev-Docs-Template | 1 |
+| Codey | 1 |
 | CMIFC | 1 |
 | ImageConverter | 1 |
 | volkansah.github.io | 1 |
@@ -247,6 +248,7 @@
 | QloApps-fork | 1 |
 | whatsapp-census | 1 |
 | social-app-fork | 1 |
+| leaky-paths-fork | 1 |
 
 </details>
 
