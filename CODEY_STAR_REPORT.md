@@ -2,8 +2,14 @@
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
-> Generated: 2026-03-03 08:51 UTC  
+> Generated: 2026-03-03 08:59 UTC  
 > Powered by [Codey](https://github.com/VolkanSah/Codey)
+
+---
+
+## ⭐ 605 Real Stars
+
+> Self-stars excluded. Fork stars excluded. This is your actual score.
 
 ---
 
@@ -13,10 +19,9 @@
 | | Active | Archived | Total |
 |---|---|---|---|
 | Own Repos | 124 | 4 | 128 |
-| Own Stars | 541 | 64 | 605 |
+| Own Stars | 541 | 64 | **605** |
 | Forks | 85 | 0 | 85 |
-| Fork Stars | 37 | 0 | 37 |
-| **Grand Total Stars** | | | **642** |
+| Fork Stars _(not counted)_ | 37 | 0 | 37 |
 
 - Fork Ratio: 0.69 — clean
 - Repos with 0 stars: 32
@@ -154,7 +159,7 @@
 </details>
 
 <details>
-<summary>Forked Repos with Stars</summary>
+<summary>Forked Repos with Stars _(info only)_</summary>
 
 | Repository | Stars |
 |---|---|
