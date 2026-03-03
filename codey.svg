@@ -1,123 +1,147 @@
-<svg width="630" height="520" viewBox="0 0 630 520" xmlns="http://www.w3.org/2000/svg">
+<svg width="630" height="530" viewBox="0 0 630 530" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .bsod  { font-family: "Courier New", "Lucida Console", monospace; }
-    @keyframes blink    { 0%,49%{ opacity:1; } 50%,100%{ opacity:0; } }
-    @keyframes fadein   { from{ opacity:0; } to{ opacity:1; } }
-    @keyframes scanline { 0%{ transform:translateY(-4px); opacity:0;    }
-                          5%{ opacity:0.08; }
-                          95%{ opacity:0.08; }
-                          100%{ transform:translateY(520px); opacity:0; } }
-    @keyframes scanloop { 0%{ transform:translateY(-4px); opacity:0;    }
-                          5%{ opacity:0.06; }
-                          95%{ opacity:0.06; }
-                          100%{ transform:translateY(520px); opacity:0; } }
-    .cursor   { animation: blink 1s step-end infinite; }
-    .scan-one { animation: scanline 2.5s linear 1 forwards; }
-    .scan-lp  { animation: scanloop 4s linear infinite; }
-
-    .l01 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 0.1s; }
-    .l02 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 0.3s; }
-    .l03 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 0.5s; }
-    .l04 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 0.7s; }
-    .l05 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 0.9s; }
-    .l06 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 1.1s; }
-    .l07 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 1.3s; }
-    .l08 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 1.5s; }
-    .l09 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 1.7s; }
-    .l10 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 1.9s; }
-    .l11 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 2.1s; }
-    .l12 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 2.3s; }
-    .l13 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 2.5s; }
-    .l14 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 2.7s; }
-    .l15 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 2.9s; }
-    .l16 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 3.1s; }
-    .l17 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 3.3s; }
-    .l18 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 3.5s; }
-    .l19 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 3.7s; }
-    .l20 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 3.9s; }
+    .b  { font-family:"Courier New","Lucida Console",monospace; }
+    @keyframes blink    { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+    @keyframes fadein   { from{opacity:0;} to{opacity:1;} }
+    @keyframes scanline { 0%{transform:translateY(-4px);opacity:0;}
+                          5%{opacity:0.10;} 95%{opacity:0.10;}
+                          100%{transform:translateY(530px);opacity:0;} }
+    @keyframes scanloop { 0%{transform:translateY(-4px);opacity:0;}
+                          5%{opacity:0.05;} 95%{opacity:0.05;}
+                          100%{transform:translateY(530px);opacity:0;} }
+    .cursor  { animation: blink 1s step-end infinite; }
+    .scan-1  { animation: scanline 2.5s linear 1 forwards; }
+    .scan-lp { animation: scanloop 5s linear infinite; }
+    .l01{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.1s;}
+    .l02{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.3s;}
+    .l03{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.5s;}
+    .l04{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.7s;}
+    .l05{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.9s;}
+    .l06{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.1s;}
+    .l07{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.3s;}
+    .l08{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.5s;}
+    .l09{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.7s;}
+    .l10{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.9s;}
+    .l11{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.1s;}
+    .l12{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.3s;}
+    .l13{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.5s;}
+    .l14{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.7s;}
+    .l15{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.9s;}
+    .l16{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.1s;}
+    .l17{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.3s;}
+    .l18{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.5s;}
+    .l19{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.7s;}
+    .l20{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.9s;}
   </style>
 
-  <!-- BSOD Background — the blue hell -->
-  <rect width="630" height="520" fill="#000080"/>
+  <!-- BG — the blue hell -->
+  <rect width="630" height="530" fill="#000080"/>
 
-  <!-- CRT ONE-SHOT scanline on load -->
-  <rect class="scan-one" x="0" y="0" width="630" height="4" fill="#ffffff"/>
-  <!-- CRT loop if cycles=4 -->
-  <rect class="scan-lp"  x="0" y="0" width="630" height="3" fill="#ffffff"/>
+  <!-- CRT scanlines -->
+  <rect class="scan-1"  x="0" y="0" width="630" height="4" fill="#ffffff"/>
+  <rect class="scan-lp" x="0" y="0" width="630" height="3" fill="#ffffff"/>
 
-  <!-- ══ HEADER BLOCK ══ -->
-  <rect x="0" y="0" width="630" height="40" fill="#0000aa"/>
-  <text x="315" y="26" text-anchor="middle" fill="#ffffff"
-        class="bsod l01" font-size="16" font-weight="bold">
+  <!-- ══ HEADER y=0 h=44 ══ -->
+  <rect x="0" y="0" width="630" height="44" fill="#0000aa"/>
+  <text x="315" y="28" text-anchor="middle" fill="#ffffff"
+        class="b l01" font-size="15" font-weight="bold">
     Windows — CODEY INTEGRITY MONITOR v2.0
   </text>
+  <text x="590" y="40" text-anchor="end" fill="#c0c0c0"
+        class="b" font-size="9" opacity="0.7">2026-03-03 22:12 UTC</text>
 
-  <!-- ══ SAD FACE ══ -->
-  <text x="40" y="100" fill="#ffffff" class="bsod l02" font-size="56">:(</text>
+  <!-- ══ SAD FACE y=60 ══ -->
+  <text x="40" y="108" fill="#ffffff" class="b l02" font-size="52">:(</text>
 
-  <!-- ══ MAIN MESSAGE ══ -->
-  <text x="40" y="155" fill="#ffffff" class="bsod l03" font-size="18" font-weight="bold">
-    Your Python developer ran into a problem and needs to rest.
+  <!-- ══ MAIN MESSAGE y=120 ══ -->
+  <text x="40" y="126" fill="#ffffff" class="b l03" font-size="16" font-weight="bold">
+    Your Python dev ran into a problem and needs to rest.
   </text>
-  <text x="40" y="178" fill="#ffffff" class="bsod l04" font-size="12">
-    We're collecting some error info, and then Codey will restart for you.
+  <text x="40" y="146" fill="#c0c0c0" class="b l04" font-size="11">
+    Collecting error info... Codey will restart automatically.
   </text>
 
-  <!-- ══ DUMP PROGRESS ══ -->
-  <text x="40" y="210" fill="#ffffff" class="bsod l05" font-size="13">
+  <!-- ══ DUMP PROGRESS y=168 ══ -->
+  <text x="40" y="168" fill="#ffffff" class="b l05" font-size="12">
     33% complete  [██████              ]
   </text>
 
-  <!-- ══ STOP CODE ══ -->
-  <text x="40" y="248" fill="#ffffff" class="bsod l06" font-size="13" font-weight="bold">
-    For more information about this issue, search online:
+  <!-- ══ DIVIDER y=183 ══ -->
+  <line x1="40" y1="183" x2="590" y2="183" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l05"/>
+
+  <!-- ══ STOP CODE y=200 ══ -->
+  <text x="40" y="200" fill="#ffffff" class="b l06" font-size="11">
+    For more information, search online:
   </text>
-  <text x="40" y="268" fill="#00ffff" class="bsod l07" font-size="14" font-weight="bold">
-    SELECTIVE_NETWORK_BONUS_0x00FF
+  <text x="40" y="220" fill="#00ffff" class="b l07" font-size="12" font-weight="bold">
+    DESCRIPTION_NULL_PTR_REF_0x0022
   </text>
 
-  <!-- ══ DIVIDER ══ -->
-  <line x1="40" y1="285" x2="590" y2="285" stroke="#c0c0c0" stroke-width="1" opacity="0.5"
-        class="l07"/>
+  <!-- ══ DIVIDER y=236 ══ -->
+  <line x1="40" y1="236" x2="590" y2="236" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l07"/>
 
-  <!-- ══ STAT DUMP ══ -->
-  <g class="bsod" font-size="12">
-    <text x="40"  y="305" fill="#ffffff"     class="l08">TECHNICAL INFORMATION:</text>
+  <!-- ══ TECH INFO HEADER y=252 ══ -->
+  <text x="40" y="252" fill="#ffffff" class="b l08" font-size="11" font-weight="bold">
+    TECHNICAL INFORMATION:
+  </text>
 
-    <text x="40"  y="323" fill="#c0c0c0"   class="l09">health   [██████░░░░░░░░░░░░░░]  33%</text>
-    <text x="40"  y="339" fill="#c0c0c0"   class="l10">hunger   [████████████████████]  100%</text>
-    <text x="40"  y="355" fill="#c0c0c0"   class="l11">happines [░░░░░░░░░░░░░░░░░░░░]  0%</text>
-    <text x="40"  y="371" fill="#c0c0c0"   class="l12">energy   [░░░░░░░░░░░░░░░░░░░░]  0%</text>
-    <text x="40"  y="387" fill="#c0c0c0"   class="l13">social   [████████████░░░░░░░░]  1.25x</text>
-    <text x="40"  y="403" fill="#c0c0c0"   class="l14">quality  [████████████████░░░░]  0.83</text>
-
-    <!-- ══ SYSTEM INFO ══ -->
-    <line x1="40" y1="416" x2="590" y2="416" stroke="#c0c0c0" stroke-width="1" opacity="0.5"
-          class="l14"/>
-
-    <text x="40"  y="432" fill="#ffff00"  class="l15">TIER: ELDER 🧙‍♂️  •  LEVEL: 3  •  XP_MULT: 0.25x  •  10.0y</text>
-    <text x="40"  y="448" fill="#ffffff"      class="l16">STREAK: 6d  •  COMMITS: 203  •  STARS: 605  •  BUGS_RESOLVED: 4</text>
-    <text x="40"  y="464" fill="#ffffff"      class="l17">MOOD: 😵 EXHAUSTED  •  PENALTIES: quality_curator</text>
-
-    <!-- Seasonal -->
-    <text x="40" y="480" fill="#ffff00" class="bsod l18">🧹 REFACTOR BONUS: 1.2x XP</text>
-
-    <!-- Prestige -->
-    
-    
-
-    <!-- Achievements -->
-    <text x="40" y="496" fill="#c0c0c0" class="bsod l19">BADGES: 🧙‍♂️  👑  💎</text>
-
+  <!-- ══ STAT BARS — 2 columns y=270 ══
+       Left col  x=40  → labels 7ch + bar 18ch + value = ~26ch × 7.2 = 187px
+       Right col x=330 → same
+       Gap between cols: 330-40=290px per col (safe for 26 chars)
+  ══ -->
+  <g class="b" font-size="11" fill="#c0c0c0">
+    <!-- LEFT col -->
+    <text x="40"  y="270" class="l09">health   [█████░░░░░░░░░░░] 33%</text>
+    <text x="40"  y="288" class="l10">hunger   [████████████████] 100%</text>
+    <text x="40"  y="306" class="l11">happines [░░░░░░░░░░░░░░░░] 0%</text>
+    <!-- RIGHT col -->
+    <text x="330"   y="270" class="l09">energy  [░░░░░░░░░░░░░░░░] 0%</text>
+    <text x="330"   y="288" class="l10">social  [██████████░░░░░░] 1.25x</text>
+    <text x="330"   y="306" class="l11">quality [█████████████░░░] 0.83</text>
   </g>
 
-  <!-- ══ FOOTER — blinking cursor ══ -->
-  <text x="40" y="514" fill="#ffffff" class="bsod l20" font-size="12">
-    C:\WINDOWS\SYSTEM32&gt; codey --reboot --tier ELDER<tspan class="cursor">_</tspan>
+  <!-- ══ DIVIDER y=322 ══ -->
+  <line x1="40" y1="322" x2="590" y2="322" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l11"/>
+
+  <!-- ══ SYSTEM INFO — short lines, one fact per line ══ -->
+  <g class="b" font-size="11">
+    <text x="40" y="340" fill="#ffff00" class="l12">
+      TIER: ELDER  |  LEVEL: 3  |  XP_MULT: 0.25x  |  GITHUB: 10.0y
+    </text>
+    <text x="40" y="358" fill="#ffffff" class="l13">
+      STREAK: 7d  |  COMMITS: 240  |  STARS: 605  |  BUGS_FIXED: 4
+    </text>
+    <text x="40" y="376" fill="#ffffff" class="l14">
+      MOOD: EXHAUSTED  |  LANG: Python  |  PENALTIES: quality_curator
+    </text>
+  </g>
+
+  <!-- ══ SEASONAL / PRESTIGE y=394 (only if present) ══ -->
+  <text x="40" y="394" fill="#ffff00" class="b l15" font-size="11">SEASONAL: REFACTOR 1.2x XP</text>
+  
+  
+
+  <!-- ══ ACHIEVEMENTS y=412 ══ -->
+  <text x="40" y="412" fill="#c0c0c0" class="b l16" font-size="11">BADGES: 🧙‍♂️ 👑 💎</text>
+
+  <!-- ══ PET + MOOD y=430 ══ -->
+  <text x="40" y="432" class="b l17" font-size="11" fill="#c0c0c0">
+    DEV: 🐍 Python  |  STATUS: 😵 EXHAUSTED
   </text>
 
-  <!-- Timestamp top right -->
-  <text x="590" y="26" text-anchor="end" fill="#c0c0c0"
-        class="bsod" font-size="10" opacity="0.7">2026-03-03 22:06 UTC</text>
+  <!-- ══ DIVIDER y=448 ══ -->
+  <line x1="40" y1="448" x2="590" y2="448" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l17"/>
+
+  <!-- ══ FOOTER y=466 + y=484 ══ -->
+  <text x="40" y="466" fill="#c0c0c0" class="b l18" font-size="10">
+    Press any key to continue... (just kidding, Codey runs on a schedule)
+  </text>
+  <text x="40" y="484" fill="#ffffff" class="b l19" font-size="11">
+    C:\WINDOWS\SYSTEM32&gt; codey --reboot --tier ELDER --no-mercy<tspan class="cursor" fill="#ffffff">_</tspan>
+  </text>
+
+  <!-- ══ BOTTOM BORDER ══ -->
+  <rect x="0" y="520" width="630" height="10" fill="#0000aa" class="l20"/>
 
 </svg>
