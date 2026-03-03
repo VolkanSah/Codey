@@ -271,6 +271,21 @@ see [.codey_themes](.codey_themes) folder
 
 
 
+---
+
+<details>
+  
+<summary> ? Tools with Codey ? </summary>
+  
+#### Action toolBox from Codey
+
+-  Star Report (manual trigger) -  Runs on the 1st of every month at 06:00 UTC + 15th of every month at 06:00 UTC
+-  Repo/DEV Audit  (manual trigger)
+-  Projekt Struktur Generator  (manual trigger)
+
+</details>
+
+
 
 ---
 
@@ -613,6 +628,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
