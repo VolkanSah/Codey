@@ -227,7 +227,8 @@ def write_report(own: dict, fork: dict, self_starred_count: int, now: str):
     # ── Breaking headline ───────────────────
     lines.append(f"## BREAKING: {grand_total} real stars{delta_str}\n")
     lines.append("> GitHub/Shields inflates your count with self-stars and fork stars.")
-    lines.append(f"> Their number: **{github_shows}** — the inflation: **{inflation}**. You're welcome.\n")
+    lines.append(f"> Their number: **{github_shows}** — the inflation: **{inflation}**. You're welcome.")
+    lines.append("> Note: GitHub has no bookmarks. Starring your own repos is the only way to organize them. Not inflation — just bad UX from GitHub's side!")
     lines.append("---\n")
 
     # ── Truth table ─────────────────────────
