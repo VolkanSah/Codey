@@ -325,6 +325,14 @@ see [.codey_themes](.codey_themes) folder
 - [ ] PostgreSQL integration for historical Issue quality tracking
 - [ ] brain_bug.log as official feature (when Brain is ready)
 
+### Pending (v2.3.0)
+- [ ] Implement Game Logic v2 in update_codey.py
+- [ ] Recalculate and test GAME_BALANCE values
+- [ ] Rename quality_curator to selective_networker (bonus not penalty)
+- [ ] Fix Kali theme — same backslash escape as PowerShell
+- [ ] Decision: codey_theme_base.py or keep everything in update_codey.py
+- [ ] Simulate full week with new logic before deploying
+
 </details> 
 
 ---
@@ -371,6 +379,59 @@ see [.codey_themes](.codey_themes) folder
 
 <details>
 <summary> - Changelog - </summary> 
+
+
+
+
+# CHANGELOG — Codey v2.2.2
+# =============================================================================
+
+## [2.2.2] — 2026-03-03
+
+### Fixed
+- [FIX] fetch_real_stars() — switched from broken GraphQL to REST API
+- [FIX] total_stars now shows real count (605) instead of inflated (711)
+        self-starred own repos correctly subtracted from total
+- [FIX] C:\\WINDOWS\\ backslash escape in PowerShell theme f-strings
+- [FIX] _cl_lab_powershell.py — renamed render() to generate_brutal_svg()
+        removed import of non-existent codey_theme_base module
+
+### Added
+- [NEW] _cl_lab_powershell.py — Windows Terminal style theme
+        bar grow animations, cycles system, VS Code dark palette
+
+### Research & Brainstorming
+- [DEV] Game Logic v2 — mathematically simulated with real profile data
+        Hunger redefined as Appetite for Success (not physical hunger)
+        Happiness gets passive income from existing stars/forks/followers
+        ELDER tier gets separate energy regen values (more experienced)
+        PR weighting drastically reduced — self-PRs nearly worthless
+        ADI formula (Anti-Dump-Index) adopted as commit quality base
+- [DEV] Architecture Plan v2 — full structure documented without code
+        GAME_BALANCE completely redefined with new variables
+        Skill decay changed from exponential to linear
+        Mood system extended: burnout, lazy, grinding, inspired added
+        fetch_real_stars() isolated as standalone function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### [2.2.1]
 #### Fixes
 - update_codey workflow now works an all branches
@@ -628,6 +689,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
