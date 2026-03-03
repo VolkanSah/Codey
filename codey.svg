@@ -1,113 +1,123 @@
-<svg width="630" height="446" viewBox="0 0 630 446" xmlns="http://www.w3.org/2000/svg">
+<svg width="630" height="520" viewBox="0 0 630 520" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .ps  { font-family: "Cascadia Code","Courier New",monospace; font-size: 12px; fill: #cccccc; }
-    .bar-bg { fill: #1a1a1a; }
-    @keyframes grow-hp { from { width:0; } to { width:93.33333333333333px;    } }
-    @keyframes grow-hu { from { width:0; } to { width:280px;    } }
-    @keyframes grow-ha { from { width:0; } to { width:0.0px; } }
-    @keyframes grow-en { from { width:0; } to { width:0.0px;    } }
-    @keyframes grow-so { from { width:0; } to { width:175.0px;    } }
-    @keyframes grow-qu { from { width:0; } to { width:232.53125000000023px;   } }
-    @keyframes blink   { 50% { opacity:0; } }
-    .grow-hp { animation: grow-hp 1.5s ease-out forwards; }
-    .grow-hu { animation: grow-hu 1.7s ease-out forwards; }
-    .grow-ha { animation: grow-ha 1.9s ease-out forwards; }
-    .grow-en { animation: grow-en 2.1s ease-out forwards; }
-    .grow-so { animation: grow-so 2.3s ease-out forwards; }
-    .grow-qu { animation: grow-qu 2.5s ease-out forwards; }
-    .blink   { animation: blink 1s step-end infinite; }
+    .bsod  { font-family: "Courier New", "Lucida Console", monospace; }
+    @keyframes blink    { 0%,49%{ opacity:1; } 50%,100%{ opacity:0; } }
+    @keyframes fadein   { from{ opacity:0; } to{ opacity:1; } }
+    @keyframes scanline { 0%{ transform:translateY(-4px); opacity:0;    }
+                          5%{ opacity:0.08; }
+                          95%{ opacity:0.08; }
+                          100%{ transform:translateY(520px); opacity:0; } }
+    @keyframes scanloop { 0%{ transform:translateY(-4px); opacity:0;    }
+                          5%{ opacity:0.06; }
+                          95%{ opacity:0.06; }
+                          100%{ transform:translateY(520px); opacity:0; } }
+    .cursor   { animation: blink 1s step-end infinite; }
+    .scan-one { animation: scanline 2.5s linear 1 forwards; }
+    .scan-lp  { animation: scanloop 4s linear infinite; }
+
+    .l01 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 0.1s; }
+    .l02 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 0.3s; }
+    .l03 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 0.5s; }
+    .l04 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 0.7s; }
+    .l05 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 0.9s; }
+    .l06 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 1.1s; }
+    .l07 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 1.3s; }
+    .l08 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 1.5s; }
+    .l09 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 1.7s; }
+    .l10 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 1.9s; }
+    .l11 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 2.1s; }
+    .l12 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 2.3s; }
+    .l13 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 2.5s; }
+    .l14 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 2.7s; }
+    .l15 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 2.9s; }
+    .l16 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 3.1s; }
+    .l17 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 3.3s; }
+    .l18 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 3.5s; }
+    .l19 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 3.7s; }
+    .l20 { opacity:0; animation: fadein 0.4s ease-out forwards; animation-delay: 3.9s; }
   </style>
 
-  <!-- Terminal window bg -->
-  <rect width="630" height="446" fill="#0c0c0c" rx="10"/>
-  <rect width="630" height="446" fill="none" stroke="#3c3c3c" stroke-width="1" rx="10"/>
+  <!-- BSOD Background — the blue hell -->
+  <rect width="630" height="520" fill="#000080"/>
 
-  <!-- Title bar -->
-  <rect width="630" height="32" fill="#2d2d2d" rx="10"/>
-  <rect y="20" width="630" height="12" fill="#2d2d2d"/>
-  <circle cx="16" cy="16" r="6" fill="#f44747" opacity="0.9"/>
-  <circle cx="36" cy="16" r="6" fill="#f59e0b" opacity="0.9"/>
-  <circle cx="56" cy="16" r="6" fill="#6a9955" opacity="0.9"/>
-  <text x="315" y="21" text-anchor="middle" class="ps" font-size="11" fill="#888888">
-    Windows PowerShell — Administrator
+  <!-- CRT ONE-SHOT scanline on load -->
+  <rect class="scan-one" x="0" y="0" width="630" height="4" fill="#ffffff"/>
+  <!-- CRT loop if cycles=4 -->
+  <rect class="scan-lp"  x="0" y="0" width="630" height="3" fill="#ffffff"/>
+
+  <!-- ══ HEADER BLOCK ══ -->
+  <rect x="0" y="0" width="630" height="40" fill="#0000aa"/>
+  <text x="315" y="26" text-anchor="middle" fill="#ffffff"
+        class="bsod l01" font-size="16" font-weight="bold">
+    Windows — CODEY INTEGRITY MONITOR v2.0
   </text>
 
-  <!-- Main prompt -->
-  <text x="20" y="46" class="ps">
-    <tspan fill="#ce9178">PS C:\Users\Python\Codey&gt;</tspan>
-    <tspan fill="#569cd6"> codey.exe --status --tier ELDER --no-lies</tspan>
+  <!-- ══ SAD FACE ══ -->
+  <text x="40" y="100" fill="#ffffff" class="bsod l02" font-size="56">:(</text>
+
+  <!-- ══ MAIN MESSAGE ══ -->
+  <text x="40" y="155" fill="#ffffff" class="bsod l03" font-size="18" font-weight="bold">
+    Your Python developer ran into a problem and needs to rest.
+  </text>
+  <text x="40" y="178" fill="#ffffff" class="bsod l04" font-size="12">
+    We're collecting some error info, and then Codey will restart for you.
   </text>
 
-  <text x="20" y="54" font-family="Cascadia Code,Courier New,monospace" font-size="11" fill="#f59e0b"># 🧹 SEASONAL: Refactor (1.2x XP active)</text>
-  
-  <text x="20" y="86" font-family="Cascadia Code,Courier New,monospace" font-size="11" fill="#888888"># BADGES: 🧙‍♂️ 👑 💎</text>
-
-  <!-- Output header -->
-  <text x="20" y="106" class="ps" fill="#9cdcfe">
-    Initializing Codey audit... 🧙‍♂️ ELDER (10.0 years on GitHub)
+  <!-- ══ DUMP PROGRESS ══ -->
+  <text x="40" y="210" fill="#ffffff" class="bsod l05" font-size="13">
+    33% complete  [██████              ]
   </text>
-  <text x="20" y="122" class="ps" fill="#888888">──────────────────────────────────────────────────────────</text>
 
-  <!-- Stat bars -->
-  <g transform="translate(20, 134)">
+  <!-- ══ STOP CODE ══ -->
+  <text x="40" y="248" fill="#ffffff" class="bsod l06" font-size="13" font-weight="bold">
+    For more information about this issue, search online:
+  </text>
+  <text x="40" y="268" fill="#00ffff" class="bsod l07" font-size="14" font-weight="bold">
+    SELECTIVE_NETWORK_BONUS_0x00FF
+  </text>
 
-    <text x="0" y="0"  class="ps">❤️  health    <tspan fill="#6a9955">[</tspan></text>
-    <rect x="116" y="-12" width="280" height="12" class="bar-bg" rx="2"/>
-    <rect x="116" y="-12" width="0"   height="12" fill="#f44747"    rx="2" class="grow-hp"/>
-    <text x="400" y="0"  class="ps"><tspan fill="#6a9955">]</tspan> 33%</text>
+  <!-- ══ DIVIDER ══ -->
+  <line x1="40" y1="285" x2="590" y2="285" stroke="#c0c0c0" stroke-width="1" opacity="0.5"
+        class="l07"/>
 
-    <text x="0" y="24" class="ps">🍖  hunger    <tspan fill="#6a9955">[</tspan></text>
-    <rect x="116" y="12"  width="280" height="12" class="bar-bg" rx="2"/>
-    <rect x="116" y="12"  width="0"   height="12" fill="#ce9178"    rx="2" class="grow-hu"/>
-    <text x="400" y="24" class="ps"><tspan fill="#6a9955">]</tspan> 100%</text>
+  <!-- ══ STAT DUMP ══ -->
+  <g class="bsod" font-size="12">
+    <text x="40"  y="305" fill="#ffffff"     class="l08">TECHNICAL INFORMATION:</text>
 
-    <text x="0" y="48" class="ps">😊  happiness <tspan fill="#6a9955">[</tspan></text>
-    <rect x="116" y="36"  width="280" height="12" class="bar-bg" rx="2"/>
-    <rect x="116" y="36"  width="0"   height="12" fill="#c586c0" rx="2" class="grow-ha"/>
-    <text x="400" y="48" class="ps"><tspan fill="#6a9955">]</tspan> 0%</text>
+    <text x="40"  y="323" fill="#c0c0c0"   class="l09">health   [██████░░░░░░░░░░░░░░]  33%</text>
+    <text x="40"  y="339" fill="#c0c0c0"   class="l10">hunger   [████████████████████]  100%</text>
+    <text x="40"  y="355" fill="#c0c0c0"   class="l11">happines [░░░░░░░░░░░░░░░░░░░░]  0%</text>
+    <text x="40"  y="371" fill="#c0c0c0"   class="l12">energy   [░░░░░░░░░░░░░░░░░░░░]  0%</text>
+    <text x="40"  y="387" fill="#c0c0c0"   class="l13">social   [████████████░░░░░░░░]  1.25x</text>
+    <text x="40"  y="403" fill="#c0c0c0"   class="l14">quality  [████████████████░░░░]  0.83</text>
 
-    <text x="0" y="72" class="ps">⚡  energy    <tspan fill="#6a9955">[</tspan></text>
-    <rect x="116" y="60"  width="280" height="12" class="bar-bg" rx="2"/>
-    <rect x="116" y="60"  width="0"   height="12" fill="#6a9955"    rx="2" class="grow-en"/>
-    <text x="400" y="72" class="ps"><tspan fill="#6a9955">]</tspan> 0%</text>
+    <!-- ══ SYSTEM INFO ══ -->
+    <line x1="40" y1="416" x2="590" y2="416" stroke="#c0c0c0" stroke-width="1" opacity="0.5"
+          class="l14"/>
 
-    <text x="0" y="96" class="ps">👥  social    <tspan fill="#6a9955">[</tspan></text>
-    <rect x="116" y="84"  width="280" height="12" class="bar-bg" rx="2"/>
-    <rect x="116" y="84"  width="0"   height="12" fill="#f59e0b"          rx="2" class="grow-so"/>
-    <text x="400" y="96" class="ps"><tspan fill="#6a9955">]</tspan> 1.25x</text>
+    <text x="40"  y="432" fill="#ffff00"  class="l15">TIER: ELDER 🧙‍♂️  •  LEVEL: 3  •  XP_MULT: 0.25x  •  10.0y</text>
+    <text x="40"  y="448" fill="#ffffff"      class="l16">STREAK: 6d  •  COMMITS: 203  •  STARS: 605  •  BUGS_RESOLVED: 4</text>
+    <text x="40"  y="464" fill="#ffffff"      class="l17">MOOD: 😵 EXHAUSTED  •  PENALTIES: quality_curator</text>
 
-    <text x="0" y="120" class="ps">💎  quality   <tspan fill="#6a9955">[</tspan></text>
-    <rect x="116" y="108" width="280" height="12" class="bar-bg" rx="2"/>
-    <rect x="116" y="108" width="0"   height="12" fill="#c586c0" rx="2" class="grow-qu"/>
-    <text x="400" y="120" class="ps"><tspan fill="#6a9955">]</tspan> 0.83</text>
+    <!-- Seasonal -->
+    <text x="40" y="480" fill="#ffff00" class="bsod l18">🧹 REFACTOR BONUS: 1.2x XP</text>
+
+    <!-- Prestige -->
+    
+    
+
+    <!-- Achievements -->
+    <text x="40" y="496" fill="#c0c0c0" class="bsod l19">BADGES: 🧙‍♂️  👑  💎</text>
 
   </g>
 
-  <!-- Divider -->
-  <text x="20" y="278" class="ps" fill="#888888">──────────────────────────────────────────────────────────</text>
-
-  <!-- Results -->
-  <text x="20" y="296" class="ps" fill="#6a9955">[+] MOOD=EXHAUSTED | STREAK=5d | COMMITS=167 | STARS=605 | BUGS_FIXED=4</text>
-  <text x="20" y="314" class="ps" fill="#6a9955">[+] XP_MULT=0.25x | PENALTIES=quality_curator</text>
-  <text x="20" y="332" class="ps" fill="#888888">──────────────────────────────────────────────────────────</text>
-
-  <!-- Pet + mood -->
-  <text x="20" y="362" font-family="Cascadia Code,Courier New,monospace" font-size="28">🐍</text>
-  <text x="56" y="358" font-family="Cascadia Code,Courier New,monospace" font-size="20">😵</text>
-  <text x="84" y="358" class="ps" fill="#9cdcfe"> Python dev • ELDER tier • 10.0y</text>
-
-  <!-- Warnings -->
-  <text x="20" y="390" font-family="Cascadia Code,Courier New,monospace" font-size="11" fill="#f44747">[!] WARNING: HAPPINESS_CRITICAL</text><text x="20" y="406" font-family="Cascadia Code,Courier New,monospace" font-size="11" fill="#f44747">[!] WARNING: ENERGY_DEPLETED</text>
-
-  <!-- Next prompt + blinking cursor -->
-  <text x="20" y="422" class="ps">
-    <tspan fill="#ce9178">PS C:\Users\Python\Codey&gt;</tspan>
-    <tspan fill="#569cd6"> </tspan><tspan fill="#569cd6" class="blink">█</tspan>
+  <!-- ══ FOOTER — blinking cursor ══ -->
+  <text x="40" y="514" fill="#ffffff" class="bsod l20" font-size="12">
+    C:\WINDOWS\SYSTEM32&gt; codey --reboot --tier ELDER<tspan class="cursor">_</tspan>
   </text>
 
-  <!-- Timestamp -->
-  <text x="610" y="438" text-anchor="end"
-        font-family="Cascadia Code,Courier New,monospace" font-size="9"
-        fill="#888888">2026-03-03 21:58 UTC</text>
+  <!-- Timestamp top right -->
+  <text x="590" y="26" text-anchor="end" fill="#c0c0c0"
+        class="bsod" font-size="10" opacity="0.7">2026-03-03 22:06 UTC</text>
 
 </svg>
