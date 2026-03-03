@@ -11,7 +11,6 @@
 # Licensed under Apache 2.0 & ESOL v1.1
 # https://github.com/ESOL-License/ESOL/
 # =============================================================================
-# better? it works :D test 3 features
 
 import requests
 import os
@@ -219,17 +218,15 @@ def write_report(own: dict, fork: dict, self_starred_count: int, now: str):
     lines = []
 
     # ── Masthead ────────────────────────────
-    lines.append(f"# The Codey Star Report — {now[:10]}\n")
+    lines.append(f"# The Codey Gazette — {now[:10]}\n")
     lines.append(f"![]( https://github.com/{USERNAME}.png?size=80)\n")
     lines.append(f"> Powered by [Codey](https://github.com/{USERNAME}/{REPONAME})\n")
-    lines.append(f"- StarReport generated on — {now[:5]}\n")
     lines.append("---\n")
 
     # ── Breaking headline ───────────────────
     lines.append(f"## BREAKING: {grand_total} real stars{delta_str}\n")
     lines.append("> GitHub/Shields inflates your count with self-stars and fork stars.")
-    lines.append(f"> Their number: **{github_shows}** — the inflation: **{inflation}**. You're welcome.")
-    lines.append("> Note: GitHub has no bookmarks. Starring your own repos is the only way to organize them. Not inflation — just bad UX from GitHub's side!")
+    lines.append(f"> Their number: **{github_shows}** — the inflation: **{inflation}**. You're welcome.\n")
     lines.append("---\n")
 
     # ── Truth table ─────────────────────────
