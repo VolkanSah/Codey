@@ -1,281 +1,113 @@
-<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-      <path d="M20 0L0 0 0 20" fill="none" stroke="#ff44cc" stroke-width="0.3" opacity="0.15"/>
-    </pattern>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="glow-hard">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="softglow">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <radialGradient id="eyeshine" cx="35%" cy="35%" r="60%">
-      <stop offset="0%"  stop-color="#ffffff" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#00ffff" stop-opacity="0"/>
-    </radialGradient>
-    <style>
-      @keyframes breathe {
-        0%,100% { transform: translateY(0);    }
-        50%     { transform: translateY(-6px); }
-      }
-      @keyframes tailswing {
-        0%   { transform: rotate(-18deg); }
-        50%  { transform: rotate(22deg);  }
-        100% { transform: rotate(-18deg); }
-      }
-      @keyframes blink {
-        0%,42%,58%,100% { transform: scaleY(1);   }
-        50%             { transform: scaleY(0.06); }
-      }
-      @keyframes eartwitch {
-        0%,88%,100% { transform: rotate(0deg);  }
-        92%         { transform: rotate(-12deg); }
-        96%         { transform: rotate(6deg);   }
-      }
-      @keyframes pawbob {
-        0%,100% { transform: rotate(0deg);   }
-        40%     { transform: rotate(-14deg); }
-        70%     { transform: rotate(8deg);   }
-      }
-      @keyframes whiskerwave {
-        0%,100% { transform: rotate(0deg);  }
-        50%     { transform: rotate(-4deg); }
-      }
-      @keyframes heartpop {
-        0%,70%,100% { transform: scale(0);   opacity:0; }
-        75%         { transform: scale(1.3); opacity:1; }
-        85%         { transform: scale(1);   opacity:1; }
-        95%         { transform: scale(0.8); opacity:0; }
-      }
-      @keyframes scanline {
-        0%   { transform: translateY(-8px); opacity:0;   }
-        10%  { opacity:0.35; }
-        90%  { opacity:0.35; }
-        100% { transform: translateY(220px); opacity:0; }
-      }
-      @keyframes cur  { 0%,49%{opacity:1} 50%,100%{opacity:0} }
-      @keyframes circ { 0%{stroke-dashoffset:60} 100%{stroke-dashoffset:0} }
+<svg width="630" height="446" viewBox="0 0 630 446" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .ps  { font-family: "Cascadia Code","Courier New",monospace; font-size: 12px; fill: #cccccc; }
+    .bar-bg { fill: #1a1a1a; }
+    @keyframes grow-hp { from { width:0; } to { width:93.33333333333333px;    } }
+    @keyframes grow-hu { from { width:0; } to { width:280px;    } }
+    @keyframes grow-ha { from { width:0; } to { width:0.0px; } }
+    @keyframes grow-en { from { width:0; } to { width:0.0px;    } }
+    @keyframes grow-so { from { width:0; } to { width:175.0px;    } }
+    @keyframes grow-qu { from { width:0; } to { width:232.53125000000023px;   } }
+    @keyframes blink   { 50% { opacity:0; } }
+    .grow-hp { animation: grow-hp 1.5s ease-out forwards; }
+    .grow-hu { animation: grow-hu 1.7s ease-out forwards; }
+    .grow-ha { animation: grow-ha 1.9s ease-out forwards; }
+    .grow-en { animation: grow-en 2.1s ease-out forwards; }
+    .grow-so { animation: grow-so 2.3s ease-out forwards; }
+    .grow-qu { animation: grow-qu 2.5s ease-out forwards; }
+    .blink   { animation: blink 1s step-end infinite; }
+  </style>
 
-      /* ONE-SHOT: boots once, forwards freezes at opacity:0 — no pink bar */
-      .scanline { animation: scanline 3.5s linear 1 forwards; }
-      .circ1    { stroke-dasharray:60; animation: circ 2.6s linear 1; }
-      .circ2    { stroke-dasharray:50; animation: circ 3.2s linear 1 0.9s; }
+  <!-- Terminal window bg -->
+  <rect width="630" height="446" fill="#0c0c0c" rx="10"/>
+  <rect width="630" height="446" fill="none" stroke="#3c3c3c" stroke-width="1" rx="10"/>
 
-      /* CAT LOOP — controlled by cycles (max=4) */
-      .cat-body  { animation: breathe 3.2s ease-in-out infinite; }
-      .tail      { animation: tailswing 2.4s ease-in-out infinite;   transform-origin: 68px 298px; }
-      .eye-l     { animation: blink 5.5s ease-in-out infinite;     transform-origin: 95px 212px; }
-      .eye-r     { animation: blink 5.5s ease-in-out infinite 0.1s;     transform-origin: 145px 212px; }
-      .ear-l     { animation: eartwitch 4s ease-in-out infinite;  transform-origin: 82px 148px; }
-      .ear-r     { animation: eartwitch 4s ease-in-out infinite 1.8s;  transform-origin: 158px 148px; }
-      .paw-l     { animation: pawbob 3.2s ease-in-out infinite 0.4s;  transform-origin: 76px 310px; }
-      .paw-r     { animation: pawbob 3.2s ease-in-out infinite 1.1s;  transform-origin: 164px 310px; }
-      .whisker-l { animation: whiskerwave 2.8s ease-in-out infinite;  transform-origin: 95px 228px; }
-      .whisker-r { animation: whiskerwave 2.8s ease-in-out infinite 1.4s;  transform-origin: 145px 228px; }
-      .heart     { animation: heartpop 4s ease-in-out infinite 1s;  transform-origin: 170px 148px; }
-      .cursor    { animation: cur 1s step-end infinite; }
-    </style>
-  </defs>
+  <!-- Title bar -->
+  <rect width="630" height="32" fill="#2d2d2d" rx="10"/>
+  <rect y="20" width="630" height="12" fill="#2d2d2d"/>
+  <circle cx="16" cy="16" r="6" fill="#f44747" opacity="0.9"/>
+  <circle cx="36" cy="16" r="6" fill="#f59e0b" opacity="0.9"/>
+  <circle cx="56" cy="16" r="6" fill="#6a9955" opacity="0.9"/>
+  <text x="315" y="21" text-anchor="middle" class="ps" font-size="11" fill="#888888">
+    Windows PowerShell — Administrator
+  </text>
 
-  <!-- Background -->
-  <rect width="630" height="473" fill="#0a0008"/>
-  <rect width="630" height="473" fill="url(#grid)"/>
-  <ellipse cx="120" cy="240" rx="120" ry="140" fill="#ff44cc" opacity="0.04" filter="url(#softglow)"/>
+  <!-- Main prompt -->
+  <text x="20" y="46" class="ps">
+    <tspan fill="#ce9178">PS C:\Users\Python\Codey&gt;</tspan>
+    <tspan fill="#569cd6"> codey.exe --status --tier ELDER --no-lies</tspan>
+  </text>
 
-  <!-- Card -->
-  <rect x="15" y="15" width="600" height="443" fill="#0f0612" stroke="#ff44cc" stroke-width="1.5"/>
-  <rect x="12" y="12" width="606" height="449" fill="none" stroke="#ff44cc" stroke-width="0.8" stroke-dasharray="6 3" opacity="0.4"/>
-  <polyline points="15,35 15,15 35,15"       fill="none" stroke="#00ffff" stroke-width="2"/>
-  <polyline points="615,35 615,15 595,15"    fill="none" stroke="#00ffff" stroke-width="2"/>
-  <polyline points="15,438 15,458 35,458"    fill="none" stroke="#00ffff" stroke-width="2"/>
-  <polyline points="615,438 615,458 595,458" fill="none" stroke="#00ffff" stroke-width="2"/>
+  <text x="20" y="54" font-family="Cascadia Code,Courier New,monospace" font-size="11" fill="#f59e0b"># 🧹 SEASONAL: Refactor (1.2x XP active)</text>
+  
+  <text x="20" y="86" font-family="Cascadia Code,Courier New,monospace" font-size="11" fill="#888888"># BADGES: 🧙‍♂️ 👑 💎</text>
 
-  <!-- Header -->
-  <rect x="15" y="15" width="600" height="28" fill="#ff44cc" opacity="0.08"/>
-  <line x1="15" y1="43" x2="615" y2="43" stroke="#ff44cc" stroke-width="1" opacity="0.5"/>
-  <text x="26" y="34" fill="#ff44cc" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --pet CAT --user ELDER --prestige 0</text>
-  <text x="608" y="34" text-anchor="end" fill="#00ffff" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-03-03 21:40 UTC</text>
+  <!-- Output header -->
+  <text x="20" y="106" class="ps" fill="#9cdcfe">
+    Initializing Codey audit... 🧙‍♂️ ELDER (10.0 years on GitHub)
+  </text>
+  <text x="20" y="122" class="ps" fill="#888888">──────────────────────────────────────────────────────────</text>
 
-  <!-- ONE-SHOT scanline — no opacity attr, CSS + forwards handles visibility -->
-  <rect class="scanline" x="15" y="43" width="600" height="6" fill="#ff44cc"/>
+  <!-- Stat bars -->
+  <g transform="translate(20, 134)">
 
-  <!-- Divider -->
-  <line x1="220" y1="44" x2="220" y2="455" stroke="#ff44cc" stroke-width="1" stroke-dasharray="4 3" opacity="0.3"/>
+    <text x="0" y="0"  class="ps">❤️  health    <tspan fill="#6a9955">[</tspan></text>
+    <rect x="116" y="-12" width="280" height="12" class="bar-bg" rx="2"/>
+    <rect x="116" y="-12" width="0"   height="12" fill="#f44747"    rx="2" class="grow-hp"/>
+    <text x="400" y="0"  class="ps"><tspan fill="#6a9955">]</tspan> 33%</text>
 
-  <!-- ══ CAT PET — 1:1 original ══ -->
-  <g class="cat-body">
-    <ellipse cx="117" cy="250" rx="75" ry="85" fill="#ff44cc" opacity="0.06" filter="url(#softglow)"/>
-    <ellipse cx="117" cy="328" rx="45" ry="7"  fill="#ff44cc" opacity="0.12"/>
+    <text x="0" y="24" class="ps">🍖  hunger    <tspan fill="#6a9955">[</tspan></text>
+    <rect x="116" y="12"  width="280" height="12" class="bar-bg" rx="2"/>
+    <rect x="116" y="12"  width="0"   height="12" fill="#ce9178"    rx="2" class="grow-hu"/>
+    <text x="400" y="24" class="ps"><tspan fill="#6a9955">]</tspan> 100%</text>
 
-    <!-- Tail -->
-    <g class="tail">
-      <path d="M 82 298 Q 30 310 22 270 Q 14 230 50 220 Q 68 214 72 228"
-            fill="none" stroke="#ff44cc" stroke-width="8" stroke-linecap="round" filter="url(#glow)"/>
-      <circle cx="71" cy="226" r="7" fill="#ff88ee" filter="url(#glow)"/>
-    </g>
+    <text x="0" y="48" class="ps">😊  happiness <tspan fill="#6a9955">[</tspan></text>
+    <rect x="116" y="36"  width="280" height="12" class="bar-bg" rx="2"/>
+    <rect x="116" y="36"  width="0"   height="12" fill="#c586c0" rx="2" class="grow-ha"/>
+    <text x="400" y="48" class="ps"><tspan fill="#6a9955">]</tspan> 0%</text>
 
-    <!-- Body -->
-    <ellipse cx="117" cy="278" rx="52" ry="62" fill="#1a0820" stroke="#ff44cc" stroke-width="1.8" filter="url(#glow)"/>
-    <ellipse cx="117" cy="268" rx="28" ry="36" fill="#ff44cc" opacity="0.08"/>
-    <line class="circ1" x1="96"  y1="258" x2="117" y2="258" stroke="#ff44cc" stroke-width="1" opacity="0.5"/>
-    <line               x1="117" y1="258" x2="117" y2="272" stroke="#ff44cc" stroke-width="1" opacity="0.4"/>
-    <line class="circ2" x1="138" y1="272" x2="117" y2="272" stroke="#ff44cc" stroke-width="1" opacity="0.5"/>
+    <text x="0" y="72" class="ps">⚡  energy    <tspan fill="#6a9955">[</tspan></text>
+    <rect x="116" y="60"  width="280" height="12" class="bar-bg" rx="2"/>
+    <rect x="116" y="60"  width="0"   height="12" fill="#6a9955"    rx="2" class="grow-en"/>
+    <text x="400" y="72" class="ps"><tspan fill="#6a9955">]</tspan> 0%</text>
 
-    <!-- Belly screen -->
-    <rect x="96" y="263" width="42" height="32" rx="5" fill="#0a0008" stroke="#ff44cc" stroke-width="1"/>
-    <text x="117" y="276" text-anchor="middle" font-family="Courier New,monospace" font-size="7"   fill="#ff44cc">Python</text>
-    <text x="117" y="287" text-anchor="middle" font-family="Courier New,monospace" font-size="6.5" fill="#ff44cc" opacity="0.75">STRUGGLING</text>
-    <text x="117" y="298" text-anchor="middle" font-family="Courier New,monospace" font-size="7"   fill="#ff44cc">$<tspan class="cursor"> █</tspan></text>
+    <text x="0" y="96" class="ps">👥  social    <tspan fill="#6a9955">[</tspan></text>
+    <rect x="116" y="84"  width="280" height="12" class="bar-bg" rx="2"/>
+    <rect x="116" y="84"  width="0"   height="12" fill="#f59e0b"          rx="2" class="grow-so"/>
+    <text x="400" y="96" class="ps"><tspan fill="#6a9955">]</tspan> 1.25x</text>
 
-    <!-- Paws -->
-    <g class="paw-l">
-      <ellipse cx="90"  cy="322" rx="18" ry="11" fill="#1a0820" stroke="#ff44cc" stroke-width="1.3"/>
-      <circle cx="82"  cy="319" r="3.5" fill="#ff44cc" opacity="0.6"/>
-      <circle cx="90"  cy="317" r="3.5" fill="#ff44cc" opacity="0.6"/>
-      <circle cx="98"  cy="319" r="3.5" fill="#ff44cc" opacity="0.6"/>
-    </g>
-    <g class="paw-r">
-      <ellipse cx="144" cy="322" rx="18" ry="11" fill="#1a0820" stroke="#ff44cc" stroke-width="1.3"/>
-      <circle cx="136" cy="319" r="3.5" fill="#ff44cc" opacity="0.6"/>
-      <circle cx="144" cy="317" r="3.5" fill="#ff44cc" opacity="0.6"/>
-      <circle cx="152" cy="319" r="3.5" fill="#ff44cc" opacity="0.6"/>
-    </g>
-
-    <!-- Head neon rings (static hint, no animation — ringpulse removed) -->
-    <circle cx="117" cy="200" r="19" fill="none" stroke="#ff44cc" stroke-width="0.5" opacity="0.15"/>
-
-    <!-- Head -->
-    <circle cx="117" cy="200" r="58" fill="#1a0820" stroke="#ff44cc" stroke-width="2" filter="url(#glow)"/>
-    <circle cx="117" cy="196" r="46" fill="#ff44cc" opacity="0.04"/>
-
-    <!-- Ears -->
-    <g class="ear-l">
-      <polygon points="72,158 84,118 108,155" fill="#1a0820" stroke="#ff44cc" stroke-width="2" filter="url(#glow)"/>
-      <polygon points="80,152 88,128 104,150" fill="#ff44cc" opacity="0.35"/>
-    </g>
-    <g class="ear-r">
-      <polygon points="126,155 150,118 162,158" fill="#1a0820" stroke="#ff44cc" stroke-width="2" filter="url(#glow)"/>
-      <polygon points="130,150 148,128 158,152" fill="#ff44cc" opacity="0.35"/>
-    </g>
-
-    <!-- Eyes -->
-    <g class="eye-l">
-      <circle cx="95"  cy="198" r="17" fill="#0a0008" stroke="#00ffff" stroke-width="1.5" filter="url(#glow)"/>
-      <circle cx="95"  cy="198" r="12" fill="#00ffff" opacity="0.9" filter="url(#glow)"/>
-      <ellipse cx="95" cy="198" rx="3.5" ry="10" fill="#050010"/>
-      <circle cx="90"  cy="193" r="3.5" fill="url(#eyeshine)"/>
-    </g>
-    <g class="eye-r">
-      <circle cx="145" cy="198" r="17" fill="#0a0008" stroke="#00ffff" stroke-width="1.5" filter="url(#glow)"/>
-      <circle cx="145" cy="198" r="12" fill="#00ffff" opacity="0.9" filter="url(#glow)"/>
-      <ellipse cx="145" cy="198" rx="3.5" ry="10" fill="#050010"/>
-      <circle cx="140" cy="193" r="3.5" fill="url(#eyeshine)"/>
-    </g>
-
-    <!-- Nose -->
-    <polygon points="117,218 111,226 123,226" fill="#ff44cc" opacity="0.9" filter="url(#glow)"/>
-
-    <!-- Mouth -->
-    <path d="M111 226 Q106 234 100 230" fill="none" stroke="#ff44cc" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
-    <path d="M123 226 Q128 234 134 230" fill="none" stroke="#ff44cc" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
-
-    <!-- Whiskers -->
-    <g class="whisker-l">
-      <line x1="95"  y1="222" x2="44"  y2="214" stroke="#ff88ee" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
-      <line x1="95"  y1="226" x2="44"  y2="226" stroke="#ff88ee" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
-      <line x1="95"  y1="230" x2="44"  y2="238" stroke="#ff88ee" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
-    </g>
-    <g class="whisker-r">
-      <line x1="145" y1="222" x2="196" y2="214" stroke="#ff88ee" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
-      <line x1="145" y1="226" x2="196" y2="226" stroke="#ff88ee" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
-      <line x1="145" y1="230" x2="196" y2="238" stroke="#ff88ee" stroke-width="1.2" opacity="0.7" stroke-linecap="round"/>
-    </g>
-
-    <!-- Forehead LEDs -->
-    <circle cx="103" cy="170" r="2.5" fill="#ff44cc"><animate attributeName="opacity" values="1;0.2;1" dur="0.9s" repeatCount="indefinite"/></circle>
-    <circle cx="112" cy="168" r="2.5" fill="#00ffff"><animate attributeName="opacity" values="1;0.2;1" dur="1.3s" repeatCount="indefinite" begin="0.4s"/></circle>
-    <circle cx="121" cy="168" r="2.5" fill="#ff44cc"><animate attributeName="opacity" values="1;0.2;1" dur="1.0s" repeatCount="indefinite" begin="0.8s"/></circle>
-    <circle cx="130" cy="170" r="2.5" fill="#00ffff"><animate attributeName="opacity" values="0.2;1;0.2" dur="0.7s" repeatCount="indefinite"/></circle>
-
-    <!-- Floating heart -->
-    <g class="heart">
-      <text x="158" y="155" font-size="20" fill="#ff44cc" text-anchor="middle" filter="url(#glow-hard)">♥</text>
-    </g>
-
-    <!-- Mood label -->
-    <text x="117" y="358" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#ff44cc" filter="url(#glow)">STRUGGLING • 10.0y</text>
-
-  </g><!-- cat-body -->
-
-  <!-- ══ STATS PANEL — translate(232, 50) ══ -->
-  <g transform="translate(232, 50)" font-family="Courier New,monospace" fill="#ff44cc">
-
-    <text x="0" y="16" font-size="13" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
-
-    <!-- Tier badge: y=22 h=34 -> bottom=56 -->
-    <rect x="0" y="22" width="376" height="34" rx="0" fill="#ff44cc" opacity="0.08" stroke="#ff44cc" stroke-width="1"/>
-    <rect x="0" y="22" width="3"   height="34" fill="#ff44cc"/>
-    <text x="8" y="35" font-size="11" font-weight="bold">[ELDER] LVL 2 • 10.0y • XP=0.25x •  PRESTIGE 0</text>
-    <text x="8" y="50" font-size="11" font-weight="bold" fill="#00ffff">MOOD=STRUGGLING</text>
-
-    <!-- Stat bars: y=74 (+18px gap from badge bottom=56) -->
-    <g transform="translate(0,74)" font-size="12">
-      <text x="0"   y="0"   opacity="0.7">health   </text>
-      <text x="80"  y="0"  >[█████░░░░░░░░░░░░░░░]</text>
-      <text x="374" y="0"   font-size="11" opacity="0.6" text-anchor="end" fill="#00ffff">29%</text>
-
-      <text x="0"   y="22"  opacity="0.7">hunger   </text>
-      <text x="80"  y="22" >[█████████████████░░░]</text>
-      <text x="374" y="22"  font-size="11" opacity="0.6" text-anchor="end" fill="#00ffff">87%</text>
-
-      <text x="0"   y="44"  opacity="0.7">happiness</text>
-      <text x="80"  y="44" >[░░░░░░░░░░░░░░░░░░░░]</text>
-      <text x="374" y="44"  font-size="11" opacity="0.6" text-anchor="end" fill="#00ffff">0%</text>
-
-      <text x="0"   y="66"  opacity="0.7">energy   </text>
-      <text x="80"  y="66" >[░░░░░░░░░░░░░░░░░░░░]</text>
-      <text x="374" y="66"  font-size="11" opacity="0.6" text-anchor="end" fill="#00ffff">0%</text>
-
-      <text x="0"   y="88"  opacity="0.7">social   </text>
-      <text x="80"  y="88" >[████████████░░░░░░░░]</text>
-      <text x="374" y="88"  font-size="11" opacity="0.6" text-anchor="end" fill="#00ffff">1.25</text>
-
-      <text x="0"   y="110" opacity="0.7">quality  </text>
-      <text x="80"  y="110">[████████████████░░░░]</text>
-      <text x="374" y="110" font-size="11" opacity="0.6" text-anchor="end" fill="#00ffff">0.83</text>
-    </g>
-
-    <line x1="0" y1="212" x2="376" y2="212" stroke="#ff44cc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
-
-    <g transform="translate(0,220)" font-size="12">
-      <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
-      <text x="0" y="20">STREAK=4d  •  COMMITS=132  •  STARS=605</text>
-      <text x="0" y="40">DOMINANT=Python 🐍  •  TIER=ELDER</text>
-      <text x="0" y="60">PENALTIES=quality_curator</text>
-      <text x="0" y="80" fill="#ff44cc">SEASON=🧹 Refactor +10%</text>
-      <text x="0" y="100" fill="#00ffff" font-size="11">ISSUES=closed:4 • ratio:0.67 • score:1.20</text>
-    </g>
-
-    <line x1="0" y1="358" x2="376" y2="358" stroke="#ff44cc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
-
-    <!-- Achievements: r=15 (-21%), font-size=13, spacing=38px -->
-    <g transform="translate(0,366)">
-      <text x="0" y="0" font-size="11" opacity="0.5">$ ls ./achievements/</text>
-      <circle cx="17" cy="22" r="15" fill="#0a0008" stroke="#ff44cc" stroke-width="1.5" filter="url(#glow)"/><text x="17" y="28" text-anchor="middle" font-size="13">🧙‍♂️</text><circle cx="55" cy="22" r="15" fill="#0a0008" stroke="#00ffff" stroke-width="1.5" filter="url(#glow)"/><text x="55" y="28" text-anchor="middle" font-size="13">👑</text><circle cx="93" cy="22" r="15" fill="#0a0008" stroke="#ff44cc" stroke-width="1.5" filter="url(#glow)"/><text x="93" y="28" text-anchor="middle" font-size="13">💎</text>
-    </g>
-
-    <line x1="0" y1="416" x2="376" y2="416" stroke="#ff44cc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
-
-    <g transform="translate(0,424)">
-      <text x="0"   y="16" font-size="13" font-weight="bold">$ _<tspan class="cursor">█</tspan></text>
-      <text x="374" y="16" font-size="10" opacity="0.45" text-anchor="end" fill="#00ffff">2026-03-03 21:40 UTC</text>
-    </g>
+    <text x="0" y="120" class="ps">💎  quality   <tspan fill="#6a9955">[</tspan></text>
+    <rect x="116" y="108" width="280" height="12" class="bar-bg" rx="2"/>
+    <rect x="116" y="108" width="0"   height="12" fill="#c586c0" rx="2" class="grow-qu"/>
+    <text x="400" y="120" class="ps"><tspan fill="#6a9955">]</tspan> 0.83</text>
 
   </g>
+
+  <!-- Divider -->
+  <text x="20" y="278" class="ps" fill="#888888">──────────────────────────────────────────────────────────</text>
+
+  <!-- Results -->
+  <text x="20" y="296" class="ps" fill="#6a9955">[+] MOOD=EXHAUSTED | STREAK=5d | COMMITS=167 | STARS=605 | BUGS_FIXED=4</text>
+  <text x="20" y="314" class="ps" fill="#6a9955">[+] XP_MULT=0.25x | PENALTIES=quality_curator</text>
+  <text x="20" y="332" class="ps" fill="#888888">──────────────────────────────────────────────────────────</text>
+
+  <!-- Pet + mood -->
+  <text x="20" y="362" font-family="Cascadia Code,Courier New,monospace" font-size="28">🐍</text>
+  <text x="56" y="358" font-family="Cascadia Code,Courier New,monospace" font-size="20">😵</text>
+  <text x="84" y="358" class="ps" fill="#9cdcfe"> Python dev • ELDER tier • 10.0y</text>
+
+  <!-- Warnings -->
+  <text x="20" y="390" font-family="Cascadia Code,Courier New,monospace" font-size="11" fill="#f44747">[!] WARNING: HAPPINESS_CRITICAL</text><text x="20" y="406" font-family="Cascadia Code,Courier New,monospace" font-size="11" fill="#f44747">[!] WARNING: ENERGY_DEPLETED</text>
+
+  <!-- Next prompt + blinking cursor -->
+  <text x="20" y="422" class="ps">
+    <tspan fill="#ce9178">PS C:\Users\Python\Codey&gt;</tspan>
+    <tspan fill="#569cd6"> </tspan><tspan fill="#569cd6" class="blink">█</tspan>
+  </text>
+
+  <!-- Timestamp -->
+  <text x="610" y="438" text-anchor="end"
+        font-family="Cascadia Code,Courier New,monospace" font-size="9"
+        fill="#888888">2026-03-03 21:58 UTC</text>
+
 </svg>
