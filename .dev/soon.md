@@ -1,3 +1,4 @@
+```
 ═══════════════════════════════════════════════════
   CODEY STATS LOGIC v2 — NO MERCY EDITION
 ═══════════════════════════════════════════════════
@@ -35,10 +36,10 @@ HAPPINESS (= Wertschätzung / Anerkennung)
     - DU forkst andere               → "ich konsumiere nur"
     - inaktivität (täglich -8)
     - viele open issues ohne fix     → "ich versage"
-    - commit quality penalties       → "ich schreibe Müll"
+    - commit quality penalties       → "ich schreibe Müll" # Achtung! Quality_Qurator wird als penalty gezeigt!
 
   RANGE: 0-100
-  DECAY: -8 pro Tag
+  DECAY: -8 pro Tag? kann schnelk sterben? Blance vonje 1 Woche finden oder 14 Tage!  # evtlrepo clons mit bonus? 
 
 
 ═══════════════════════════════════════════════════
@@ -58,8 +59,9 @@ ENERGY (= Schaffenskraft / Tatkraft)
     - inaktivität                    → +20 regen (ruht sich aus)
 
   RANGE: 0-100
-  REGEN: +20 wenn keine aktivität (schläft/erholt sich)
+  REGEN: +20 wenn keine aktivität (schläft/erholt sich) Wichtig bei Devs ab Edier andere rechnung da aktiver in einer sitzung! 
   REGEN: +5  wenn aktiv (kleiner boost)
+  e.g. New Repo Public + Energie boost!?
 
 
 ═══════════════════════════════════════════════════
@@ -68,11 +70,11 @@ HEALTH (= Gesamtzustand — nicht direkt beeinflussbar)
   = gewichteter Durchschnitt:
 
   health = (
-      energy    * 0.35 +   ← wichtigste: ohne kraft nichts
+      energy    * 0.35 +   ← wichtigste: ohne kraft nichts # wenn energie zu wenig wird von health und hapinies abgezogen, evtl 1-3 % von comit menge! Wenn realiische wärete für ??? bald!
       happiness * 0.35 +   ← anerkennung hält am leben
       hunger    * 0.30     ← motivation hält es am laufen
   )
-
+  # evtl. täglich? werte inkositent
   BONUS:  streak > 7d   → +5
   BONUS:  streak > 30d  → +10
   PENALTY: quality_score < 0.5 → -10
@@ -113,6 +115,7 @@ SOCIAL SCORE (bleibt weitgehend gleich)
 
   star quality:
     stars/repo < 1.0 AND repos > 5 → code_spammer × 0.7
+# ich 1,25 : filter zu lasch! 
 
 
 ═══════════════════════════════════════════════════
@@ -126,7 +129,7 @@ QUALITY SCORE (bleibt weitgehend gleich)
   commit messages:
     - 'fix','wip','typo' → -0.05 each
     - len < 10           → -0.1
-  DEIN score 0.83 = sehr gut 
+  DEIN score 0.83 = sehr gut? 0.8 testen, so gut kann ich net sein! 
 
 
 ═══════════════════════════════════════════════════
@@ -138,3 +141,7 @@ PENALTY RENAME
   Wer weniger folgt als ihm folgt = Qualitätsmerkmal!
   Nicht bestrafen — belohnen!
 ═══════════════════════════════════════════════════
+
+```
+
+only somthing i thing about the hole logic, sorry can sink in german better :D AI will  translate it for ypu all later in Englisch or other lingo
