@@ -295,15 +295,17 @@ see [.codey_themes](.codey_themes) folder
     - [x] Codey Audit Collector (Basics)
     - [x] Generate Repo Structure
 - [x] API endpoint — yes and no, you'll see :D
+- [x] Codey Star_Report (relase ready. not relassed! onky main!
 
 #### In progress
 - [ ] Issue quality analysis — found new patterns, needs fixing
 - [ ] Heartbeat — logic test (mostly not public, sorry)
-- [ ] brain_bug.log as official feature (when Brain is ready)
+- [ ] Outsorce logic of update core and use Codey Starreport for more brutal stats. 
 
 #### Planned
 - [ ] GitLab support
 - [ ] PostgreSQL integration for historical Issue quality tracking
+- [ ] brain_bug.log as official feature (when Brain is ready)
 
 </details> 
 
@@ -610,6 +612,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
