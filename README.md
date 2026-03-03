@@ -311,12 +311,14 @@ see [.codey_themes](.codey_themes) folder
     - [x] Codey Audit Collector (Basics)
     - [x] Generate Repo Structure
 - [x] API endpoint — yes and no, you'll see :D
-- [x] Codey Star_Report (relase ready. not relassed! onky main!
+- [x] Codey Star_Report now 100 % ⭐
+- [x] Powershell default theme 
 
 #### In progress
 - [ ] Issue quality analysis — found new patterns, needs fixing
 - [ ] Heartbeat — logic test (mostly not public, sorry)
-- [ ] Outsorce logic of update core and use Codey Starreport for more brutal stats. 
+- [ ] Outsorce logic of update core and use Codey Starreport for more brutal stats.
+- [ ] Kali Linux Skin
 
 #### Planned
 - [ ] GitLab support
@@ -342,8 +344,6 @@ see [.codey_themes](.codey_themes) folder
 - ✅ ~~Codey on drugs~~ — Energy calculation normalized
 - ✅ ~~Seasonal text overflow in SVG~~ — Fixed: wider box
 - ✅ some stuf if i have time.. ist test time
-- ✅ Dont need any more, new plan :D
-    - [x] Backround accelator integration (Codey gets a real brain) idea on hf only for hock .js i mean. repo klosed for core on codey-lab
 
 
 </details> 
@@ -628,6 +628,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
