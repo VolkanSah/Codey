@@ -66,7 +66,7 @@ jobs:
           git add CODEY_STAR_REPORT.md .codey/stats_history.jsonl
           
           # Only commit if there are actual differences; [skip ci] prevents re-triggering workflows
-          git diff --staged --quiet || git commit -m "report: codey star report [skip ci]"
+          git diff --staged --quiet || git commit -m "⭐ : codey star report generated [skip ci]"
           
           # Push the changes back to the repository
           git push
