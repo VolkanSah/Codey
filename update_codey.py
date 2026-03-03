@@ -120,6 +120,37 @@ def get_json_safe(url, params=None):
         return False, r.text
 
 
+
+# own stared 
+# new from 2.2.x
+def fetch_starred_own() -> set:
+    """Returns set of own repo names the user starred themselves."""
+    starred = set()
+    cursor  = None
+    while True:
+        after = f', after: "{cursor}"' if cursor else ""
+        query = """{ user(login: "%s") { starredRepositories(
+            first: 100%s) {
+            nodes { name owner { login } }
+            pageInfo { hasNextPage endCursor }
+        }}}""" % (OWNER, after)
+        r = requests.post(
+            "https://api.github.com/graphql",
+            json={"query": query},
+            headers={'Authorization': f'Bearer {TOKEN}'}
+        )
+        r.raise_for_status()
+        data = r.json()
+        page = data["data"]["user"]["starredRepositories"]
+        for node in page["nodes"]:
+            if node["owner"]["login"] == OWNER:
+                starred.add(node["name"])
+        if not page["pageInfo"]["hasNextPage"]:
+            break
+        cursor = page["pageInfo"]["endCursor"]
+    return starred
+
+
 # ─────────────────────────────────────────────
 # DATA FETCHERS
 # ─────────────────────────────────────────────
