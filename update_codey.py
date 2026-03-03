@@ -461,6 +461,7 @@ def get_all_data_for_user(owner):
         r.get('stargazers_count', 0) - (1 if r.get('name') in self_starred else 0)
         for r in own_repos
     )
+    print(f"⭐ Real stars: {total_stars} (self-starred repos: {len(self_starred)})")
 
 
     
