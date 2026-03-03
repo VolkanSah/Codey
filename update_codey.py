@@ -150,7 +150,6 @@ def fetch_starred_own() -> set:
         cursor = page["pageInfo"]["endCursor"]
     return starred
 
-
 # ─────────────────────────────────────────────
 # DATA FETCHERS
 # ─────────────────────────────────────────────
@@ -457,7 +456,14 @@ def get_all_data_for_user(owner):
     repos_list = fetch_all_repos_for_user(owner)
 
     own_repos    = [r for r in repos_list if not r.get('fork')]
-    total_stars  = sum(r.get('stargazers_count', 0) for r in own_repos)
+    self_starred = fetch_starred_own()
+    total_stars  = sum(
+        r.get('stargazers_count', 0) - (1 if r.get('name') in self_starred else 0)
+        for r in own_repos
+    )
+
+
+    
     total_forks  = sum(r.get('forks_count',      0) for r in own_repos)
 
     repo_qualities  = [analyze_repo_quality(r) for r in own_repos]
