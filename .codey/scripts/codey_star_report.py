@@ -11,7 +11,7 @@
 # Licensed under Apache 2.0 & ESOL v1.1
 # https://github.com/ESOL-License/ESOL/
 # =============================================================================
-# it works local :P !
+# better? it works :D test 3 features
 
 import requests
 import os
@@ -149,13 +149,41 @@ def process(repos: list, self_starred: set = None) -> dict:
 
 
 # ─────────────────────────────────────────────
-# MARKDOWN REPORT
+# BASH OUTPUT (the brutal truth, no mercy)
 # ─────────────────────────────────────────────
 
-def write_report(own: dict, fork: dict, now: str):
-    fork_ratio  = round(fork["active_count"] / max(own["active_count"], 1), 2)
-    # Grand Total = only own stars (active + archived) — forks are not yours
-    grand_total = own["active_stars"] + own["archived_stars"]
+def print_bash_report(own: dict, fork: dict, self_starred_count: int, now: str):
+    grand_total   = own["active_stars"] + own["archived_stars"]
+    github_shows  = grand_total + self_starred_count + fork["active_stars"]
+    inflation     = github_shows - grand_total
+
+    print("")
+    print("=" * 54)
+    print("  CODEY STAR REPORT — THE TRUTH")
+    print(f"  {now}")
+    print("=" * 54)
+    print(f"  Real stars (earned by others):  {grand_total}")
+    print(f"  Self-stars removed:             {self_starred_count}  <- you starring yourself")
+    print(f"  Fork stars removed:             {fork['active_stars']}  <- not your work")
+    print(f"  GitHub / Shields shows:         {github_shows}  <- lies")
+    print(f"  Total inflation:                {inflation}  <- cope")
+    print("=" * 54)
+    print(f"  Own repos (active):   {own['active_count']}")
+    print(f"  Own repos (archived): {own['archived_count']}")
+    print(f"  Repos with 0 stars:   {own['zero_stars']}  <- shame corner")
+    print("=" * 54)
+    print("")
+
+
+# ─────────────────────────────────────────────
+# MARKDOWN REPORT (newspaper style)
+# ─────────────────────────────────────────────
+
+def write_report(own: dict, fork: dict, self_starred_count: int, now: str):
+    fork_ratio   = round(fork["active_count"] / max(own["active_count"], 1), 2)
+    grand_total  = own["active_stars"] + own["archived_stars"]
+    github_shows = grand_total + self_starred_count + fork["active_stars"]
+    inflation    = github_shows - grand_total
 
     if fork_ratio > 5.0:
         verdict = "SPAM FOLLOWER DETECTED"
@@ -175,21 +203,46 @@ def write_report(own: dict, fork: dict, now: str):
             lines.append(f"| {r['name']} | {r['stargazerCount']} |")
         return "\n".join(lines) + "\n"
 
+    # ── previous run delta ──────────────────
+    delta_str = ""
+    if JSONL.exists():
+        try:
+            lines_raw = JSONL.read_text(encoding="utf-8").strip().splitlines()
+            if len(lines_raw) >= 2:
+                prev = json.loads(lines_raw[-1])
+                diff = grand_total - prev.get("grand_total_stars", grand_total)
+                sign = "+" if diff >= 0 else ""
+                delta_str = f" ({sign}{diff} since yesterday)"
+        except Exception:
+            pass
+
     lines = []
-    lines.append(f"# Codey Star Report — {USERNAME}\n")
+
+    # ── Masthead ────────────────────────────
+    lines.append(f"# The Codey Gazette — {now[:10]}\n")
     lines.append(f"![]( https://github.com/{USERNAME}.png?size=80)\n")
-    lines.append(f"> Generated: {now}  ")
     lines.append(f"> Powered by [Codey](https://github.com/{USERNAME}/{REPONAME})\n")
     lines.append("---\n")
 
-    # Hero number — the truth
-    lines.append(f"## ⭐ {grand_total} Real Stars\n")
-    lines.append(f"> Self-stars excluded. Fork stars excluded. This is your actual score.\n")
+    # ── Breaking headline ───────────────────
+    lines.append(f"## BREAKING: {grand_total} real stars{delta_str}\n")
+    lines.append("> GitHub/Shields inflates your count with self-stars and fork stars.")
+    lines.append(f"> Their number: **{github_shows}** — the inflation: **{inflation}**. You're welcome.\n")
     lines.append("---\n")
 
-    # Summary
+    # ── Truth table ─────────────────────────
+    lines.append("| | Count |")
+    lines.append("|---|---|")
+    lines.append(f"| Real stars (earned) | **{grand_total}** |")
+    lines.append(f"| Self-stars removed | {self_starred_count} |")
+    lines.append(f"| Fork stars removed | {fork['active_stars']} |")
+    lines.append(f"| GitHub / Shields shows | {github_shows} |")
+    lines.append(f"| Inflation | {inflation} |\n")
+    lines.append("---\n")
+
+    # ── Details ─────────────────────────────
     lines.append("<details>")
-    lines.append("<summary>Summary</summary>\n")
+    lines.append("<summary>Full Summary</summary>\n")
     lines.append("| | Active | Archived | Total |")
     lines.append("|---|---|---|---|")
     lines.append(f"| Own Repos | {own['active_count']} | {own['archived_count']} | {own['active_count'] + own['archived_count']} |")
@@ -201,40 +254,36 @@ def write_report(own: dict, fork: dict, now: str):
     lines.append(f"- Repos with 0 stars: {own['zero_stars']}")
     lines.append("\n</details>\n")
 
-    # Top 10
     lines.append("<details>")
     lines.append("<summary>Top 10 Repos</summary>\n")
     lines.append(repo_table(own["active_repos"], limit=10))
     lines.append("</details>\n")
 
-    # All own repos
     lines.append("<details>")
     lines.append("<summary>All Own Repos</summary>\n")
     lines.append(repo_table([r for r in own["active_repos"] if r["stargazerCount"] > 0]))
     lines.append("</details>\n")
 
-    # Archived
     if own["archived_repos"]:
         lines.append("<details>")
         lines.append("<summary>Archived Repos</summary>\n")
         lines.append(repo_table(own["archived_repos"]))
         lines.append("</details>\n")
 
-    # Forks with stars
     fork_with_stars = [r for r in fork["active_repos"] if r["stargazerCount"] > 0]
     if fork_with_stars:
         lines.append("<details>")
-        lines.append("<summary>Forked Repos with Stars _(info only)_</summary>\n")
+        lines.append("<summary>Forked Repos with Stars (info only)</summary>\n")
         lines.append(repo_table(fork_with_stars))
         lines.append("</details>\n")
 
-    # Codey teaser
+    # ── Footer ──────────────────────────────
     lines.append("---")
     lines.append("> Stars are just the surface.")
     lines.append(f"> [Meet my Codey](https://github.com/{USERNAME}/{REPONAME}) — it tracks commits, streaks, code quality and brutally judges my dev life. Daily.\n")
 
     REPORT.write_text("\n".join(lines), encoding="utf-8")
-    print(f"CODEY_STAR_REPORT.md written.")
+    print("CODEY_STAR_REPORT.md written.")
 
 
 # ─────────────────────────────────────────────
@@ -256,7 +305,6 @@ def append_jsonl(own: dict, fork: dict, now: str):
         "fork_active":        fork["active_count"],
         "fork_stars":         fork["active_stars"],
         "fork_ratio":         round(fork["active_count"] / max(own["active_count"], 1), 2),
-        # grand_total = own only, forks excluded
         "grand_total_stars":  own["active_stars"] + own["archived_stars"],
         "top10": [
             {"name": r["name"], "stars": r["stargazerCount"]}
@@ -265,7 +313,7 @@ def append_jsonl(own: dict, fork: dict, now: str):
     }
     with open(JSONL, "a", encoding="utf-8") as f:
         f.write(json.dumps(record) + "\n")
-    print(f"stats_history.jsonl updated.")
+    print("stats_history.jsonl updated.")
 
 
 # ─────────────────────────────────────────────
@@ -274,24 +322,19 @@ def append_jsonl(own: dict, fork: dict, now: str):
 
 if __name__ == "__main__":
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    print(f"Collecting stats for {USERNAME} — {now}")
 
-    print("Fetching self-starred repos (deduplication)...")
+    print(f"Fetching self-starred repos...")
     self_starred = fetch_starred_own()
-    print(f"Self-starred own repos: {len(self_starred)}")
 
-    print("Fetching own repos...")
+    print(f"Fetching own repos...")
     own  = process(fetch_repos(False), self_starred)
 
-    print("Fetching forked repos...")
+    print(f"Fetching forked repos...")
     fork = process(fetch_repos(True), self_starred)
 
-    grand = own["active_stars"] + own["archived_stars"]
-    print(f"Own:   {own['active_count']} repos, {own['active_stars']} stars")
-    print(f"Fork:  {fork['active_count']} repos, {fork['active_stars']} stars (not counted)")
-    print(f"Total: {grand} real stars")
+    print_bash_report(own, fork, len(self_starred), now)
 
-    write_report(own, fork, now)
+    write_report(own, fork, len(self_starred), now)
     append_jsonl(own, fork, now)
 
     print("Done.")
