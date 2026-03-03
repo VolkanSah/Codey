@@ -123,32 +123,29 @@ def get_json_safe(url, params=None):
 
 # own stared 
 # new from 2.2.x
-def fetch_starred_own() -> set:
-    """Returns set of own repo names the user starred themselves."""
-    starred = set()
-    cursor  = None
+def fetch_real_stars(owner):
+    """
+    Exact same logic as codey_star_report.py.
+    Returns real star count (self-stars + fork stars removed).
+    """
+    # Self-starred via REST (wie im Star Report)
+    self_starred = set()
+    page = 1
     while True:
-        after = f', after: "{cursor}"' if cursor else ""
-        query = """{ user(login: "%s") { starredRepositories(
-            first: 100%s) {
-            nodes { name owner { login } }
-            pageInfo { hasNextPage endCursor }
-        }}}""" % (OWNER, after)
-        r = requests.post(
-            "https://api.github.com/graphql",
-            json={"query": query},
-            headers={'Authorization': f'Bearer {TOKEN}'}
+        ok, data = get_json_safe(
+            f'https://api.github.com/users/{owner}/starred',
+            params={'per_page': 100, 'page': page}
         )
-        r.raise_for_status()
-        data = r.json()
-        page = data["data"]["user"]["starredRepositories"]
-        for node in page["nodes"]:
-            if node["owner"]["login"] == OWNER:
-                starred.add(node["name"])
-        if not page["pageInfo"]["hasNextPage"]:
+        if not ok or not isinstance(data, list) or not data:
             break
-        cursor = page["pageInfo"]["endCursor"]
-    return starred
+        for repo in data:
+            if repo.get('owner', {}).get('login', '').lower() == owner.lower():
+                self_starred.add(repo.get('name'))
+        if len(data) < 100:
+            break
+        page += 1
+
+    return self_starred
 
 # ─────────────────────────────────────────────
 # DATA FETCHERS
@@ -456,15 +453,12 @@ def get_all_data_for_user(owner):
     repos_list = fetch_all_repos_for_user(owner)
 
     own_repos    = [r for r in repos_list if not r.get('fork')]
-    self_starred = fetch_starred_own()
-    total_stars  = sum(
+    self_starred = fetch_real_stars(owner)   # REST — wie Star Report ✓
+    total_stars  = sum( # FIX stars 03.03.2026
         r.get('stargazers_count', 0) - (1 if r.get('name') in self_starred else 0)
         for r in own_repos
     )
-    print(f"⭐ Real stars: {total_stars} (self-starred repos: {len(self_starred)})")
-
-
-    
+    print(f"⭐ Real stars: {total_stars} (self-starred: {len(self_starred)})")
     total_forks  = sum(r.get('forks_count',      0) for r in own_repos)
 
     repo_qualities  = [analyze_repo_quality(r) for r in own_repos]
