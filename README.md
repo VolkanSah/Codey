@@ -1,5 +1,5 @@
 
-# 🐾 Codey - Your Brutally Honest GitHub Pet
+# 🐾 Codey - Your Brutally Honest GitHub Stats/Pet
 
 
 
@@ -689,6 +689,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
