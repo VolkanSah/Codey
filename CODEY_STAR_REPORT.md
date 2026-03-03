@@ -1,20 +1,30 @@
-# Codey Star Report — VolkanSah
+# The Codey Gazette — 2026-03-03
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
-> Generated: 2026-03-03 08:59 UTC  
 > Powered by [Codey](https://github.com/VolkanSah/Codey)
 
 ---
 
-## ⭐ 605 Real Stars
+## BREAKING: 605 real stars (+0 since yesterday)
 
-> Self-stars excluded. Fork stars excluded. This is your actual score.
+> GitHub/Shields inflates your count with self-stars and fork stars.
+> Their number: **807** — the inflation: **202**. You're welcome.
+
+---
+
+| | Count |
+|---|---|
+| Real stars (earned) | **605** |
+| Self-stars removed | 165 |
+| Fork stars removed | 37 |
+| GitHub / Shields shows | 807 |
+| Inflation | 202 |
 
 ---
 
 <details>
-<summary>Summary</summary>
+<summary>Full Summary</summary>
 
 | | Active | Archived | Total |
 |---|---|---|---|
@@ -159,7 +169,7 @@
 </details>
 
 <details>
-<summary>Forked Repos with Stars _(info only)_</summary>
+<summary>Forked Repos with Stars (info only)</summary>
 
 | Repository | Stars |
 |---|---|
