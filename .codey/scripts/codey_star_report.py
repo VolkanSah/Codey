@@ -219,9 +219,10 @@ def write_report(own: dict, fork: dict, self_starred_count: int, now: str):
     lines = []
 
     # ── Masthead ────────────────────────────
-    lines.append(f"# The Codey Gazette — {now[:10]}\n")
+    lines.append(f"# The Codey Star Report — {now[:10]}\n")
     lines.append(f"![]( https://github.com/{USERNAME}.png?size=80)\n")
     lines.append(f"> Powered by [Codey](https://github.com/{USERNAME}/{REPONAME})\n")
+    lines.append(f"- StarReport generated on — {now[:5]}\n")
     lines.append("---\n")
 
     # ── Breaking headline ───────────────────
