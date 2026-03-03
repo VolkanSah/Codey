@@ -10,7 +10,7 @@
 
 > GitHub/Shields inflates your count with self-stars and fork stars.
 > Their number: **807** — the inflation: **202**. You're welcome.
-
+> Note: GitHub has no bookmarks. Starring your own repos is the only way to organize them. Not inflation — just bad UX from GitHub's side!
 ---
 
 | | Count |
