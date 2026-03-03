@@ -12,6 +12,7 @@
 
 
 > ... with some actions toolbox you will ❤️ **Sources: [DEV-Codey](https://github.com/volkansah/Codey)** note: use always latest on [Codey`s Lab](https://github.com/Codey-LAB/Codey)
+please note that animated SVGs can be heavy.. soon more (light) skins 
 
 ---
 
@@ -612,6 +613,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
