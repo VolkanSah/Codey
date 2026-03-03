@@ -207,7 +207,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 
   <!-- Main prompt -->
   <text x="20" y="46" class="ps">
-    <tspan fill="{colors['path']}">PS C:\Users\{dominant_lang}\Codey&gt;</tspan>
+    <tspan fill="{colors['path']}">PS C:\\Users\\{dominant_lang}\\Codey&gt;</tspan>
     <tspan fill="{colors['command']}"> codey.exe --status --tier {tier.upper()} --no-lies</tspan>
   </text>
 
@@ -274,7 +274,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 
   <!-- Next prompt + blinking cursor -->
   <text x="20" y="{total_height - 24}" class="ps">
-    <tspan fill="{colors['path']}">PS C:\Users\{dominant_lang}\Codey&gt;</tspan>
+    <tspan fill="{colors['path']}">PS C:\\Users\\{dominant_lang}\\Codey&gt;</tspan>
     <tspan fill="{colors['command']}"> </tspan><tspan fill="{colors['command']}" class="blink">█</tspan>
   </text>
 
