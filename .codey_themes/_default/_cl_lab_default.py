@@ -4,7 +4,7 @@ from datetime import datetime
 # FILE: _cl_lab_default.py - "NO MERCY" EDITION
 # =============================================================================
 # DEMO DUMMY: ./codey_lab_default.svg
-# UPDATED:    21.02.2026
+# UPDATED:    04.03.2026
 # AUTHOR:     VolkanSah
 # =============================================================================
 #
@@ -25,6 +25,9 @@ from datetime import datetime
 #
 # =============================================================================
 # CHANGELOG:
+# [FIX]      04.03.2026 - penalties/bonuses split — social_bonuses green, social_penalties red
+#                         quality_curator and other bonuses no longer shown as penalties
+# [NEW]      04.03.2026 - commit_quality_bonuses displayed (conventional_commits, clean_history)
 # [NEW]      21.02.2026 - issue_score + issue_close_ratio displayed in footer
 # [NEW]      21.02.2026 - cycles parameter now controls animation tier
 # [IMPROVED] 21.02.2026 - footer layout adjusted for issue score line
@@ -49,7 +52,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     moods = {
         'happy': '😊', 'struggling': '😰', 'exhausted': '😵',
         'grinding': '😤', 'elite': '😎', 'wise': '🧐',
-        'neutral': '😐', 'overwhelmed': '🤯'
+        'neutral': '😐', 'overwhelmed': '🤯', 'inspired': '✨'
     }
     pets = {
         'C': '🦫', 'C++': '🐬', 'C#': '🦊', 'Java': '🦧', 'PHP': '🐘',
@@ -77,6 +80,8 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         'energy':         '#3fb950',
         'border':         '#30363d',
         'tier':           tier_color,
+        'penalty':        '#ff4444',
+        'bonus':          '#22cc66',
     }
 
     def bar(value, max_width=330):
@@ -126,8 +131,8 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         )
 
     # ── Issue stats ────────────────────────────────────────────────────────
-    issues_closed  = brutal_stats.get('issues_closed', 0)
-    issue_line     = ''
+    issues_closed    = brutal_stats.get('issues_closed', 0)
+    issue_line       = ''
     issue_score_line = ''
     if issues_closed > 0:
         issue_line = f' • 🐛 {issues_closed} issues closed'
@@ -139,14 +144,28 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
             f'🐛 closed={issues_closed} • ratio={ratio:.2f} • score={score:.2f}</text>'
         )
 
-    # ── cycles → animation tier ────────────────────────────────────────────
-    # light (2): only breathe — no filters, mobile-safe
-    # normal (4): standard animations
-    # full (8): all animations + filters
-    # Default theme is static (no CSS animations) — cycles reserved for
-    # future animated default variant or subclass themes.
-    # Currently used by: _cl_lab_cuty.py, _cl_lab_cat.py
-    _ = cycles  # explicitly acknowledged — not unused
+    # ── Penalties / Bonuses — FIX: split display, red vs green ────────────
+    # social_penalties = bad  → red   ⛔
+    # social_bonuses   = good → green ✅
+    # commit_quality_bonuses also shown if present
+    social_penalties = brutal_stats.get('social_penalties', [])
+    social_bonuses   = brutal_stats.get('social_bonuses', [])
+    commit_bonuses   = brutal_stats.get('commit_quality_bonuses', [])
+    all_bonuses      = social_bonuses + commit_bonuses
+
+    penalty_display = (
+        f'<text x="0" y="30" text-anchor="middle" '
+        f'fill="{colors["penalty"]}" font-size="11">'
+        f'{"⛔ " + social_penalties[0] if social_penalties else ""}</text>'
+    )
+    bonus_display = (
+        f'<text x="0" y="45" text-anchor="middle" '
+        f'fill="{colors["bonus"]}" font-size="11">'
+        f'{"✅ " + all_bonuses[0] if all_bonuses else ""}</text>'
+    )
+
+    # ── cycles acknowledged — static theme, reserved for subclasses ───────
+    _ = cycles
 
     svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
   <rect width="630" height="473" fill="{colors['background']}" rx="15"/>
@@ -216,17 +235,18 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     </text>
     <text x="0" y="15" text-anchor="middle" fill="{colors['secondary_text']}" font-size="11">
       Tier: {tier.upper()} • XP Mult: {brutal_stats.get('multipliers', {}).get('xp', 1.0):.2f}x
-      • Penalties: {', '.join(brutal_stats.get('social_penalties', [])[:3]) or 'None'}
     </text>
+    {penalty_display}
+    {bonus_display}
   </g>
-  <g transform="translate(315, 405)">
+  <g transform="translate(315, 415)">
     <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="13">
       🗓️ {codey['streak']}d streak • 📊 {codey['total_commits']} commits
       • ⭐ {brutal_stats.get('total_stars', 0)} stars{issue_line}
     </text>
     {issue_score_line}
   </g>
-  <text x="315" y="450" text-anchor="middle"
+  <text x="315" y="455" text-anchor="middle"
         fill="{colors['secondary_text']}" font-size="11">
     {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • {dominant_lang} {pet_emoji}
   </text>
