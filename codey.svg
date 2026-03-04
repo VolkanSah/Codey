@@ -1,108 +1,84 @@
-<svg width="630" height="500" viewBox="0 0 630 500" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .b  { font-family:"Courier New","Lucida Console",monospace; }
-    @keyframes blink    { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
-    @keyframes fadein   { from{opacity:0;} to{opacity:1;} }
-    @keyframes scanline { 0%{transform:translateY(-4px);opacity:0;}
-                          5%{opacity:0.10;} 95%{opacity:0.10;}
-                          100%{transform:translateY(500px);opacity:0;} }
-    @keyframes scanloop { 0%{transform:translateY(-4px);opacity:0;}
-                          5%{opacity:0.05;} 95%{opacity:0.05;}
-                          100%{transform:translateY(500px);opacity:0;} }
-    .cursor  { animation: blink 1s step-end infinite; }
-    .scan-1  { animation: scanline 2.5s linear 1 forwards; }
-    .scan-lp { animation: scanloop 5s linear infinite; }
-    .l01{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.1s;}
-    .l02{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.3s;}
-    .l03{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.5s;}
-    .l04{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.7s;}
-    .l05{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.9s;}
-    .l06{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.1s;}
-    .l07{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.3s;}
-    .l08{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.5s;}
-    .l09{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.7s;}
-    .l10{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.9s;}
-    .l11{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.1s;}
-    .l12{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.3s;}
-    .l13{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.5s;}
-    .l14{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.7s;}
-    .l15{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.9s;}
-    .l16{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.1s;}
-    .l17{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.3s;}
-    .l18{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.5s;}
-  </style>
+<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
+  <rect width="630" height="473" fill="#0d1117" rx="15"/>
+  <rect x="20" y="20" width="590" height="433" fill="#161b22" rx="12"
+        stroke="#30363d" stroke-width="1"/>
 
-  <!-- BG — the blue hell -->
-  <rect width="630" height="500" fill="#000080"/>
-
-  <!-- CRT scanlines -->
-  <rect class="scan-1"  x="0" y="0" width="630" height="4" fill="#ffffff"/>
-  <rect class="scan-lp" x="0" y="0" width="630" height="3" fill="#ffffff"/>
-
-  <!-- ══ HEADER y=0 h=44 ══ -->
-  <rect x="0" y="0" width="630" height="44" fill="#0000aa"/>
-  <text x="315" y="28" text-anchor="middle" fill="#ffffff"
-        class="b l01" font-size="15" font-weight="bold">Windows Blue Screen of Death</text>
-  <text x="590" y="40" text-anchor="end" fill="#c0c0c0"
-        class="b" font-size="9" opacity="0.7">2026-03-04 13:02 UTC</text>
-
-  <!-- ══ SAD FACE y=56 → baseline y=100 ══ -->
-  <text x="40" y="100" fill="#ffffff" class="b l02" font-size="48">:(</text>
-
-  <!-- ══ MAIN MESSAGE CVE-STYLE y=116 ══ -->
-  <text x="40" y="116" fill="#ffffff" class="b l03" font-size="15" font-weight="bold">Your ELDER Python dev crashed: ENERGY_DEPLETED</text>
-  <text x="40" y="136" fill="#c0c0c0" class="b l04" font-size="11">Collecting error info... Codey will restart automatically. Mood: X-(</text>
-
-  <!-- ══ STOP CODE y=158 ══ -->
-  <text x="40" y="158" fill="#ffffff" class="b l05" font-size="11">For more information, search online:</text>
-  <text x="40" y="176" fill="#00ffff" class="b l06" font-size="12" font-weight="bold">DEVELOPER_POWER_FAILURE_0x0000</text>
-
-  <!-- ══ DIVIDER y=194 ══ -->
-  <line x1="40" y1="194" x2="590" y2="194" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l06"/>
-
-  <!-- ══ TECH INFO y=212 ══ -->
-  <text x="40" y="212" fill="#ffffff" class="b l07" font-size="12" font-weight="bold">TECHNICAL INFORMATION:</text>
-
-  <!-- ══ STAT BARS — 2 columns y=232 ══ -->
-  <g class="b" font-size="12" fill="#c0c0c0">
-    <text x="40" y="232" class="l08">health   [█████░░░░░░░░░░░] 33%</text>
-    <text x="40" y="252" class="l09">hunger   [████████████████] 100%</text>
-    <text x="40" y="272" class="l10">happines [░░░░░░░░░░░░░░░░] 0%</text>
-    <text x="330"  y="232" class="l08">energy  [░░░░░░░░░░░░░░░░] 0%</text>
-    <text x="330"  y="252" class="l09">social  [██████████░░░░░░] 1.25x</text>
-    <text x="330"  y="272" class="l10">quality [█████████████░░░] 0.83</text>
-  </g>
-
-  <!-- ══ DIVIDER y=292 ══ -->
-  <line x1="40" y1="292" x2="590" y2="292" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l10"/>
-
-  <!-- ══ SYSTEM INFO y=312 ══ -->
-  <g class="b" font-size="12">
-    <text x="40" y="312" fill="#ffff00" class="l11">TIER: ELDER  |  LEVEL: 4  |  XP: 0.25x  |  GITHUB: 10.0y  |  PRESTIGE: 0</text>
-    <text x="40" y="332" fill="#ffffff"     class="l12">STREAK: 11d  |  COMMITS: 387  |  STARS: 605  |  BUGS_FIXED: 4</text>
-    <text x="40" y="352" fill="#c0c0c0"   class="l13">PENALTIES: ENERGY_DEPLETED, HAPPINESS_CRITICAL</text>
-  </g>
-
-  <!-- ══ SEASONAL / PRESTIGE y=372 ══ -->
-  <text x="40" y="372" fill="#ffff00" class="b l14" font-size="12">SEASONAL: REFACTOR 1.2x XP</text>
-  
-
-  <!-- ══ ACHIEVEMENTS y=392 ══ -->
-  <text x="40" y="392" fill="#c0c0c0" class="b l15" font-size="12">BADGES: 🧙‍♂️ 👑 💎 💀 🎯</text>
-
-  <!-- ══ DIVIDER y=412 ══ -->
-  <line x1="40" y1="412" x2="590" y2="412" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l15"/>
-
-  <!-- ══ DEV LINE expanded y=432 ══ -->
-  <text x="40" y="432" fill="#ffffff" class="b l16" font-size="13">
-    🐍 Python  //  X-( EXHAUSTED  //  ELDER 10.0y  //  11d streak
+  <g><rect x="45.0" y="10" width="150" height="35" rx="17.5" fill="#f59e0b" opacity="0.9" stroke="#30363d" stroke-width="1.5"/><text x="120" y="33" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">🧹 Refactor</text></g>
+  <text x="40" y="75" fill="#f0f6fc" font-size="18" font-weight="bold">
+    🧙‍♂️ CODEY Level 5
   </text>
+  
+  <text x="417.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">👑</text><text x="462.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">💎</text><text x="507.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">💀</text><text x="552.5" y="48" text-anchor="middle" fill="#f0f6fc" font-size="20">🎯</text>
 
-  <!-- ══ FOOTER y=452 ══ -->
-  <text x="40" y="452" fill="#c0c0c0" class="b l17" font-size="10">Press any key to continue... (just kidding, Codey runs on a schedule)</text>
-  <text x="40" y="472" fill="#ffffff"   class="b l18" font-size="12">C:\WINDOWS\SYSTEM32&gt; codey --reboot --tier ELDER --no-mercy<tspan class="cursor" fill="#ffffff">_</tspan></text>
+  <!-- Pet area -->
+  <g transform="translate(0, 84)">
+    <circle cx="120" cy="150" r="57.5" fill="#21262d"
+            stroke="#f59e0b" stroke-width="3"/>
+    <text x="120" y="176" text-anchor="middle" font-size="65">🐍</text>
+    <circle cx="120" cy="225" r="25" fill="#21262d"
+            stroke="#30363d" stroke-width="1"/>
+    <text x="120" y="230" text-anchor="middle" font-size="25">
+      😵
+    </text>
+    <text x="120" y="260" text-anchor="middle"
+          fill="#8b949e" font-size="11">
+      Exhausted • 10.0y
+    </text>
+  </g>
 
-  <!-- ══ BOTTOM BAR ══ -->
-  <rect x="0" y="490" width="630" height="10" fill="#0000aa"/>
+  <!-- Stat bars -->
+  <g transform="translate(205, 120)">
+    <text x="0" y="20"   fill="#f0f6fc" font-weight="bold" font-size="14">❤️ Health</text>
+    <text x="330" y="20" fill="#8b949e" font-size="12" text-anchor="end">33%</text>
+    <rect x="0" y="25"   width="330" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="25"   width="110.0" height="12" fill="#f85149" rx="6"/>
 
+    <text x="0" y="55"   fill="#f0f6fc" font-weight="bold" font-size="14">🍖 Hunger</text>
+    <text x="330" y="55" fill="#8b949e" font-size="12" text-anchor="end">100%</text>
+    <rect x="0" y="60"   width="330" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="60"   width="330" height="12" fill="#ffa657" rx="6"/>
+
+    <text x="0" y="90"   fill="#f0f6fc" font-weight="bold" font-size="14">😊 Happiness</text>
+    <text x="330" y="90" fill="#8b949e" font-size="12" text-anchor="end">0%</text>
+    <rect x="0" y="95"   width="330" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="95"   width="0.0" height="12" fill="#a855f7" rx="6"/>
+
+    <text x="0" y="125"   fill="#f0f6fc" font-weight="bold" font-size="14">⚡ Energy</text>
+    <text x="330" y="125" fill="#8b949e" font-size="12" text-anchor="end">0%</text>
+    <rect x="0" y="130"   width="330" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="130"   width="0.0" height="12" fill="#3fb950" rx="6"/>
+
+    <text x="0" y="160"   fill="#f0f6fc" font-weight="bold" font-size="14">👥 Social</text>
+    <text x="330" y="160" fill="#8b949e" font-size="12" text-anchor="end">1.25</text>
+    <rect x="0" y="165"   width="330" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="165"   width="206.25" height="12" fill="#f59e0b" rx="6"/>
+
+    <text x="0" y="195"   fill="#f0f6fc" font-weight="bold" font-size="14">💎 Quality</text>
+    <text x="330" y="195" fill="#8b949e" font-size="12" text-anchor="end">0.83</text>
+    <rect x="0" y="200"   width="330" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="200"   width="274.0546875000003" height="12" fill="#a855f7" rx="6"/>
+  </g>
+
+  <!-- Footer -->
+  <g transform="translate(315, 368)">
+    <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="13" font-weight="bold">
+      PET STATUS:
+    </text>
+    <text x="0" y="15" text-anchor="middle" fill="#8b949e" font-size="11">
+      Tier: ELDER • XP Mult: 0.25x
+    </text>
+    <text x="0" y="30" text-anchor="middle" fill="#ff4444" font-size="11"></text>
+    <text x="0" y="45" text-anchor="middle" fill="#22cc66" font-size="11">✅ quality_curator</text>
+  </g>
+  <g transform="translate(315, 415)">
+    <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="13">
+      🗓️ 12d streak • 📊 428 commits
+      • ⭐ 605 stars • 🐛 4 issues closed
+    </text>
+    <text x="0" y="18" text-anchor="middle" fill="#8b949e" font-size="10">🐛 closed=4 • ratio=0.67 • score=1.20</text>
+  </g>
+  <text x="315" y="455" text-anchor="middle"
+        fill="#8b949e" font-size="11">
+    2026-03-04 13:43 UTC • Python 🐍
+  </text>
 </svg>
