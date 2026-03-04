@@ -45,17 +45,17 @@
   <rect x="0" y="0" width="630" height="44" fill="#0000aa"/>
   <text x="315" y="28" text-anchor="middle" fill="#ffffff"
         class="b l01" font-size="15" font-weight="bold">
-    Windows — CODEY INTEGRITY MONITOR v2.0
+    Windows Blue Screen of Death
   </text>
   <text x="590" y="40" text-anchor="end" fill="#c0c0c0"
-        class="b" font-size="9" opacity="0.7">2026-03-04 06:57 UTC</text>
+        class="b" font-size="9" opacity="0.7">2026-03-04 12:05 UTC</text>
 
   <!-- ══ SAD FACE y=60 ══ -->
-  <text x="40" y="108" fill="#ffffff" class="b l02" font-size="52">:(</text>
+  <text x="40" y="108" fill="#ffffff" class="b l02" font-size="42">:(</text>
 
   <!-- ══ MAIN MESSAGE y=120 ══ -->
   <text x="40" y="126" fill="#ffffff" class="b l03" font-size="16" font-weight="bold">
-    Your Python dev ran into a problem and needs to rest.
+    Your Python dev ran into a problem and needs to rest!
   </text>
   <text x="40" y="146" fill="#c0c0c0" class="b l04" font-size="11">
     Collecting error info... Codey will restart automatically.
@@ -107,10 +107,10 @@
   <!-- ══ SYSTEM INFO — short lines, one fact per line ══ -->
   <g class="b" font-size="11">
     <text x="40" y="340" fill="#ffff00" class="l12">
-      TIER: ELDER  |  LEVEL: 3  |  XP_MULT: 0.25x  |  GITHUB: 10.0y
+      TIER: ELDER  |  LEVEL: 4  |  XP_MULT: 0.25x  |  GITHUB: 10.0y
     </text>
     <text x="40" y="358" fill="#ffffff" class="l13">
-      STREAK: 8d  |  COMMITS: 282  |  STARS: 605  |  BUGS_FIXED: 4
+      STREAK: 9d  |  COMMITS: 315  |  STARS: 605  |  BUGS_FIXED: 4
     </text>
     <text x="40" y="376" fill="#ffffff" class="l14">
       MOOD: EXHAUSTED  |  LANG: Python  |  PENALTIES: quality_curator
@@ -123,7 +123,7 @@
   
 
   <!-- ══ ACHIEVEMENTS y=412 ══ -->
-  <text x="40" y="412" fill="#c0c0c0" class="b l16" font-size="11">BADGES: 🧙‍♂️ 👑 💎</text>
+  <text x="40" y="412" fill="#c0c0c0" class="b l16" font-size="11">BADGES: 🧙‍♂️ 👑 💎 💀</text>
 
   <!-- ══ PET + MOOD y=430 ══ -->
   <text x="40" y="432" class="b l17" font-size="11" fill="#c0c0c0">
