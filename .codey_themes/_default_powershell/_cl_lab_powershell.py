@@ -239,17 +239,17 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <rect x="0" y="0" width="630" height="44" fill="{DARKBG}"/>
   <text x="315" y="28" text-anchor="middle" fill="{FG}"
         class="b l01" font-size="15" font-weight="bold">
-    Windows — CODEY INTEGRITY MONITOR v2.0
+    Windows Blue Screen of Death
   </text>
   <text x="{MR}" y="40" text-anchor="end" fill="{GREY}"
         class="b" font-size="9" opacity="0.7">{now}</text>
 
   <!-- ══ SAD FACE y=60 ══ -->
-  <text x="{ML}" y="108" fill="{FG}" class="b l02" font-size="52">:(</text>
+  <text x="{ML}" y="108" fill="{FG}" class="b l02" font-size="42">:(</text>
 
   <!-- ══ MAIN MESSAGE y=120 ══ -->
   <text x="{ML}" y="126" fill="{FG}" class="b l03" font-size="16" font-weight="bold">
-    Your {dominant_lang} dev ran into a problem and needs to rest.
+    Your {dominant_lang} dev ran into a problem and needs to rest!
   </text>
   <text x="{ML}" y="146" fill="{GREY}" class="b l04" font-size="11">
     Collecting error info... Codey will restart automatically.
