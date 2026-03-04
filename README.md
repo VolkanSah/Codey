@@ -312,12 +312,15 @@ see [.codey_themes](.codey_themes) folder
     - [x] Generate Repo Structure
 - [x] API endpoint — yes and no, you'll see :D
 - [x] Codey Star_Report now 100 % ⭐
-- [x] Powershell default theme 
+- [x] Blue Hell default theme
+- [x] Penalty/Bonus split - (not realsed)
+
 
 #### In progress
 - [ ] Issue quality analysis — found new patterns, needs fixing
 - [ ] Heartbeat — logic test (mostly not public, sorry)
 - [ ] Outsorce logic of update core and use Codey Starreport for more brutal stats.
+- [-] Default Theme Patch - crafting on new logic, for more brutal stats
 - [ ] Kali Linux Skin
 
 #### Planned
@@ -689,6 +692,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
