@@ -4,7 +4,7 @@ from datetime import datetime
 # FILE: _cl_lab_default.py - "NO MERCY" EDITION
 # =============================================================================
 # DEMO DUMMY: ./codey_lab_default.svg
-# UPDATED:    04.03.2026
+# UPDATED:    04.03.2026 with help of ai, was to lazy to update them. save time 20 minutes
 # AUTHOR:     VolkanSah
 # =============================================================================
 #
@@ -25,23 +25,12 @@ from datetime import datetime
 #
 # =============================================================================
 # CHANGELOG:
-# [FIX]      04.03.2026 - penalties/bonuses split — social_bonuses green, social_penalties red
-#                         quality_curator and other bonuses no longer shown as penalties
-# [NEW]      04.03.2026 - commit_quality_bonuses displayed (conventional_commits, clean_history)
+# [FIX]      04.03.2026 - penalties/bonuses split — ⛔ red or ✅ green, own line above timestamp
+#                         quality_curator no longer shown as penalty
 # [NEW]      21.02.2026 - issue_score + issue_close_ratio displayed in footer
 # [NEW]      21.02.2026 - cycles parameter now controls animation tier
 # [IMPROVED] 21.02.2026 - footer layout adjusted for issue score line
 # =============================================================================
-#
-# CORE TEMPLATE NOTICE:
-# This file (_cl_lab_default.py) is the primary core template for Codey.
-# To maintain order and prevent chaos, all core logic and output changes
-# are implemented here first.
-# =============================================================================
-#
-# ─────────────────────────────────────────────
-# SVG GENERATOR LOGIC STARTS HERE!
-# ─────────────────────────────────────────────
 
 def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     brutal_stats = codey.get('brutal_stats', {})
@@ -80,8 +69,6 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         'energy':         '#3fb950',
         'border':         '#30363d',
         'tier':           tier_color,
-        'penalty':        '#ff4444',
-        'bonus':          '#22cc66',
     }
 
     def bar(value, max_width=330):
@@ -144,32 +131,24 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
             f'🐛 closed={issues_closed} • ratio={ratio:.2f} • score={score:.2f}</text>'
         )
 
-    # ── Penalties / Bonuses — FIX: split display, red vs green ────────────
-    # social_penalties = bad  → red   ⛔
-    # social_bonuses   = good → green ✅
-    # commit_quality_bonuses also shown if present
+    # ── Penalties / Bonuses — if penalty → red, elif bonus → green ────────
     social_penalties = brutal_stats.get('social_penalties', [])
-    social_bonuses   = brutal_stats.get('social_bonuses', [])
-    commit_bonuses   = brutal_stats.get('commit_quality_bonuses', [])
-    all_bonuses      = social_bonuses + commit_bonuses
+    all_bonuses      = brutal_stats.get('social_bonuses', []) + brutal_stats.get('commit_quality_bonuses', [])
+    if social_penalties:
+        verdict_color = '#ff4444'
+        verdict       = '⛔ ' + social_penalties[0]
+    elif all_bonuses:
+        verdict_color = '#22cc66'
+        verdict       = '✅ ' + all_bonuses[0]
+    else:
+        verdict_color = colors['secondary_text']
+        verdict       = ''
 
-    penalty_display = (
-        f'<text x="0" y="30" text-anchor="middle" '
-        f'fill="{colors["penalty"]}" font-size="11">'
-        f'{"⛔ " + social_penalties[0] if social_penalties else ""}</text>'
-    )
-    bonus_display = (
-        f'<text x="0" y="45" text-anchor="middle" '
-        f'fill="{colors["bonus"]}" font-size="11">'
-        f'{"✅ " + all_bonuses[0] if all_bonuses else ""}</text>'
-    )
+    _ = cycles  # static theme — reserved for subclasses
 
-    # ── cycles acknowledged — static theme, reserved for subclasses ───────
-    _ = cycles
-
-    svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
-  <rect width="630" height="473" fill="{colors['background']}" rx="15"/>
-  <rect x="20" y="20" width="590" height="433" fill="{colors['card']}" rx="12"
+    svg = f'''<svg width="630" height="500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="630" height="500" fill="{colors['background']}" rx="15"/>
+  <rect x="20" y="20" width="590" height="460" fill="{colors['card']}" rx="12"
         stroke="{colors['border']}" stroke-width="1"/>
 
   {seasonal_display}
@@ -230,24 +209,19 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 
   <!-- Footer -->
   <g transform="translate(315, 368)">
-    <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="13" font-weight="bold">
-      PET STATUS:
-    </text>
-    <text x="0" y="15" text-anchor="middle" fill="{colors['secondary_text']}" font-size="11">
+    <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="13" font-weight="bold">PET STATUS:</text>
+    <text x="0" y="18" text-anchor="middle" fill="{colors['secondary_text']}" font-size="11">
       Tier: {tier.upper()} • XP Mult: {brutal_stats.get('multipliers', {}).get('xp', 1.0):.2f}x
     </text>
-    {penalty_display}
-    {bonus_display}
   </g>
-  <g transform="translate(315, 415)">
+  <g transform="translate(315, 400)">
     <text x="0" y="0" text-anchor="middle" fill="{colors['text']}" font-size="13">
-      🗓️ {codey['streak']}d streak • 📊 {codey['total_commits']} commits
-      • ⭐ {brutal_stats.get('total_stars', 0)} stars{issue_line}
+      🗓️ {codey['streak']}d streak • 📊 {codey['total_commits']} commits • ⭐ {brutal_stats.get('total_stars', 0)} stars{issue_line}
     </text>
     {issue_score_line}
   </g>
-  <text x="315" y="455" text-anchor="middle"
-        fill="{colors['secondary_text']}" font-size="11">
+  <text x="315" y="445" text-anchor="middle" fill="{verdict_color}" font-size="11">{verdict}</text>
+  <text x="315" y="465" text-anchor="middle" fill="{colors['secondary_text']}" font-size="11">
     {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')} • {dominant_lang} {pet_emoji}
   </text>
 </svg>'''
@@ -255,10 +229,5 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 
 # ─────────────────────────────────────────────
 # END OF SVG GENERATOR LOGIC
-# ─────────────────────────────────────────────
-
-# If you like or love Codey, give him a hug!
-# Show some support by starring the repository and following my profile.
-# Thanks, and have fun!
 # ─────────────────────────────────────────────
 # Crafted with passion by VolkanSah (2026)
