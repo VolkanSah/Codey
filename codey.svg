@@ -1,14 +1,14 @@
-<svg width="630" height="530" viewBox="0 0 630 530" xmlns="http://www.w3.org/2000/svg">
+<svg width="630" height="500" viewBox="0 0 630 500" xmlns="http://www.w3.org/2000/svg">
   <style>
     .b  { font-family:"Courier New","Lucida Console",monospace; }
     @keyframes blink    { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
     @keyframes fadein   { from{opacity:0;} to{opacity:1;} }
     @keyframes scanline { 0%{transform:translateY(-4px);opacity:0;}
                           5%{opacity:0.10;} 95%{opacity:0.10;}
-                          100%{transform:translateY(530px);opacity:0;} }
+                          100%{transform:translateY(500px);opacity:0;} }
     @keyframes scanloop { 0%{transform:translateY(-4px);opacity:0;}
                           5%{opacity:0.05;} 95%{opacity:0.05;}
-                          100%{transform:translateY(530px);opacity:0;} }
+                          100%{transform:translateY(500px);opacity:0;} }
     .cursor  { animation: blink 1s step-end infinite; }
     .scan-1  { animation: scanline 2.5s linear 1 forwards; }
     .scan-lp { animation: scanloop 5s linear infinite; }
@@ -30,12 +30,10 @@
     .l16{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.1s;}
     .l17{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.3s;}
     .l18{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.5s;}
-    .l19{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.7s;}
-    .l20{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.9s;}
   </style>
 
   <!-- BG — the blue hell -->
-  <rect width="630" height="530" fill="#000080"/>
+  <rect width="630" height="500" fill="#000080"/>
 
   <!-- CRT scanlines -->
   <rect class="scan-1"  x="0" y="0" width="630" height="4" fill="#ffffff"/>
@@ -44,104 +42,67 @@
   <!-- ══ HEADER y=0 h=44 ══ -->
   <rect x="0" y="0" width="630" height="44" fill="#0000aa"/>
   <text x="315" y="28" text-anchor="middle" fill="#ffffff"
-        class="b l01" font-size="15" font-weight="bold">
-    Windows Blue Screen of Death
-  </text>
+        class="b l01" font-size="15" font-weight="bold">Windows Blue Screen of Death</text>
   <text x="590" y="40" text-anchor="end" fill="#c0c0c0"
-        class="b" font-size="9" opacity="0.7">2026-03-04 12:05 UTC</text>
+        class="b" font-size="9" opacity="0.7">2026-03-04 12:31 UTC</text>
 
-  <!-- ══ SAD FACE y=60 ══ -->
-  <text x="40" y="108" fill="#ffffff" class="b l02" font-size="42">:(</text>
+  <!-- ══ SAD FACE y=56 → baseline y=100 ══ -->
+  <text x="40" y="100" fill="#ffffff" class="b l02" font-size="48">:(</text>
 
-  <!-- ══ MAIN MESSAGE y=120 ══ -->
-  <text x="40" y="126" fill="#ffffff" class="b l03" font-size="16" font-weight="bold">
-    Your Python dev ran into a problem and needs to rest!
-  </text>
-  <text x="40" y="146" fill="#c0c0c0" class="b l04" font-size="11">
-    Collecting error info... Codey will restart automatically.
-  </text>
+  <!-- ══ MAIN MESSAGE CVE-STYLE y=116 ══ -->
+  <text x="40" y="116" fill="#ffffff" class="b l03" font-size="15" font-weight="bold">Your ELDER Python dev crashed: ENERGY_DEPLETED</text>
+  <text x="40" y="136" fill="#c0c0c0" class="b l04" font-size="11">Collecting error info... Codey will restart automatically. Mood: X-(</text>
 
-  <!-- ══ DUMP PROGRESS y=168 ══ -->
-  <text x="40" y="168" fill="#ffffff" class="b l05" font-size="12">
-    33% complete  [██████              ]
-  </text>
+  <!-- ══ STOP CODE y=158 ══ -->
+  <text x="40" y="158" fill="#ffffff" class="b l05" font-size="11">For more information, search online:</text>
+  <text x="40" y="176" fill="#00ffff" class="b l06" font-size="12" font-weight="bold">DESCRIPTION_NULL_PTR_REF_0x0022</text>
 
-  <!-- ══ DIVIDER y=183 ══ -->
-  <line x1="40" y1="183" x2="590" y2="183" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l05"/>
+  <!-- ══ DIVIDER y=194 ══ -->
+  <line x1="40" y1="194" x2="590" y2="194" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l06"/>
 
-  <!-- ══ STOP CODE y=200 ══ -->
-  <text x="40" y="200" fill="#ffffff" class="b l06" font-size="11">
-    For more information, search online:
-  </text>
-  <text x="40" y="220" fill="#00ffff" class="b l07" font-size="12" font-weight="bold">
-    DESCRIPTION_NULL_PTR_REF_0x0022
-  </text>
+  <!-- ══ TECH INFO y=212 ══ -->
+  <text x="40" y="212" fill="#ffffff" class="b l07" font-size="12" font-weight="bold">TECHNICAL INFORMATION:</text>
 
-  <!-- ══ DIVIDER y=236 ══ -->
-  <line x1="40" y1="236" x2="590" y2="236" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l07"/>
-
-  <!-- ══ TECH INFO HEADER y=252 ══ -->
-  <text x="40" y="252" fill="#ffffff" class="b l08" font-size="11" font-weight="bold">
-    TECHNICAL INFORMATION:
-  </text>
-
-  <!-- ══ STAT BARS — 2 columns y=270 ══
-       Left col  x=40  → labels 7ch + bar 18ch + value = ~26ch × 7.2 = 187px
-       Right col x=330 → same
-       Gap between cols: 330-40=290px per col (safe for 26 chars)
-  ══ -->
-  <g class="b" font-size="11" fill="#c0c0c0">
-    <!-- LEFT col -->
-    <text x="40"  y="270" class="l09">health   [█████░░░░░░░░░░░] 33%</text>
-    <text x="40"  y="288" class="l10">hunger   [████████████████] 100%</text>
-    <text x="40"  y="306" class="l11">happines [░░░░░░░░░░░░░░░░] 0%</text>
-    <!-- RIGHT col -->
-    <text x="330"   y="270" class="l09">energy  [░░░░░░░░░░░░░░░░] 0%</text>
-    <text x="330"   y="288" class="l10">social  [██████████░░░░░░] 1.25x</text>
-    <text x="330"   y="306" class="l11">quality [█████████████░░░] 0.83</text>
+  <!-- ══ STAT BARS — 2 columns y=232 ══ -->
+  <g class="b" font-size="12" fill="#c0c0c0">
+    <text x="40" y="232" class="l08">health   [█████░░░░░░░░░░░] 33%</text>
+    <text x="40" y="252" class="l09">hunger   [████████████████] 100%</text>
+    <text x="40" y="272" class="l10">happines [░░░░░░░░░░░░░░░░] 0%</text>
+    <text x="330"  y="232" class="l08">energy  [░░░░░░░░░░░░░░░░] 0%</text>
+    <text x="330"  y="252" class="l09">social  [██████████░░░░░░] 1.25x</text>
+    <text x="330"  y="272" class="l10">quality [█████████████░░░] 0.83</text>
   </g>
 
-  <!-- ══ DIVIDER y=322 ══ -->
-  <line x1="40" y1="322" x2="590" y2="322" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l11"/>
+  <!-- ══ DIVIDER y=292 ══ -->
+  <line x1="40" y1="292" x2="590" y2="292" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l10"/>
 
-  <!-- ══ SYSTEM INFO — short lines, one fact per line ══ -->
-  <g class="b" font-size="11">
-    <text x="40" y="340" fill="#ffff00" class="l12">
-      TIER: ELDER  |  LEVEL: 4  |  XP_MULT: 0.25x  |  GITHUB: 10.0y
-    </text>
-    <text x="40" y="358" fill="#ffffff" class="l13">
-      STREAK: 9d  |  COMMITS: 315  |  STARS: 605  |  BUGS_FIXED: 4
-    </text>
-    <text x="40" y="376" fill="#ffffff" class="l14">
-      MOOD: EXHAUSTED  |  LANG: Python  |  PENALTIES: quality_curator
-    </text>
+  <!-- ══ SYSTEM INFO y=312 ══ -->
+  <g class="b" font-size="12">
+    <text x="40" y="312" fill="#ffff00" class="l11">TIER: ELDER  |  LEVEL: 4  |  XP: 0.25x  |  GITHUB: 10.0y  |  PRESTIGE: 0</text>
+    <text x="40" y="332" fill="#ffffff"     class="l12">STREAK: 10d  |  COMMITS: 350  |  STARS: 605  |  BUGS_FIXED: 4</text>
+    <text x="40" y="352" fill="#c0c0c0"   class="l13">PENALTIES: quality_curator, no_description</text>
   </g>
 
-  <!-- ══ SEASONAL / PRESTIGE y=394 (only if present) ══ -->
-  <text x="40" y="394" fill="#ffff00" class="b l15" font-size="11">SEASONAL: REFACTOR 1.2x XP</text>
+  <!-- ══ SEASONAL / PRESTIGE y=372 ══ -->
+  <text x="40" y="372" fill="#ffff00" class="b l14" font-size="12">SEASONAL: REFACTOR 1.2x XP</text>
   
-  
 
-  <!-- ══ ACHIEVEMENTS y=412 ══ -->
-  <text x="40" y="412" fill="#c0c0c0" class="b l16" font-size="11">BADGES: 🧙‍♂️ 👑 💎 💀</text>
+  <!-- ══ ACHIEVEMENTS y=392 ══ -->
+  <text x="40" y="392" fill="#c0c0c0" class="b l15" font-size="12">BADGES: 🧙‍♂️ 👑 💎 💀</text>
 
-  <!-- ══ PET + MOOD y=430 ══ -->
-  <text x="40" y="432" class="b l17" font-size="11" fill="#c0c0c0">
-    DEV: 🐍 Python  |  STATUS: 😵 EXHAUSTED
+  <!-- ══ DIVIDER y=412 ══ -->
+  <line x1="40" y1="412" x2="590" y2="412" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l15"/>
+
+  <!-- ══ DEV LINE expanded y=432 ══ -->
+  <text x="40" y="432" fill="#ffffff" class="b l16" font-size="13">
+    🐍 Python  //  X-( EXHAUSTED  //  ELDER 10.0y  //  10d streak
   </text>
 
-  <!-- ══ DIVIDER y=448 ══ -->
-  <line x1="40" y1="448" x2="590" y2="448" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l17"/>
+  <!-- ══ FOOTER y=452 ══ -->
+  <text x="40" y="452" fill="#c0c0c0" class="b l17" font-size="10">Press any key to continue... (just kidding, Codey runs on a schedule)</text>
+  <text x="40" y="472" fill="#ffffff"   class="b l18" font-size="12">C:\WINDOWS\SYSTEM32&gt; codey --reboot --tier ELDER --no-mercy<tspan class="cursor" fill="#ffffff">_</tspan></text>
 
-  <!-- ══ FOOTER y=466 + y=484 ══ -->
-  <text x="40" y="466" fill="#c0c0c0" class="b l18" font-size="10">
-    Press any key to continue... (just kidding, Codey runs on a schedule)
-  </text>
-  <text x="40" y="484" fill="#ffffff" class="b l19" font-size="11">
-    C:\WINDOWS\SYSTEM32&gt; codey --reboot --tier ELDER --no-mercy<tspan class="cursor" fill="#ffffff">_</tspan>
-  </text>
-
-  <!-- ══ BOTTOM BORDER ══ -->
-  <rect x="0" y="520" width="630" height="10" fill="#0000aa" class="l20"/>
+  <!-- ══ BOTTOM BAR ══ -->
+  <rect x="0" y="490" width="630" height="10" fill="#0000aa"/>
 
 </svg>
