@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 # =============================================================================
 # update_codey.py - No Mercy EDITION
@@ -202,11 +201,15 @@ def analyze_commit_quality(commits):
     """
     Score commit messages 0.1–1.0.
     Penalizes lazy keywords, very short messages, missing description on long ones.
+
+    IMPROVED: No bonus-as-penalty confusion here — this function only has real
+    penalties (score reductions). Nothing to split. Kept as-is.
     """
     if not commits:
-        return {'quality_score': 1.0, 'penalties': []}
+        return {'quality_score': 1.0, 'penalties': [], 'bonuses': []}
 
     penalties = []
+    bonuses   = []
     quality_score = 1.0
 
     for commit in commits[:20]:
@@ -224,9 +227,23 @@ def analyze_commit_quality(commits):
             quality_score -= 0.05
             penalties.append('no_description')
 
+    # IMPROVED: Bonus for clean commit history (no penalties at all)
+    if not penalties and len(commits) >= 5:
+        bonuses.append('clean_history')
+
+    # IMPROVED: Bonus for consistent conventional-commit style (feat/fix/chore/docs/refactor)
+    conventional_count = sum(
+        1 for c in commits[:20]
+        if any(c.get('commit', {}).get('message', '').lower().startswith(prefix)
+               for prefix in ('feat', 'fix', 'chore', 'docs', 'refactor', 'test', 'style', 'perf', 'ci'))
+    )
+    if conventional_count >= 3:
+        bonuses.append('conventional_commits')
+
     return {
         'quality_score': max(0.1, quality_score),
-        'penalties':     list(set(penalties))
+        'penalties':     list(set(penalties)),
+        'bonuses':       list(set(bonuses)),   # NEW field
     }
 
 
@@ -324,7 +341,11 @@ def calculate_social_engineering_score(user_data, all_repos):
     - follow/follower ratio spam
     - fork leeching
     - repo spamming without stars
-    Returns score multiplier (0.1–1.5+) and penalty labels.
+    Returns score multiplier (0.1–1.5+), penalty labels, and bonus labels.
+
+    BUG (FIXED): Positive traits like 'quality_curator' were stored in penalties[].
+    Now penalties[] = only negative traits, bonuses[] = only positive traits.
+    Themes should render penalties RED and bonuses GREEN.
     """
     followers = user_data.get('followers', 0)
     following  = user_data.get('following', 0)
@@ -336,9 +357,11 @@ def calculate_social_engineering_score(user_data, all_repos):
     total_stars  = sum(r.get('stargazers_count', 0) for r in own_repos)
     star_per_repo = total_stars / max(len(own_repos), 1)
 
-    score    = 1.0
-    penalties = []
+    score     = 1.0
+    penalties = []   # negative traits only — render RED in themes
+    bonuses   = []   # positive traits only — render GREEN in themes
 
+    # Follow/Follower ratio
     if ffr > 5.0:
         score *= 0.25
         penalties.append('spam_follower')
@@ -346,23 +369,34 @@ def calculate_social_engineering_score(user_data, all_repos):
         score *= 0.75
         penalties.append('desperate_networker')
     elif ffr < 0.5:
+        # BUG (FIXED): was penalties.append('quality_curator') — this is a BONUS
         score *= 1.25
-        penalties.append('quality_curator')  # positive "penalty"
+        bonuses.append('quality_curator')
 
+    # Fork ratio
     if fork_ratio > 2.0:
         score *= 0.5
         penalties.append('fork_leech')
 
+    # Stars per repo
     if star_per_repo < 1.0 and len(own_repos) > 5:
         score *= 0.7
         penalties.append('code_spammer')
 
+    # Additional bonuses
+    if star_per_repo >= 10.0:
+        bonuses.append('star_magnet')
+
+    if len(own_repos) >= 10 and fork_ratio < 0.5:
+        bonuses.append('original_builder')
+
     return {
-        'score':      max(0.1, score),
-        'ffr':        ffr,
-        'fork_ratio': fork_ratio,
+        'score':         max(0.1, score),
+        'ffr':           ffr,
+        'fork_ratio':    fork_ratio,
         'star_per_repo': star_per_repo,
-        'penalties':  penalties
+        'penalties':     penalties,
+        'bonuses':       bonuses,   # NEW: separate list for positive traits
     }
 
 
@@ -525,7 +559,7 @@ def get_all_data_for_user(owner):
         print(f"  Fallback total: {daily_commits} commits")
 
     commit_quality_data = analyze_commit_quality(all_commits) if all_commits else {
-        'quality_score': 1.0, 'penalties': []
+        'quality_score': 1.0, 'penalties': [], 'bonuses': []
     }
 
     # NEW: Issue activity from full event history (not just 24h, shows pattern)
@@ -587,6 +621,8 @@ def check_brutal_achievements(codey, tier, github_years):
         # NEW: issue achievement
         (brutal_stats.get('issue_close_ratio', 0) > 0.8
          and brutal_stats.get('issues_closed', 0) >= 5,      '🐛 Bug Slayer'),
+        # NEW: quality curator achievement (was wrongly a penalty before)
+        ('quality_curator' in brutal_stats.get('social_bonuses', []),  '🎯 Quality Curator'),
     ]
 
     for condition, badge in candidates:
@@ -710,16 +746,18 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
         'tier':                    tier,
         'github_years':            github_years,
         'social_score':            social_analysis['score'],
-        'social_penalties':        social_analysis['penalties'],
+        'social_penalties':        social_analysis['penalties'],   # RED in themes
+        'social_bonuses':          social_analysis['bonuses'],     # GREEN in themes — NEW
         'avg_repo_quality':        all_time_data.get('avg_repo_quality', 0),
         'commit_quality_score':    commit_quality.get('quality_score', 1.0),
         'commit_quality_penalties': commit_quality.get('penalties', []),
+        'commit_quality_bonuses':  commit_quality.get('bonuses', []),   # NEW
         'multipliers':             multipliers,
         'total_stars':             all_time_data.get('total_stars', 0),
         'language_diversity_penalty': lang_penalty,
         'xp_earned':               total_xp,
         'dominant_language':       all_time_data.get('dominant_language', 'unknown'),
-        # NEW: issue stats
+        # issue stats
         'issues_closed':           issue_data.get('closed', 0),
         'issue_close_ratio':       issue_data.get('close_ratio', 0),
         'issue_score':             issue_data.get('score', 1.0),
@@ -728,11 +766,15 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     # Step 7: Mood
     penalties_count = (len(social_analysis['penalties']) +
                        len(commit_quality.get('penalties', [])))
+    bonuses_count   = (len(social_analysis['bonuses']) +
+                       len(commit_quality.get('bonuses', [])))
+
     if codey['health'] < 30:              codey['mood'] = 'struggling'
     elif codey['energy'] < 20:            codey['mood'] = 'exhausted'
     elif penalties_count > 2:             codey['mood'] = 'overwhelmed'
     elif social_analysis['score'] > 1.2:  codey['mood'] = 'elite'
     elif tier == 'elder' and codey['health'] > 70: codey['mood'] = 'wise'
+    elif bonuses_count >= 2:              codey['mood'] = 'inspired'   # NEW mood
     elif codey['health'] > 80:            codey['mood'] = 'happy'
     else:                                 codey['mood'] = 'grinding'
 
@@ -866,6 +908,7 @@ if __name__ == "__main__":
     print(f"  Tier:         {brutal.get('tier', '?').upper()} ({brutal.get('github_years', 0):.1f} years)")
     print(f"  Health:       {codey['health']:.0f}% | Energy: {codey['energy']:.0f}% | Mood: {codey['mood']}")
     print(f"  Social Score: {brutal.get('social_score', 1.0):.2f}x | XP Today: {brutal.get('xp_earned', 0):.0f}")
+    print(f"  Social+:      {brutal.get('social_bonuses', [])} | Social-: {brutal.get('social_penalties', [])}")
     print(f"  Issues:       closed={brutal.get('issues_closed', 0)}, score={brutal.get('issue_score', 1.0):.2f}")
 
     if brutal.get('can_prestige'):
