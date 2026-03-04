@@ -1,0 +1,132 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: codey-brutal-svg 1.0-kawaii-clean\n"
+"Language: ko\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# ── Tier ─────────────────────────────────────
+msgid "noob"
+msgstr "왕초보"
+
+msgid "developer"
+msgstr "코딩요정"
+
+msgid "veteran"
+msgstr "코딩장인"
+
+msgid "elder"
+msgstr "전설"
+
+# ── Mood ─────────────────────────────────────
+msgid "happy"
+msgstr "행복함"
+
+msgid "struggling"
+msgstr "힘내는중"
+
+msgid "exhausted"
+msgstr "지침상태"
+
+msgid "grinding"
+msgstr "집중모드"
+
+msgid "elite"
+msgstr "최상급"
+
+msgid "wise"
+msgstr "지혜로움"
+
+msgid "neutral"
+msgstr "평온"
+
+msgid "overwhelmed"
+msgstr "과부하"
+
+msgid "inspired"
+msgstr "영감상태"
+
+# ── Status ───────────────────────────────────
+msgid "clean"
+msgstr "클린상태"
+
+msgid "SEASON=OFFLINE"
+msgstr "시즌비활성"
+
+msgid "SEASON"
+msgstr "시즌이벤트"
+
+msgid "ISSUES"
+msgstr "이슈"
+
+msgid "closed"
+msgstr "해결완료"
+
+msgid "ratio"
+msgstr "비율"
+
+msgid "score"
+msgstr "점수"
+
+# ── Stats Labels ─────────────────────────────
+msgid "health"
+msgstr "체력"
+
+msgid "hunger"
+msgstr "배고픔"
+
+msgid "happiness"
+msgstr "행복도"
+
+msgid "energy"
+msgstr "에너지"
+
+msgid "social"
+msgstr "소셜지수"
+
+msgid "quality"
+msgstr "품질"
+
+# ── Activity ─────────────────────────────────
+msgid "STREAK"
+msgstr "연속기록"
+
+msgid "COMMITS"
+msgstr "커밋수"
+
+msgid "STARS"
+msgstr "스타수"
+
+msgid "DOMINANT"
+msgstr "주언어"
+
+msgid "TIER"
+msgstr "등급"
+
+msgid "LVL"
+msgstr "레벨"
+
+msgid "PRESTIGE"
+msgstr "명예레벨"
+
+msgid "XP"
+msgstr "경험치"
+
+# ── Logs / Commands ──────────────────────────
+msgid "cat stats.log"
+msgstr "스탯보기"
+
+msgid "cat activity.log"
+msgstr "활동보기"
+
+msgid "ls ./achievements/"
+msgstr "업적목록"
+
+msgid "./codey --status"
+msgstr "코디상태확인"
+
+msgid "root@codey:~$ ./status --user"
+msgstr "루트코디상태"
+
+msgid "user@codey:~$ cat stats.log"
+msgstr "코디스탯확인"
