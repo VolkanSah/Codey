@@ -123,12 +123,20 @@ Your Codey evolves based on your **dominant programming language**:
 
 | Tier | GitHub Age | XP Multiplier | Requirements |
 |------|-----------|---------------|--------------|
-| 🌱 Noob | < 2 years | 1.0x | Base |
+| 🌱 Noob | < 2 years | 1.0x | Base | 
 | 💻 Developer | 2–5 years | 0.67x | 1.5x harder |
 | ⚔️ Veteran | 5–8 years | 0.40x | 2.5x harder |
 | 🧙 Elder | 8+ years | 0.20x | 4x harder |
 
-You've been around long enough. One commit shouldn't level you up.
+#### planing
+[-] problem Eldier as achievments , too!soon fix!
+[-] problem Noob reanme it to newbee in core !soon fix!
+[ ] - new calculation cause bonis! (noob 1 > 0.8x , dev > 0,59x , Veteran > 0,44 , Eldier >  0,33)
+
+#### New planed
+| 🧙 Elder | 8-14 years | 0.33x | xx harder |
+| no icion jet!  MIKAT | 14+ years | 0.20x | xx harder | 
+
 
 ---
 
@@ -692,6 +700,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
