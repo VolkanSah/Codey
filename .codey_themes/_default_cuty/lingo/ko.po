@@ -1,0 +1,139 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: codey-brutal-svg 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-04 00:00+0000\n"
+"PO-Revision-Date: 2026-03-04 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Korean\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# ── Tier ─────────────────────────────────────
+msgid "noob"
+msgstr "초보자"
+
+msgid "developer"
+msgstr "개발자"
+
+msgid "veteran"
+msgstr "베테랑"
+
+msgid "elder"
+msgstr "고수"
+
+# ── Mood ─────────────────────────────────────
+msgid "happy"
+msgstr "행복함"
+
+msgid "struggling"
+msgstr "고군분투"
+
+msgid "exhausted"
+msgstr "지침"
+
+msgid "grinding"
+msgstr "열심히 작업중"
+
+msgid "elite"
+msgstr "엘리트"
+
+msgid "wise"
+msgstr "현명함"
+
+msgid "neutral"
+msgstr "보통"
+
+msgid "overwhelmed"
+msgstr "압도됨"
+
+msgid "inspired"
+msgstr "영감받음"
+
+# ── Status ───────────────────────────────────
+msgid "clean"
+msgstr "정상"
+
+msgid "SEASON=OFFLINE"
+msgstr "시즌=오프라인"
+
+msgid "SEASON"
+msgstr "시즌"
+
+msgid "ISSUES"
+msgstr "이슈"
+
+msgid "closed"
+msgstr "해결됨"
+
+msgid "ratio"
+msgstr "비율"
+
+msgid "score"
+msgstr "점수"
+
+# ── Stats Labels ─────────────────────────────
+msgid "health"
+msgstr "체력"
+
+msgid "hunger"
+msgstr "배고픔"
+
+msgid "happiness"
+msgstr "행복도"
+
+msgid "energy"
+msgstr "에너지"
+
+msgid "social"
+msgstr "소셜"
+
+msgid "quality"
+msgstr "품질"
+
+# ── Activity ─────────────────────────────────
+msgid "STREAK"
+msgstr "연속일"
+
+msgid "COMMITS"
+msgstr "커밋"
+
+msgid "STARS"
+msgstr "스타"
+
+msgid "DOMINANT"
+msgstr "주언어"
+
+msgid "TIER"
+msgstr "등급"
+
+msgid "LVL"
+msgstr "레벨"
+
+msgid "PRESTIGE"
+msgstr "프레스티지"
+
+msgid "XP"
+msgstr "경험치"
+
+# ── Logs / Commands ──────────────────────────
+msgid "cat stats.log"
+msgstr "stats.log 출력"
+
+msgid "cat activity.log"
+msgstr "activity.log 출력"
+
+msgid "ls ./achievements/"
+msgstr "업적 목록"
+
+msgid "./codey --status"
+msgstr "코디 상태 확인"
+
+msgid "root@codey:~$ ./status --user"
+msgstr "루트@코디:~$ ./상태 --사용자"
+
+msgid "user@codey:~$ cat stats.log"
+msgstr "사용자@코디:~$ stats.log 출력"
