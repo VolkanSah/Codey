@@ -6,7 +6,6 @@ from datetime import datetime
 # DEMO DUMMY: ./codey_lab_cuty.svg
 # UPDATED:    05.03.2026
 # AUTHOR:     VolkanSah
-# Tools: Inskape + 3DMax + ClaudeAi for type work
 # =============================================================================
 # LICENSE: Apache 2.0 + ESOL v1.1 — https://github.com/ESOL-License
 # =============================================================================
@@ -94,7 +93,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         ratio     = brutal_stats.get('issue_close_ratio', 0)
         score     = brutal_stats.get('issue_score', 1.0)
         issue_xml = (
-            f'<text x="0" y="124" fill="#ff88dd" font-size="10">'
+            f'<text x="0" y="63" fill="#ff88dd" font-size="10">'
             f'ISSUES=closed:{issues_closed} • ratio:{ratio:.2f} • score:{score:.2f}</text>'
         )
 
@@ -124,15 +123,13 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     s_bar  = bar(min(100, s_val * 50))
     q_bar  = bar(q_val * 100)
 
-    # ── Achievements — klein skaliert unten rechts wie Inkscape dummy ──────
-    # matrix(0.571, 0, 0, 0.549, 502, 420) — r=19 spacing=46 in local coords
+    # ── Achievements — kein Label-Text, keine Ringe, Icon overlay = tier_color ──
     ach_xml = ''
     if codey.get('achievements'):
         for i, ach in enumerate(codey['achievements'][-5:]):
-            x   = 22 + i * 46
-            col = '#e0aaff' if i % 2 == 0 else '#ff88dd'
+            x = 22 + i * 46
             ach_xml += (
-                f'<circle cx="{x}" cy="30" r="19" fill="#0c0018" stroke="{col}" '
+                f'<circle cx="{x}" cy="30" r="19" fill="#0c0018" stroke="{tier_color}" '
                 f'stroke-width="1.5" filter="url(#glow)"/>'
                 f'<text x="{x}" y="37" text-anchor="middle" font-size="17">'
                 f'{ach.split(" ")[0]}</text>'
@@ -380,61 +377,58 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <!-- sep1: y=90 -->
   <line x1="263" y1="90" x2="636" y2="90" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-  <!-- Tier badge: translate(265, 95) -->
+  <!-- Tier badge: translate(265, 95) — nur mood, keine LVL-Zeile -->
   <g transform="translate(265, 95)" font-family="Courier New,monospace" fill="#e0aaff">
     <rect x="0" y="0" width="368" height="22" rx="4" fill="{tier_color}" opacity="0.1" stroke="{tier_color}" stroke-width="1"/>
     <rect x="0" y="0" width="3"   height="22" fill="#e0aaff" rx="1"/>
-    <text x="8" y="15" font-size="11" font-weight="bold">[{tier.upper()}] LVL {codey['level']} • {brutal_stats.get('github_years', 1):.1f}y • XP={xp_mult:.2f}x • {prestige_str} PRESTIGE {prestige_lv}</text>
+    <text x="8" y="15" font-size="11" font-weight="bold" fill="#ff88dd">{mood_emoji} {codey.get('mood', 'neutral').upper()} • [{tier.upper()}] LVL {codey['level']} • {brutal_stats.get('github_years', 1):.1f}y</text>
   </g>
 
-  <!-- Bars: translate(265, 121) — 1:1 Inkscape -->
+  <!-- Bars: translate(265, 121) — x=374 zu weit, fix auf x=318 (text-anchor=end) -->
   <g transform="translate(265, 121)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
-    <text x="8"   y="15" font-size="11" font-weight="bold" fill="#ff88dd">{mood_emoji} {codey.get('mood', 'neutral').upper()}</text>
+    <text x="0"   y="22"  opacity="0.65">health   </text>
+    <text x="80"  y="22" >[{h_bar}]</text>
+    <text x="318" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{codey.get('health', 0):.0f}%</text>
 
-    <text x="0"   y="37"  opacity="0.65">health   </text>
-    <text x="80"  y="37" >[{h_bar}]</text>
-    <text x="374" y="37"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{codey.get('health', 0):.0f}%</text>
+    <text x="0"   y="44"  opacity="0.65">hunger   </text>
+    <text x="80"  y="44" >[{m_bar}]</text>
+    <text x="318" y="44"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{codey.get('hunger', 0):.0f}%</text>
 
-    <text x="0"   y="59"  opacity="0.65">hunger   </text>
-    <text x="80"  y="59" >[{m_bar}]</text>
-    <text x="374" y="59"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{codey.get('hunger', 0):.0f}%</text>
+    <text x="0"   y="66"  opacity="0.65">happiness</text>
+    <text x="80"  y="66" >[{ha_bar}]</text>
+    <text x="318" y="66"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{codey.get('happiness', 0):.0f}%</text>
 
-    <text x="0"   y="81"  opacity="0.65">happiness</text>
-    <text x="80"  y="81" >[{ha_bar}]</text>
-    <text x="374" y="81"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{codey.get('happiness', 0):.0f}%</text>
+    <text x="0"   y="88"  opacity="0.65">energy   </text>
+    <text x="80"  y="88" >[{e_bar}]</text>
+    <text x="318" y="88"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{codey.get('energy', 0):.0f}%</text>
 
-    <text x="0"   y="103" opacity="0.65">energy   </text>
-    <text x="80"  y="103">[{e_bar}]</text>
-    <text x="374" y="103" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{codey.get('energy', 0):.0f}%</text>
+    <text x="0"   y="110" opacity="0.65">social   </text>
+    <text x="80"  y="110">[{s_bar}]</text>
+    <text x="318" y="110" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{s_val:.2f}</text>
 
-    <text x="0"   y="125" opacity="0.65">social   </text>
-    <text x="80"  y="125">[{s_bar}]</text>
-    <text x="374" y="125" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{s_val:.2f}</text>
-
-    <text x="0"   y="147" opacity="0.65">quality  </text>
-    <text x="80"  y="147">[{q_bar}]</text>
-    <text x="374" y="147" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{q_val:.2f}</text>
+    <text x="0"   y="132" opacity="0.65">quality  </text>
+    <text x="80"  y="132">[{q_bar}]</text>
+    <text x="318" y="132" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{q_val:.2f}</text>
   </g>
 
   <!-- sep2: y=254 absolut — Inkscape -->
   <line x1="263" y1="254" x2="636" y2="254" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
   <!-- Activity: matrix(1.199, 0, 0, 1.145, 267, 274) — 1:1 Inkscape skaliert -->
+  <!-- Zeilen: header / streak+commits+stars / status (kein icon) / issues / season (letzte) -->
   <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
-    <text x="0" y="0"   font-size="11" opacity="0.5">$ cat activity.log</text>
+    <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
     <text x="0" y="21">STREAK={codey.get('streak', 0)}d  •  COMMITS={codey.get('total_commits', 0)}  •  REAL_STARS={total_stars}</text>
-    <text x="0" y="42">DOMINANT={dominant_lang} {pet_emoji}  •  TIER={tier.upper()}</text>
-    <text x="0" y="63" fill="{status_color}">{status_icon} STATUS={status_val}</text>
-    <text x="0" y="84" fill="#ff88dd">{season_info}</text>
+    <text x="0" y="42" fill="{status_color}">STATUS={status_val}</text>
     {issue_xml}
+    <text x="0" y="84" fill="#ff88dd">{season_info}</text>
   </g>
 
   <!-- sep3: y=414 absolut — Inkscape -->
   <line x1="263" y1="414" x2="636" y2="414" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-  <!-- Achievements: matrix(0.571,0,0,0.549, 502,420) — klein unten rechts -->
+  <!-- Achievements: matrix(0.571,0,0,0.549, 502,420) — klein unten rechts, kein Label -->
   <g transform="matrix(0.571,0,0,0.549,502,420)" font-family="Courier New,monospace" fill="#e0aaff">
-    <text x="0" y="0" font-size="11" opacity="0.5">$ ls ./achievements/</text>
     {ach_xml}
   </g>
 
