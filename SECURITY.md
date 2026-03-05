@@ -41,7 +41,7 @@ Codey is a living immune system. Only the latest version is supported and monito
 | Version | Supported |
 | --- | --- |
 | Latest | Yes |
-| < 2.2.2 | No |
+| < 2.2.2 | - |
 
 ## Reporting a Vulnerability
 
