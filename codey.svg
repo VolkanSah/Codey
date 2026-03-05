@@ -86,12 +86,10 @@
         50%     { r:4.5; opacity:0.3; }
       }
 
-      /* ONE-SHOT — was infinite */
       .scanline { animation: scanline 3.8s linear 2 forwards; }
       .circ1    { stroke-dasharray:60; animation: circ 2.6s linear 1 forwards; }
       .circ2    { stroke-dasharray:50; animation: circ 3.2s linear 1 0.9s forwards; }
 
-      /* BOT LOOP — cycles controlled */
       .bot-body { animation: breathe 3.2s ease-in-out infinite; }
       .head-bob { animation: headbob 4.5s ease-in-out infinite; transform-origin: 141px 185px; }
       .eye-l    { animation: blink 5s ease-in-out infinite;      transform-origin: 122px 185px; }
@@ -109,7 +107,7 @@
     </style>
   </defs>
 
-  <!-- Background — ambient ellipse removed (opacity=0.04) -->
+  <!-- Background -->
   <rect width="630" height="473" fill="#080010"/>
   <rect width="630" height="473" fill="url(#grid)"/>
 
@@ -125,19 +123,19 @@
   <rect x="15" y="15" width="600" height="28" fill="#bf00ff" opacity="0.08"/>
   <line x1="15" y1="43" x2="615" y2="43" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
   <text x="26" y="34" fill="#e0aaff" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user ELDER --lvl 6 --prestige 0</text>
-  <text x="608" y="34" text-anchor="end" fill="#f59e0b" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-03-05 09:13 UTC</text>
+  <text x="608" y="34" text-anchor="end" fill="#f59e0b" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-03-05 09:22 UTC</text>
 
   <!-- ONE-SHOT scanline -->
   <rect class="scanline" x="15" y="43" width="600" height="5" fill="#bf00ff"/>
 
-  <!-- Divider — x=253 matches shifted bot -->
+  <!-- Divider -->
   <line x1="253" y1="44" x2="253" y2="455" stroke="#bf00ff" stroke-width="1" stroke-dasharray="4 3" opacity="0.3"/>
 
-  <!-- ══ CUTE ROBOT — cx=141 (+33px), all coords recalculated ══ -->
+  <!-- ══ CUTE ROBOT — cx=141 ══ -->
   <g class="bot-body">
     <ellipse cx="141" cy="336" rx="48" ry="8" fill="url(#shadowgrad)"/>
 
-    <!-- Legs — glow removed (occluded by body+shadow) -->
+    <!-- Legs -->
     <rect x="121" y="295" width="16" height="30" rx="8" fill="url(#bodygrad)"/>
     <rect x="149" y="295" width="16" height="30" rx="8" fill="url(#bodygrad)"/>
     <ellipse cx="129" cy="328" rx="14" ry="8" fill="#9922cc"/>
@@ -166,24 +164,20 @@
       <ellipse cx="209" cy="227" rx="5" ry="3" fill="#e0aaff" opacity="0.35"/>
     </g>
 
-    <!-- Neck — glow removed (occluded by head) -->
+    <!-- Neck -->
     <rect x="135" y="204" width="12" height="16" rx="5" fill="#9922cc"/>
 
-    <!-- HEAD GROUP — headbob origin: 141,185 -->
+    <!-- HEAD GROUP -->
     <g class="head-bob">
       <rect x="97" y="130" width="88" height="78" rx="28" fill="url(#headgrad)" filter="url(#glow)"/>
       <ellipse cx="129" cy="142" rx="32" ry="14" fill="white" opacity="0.15"/>
       <circle cx="111" cy="138" r="5" fill="white" opacity="0.2"/>
-
-      <!-- Ear nubs — glow kept (visible at sides) -->
       <circle cx="105" cy="140" r="14" fill="url(#headgrad)" filter="url(#glow)"/>
       <circle cx="105" cy="140" r="8"  fill="#cc44ff" opacity="0.5"/>
       <circle cx="105" cy="140" r="4"  fill="white"   opacity="0.2"/>
       <circle cx="185" cy="140" r="14" fill="url(#headgrad)" filter="url(#glow)"/>
       <circle cx="185" cy="140" r="8"  fill="#cc44ff" opacity="0.5"/>
       <circle cx="185" cy="140" r="4"  fill="white"   opacity="0.2"/>
-
-      <!-- Face screen -->
       <rect x="107" y="142" width="68" height="52" rx="14" fill="#1a0030" stroke="#cc44ff" stroke-width="1.2"/>
       <rect x="113" y="146" width="24" height="6" rx="3" fill="white" opacity="0.07"/>
       <g opacity="0.07">
@@ -196,8 +190,6 @@
         <rect x="107" y="182" width="68" height="2" fill="#e0aaff"/>
         <rect x="107" y="188" width="68" height="2" fill="#e0aaff"/>
       </g>
-
-      <!-- Eyes left — blink origin: 122,185 -->
       <g class="eye-l">
         <circle cx="122" cy="168" r="14" fill="url(#eyegrad)"/>
         <circle cx="122" cy="168" r="10" fill="url(#pupilgrad)"/>
@@ -208,7 +200,6 @@
         <line x1="122" y1="154" x2="122" y2="150" stroke="#cc44ff" stroke-width="1.5" stroke-linecap="round"/>
         <line x1="129" y1="156" x2="131" y2="152" stroke="#cc44ff" stroke-width="1.5" stroke-linecap="round"/>
       </g>
-      <!-- Eyes right — blink origin: 160,185 -->
       <g class="eye-r">
         <circle cx="160" cy="168" r="14" fill="url(#eyegrad)"/>
         <circle cx="160" cy="168" r="10" fill="url(#pupilgrad)"/>
@@ -219,107 +210,98 @@
         <line x1="160" y1="154" x2="160" y2="150" stroke="#cc44ff" stroke-width="1.5" stroke-linecap="round"/>
         <line x1="167" y1="156" x2="169" y2="152" stroke="#cc44ff" stroke-width="1.5" stroke-linecap="round"/>
       </g>
-
-      <!-- Smile -->
       <path d="M 133 186 Q 141 194 149 186" stroke="#ff88dd" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#glow)"/>
-
-      <!-- Blush cheeks -->
       <ellipse class="blush" cx="108" cy="180" rx="12" ry="7" fill="url(#cheekgrad)"/>
       <ellipse class="blush" cx="174" cy="180" rx="12" ry="7" fill="url(#cheekgrad)"/>
-
-      <!-- Forehead LEDs -->
       <circle class="led1" cx="131" cy="145" r="3" fill="#ff88dd"/>
       <circle class="led2" cx="141" cy="143" r="3" fill="#e0aaff"/>
       <circle class="led3" cx="151" cy="143" r="3" fill="#ff88dd"/>
       <circle class="led4" cx="161" cy="145" r="3" fill="#e0aaff"/>
-
-      <!-- Antenna — antring removed, tip glow-hard kept -->
       <line x1="141" y1="130" x2="141" y2="102" stroke="#cc44ff" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
       <circle class="anttip" cx="141" cy="94" r="8" fill="#ff44cc" filter="url(#glow-hard)"/>
       <circle cx="138" cy="91" r="2.5" fill="white" opacity="0.7"/>
+    </g>
 
-    </g><!-- head-bob -->
-
-    <!-- Floating heart — origin: 195,148 -->
     <g class="heart">
       <text x="195" y="152" font-size="22" fill="#ff44cc" text-anchor="middle" filter="url(#glow-hard)">♥</text>
     </g>
-    <!-- Floating star — origin: 89,158 -->
     <g class="star">
       <text x="89" y="162" font-size="16" fill="#e0aaff" text-anchor="middle" filter="url(#glow)">✦</text>
     </g>
 
-    <!-- Mood label -->
     <text x="141" y="364" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#e0aaff" opacity="0.8">EXHAUSTED • 10.0y</text>
-
-  </g><!-- bot-body -->
-
-  <!-- ══ STATS PANEL — translate(267, 50) ══ -->
-  <g transform="translate(267, 50)" font-family="Courier New,monospace" fill="#e0aaff">
-
-    <text x="0" y="16" font-size="13" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
-
-    <!-- Tier badge: y=22 h=34 → bottom=56 -->
-    <rect x="0" y="22" width="360" height="34" rx="4" fill="#f59e0b" opacity="0.1" stroke="#f59e0b" stroke-width="1"/>
-    <rect x="0" y="22" width="3"   height="34" fill="#e0aaff" rx="1"/>
-    <text x="8" y="35" font-size="11" font-weight="bold">[ELDER] LVL 6 • 10.0y • XP=0.25x •  PRESTIGE 0</text>
-    <text x="8" y="50" font-size="11" font-weight="bold" fill="#ff88dd">😵 EXHAUSTED</text>
-
-    <!-- Stat bars: translate(0,64) — 6×22=132 → bottom=196 -->
-    <g transform="translate(0,64)" font-size="12">
-      <text x="0"   y="0"   opacity="0.65">health   </text>
-      <text x="80"  y="0"  >[██████░░░░░░░░░░░░░░]</text>
-      <text x="358" y="0"   font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">33%</text>
-
-      <text x="0"   y="22"  opacity="0.65">hunger   </text>
-      <text x="80"  y="22" >[████████████████████]</text>
-      <text x="358" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">100%</text>
-
-      <text x="0"   y="44"  opacity="0.65">happiness</text>
-      <text x="80"  y="44" >[░░░░░░░░░░░░░░░░░░░░]</text>
-      <text x="358" y="44"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0%</text>
-
-      <text x="0"   y="66"  opacity="0.65">energy   </text>
-      <text x="80"  y="66" >[░░░░░░░░░░░░░░░░░░░░]</text>
-      <text x="358" y="66"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0%</text>
-
-      <text x="0"   y="88"  opacity="0.65">social   </text>
-      <text x="80"  y="88" >[████████████░░░░░░░░]</text>
-      <text x="358" y="88"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">1.25</text>
-
-      <text x="0"   y="110" opacity="0.65">quality  </text>
-      <text x="80"  y="110">[████████████████░░░░]</text>
-      <text x="358" y="110" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0.83</text>
-    </g>
-
-    <!-- sep1: y=202 (bars bottom=196, +6 gap) -->
-    <line x1="0" y1="202" x2="360" y2="202" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
-
-    <!-- Activity: translate(0,210) -->
-    <g transform="translate(0,210)" font-size="12">
-      <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
-      <text x="0" y="20">STREAK=16d  •  COMMITS=570  •  REAL_STARS=606</text>
-      <text x="0" y="40">DOMINANT=Python 🐍  •  TIER=ELDER</text>
-      <text x="0" y="60" fill="#22cc66">✅ STATUS=quality_curator</text>
-      <text x="0" y="80" fill="#ff88dd">SEASON=🧹 Refactor +10%</text>
-      <text x="0" y="100" fill="#ff88dd" font-size="11">ISSUES=closed:5 • ratio:0.83 • score:1.25</text>
-    </g>
-
-    <line x1="0" y1="338" x2="360" y2="338" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
-
-    <!-- Achievements: r=19, spacing=46px -->
-    <g transform="translate(0,346)">
-      <text x="0" y="0" font-size="11" opacity="0.5">$ ls ./achievements/</text>
-      <circle cx="22" cy="30" r="19" fill="#0c0018" stroke="#e0aaff" stroke-width="1.5" filter="url(#glow)"/><text x="22" y="37" text-anchor="middle" font-size="17">👑</text><circle cx="68" cy="30" r="19" fill="#0c0018" stroke="#ff88dd" stroke-width="1.5" filter="url(#glow)"/><text x="68" y="37" text-anchor="middle" font-size="17">💎</text><circle cx="114" cy="30" r="19" fill="#0c0018" stroke="#e0aaff" stroke-width="1.5" filter="url(#glow)"/><text x="114" y="37" text-anchor="middle" font-size="17">💀</text><circle cx="160" cy="30" r="19" fill="#0c0018" stroke="#ff88dd" stroke-width="1.5" filter="url(#glow)"/><text x="160" y="37" text-anchor="middle" font-size="17">🎯</text><circle cx="206" cy="30" r="19" fill="#0c0018" stroke="#e0aaff" stroke-width="1.5" filter="url(#glow)"/><text x="206" y="37" text-anchor="middle" font-size="17">🐛</text>
-    </g>
-
-    <line x1="0" y1="404" x2="360" y2="404" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
-
-    <!-- Cursor line -->
-    <g transform="translate(0,412)">
-      <text x="0"   y="16" font-size="13" font-weight="bold">$ ./codey --run<tspan class="cursor">█</tspan></text>
-      <text x="360" y="16" font-size="10" opacity="0.45" text-anchor="end" fill="#f59e0b">2026-03-05 09:13 UTC</text>
-    </g>
-
   </g>
+
+  <!-- ══ STATS PANEL — exakte Inkscape koordinaten ══ -->
+
+  <!-- Header: x=265 y=74 -->
+  <text x="265" y="74" fill="#e0aaff" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
+
+  <!-- sep1: y=90 -->
+  <line x1="263" y1="90" x2="636" y2="90" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+
+  <!-- Tier badge: translate(265, 95) -->
+  <g transform="translate(265, 95)" font-family="Courier New,monospace" fill="#e0aaff">
+    <rect x="0" y="0" width="368" height="22" rx="4" fill="#f59e0b" opacity="0.1" stroke="#f59e0b" stroke-width="1"/>
+    <rect x="0" y="0" width="3"   height="22" fill="#e0aaff" rx="1"/>
+    <text x="8" y="15" font-size="11" font-weight="bold">[ELDER] LVL 6 • 10.0y • XP=0.25x •  PRESTIGE 0</text>
+  </g>
+
+  <!-- Bars: translate(265, 121) — 1:1 Inkscape -->
+  <g transform="translate(265, 121)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
+    <text x="8"   y="15" font-size="11" font-weight="bold" fill="#ff88dd">😵 EXHAUSTED</text>
+
+    <text x="0"   y="37"  opacity="0.65">health   </text>
+    <text x="80"  y="37" >[██████░░░░░░░░░░░░░░]</text>
+    <text x="374" y="37"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">33%</text>
+
+    <text x="0"   y="59"  opacity="0.65">hunger   </text>
+    <text x="80"  y="59" >[████████████████████]</text>
+    <text x="374" y="59"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">100%</text>
+
+    <text x="0"   y="81"  opacity="0.65">happiness</text>
+    <text x="80"  y="81" >[░░░░░░░░░░░░░░░░░░░░]</text>
+    <text x="374" y="81"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0%</text>
+
+    <text x="0"   y="103" opacity="0.65">energy   </text>
+    <text x="80"  y="103">[░░░░░░░░░░░░░░░░░░░░]</text>
+    <text x="374" y="103" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0%</text>
+
+    <text x="0"   y="125" opacity="0.65">social   </text>
+    <text x="80"  y="125">[████████████░░░░░░░░]</text>
+    <text x="374" y="125" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">1.25</text>
+
+    <text x="0"   y="147" opacity="0.65">quality  </text>
+    <text x="80"  y="147">[████████████████░░░░]</text>
+    <text x="374" y="147" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0.83</text>
+  </g>
+
+  <!-- sep2: y=254 absolut — Inkscape -->
+  <line x1="263" y1="254" x2="636" y2="254" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+
+  <!-- Activity: matrix(1.199, 0, 0, 1.145, 267, 274) — 1:1 Inkscape skaliert -->
+  <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
+    <text x="0" y="0"   font-size="11" opacity="0.5">$ cat activity.log</text>
+    <text x="0" y="21">STREAK=17d  •  COMMITS=598  •  REAL_STARS=606</text>
+    <text x="0" y="42">DOMINANT=Python 🐍  •  TIER=ELDER</text>
+    <text x="0" y="63" fill="#22cc66">✅ STATUS=quality_curator</text>
+    <text x="0" y="84" fill="#ff88dd">SEASON=🧹 Refactor +10%</text>
+    <text x="0" y="124" fill="#ff88dd" font-size="10">ISSUES=closed:5 • ratio:0.83 • score:1.25</text>
+  </g>
+
+  <!-- sep3: y=414 absolut — Inkscape -->
+  <line x1="263" y1="414" x2="636" y2="414" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+
+  <!-- Achievements: matrix(0.571,0,0,0.549, 502,420) — klein unten rechts -->
+  <g transform="matrix(0.571,0,0,0.549,502,420)" font-family="Courier New,monospace" fill="#e0aaff">
+    <text x="0" y="0" font-size="11" opacity="0.5">$ ls ./achievements/</text>
+    <circle cx="22" cy="30" r="19" fill="#0c0018" stroke="#e0aaff" stroke-width="1.5" filter="url(#glow)"/><text x="22" y="37" text-anchor="middle" font-size="17">👑</text><circle cx="68" cy="30" r="19" fill="#0c0018" stroke="#ff88dd" stroke-width="1.5" filter="url(#glow)"/><text x="68" y="37" text-anchor="middle" font-size="17">💎</text><circle cx="114" cy="30" r="19" fill="#0c0018" stroke="#e0aaff" stroke-width="1.5" filter="url(#glow)"/><text x="114" y="37" text-anchor="middle" font-size="17">💀</text><circle cx="160" cy="30" r="19" fill="#0c0018" stroke="#ff88dd" stroke-width="1.5" filter="url(#glow)"/><text x="160" y="37" text-anchor="middle" font-size="17">🎯</text><circle cx="206" cy="30" r="19" fill="#0c0018" stroke="#e0aaff" stroke-width="1.5" filter="url(#glow)"/><text x="206" y="37" text-anchor="middle" font-size="17">🐛</text>
+  </g>
+
+  <!-- Cursor: translate(265, 422) — Inkscape -->
+  <g transform="translate(265, 422)" font-family="Courier New,monospace" fill="#e0aaff">
+    <text x="0"   y="16" font-size="13" font-weight="bold">$ ./codey --run<tspan class="cursor">█</tspan></text>
+    <text x="368" y="16" font-size="10" opacity="0.45" text-anchor="end" fill="#f59e0b">2026-03-05 09:22 UTC</text>
+  </g>
+
 </svg>
