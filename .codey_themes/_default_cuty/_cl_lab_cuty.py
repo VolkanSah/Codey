@@ -123,17 +123,13 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     s_bar  = bar(min(100, s_val * 50))
     q_bar  = bar(q_val * 100)
 
-    # ── Achievements — kein Label-Text, keine Ringe, Icon overlay = tier_color ──
-    ach_xml = ''
+    # ── Achievements — Icons als Text für Cursor-Zeile ────────────────────
+    ach_icons = ''
+    ach_xml   = ''  # nicht mehr verwendet
     if codey.get('achievements'):
-        for i, ach in enumerate(codey['achievements'][-5:]):
-            x = 22 + i * 46
-            ach_xml += (
-                f'<circle cx="{x}" cy="30" r="19" fill="#0c0018" stroke="{tier_color}" '
-                f'stroke-width="1.5" filter="url(#glow)"/>'
-                f'<text x="{x}" y="37" text-anchor="middle" font-size="17">'
-                f'{ach.split(" ")[0]}</text>'
-            )
+        ach_icons = ' '.join(
+            ach.split(' ')[0] for ach in codey['achievements'][-5:]
+        )
 
     svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -377,15 +373,8 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <!-- sep1: y=90 -->
   <line x1="263" y1="90" x2="636" y2="90" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-  <!-- Tier badge: translate(265, 95) — nur mood, keine LVL-Zeile -->
-  <g transform="translate(265, 95)" font-family="Courier New,monospace" fill="#e0aaff">
-    <rect x="0" y="0" width="368" height="22" rx="4" fill="{tier_color}" opacity="0.1" stroke="{tier_color}" stroke-width="1"/>
-    <rect x="0" y="0" width="3"   height="22" fill="#e0aaff" rx="1"/>
-    <text x="8" y="15" font-size="11" font-weight="bold" fill="#ff88dd">{mood_emoji} {codey.get('mood', 'neutral').upper()} • [{tier.upper()}] LVL {codey['level']} • {brutal_stats.get('github_years', 1):.1f}y</text>
-  </g>
-
-  <!-- Bars: translate(265, 121) — x=374 zu weit, fix auf x=318 (text-anchor=end) -->
-  <g transform="translate(265, 121)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
+  <!-- Bars: translate(265, 95) — direkt nach sep1, kein badge -->
+  <g transform="translate(265, 95)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
     <text x="0"   y="22"  opacity="0.65">health   </text>
     <text x="80"  y="22" >[{h_bar}]</text>
     <text x="318" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">{codey.get('health', 0):.0f}%</text>
@@ -414,12 +403,12 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <!-- sep2: y=254 absolut — Inkscape -->
   <line x1="263" y1="254" x2="636" y2="254" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-  <!-- Activity: matrix(1.199, 0, 0, 1.145, 267, 274) — 1:1 Inkscape skaliert -->
-  <!-- Zeilen: header / streak+commits+stars / status (kein icon) / issues / season (letzte) -->
+  <!-- Activity: matrix(1.199, 0, 0, 1.145, 267, 274) -->
   <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
     <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
-    <text x="0" y="21">STREAK={codey.get('streak', 0)}d  •  COMMITS={codey.get('total_commits', 0)}  •  REAL_STARS={total_stars}</text>
-    <text x="0" y="42" fill="{status_color}">STATUS={status_val}</text>
+    <text x="0" y="21">STREAK={codey.get('streak', 0)}d  •  COMMITS={codey.get('total_commits', 0)}</text>
+    <text x="0" y="42">REAL_STARS={total_stars}  •  DOMINANT={dominant_lang} {pet_emoji}</text>
+    <text x="0" y="63" fill="{status_color}">STATUS={status_val}</text>
     {issue_xml}
     <text x="0" y="84" fill="#ff88dd">{season_info}</text>
   </g>
@@ -427,14 +416,9 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <!-- sep3: y=414 absolut — Inkscape -->
   <line x1="263" y1="414" x2="636" y2="414" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-  <!-- Achievements: matrix(0.571,0,0,0.549, 502,420) — klein unten rechts, kein Label -->
-  <g transform="matrix(0.571,0,0,0.549,502,420)" font-family="Courier New,monospace" fill="#e0aaff">
-    {ach_xml}
-  </g>
-
-  <!-- Cursor: translate(265, 422) — Inkscape -->
+  <!-- Cursor + Achievement Icons inline — keine Ringe, kein extra Block -->
   <g transform="translate(265, 422)" font-family="Courier New,monospace" fill="#e0aaff">
-    <text x="0"   y="16" font-size="13" font-weight="bold">$ ./codey --run<tspan class="cursor">█</tspan></text>
+    <text x="0"   y="16" font-size="13" font-weight="bold">$ ./codey --run {ach_icons}<tspan class="cursor">█</tspan></text>
     <text x="368" y="16" font-size="10" opacity="0.45" text-anchor="end" fill="{tier_color}">{datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}</text>
   </g>
 
