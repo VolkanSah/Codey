@@ -93,7 +93,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         ratio     = brutal_stats.get('issue_close_ratio', 0)
         score     = brutal_stats.get('issue_score', 1.0)
         issue_xml = (
-            f'<text x="0" y="63" fill="#ff88dd" font-size="10">'
+            f'<text x="0" y="84" fill="#ff88dd" font-size="10">'
             f'ISSUES=closed:{issues_closed} • ratio:{ratio:.2f} • score:{score:.2f}</text>'
         )
 
@@ -407,19 +407,18 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
     <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
     <text x="0" y="21">STREAK={codey.get('streak', 0)}d  •  COMMITS={codey.get('total_commits', 0)}</text>
-    <text x="0" y="42">REAL_STARS={total_stars}  •  DOMINANT={dominant_lang} {pet_emoji}</text>
+    <text x="0" y="42">REAL_STARS={total_stars}  •  INFLATION={brutal_stats.get('self_starred_repos', 0)}</text>
     <text x="0" y="63" fill="{status_color}">STATUS={status_val}</text>
     {issue_xml}
-    <text x="0" y="84" fill="#ff88dd">{season_info}</text>
+    <text x="0" y="105" fill="#ff88dd">{season_info}</text>
   </g>
 
   <!-- sep3: y=414 absolut — Inkscape -->
   <line x1="263" y1="414" x2="636" y2="414" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
-  <!-- Cursor + Achievement Icons inline — keine Ringe, kein extra Block -->
+  <!-- Cursor + Achievement Icons inline — Icons in tier_color, kein Datum -->
   <g transform="translate(265, 422)" font-family="Courier New,monospace" fill="#e0aaff">
-    <text x="0"   y="16" font-size="13" font-weight="bold">$ ./codey --run {ach_icons}<tspan class="cursor">█</tspan></text>
-    <text x="368" y="16" font-size="10" opacity="0.45" text-anchor="end" fill="{tier_color}">{datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}</text>
+    <text x="0" y="16" font-size="13" font-weight="bold">$ ./codey --run <tspan fill="{tier_color}">{ach_icons}</tspan> <tspan class="cursor">█</tspan></text>
   </g>
 
 </svg>'''
