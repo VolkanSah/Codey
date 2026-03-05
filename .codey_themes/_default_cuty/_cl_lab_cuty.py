@@ -71,11 +71,11 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     if social_penalties:
         status_val   = social_penalties[0]
         status_color = '#ff4444'
-        status_icon  = '⛔'
+        status_icon  = '⛔' # wird nicht angezeigt, da noch zu  grell! 
     elif social_bonuses:
         status_val   = social_bonuses[0]
         status_color = '#22cc66'
-        status_icon  = '✅'
+        status_icon  = '✅'  # wird nicht angezeigt, da noch zu  grell! 
     else:
         status_val   = 'clean'
         status_color = '#8b949e'
@@ -244,7 +244,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <rect width="630" height="473" fill="#080010"/>
   <rect width="630" height="473" fill="url(#grid)"/>
 
-  <!-- Card -->
+  <!-- Card :D -->
   <rect x="15" y="15" width="600" height="443" fill="#0c0018" stroke="{tier_color}" stroke-width="1.5"/>
   <rect x="12" y="12" width="606" height="449" fill="none" stroke="{tier_color}" stroke-width="0.8" stroke-dasharray="6 3" opacity="0.3"/>
   <polyline points="15,35 15,15 35,15"       fill="none" stroke="#e0aaff" stroke-width="2"/>
@@ -252,7 +252,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <polyline points="15,438 15,458 35,458"    fill="none" stroke="#e0aaff" stroke-width="2"/>
   <polyline points="615,438 615,458 595,458" fill="none" stroke="#e0aaff" stroke-width="2"/>
 
-  <!-- Header -->
+  <!-- Header :D -->
   <rect x="15" y="15" width="600" height="28" fill="#bf00ff" opacity="0.08"/>
   <line x1="15" y1="43" x2="615" y2="43" stroke="{tier_color}" stroke-width="1" opacity="0.5"/>
   <text x="26" y="34" fill="#e0aaff" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user {tier.upper()} --lvl {codey['level']} --prestige {prestige_lv}</text>
@@ -371,7 +371,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <text x="265" y="74" fill="#e0aaff" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
 
   <!-- sep1: y=90 -->
-  <line x1="263" y1="90" x2="636" y2="90" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+  <line x1="263" y1="90" x2="630" y2="90" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
   <!-- Bars: translate(265, 95) — direkt nach sep1, kein badge -->
   <g transform="translate(265, 95)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
@@ -401,7 +401,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   </g>
 
   <!-- sep2: y=254 absolut — Inkscape -->
-  <line x1="263" y1="254" x2="636" y2="254" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+  <line x1="263" y1="254" x2="630" y2="254" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
 
   <!-- Activity: matrix(1.199, 0, 0, 1.145, 267, 274) -->
   <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
