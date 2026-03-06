@@ -6,10 +6,10 @@
 # =============================================================================
 
 # ── USER DATA — root ──
-codey.config
-codey.json
-codey.svg
-README.md
+#codey.config
+#codey.json
+#codey.svg
+#README.md
 
 # ── USER DATA — folders ──
 my_codey/
