@@ -908,37 +908,7 @@ def load_generate_fn(theme: str):
 if __name__ == "__main__":
     print("🔥 Updating BRUTAL Codey...")
 
-    user_data     = get_user_data(OWNER)
-    all_time_data = get_all_data_for_user(OWNER)
-
-    raw_commits  = all_time_data.get('daily_commits', 0)
-    raw_prs      = all_time_data.get('daily_prs', 0)
-
-    # BUG (FIXED): Weekend bonus now stored separately as 'display' values.
-    # raw_commits is passed as 'raw_commits' so total_commits stays accurate.
-    # The bonus only affects XP/hunger/happiness via the inflated 'commits' key.
-    if is_weekend_warrior():
-        print("🎯 Weekend Warrior bonus activated!")
-        display_commits = int(raw_commits * GAME_BALANCE['WEEKEND_BONUS'])
-        display_prs     = int(raw_prs     * GAME_BALANCE['WEEKEND_BONUS'])
-    else:
-        display_commits = raw_commits
-        display_prs     = raw_prs
-
-    daily_activity = {
-        'commits':     display_commits,   # used for XP/rewards
-        'prs':         display_prs,
-        'raw_commits': raw_commits,        # used for total_commits (no inflation)
-    }
-
-    print(f"Daily activity: {raw_commits} commits, {raw_prs} PRs (raw)")
-    print(f"  After bonus:  {display_commits} commits, {display_prs} PRs")
-    print(f"Repo Quality:   {all_time_data.get('avg_repo_quality', 0):.2f}")
-    print(f"Commit Quality: {all_time_data.get('commit_quality', {}).get('quality_score', 1.0):.2f}")
-    issue_data = all_time_data.get('issue_data', {})
-    print(f"Issue Score:    {issue_data.get('score', 1.0):.2f} "
-          f"(closed: {issue_data.get('closed', 0)}, ratio: {issue_data.get('close_ratio', 0):.2f})")
-
+    # Run Guard FIRST — vor allen API calls!
     codey = load_codey()
     should_update, hours_since = should_run_full_update(codey)
     if not should_update:
@@ -951,6 +921,36 @@ if __name__ == "__main__":
             f.write(svg)
         print("🎨 codey.svg refreshed.")
         sys.exit(0)
+
+    # Erst hier API calls — nur wenn wirklich nötig!
+    user_data     = get_user_data(OWNER)
+    all_time_data = get_all_data_for_user(OWNER)
+
+    raw_commits  = all_time_data.get('daily_commits', 0)
+    raw_prs      = all_time_data.get('daily_prs', 0)
+
+    if is_weekend_warrior():
+        print("🎯 Weekend Warrior bonus activated!")
+        display_commits = int(raw_commits * GAME_BALANCE['WEEKEND_BONUS'])
+        display_prs     = int(raw_prs     * GAME_BALANCE['WEEKEND_BONUS'])
+    else:
+        display_commits = raw_commits
+        display_prs     = raw_prs
+
+    daily_activity = {
+        'commits':     display_commits,
+        'prs':         display_prs,
+        'raw_commits': raw_commits,
+    }
+
+    print(f"Daily activity: {raw_commits} commits, {raw_prs} PRs (raw)")
+    print(f"  After bonus:  {display_commits} commits, {display_prs} PRs")
+    print(f"Repo Quality:   {all_time_data.get('avg_repo_quality', 0):.2f}")
+    print(f"Commit Quality: {all_time_data.get('commit_quality', {}).get('quality_score', 1.0):.2f}")
+    issue_data = all_time_data.get('issue_data', {})
+    print(f"Issue Score:    {issue_data.get('score', 1.0):.2f} "
+          f"(closed: {issue_data.get('closed', 0)}, ratio: {issue_data.get('close_ratio', 0):.2f})")
+
     codey = update_brutal_stats(codey, daily_activity, all_time_data, user_data)
 
     brutal = codey.get('brutal_stats', {})
