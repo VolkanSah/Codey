@@ -63,8 +63,9 @@ GAME_BALANCE = {
 }
 
 # ─────────────────────────────────────────────
-# RUN Guard to save calls, too
+#  RUN Guard to save calls, too
 # ─────────────────────────────────────────────
+# NEW since > 2.2.3
 RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 24))
 
 def should_run_full_update(codey):
@@ -137,13 +138,13 @@ def get_json_safe(url, params=None):
 
 
 # own stared 
-# new from 2.2.x
+# new from >2.2.x
 def fetch_real_stars(owner):
     """
     Exact same logic as codey_star_report.py.
     Returns real star count (self-stars + fork stars removed).
     """
-    # Self-starred via REST (wie im Star Report)
+    # Self-starred via REST (like the Star Report)
     self_starred = set()
     page = 1
     while True:
@@ -793,7 +794,7 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     elif bonuses_count >= 2:              codey['mood'] = 'inspired'   # NEW mood
     elif codey['health'] > 80:            codey['mood'] = 'happy'
     else:                                 codey['mood'] = 'grinding'
-    # NEU? not ready! -- need update themes too!
+    # NEU? not ready! -- need update themes too! # NEW since > 2.3.x ??
     #if codey['energy'] < 10 and codey['happiness'] < 10:   codey['mood'] = 'burnout'
     #elif codey['health'] < 25:                              codey['mood'] = 'struggling'
     #elif codey['energy'] < 20 and codey['hunger'] > 70:    codey['mood'] = 'exhausted'
@@ -888,6 +889,11 @@ def load_generate_fn(theme: str):
                 return mod.generate_brutal_svg
     raise FileNotFoundError(f"No valid theme found for '{theme}' — check .codey_themes/")
 
+
+# ─────────────────────────────────────────────
+# MAIN RUN
+# ─────────────────────────────────────────────
+
 if __name__ == "__main__":
     print("🔥 Updating BRUTAL Codey...")
 
@@ -920,6 +926,9 @@ if __name__ == "__main__":
           f"(closed: {issue_data.get('closed', 0)}, ratio: {issue_data.get('close_ratio', 0):.2f})")
 
     codey = load_codey()
+    # NEW since > 2.2.3
+    # Skips APi requests if <24h 
+    # [FIX] codey-files handels
     should_update, hours_since = should_run_full_update(codey)
     if not should_update:
         print(f"⏭️ Last update was {hours_since:.1f}h ago — skipping stat update.")
