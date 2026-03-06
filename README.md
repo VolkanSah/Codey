@@ -267,7 +267,8 @@ see [.codey_themes](.codey_themes) folder
 - Cuty (cute robot)
 - CyberCat (neon)
 - Evil Robot (dark) — soon
-- Ghost (blue/green) — soon
+- Ghost (blue/green)
+- Blue Hell (BSOD)
 - + Community themes welcome
 > please, set theme/skin in `example.codey.config` and rename it to `codey.config`
 
@@ -324,7 +325,8 @@ see [.codey_themes](.codey_themes) folder
 - [x] Penalty/Bonus split -  (in dev and core + some in >2.2.2)
 - [x] more usability for update_codey.yml
 - [x] added inflation (value = self_starred)
-- [x] Update cuty to version >2.3.x
+- [x] Updated/optimized cuty, cat, ghost to version >2.3.x
+- [x] Ghost Skin relased
 
 
 
@@ -707,6 +709,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
