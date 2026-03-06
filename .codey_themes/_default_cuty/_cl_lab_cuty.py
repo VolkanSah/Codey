@@ -82,7 +82,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         status_icon  = ''
 
     season_info = (
-        f'SEASON={seasonal_bonus["emoji"]} {seasonal_bonus["name"]} +10%' # +10% - Note VOLKAN!  falsch aus codey_core seesons auslesen # # SEASONAL / WEEKEND 791-815 (def get_seasonal_bonus + def is_weekend_warrior)
+        f'SEASON={seasonal_bonus["emoji"]} {seasonal_bonus["name"]} + {seasonal_bonus["multiplier"]} x ' # [FIX] 06.03.2026
         if seasonal_bonus else 'SEASON=OFFLINE'
     )
 
