@@ -7,8 +7,8 @@
 
 # ── USER DATA — root ──
 codey.config
-codey.json
-codey.svg
+# codey.json
+# codey.svg
 README.md
 
 # ── USER DATA — folders ──
