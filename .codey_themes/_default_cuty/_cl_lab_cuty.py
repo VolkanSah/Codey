@@ -83,7 +83,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         status_icon  = ''
 
     season_info = (
-        f'SEASON={seasonal_bonus["emoji"]} {seasonal_bonus["name"]} + {seasonal_bonus["multiplier"]} x ' # [FIX] 06.03.2026
+        f'SEASON={seasonal_bonus["name"]} +{seasonal_bonus["multiplier"]}x {seasonal_bonus["emoji"]}' # [FIX] 06.03.2026
         if seasonal_bonus else 'SEASON=OFFLINE'
     )
 
