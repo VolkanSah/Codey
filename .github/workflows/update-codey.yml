@@ -59,9 +59,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
         GIT_REPOSITORY: ${{ vars.GIT_REPOSITORY }}
-      run: |
-        rm -f codey.svg
-        python update_codey.py
+      run: python update_codey.py
 
     # Step 5: Save changes back to the repository
     - name: Commit
@@ -74,9 +72,7 @@ jobs:
         git add codey.svg codey.json 2>/dev/null || true
 
         # Skip commit if nothing changed
-        #if git diff --cached --quiet; then
-        # NEW: Skip commit if nothing changed
-        if [ -z "$(git status --porcelain codey.svg codey.json)" ]; then
+        if git diff --cached --quiet; then
           echo "No changes to commit — skipping."
           exit 0
         fi
