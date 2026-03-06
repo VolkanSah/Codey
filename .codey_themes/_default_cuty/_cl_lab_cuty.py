@@ -407,7 +407,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
     <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
     <text x="0" y="21">STREAK={codey.get('streak', 0)}d  •  COMMITS={codey.get('total_commits', 0)}</text>
-    <text x="0" y="42">REAL_STARS={total_stars}  •  INFLATION={brutal_stats.get('self_starred_repos', 0)}</text>
+    <text x="0" y="42">REAL_STARS={total_stars}  •  INFLATION={brutal_stats.get('self_starred', 0)}</text>
     <text x="0" y="63" fill="{status_color}">STATUS={status_val}</text>
     {issue_xml}
     <text x="0" y="105" fill="#ff88dd">{season_info}</text>
