@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # =============================================================================
-# update_codey.py - No Mercy EDITION
+# update_codey.py - No Mercy EDITION (Logic version 2.0)
 # =============================================================================
 # Codey is a neutral quality pet/tool for GitHub and GitLab.
 # It shows the world that not everything is scam and AI-generated garbage.
@@ -24,7 +24,10 @@
 # NEW:      marks new features
 # IMPROVED: marks improvements
 # =============================================================================
-
+#!/usr/bin/env python3
+# update_codey.py - No Mercy EDITION v3
+# New stat logic + run-guard + traffic/clones + dynamic decay
+# Themes are in separate files — this file handles logic only.
 
 import requests
 import json
@@ -33,39 +36,91 @@ import sys
 from datetime import datetime, timedelta, timezone
 from collections import Counter
 
-# ─────────────────────────────────────────────
-# CONFIG
-# ─────────────────────────────────────────────
-
+# ---------------------------------------------------------------------------
+# Configuration / Env
+# ---------------------------------------------------------------------------
 TOKEN = os.environ.get('GIT_TOKEN') or os.environ.get('GITHUB_TOKEN')
 REPO  = os.environ.get('GIT_REPOSITORY') or os.environ.get('GITHUB_REPOSITORY')
-
 if not REPO:
-    print("WARNING: No REPO set. Using 'VolkanSah' as fallback.")
+    print("WARNING: No REPO set — using 'VolkanSah' as fallback.")
     REPO = "VolkanSah"
 
-# Game balance — all magic numbers in one place
+# How many hours between full stat updates.
+# Set CODEY_RUN_INTERVAL=6 in your workflow env for 6h runs.
+# Second run within interval = stats skipped, only SVG refreshed.
+RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 24))
+
+# ---------------------------------------------------------------------------
+# Game Balance — all magic numbers live here, nowhere else
+# ---------------------------------------------------------------------------
 GAME_BALANCE = {
-    'ENERGY_COST_COMMIT':      2.5,
-    'ENERGY_COST_PR':          5.0,
-    'ENERGY_REGEN_REST':       20,
-    'ENERGY_REGEN_ACTIVE':     5,
-    'DAILY_HUNGER_DECAY':      20,
-    'DAILY_HAPPINESS_DECAY':   12,
+
+    # --- Energy costs ---
+    'ENERGY_COST_COMMIT': {          # tier-based: higher tier = less cost
+        'noob':      2.5,
+        'developer': 2.0,
+        'veteran':   1.5,
+        'elder':     1.0,
+    },
+    'ENERGY_COST_RELEASE':   10.0,
+    'ENERGY_COST_ISSUE_OPEN': 3.0,
+    'ENERGY_COST_PR':         5.0,
+
+    # --- Energy regen ---
+    'ENERGY_REGEN_REST':     20,     # no activity → rest & recover
+    'ENERGY_REGEN_ACTIVE':    5,     # active day → small flow bonus
+    # streak bonus on top: +min(10, streak * 0.5) when resting
+
+    # --- Hunger (Drive / Appetite for success) ---
+    # Rises with inactivity, falls when you ship things
+    'HUNGER_DECAY_INACTIVE':  15,    # +15/day when no commits (gets hungry)
+    'HUNGER_CAP_LOW_ENERGY':  30,    # max hunger when energy < 10
+    'HUNGER_GAIN_COMMIT':      3,    # each commit satisfies drive a little
+    'HUNGER_GAIN_RELEASE':    10,    # shipping = big satisfaction
+    'HUNGER_GAIN_FOLLOWER':    5,    # new follower → "I want MORE!"
+    'HUNGER_GAIN_FORK_RECV':   8,    # someone forked you → "they want more!"
+    'HUNGER_GAIN_STAR_RECV':   4,    # star received
+    'HUNGER_SPAM_THRESHOLD':  10,    # commits/day above this = oversatiated (hunger drops)
+    'HUNGER_SPAM_PENALTY':     5,    # hunger drops this much when spamming
+
+    # --- Happiness (Recognition / Appreciation) ---
+    # Rises with external validation, drops with neglect
+    'HAPPINESS_DECAY_BASE':    5,    # daily base decay
+    'HAPPINESS_DECAY_MAX':    12,    # max decay (with penalties)
+    'HAPPINESS_GAIN_FORK':    10,    # someone forked your repo → "my work lives on!"
+    'HAPPINESS_GAIN_STAR':     5,    # star on your repo
+    'HAPPINESS_GAIN_FOLLOWER': 6,    # new follower
+    'HAPPINESS_GAIN_ISSUE_CLOSED': 4,
+    'HAPPINESS_GAIN_RELEASE':  15,   # shipped something → pride!
+    'HAPPINESS_GAIN_CLONE':    2,    # per clone (max +10)
+    'HAPPINESS_PENALTY_OWN_FORK': 5, # you forked someone → "I'm just consuming"
+    'HAPPINESS_ISSUE_THRESHOLD':  10, # open issues above this = unhappy
+
+    # --- Health (Overall condition — derived, not set directly) ---
+    'HEALTH_WEIGHT_ENERGY':    0.35,
+    'HEALTH_WEIGHT_HAPPINESS': 0.35,
+    'HEALTH_WEIGHT_HUNGER':    0.30,
+    'HEALTH_STREAK_BONUS_7':    5,
+    'HEALTH_STREAK_BONUS_30':  10,
+    'HEALTH_PENALTY_QUALITY':  10,   # quality_score < 0.5
+    'HEALTH_PENALTY_SPAM':     15,   # social spam detected
+    'HEALTH_PENALTY_LOW_ENERGY': 5,  # energy < 10 drains health too
+
+    # --- XP / Leveling ---
     'XP_PER_COMMIT':           10,
     'XP_PER_PR':               25,
-    'XP_PER_ISSUE_CLOSED':     8,   # NEW: reward for closing issues
-    'HUNGER_GAIN_MODIFIER':    0.5,
-    'HAPPINESS_GAIN_MODIFIER': 0.8,
     'BASE_LEVEL_REQUIREMENT':  25,
     'STREAK_LOSS_DIVISOR':     10,
-    'WEEKEND_BONUS':           1.5,
+
+    # --- Multipliers ---
+    'WEEKEND_BONUS':            1.5,
+    'HUNGER_GAIN_MODIFIER':     0.5,
+    'HAPPINESS_GAIN_MODIFIER':  0.8,
 }
 
-# ─────────────────────────────────────────────
-# REPO / OWNER NORMALIZATION
-# ─────────────────────────────────────────────
-
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
 def normalize_repo_input(r):
     r = r.strip()
     if r.startswith('http://') or r.startswith('https://'):
@@ -73,83 +128,81 @@ def normalize_repo_input(r):
         if 'github.com' in parts:
             idx = parts.index('github.com')
             if len(parts) > idx + 2:
-                return f"{parts[idx + 1]}/{parts[idx + 2]}"
+                return f"{parts[idx+1]}/{parts[idx+2]}"
             elif len(parts) > idx + 1:
-                return parts[idx + 1]
+                return parts[idx+1]
     return r
 
-REPO         = normalize_repo_input(REPO)
+REPO  = normalize_repo_input(REPO)
 is_repo_mode = '/' in REPO and len(REPO.split('/')) == 2
-OWNER        = REPO.split('/')[0]
-
-# ─────────────────────────────────────────────
-# API HELPERS
-# ─────────────────────────────────────────────
+OWNER = REPO.split('/')[0]
 
 headers = {}
 if TOKEN:
-    headers = {
-        'Authorization': f'token {TOKEN}',
-        'Accept': 'application/vnd.github.v3+json'
-    }
+    headers = {'Authorization': f'token {TOKEN}', 'Accept': 'application/vnd.github.v3+json'}
 else:
-    print("NOTE: No token set - heavily rate-limited.", file=sys.stderr)
+    print("NOTE: No token — API calls will be heavily rate-limited.", file=sys.stderr)
 
 
-def get_json_safe(url, params=None):
-    """GET request with full error handling. Returns (ok: bool, data)."""
+def get_json_safe(url, params=None, method='GET', body=None):
+    """Single safe wrapper for all GitHub API calls (REST + GraphQL POST)."""
     try:
-        r = requests.get(url, headers=headers, params=params, timeout=20)
+        if method == 'POST':
+            r = requests.post(url, headers=headers, json=body, timeout=20)
+        else:
+            r = requests.get(url, headers=headers, params=params, timeout=20)
     except Exception as e:
-        print(f"Network-Error at {url}: {e}", file=sys.stderr)
+        print(f"Network error at {url}: {e}", file=sys.stderr)
         return False, None
-
     if not r.ok:
         try:
-            body = r.json()
+            body_resp = r.json()
         except Exception:
-            body = r.text
-        print(f"GitHub API Error {r.status_code} at {url}: {body}", file=sys.stderr)
-        return False, body
-
+            body_resp = r.text
+        print(f"GitHub API {r.status_code} at {url}: {body_resp}", file=sys.stderr)
+        return False, body_resp
     try:
         return True, r.json()
     except ValueError:
-        print(f"Response from {url} is not JSON.", file=sys.stderr)
+        print(f"Non-JSON response from {url}", file=sys.stderr)
         return False, r.text
 
 
+def get_rate_limit():
+    ok, data = get_json_safe('https://api.github.com/rate_limit')
+    if not ok:
+        return {}
+    core    = data.get('resources', {}).get('core', {})
+    graphql = data.get('resources', {}).get('graphql', {})
+    return {
+        'core_remaining':    core.get('remaining', 0),
+        'graphql_remaining': graphql.get('remaining', 0),
+    }
 
-# own stared 
-# new from 2.2.x
-def fetch_real_stars(owner):
+
+# ---------------------------------------------------------------------------
+# Run Guard — prevents double-counting on multiple runs per day
+# ---------------------------------------------------------------------------
+def should_run_full_update(codey):
     """
-    Exact same logic as codey_star_report.py.
-    Returns real star count (self-stars + fork stars removed).
+    Returns (should_update: bool, hours_since_last: float)
+    If last_update is within RUN_INTERVAL_HOURS, skip stat calculation.
+    SVG will still be regenerated so the badge stays fresh.
     """
-    # Self-starred via REST (wie im Star Report)
-    self_starred = set()
-    page = 1
-    while True:
-        ok, data = get_json_safe(
-            f'https://api.github.com/users/{owner}/starred',
-            params={'per_page': 100, 'page': page}
-        )
-        if not ok or not isinstance(data, list) or not data:
-            break
-        for repo in data:
-            if repo.get('owner', {}).get('login', '').lower() == owner.lower():
-                self_starred.add(repo.get('name'))
-        if len(data) < 100:
-            break
-        page += 1
+    last = codey.get('last_update')
+    if not last:
+        return True, 999.0
+    try:
+        last_dt = datetime.fromisoformat(last.replace('Z', '+00:00'))
+        hours_since = (datetime.now(timezone.utc) - last_dt).total_seconds() / 3600
+        return hours_since >= RUN_INTERVAL_HOURS, hours_since
+    except Exception:
+        return True, 999.0
 
-    return self_starred
 
-# ─────────────────────────────────────────────
-# DATA FETCHERS
-# ─────────────────────────────────────────────
-
+# ---------------------------------------------------------------------------
+# GitHub Data Fetchers
+# ---------------------------------------------------------------------------
 def get_user_data(owner):
     ok, data = get_json_safe(f'https://api.github.com/users/{owner}')
     return data if ok and isinstance(data, dict) else {}
@@ -160,8 +213,16 @@ def get_repo_data(full_repo):
     return data if ok and isinstance(data, dict) else {}
 
 
+def get_github_age_years(created_at_str):
+    try:
+        created = datetime.fromisoformat(created_at_str.replace('Z', '+00:00'))
+        return (datetime.now(timezone.utc) - created).days / 365.25
+    except Exception:
+        return 1
+
+
 def fetch_all_repos_for_user(owner):
-    """Fetch ALL public repos with pagination. Sorted by last push."""
+    """Fetch ALL repos with pagination."""
     all_repos = []
     page = 1
     while True:
@@ -178,633 +239,457 @@ def fetch_all_repos_for_user(owner):
     return all_repos
 
 
-def fetch_all_events_for_user(owner):
-    """Fetch up to 300 public events (GitHub max = 10 pages × 30)."""
-    all_events = []
-    for page in range(1, 11):
-        ok, page_data = get_json_safe(
-            f'https://api.github.com/users/{owner}/events/public',
-            params={'per_page': 30, 'page': page}
+def fetch_commits_since(owner, repos, since_iso):
+    """
+    Fetch commits per repo using `since=` filter.
+    Much more efficient than parsing 300 events.
+    Only checks own (non-fork) repos.
+    Returns list of raw commit objects.
+    """
+    all_commits = []
+    for repo in repos:
+        if repo.get('fork'):
+            continue
+        ok, commits = get_json_safe(
+            f'https://api.github.com/repos/{repo["full_name"]}/commits',
+            params={'author': owner, 'since': since_iso, 'per_page': 100}
         )
-        if not ok or not isinstance(page_data, list) or not page_data:
-            break
-        all_events.extend(page_data)
-    print(f"✓ Fetched {len(all_events)} events")
-    return all_events
+        if ok and isinstance(commits, list):
+            all_commits.extend(commits)
+    return all_commits
 
 
-# ─────────────────────────────────────────────
-# QUALITY ANALYSIS
-# ─────────────────────────────────────────────
+def fetch_prs_since(owner, repos, since_iso):
+    """Count merged PRs from external repos since last run."""
+    merged_count = 0
+    since_dt = datetime.fromisoformat(since_iso.replace('Z', '+00:00'))
+    for repo in repos:
+        ok, prs = get_json_safe(
+            f'https://api.github.com/repos/{repo["full_name"]}/pulls',
+            params={'state': 'closed', 'per_page': 50}
+        )
+        if not ok or not isinstance(prs, list):
+            continue
+        for pr in prs:
+            if not pr.get('merged_at'):
+                continue
+            merged_at = datetime.fromisoformat(pr['merged_at'].replace('Z', '+00:00'))
+            if merged_at > since_dt and pr.get('user', {}).get('login') == owner:
+                merged_count += 1
+    return merged_count
 
+
+def fetch_clone_traffic(owner, repos):
+    """
+    REST-only: /traffic/clones requires push access.
+    Returns total clones across own repos (needs token with repo scope).
+    """
+    total_clones = 0
+    for repo in repos[:10]:   # limit to top 10 to save API calls
+        if repo.get('fork'):
+            continue
+        ok, data = get_json_safe(
+            f'https://api.github.com/repos/{repo["full_name"]}/traffic/clones'
+        )
+        if ok and isinstance(data, dict):
+            total_clones += data.get('count', 0)
+    return total_clones
+
+
+def fetch_events_for_social(owner):
+    """
+    Fetch public events to detect: new followers, stars received,
+    forks received, own forks created, issues opened/closed.
+    Only used for social signals, NOT for commit counting.
+    """
+    ok, events = get_json_safe(
+        f'https://api.github.com/users/{owner}/events/public',
+        params={'per_page': 100}
+    )
+    if not ok or not isinstance(events, list):
+        return {}
+
+    since_dt = datetime.now(timezone.utc) - timedelta(hours=RUN_INTERVAL_HOURS)
+
+    signals = {
+        'forks_received':   0,
+        'stars_received':   0,
+        'new_followers':    0,
+        'issues_opened':    0,
+        'issues_closed':    0,
+        'own_forks_created':0,
+        'releases':         0,
+    }
+
+    for event in events:
+        event_time_str = event.get('created_at', '')
+        try:
+            event_time = datetime.fromisoformat(event_time_str.replace('Z', '+00:00'))
+        except Exception:
+            continue
+        if event_time < since_dt:
+            break   # events are chronological, no need to continue
+
+        etype   = event.get('type', '')
+        payload = event.get('payload', {})
+
+        if etype == 'ForkEvent':
+            # Someone forked YOUR repo
+            if event.get('actor', {}).get('login') != owner:
+                signals['forks_received'] += 1
+            else:
+                signals['own_forks_created'] += 1
+
+        elif etype == 'WatchEvent' and payload.get('action') == 'started':
+            if event.get('actor', {}).get('login') != owner:
+                signals['stars_received'] += 1
+
+        elif etype == 'FollowEvent':
+            signals['new_followers'] += 1
+
+        elif etype == 'IssuesEvent':
+            action = payload.get('action', '')
+            if action == 'opened':
+                signals['issues_opened'] += 1
+            elif action == 'closed':
+                signals['issues_closed'] += 1
+
+        elif etype == 'ReleaseEvent' and payload.get('action') == 'published':
+            signals['releases'] += 1
+
+    return signals
+
+
+# ---------------------------------------------------------------------------
+# Analysis Functions
+# ---------------------------------------------------------------------------
 def analyze_commit_quality(commits):
-    """
-    Score commit messages 0.1–1.0.
-    Penalizes lazy keywords, very short messages, missing description on long ones.
-
-    IMPROVED: No bonus-as-penalty confusion here — this function only has real
-    penalties (score reductions). Nothing to split. Kept as-is.
-    """
+    """Brutal commit message analysis — unchanged, works well."""
     if not commits:
-        return {'quality_score': 1.0, 'penalties': [], 'bonuses': []}
+        return {'quality_score': 1.0, 'penalties': []}
 
-    penalties = []
-    bonuses   = []
+    penalties    = []
     quality_score = 1.0
 
     for commit in commits[:20]:
-        msg = commit.get('commit', {}).get('message', '').lower()
-
-        if any(w in msg for w in ['fix', 'todo', 'wip', 'typo', 'oops']):
+        message = commit.get('commit', {}).get('message', '').lower()
+        if any(w in message for w in ['fix', 'todo', 'wip', 'typo', 'oops']):
             quality_score -= 0.05
             penalties.append('lazy_messages')
-
-        if len(msg) < 10:
+        if len(message) < 10:
             quality_score -= 0.1
             penalties.append('short_messages')
-
-        if '\n' not in msg and len(msg) > 50:
+        if message.count('\n') == 0 and len(message) > 50:
             quality_score -= 0.05
             penalties.append('no_description')
 
-    # IMPROVED: Bonus for clean commit history (no penalties at all)
-    if not penalties and len(commits) >= 5:
-        bonuses.append('clean_history')
-
-    # IMPROVED: Bonus for consistent conventional-commit style (feat/fix/chore/docs/refactor)
-    conventional_count = sum(
-        1 for c in commits[:20]
-        if any(c.get('commit', {}).get('message', '').lower().startswith(prefix)
-               for prefix in ('feat', 'fix', 'chore', 'docs', 'refactor', 'test', 'style', 'perf', 'ci'))
-    )
-    if conventional_count >= 3:
-        bonuses.append('conventional_commits')
-
     return {
         'quality_score': max(0.1, quality_score),
-        'penalties':     list(set(penalties)),
-        'bonuses':       list(set(bonuses)),   # NEW field
+        'penalties':     list(set(penalties))
     }
 
 
 def analyze_repo_quality(repo_data):
-    """
-    Score a single repo 0.1–1.0.
-    Checks license, description, fork status, open issues.
-    NOTE: has_readme uses has_downloads as proxy — not ideal but avoids extra API call.
-    """
     score = 1.0
     if not repo_data.get('license'):
         score -= 0.3
     if not repo_data.get('description'):
         score -= 0.2
     if repo_data.get('fork'):
-        score *= 0.1          # forks count very little
+        score *= 0.1
     if repo_data.get('open_issues_count', 0) > 10:
         score -= 0.2
     return max(0.1, score)
 
 
-# NEW: Issue quality analysis via keywords + open/close ratio
-def analyze_issue_activity(events, owner):
-    """
-    Extracts IssuesEvent data from the already-fetched events list.
-    Scores based on:
-    - closing issues (responsibility)
-    - keyword patterns in issue titles (bug/feature/enhancement = good, spam = bad)
-    - open/close ratio penalty if too many open and nothing resolved
-
-    Returns dict with score (0.1–1.5) and metadata.
-    """
-    opened  = 0
-    closed  = 0
-    keywords_good = ['bug', 'fix', 'enhancement', 'feature', 'improvement', 'refactor', 'docs', 'test']
-    keywords_bad  = ['test123', 'asdf', 'please help', 'urgent', 'idk']
-
-    quality_hits  = 0
-    spam_hits     = 0
-
-    for event in events:
-        if event.get('type') != 'IssuesEvent':
-            continue
-
-        action = event.get('payload', {}).get('action', '')
-        title  = event.get('payload', {}).get('issue', {}).get('title', '').lower()
-
-        if action == 'opened':
-            opened += 1
-            if any(k in title for k in keywords_good):
-                quality_hits += 1
-            if any(k in title for k in keywords_bad):
-                spam_hits += 1
-
-        elif action == 'closed':
-            closed += 1
-
-    total = opened + closed
-    if total == 0:
-        return {'score': 1.0, 'opened': 0, 'closed': 0, 'note': 'no_issue_activity'}
-
-    # Reward closing issues
-    close_ratio = closed / max(opened, 1)
-    score = 1.0 + (close_ratio * 0.3)   # up to +0.3 bonus for responsible closer
-
-    # Keyword quality bonus
-    if quality_hits > 0:
-        score += min(0.2, quality_hits * 0.05)
-
-    # Spam penalty
-    if spam_hits > 0:
-        score -= min(0.4, spam_hits * 0.1)
-
-    # Heavy open-without-closing penalty
-    if opened > 5 and close_ratio < 0.2:
-        score -= 0.3
-
-    return {
-        'score':        max(0.1, min(1.5, score)),
-        'opened':       opened,
-        'closed':       closed,
-        'close_ratio':  close_ratio,
-        'quality_hits': quality_hits,
-        'spam_hits':    spam_hits
-    }
-
-
-# ─────────────────────────────────────────────
-# SOCIAL ENGINEERING DETECTION
-# ─────────────────────────────────────────────
-
-def calculate_social_engineering_score(user_data, all_repos):
-    """
-    Detects gaming patterns:
-    - follow/follower ratio spam
-    - fork leeching
-    - repo spamming without stars
-    Returns score multiplier (0.1–1.5+), penalty labels, and bonus labels.
-
-    BUG (FIXED): Positive traits like 'quality_curator' were stored in penalties[].
-    Now penalties[] = only negative traits, bonuses[] = only positive traits.
-    Themes should render penalties RED and bonuses GREEN.
-    """
-    followers = user_data.get('followers', 0)
-    following  = user_data.get('following', 0)
-    ffr        = following / max(followers, 1)
+def calculate_social_score(user_data, all_repos):
+    """Detect social engineering patterns. selective_networker is a BONUS not a penalty."""
+    followers = user_data.get('followers', 1)
+    following = user_data.get('following', 0)
+    ffr       = following / max(followers, 1)
 
     own_repos    = [r for r in all_repos if not r.get('fork')]
     forked_repos = [r for r in all_repos if r.get('fork')]
     fork_ratio   = len(forked_repos) / max(len(own_repos), 1)
+
     total_stars  = sum(r.get('stargazers_count', 0) for r in own_repos)
     star_per_repo = total_stars / max(len(own_repos), 1)
 
-    score     = 1.0
-    penalties = []   # negative traits only — render RED in themes
-    bonuses   = []   # positive traits only — render GREEN in themes
+    score    = 1.0
+    labels   = []
 
-    # Follow/Follower ratio
     if ffr > 5.0:
         score *= 0.25
-        penalties.append('spam_follower')
+        labels.append('spam_follower')
     elif ffr > 2.0:
         score *= 0.75
-        penalties.append('desperate_networker')
+        labels.append('desperate_networker')
     elif ffr < 0.5:
-        # BUG (FIXED): was penalties.append('quality_curator') — this is a BONUS
-        score *= 1.25
-        bonuses.append('quality_curator')
+        score *= 1.25           # BONUS: quality over quantity
+        labels.append('selective_networker')
 
-    # Fork ratio
     if fork_ratio > 2.0:
         score *= 0.5
-        penalties.append('fork_leech')
+        labels.append('fork_leech')
 
-    # Stars per repo
     if star_per_repo < 1.0 and len(own_repos) > 5:
         score *= 0.7
-        penalties.append('code_spammer')
-
-    # Additional bonuses
-    if star_per_repo >= 10.0:
-        bonuses.append('star_magnet')
-
-    if len(own_repos) >= 10 and fork_ratio < 0.5:
-        bonuses.append('original_builder')
+        labels.append('code_spammer')
 
     return {
-        'score':         max(0.1, score),
-        'ffr':           ffr,
-        'fork_ratio':    fork_ratio,
+        'score':       max(0.1, score),
+        'ffr':         ffr,
+        'fork_ratio':  fork_ratio,
         'star_per_repo': star_per_repo,
-        'penalties':     penalties,
-        'bonuses':       bonuses,   # NEW: separate list for positive traits
+        'labels':      labels,
+        'total_stars': total_stars,
     }
 
 
-# ─────────────────────────────────────────────
-# TIER SYSTEM
-# ─────────────────────────────────────────────
-
-def get_github_age_years(created_at_str):
-    try:
-        created = datetime.fromisoformat(created_at_str.replace('Z', '+00:00'))
-        return (datetime.now(timezone.utc) - created).days / 365.25
-    except Exception:
-        return 1
-
-
-def determine_tier(github_years):
-    """Tier based purely on account age — experience is time."""
-    if github_years < 2:   return 'noob'
-    elif github_years < 5: return 'developer'
-    elif github_years < 8: return 'veteran'
-    else:                  return 'elder'
+def determine_tier(github_years, total_repos, total_commits):
+    if github_years < 2:
+        return 'noob'
+    elif github_years < 5:
+        return 'developer'
+    elif github_years < 8:
+        return 'veteran'
+    else:
+        return 'elder'
 
 
 def calculate_tier_multipliers(tier, social_score):
-    """
-    Higher tier = higher requirements, lower XP gain.
-    You've been around long enough, one commit shouldn't level you up.
-    """
-    base_multipliers = {
+    base = {
         'noob':      {'xp': 1.0,  'decay': 0.95, 'requirements': 1.0},
         'developer': {'xp': 0.67, 'decay': 0.90, 'requirements': 1.5},
         'veteran':   {'xp': 0.40, 'decay': 0.85, 'requirements': 2.5},
         'elder':     {'xp': 0.20, 'decay': 0.80, 'requirements': 4.0},
-    }
-    m = base_multipliers.get(tier, base_multipliers['noob']).copy()
-    m['xp'] *= social_score   # social score directly scales XP gain
-    return m
+    }.get(tier, {'xp': 1.0, 'decay': 0.95, 'requirements': 1.0})
+
+    base['xp'] *= social_score
+    return base
 
 
-# ─────────────────────────────────────────────
-# SKILL DECAY
-# ─────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# New Stat Calculation — separated per stat for clarity + testability
+# ---------------------------------------------------------------------------
 
-def calculate_skill_decay(last_update_str, current_stats):
+def calculate_hunger_change(codey, daily_commits, social_signals, energy):
     """
-    Applies exponential decay to health/happiness/energy for inactive periods.
-    Streak is intentionally NOT touched here — handled once in update_brutal_stats.
-
-    BUG (FIXED): Original also decremented streak here, causing double-penalty
-    when combined with the streak logic in update_brutal_stats.
+    HUNGER = Appetite for success / Drive
+    Rises with inactivity, falls when you ship.
     """
-    if not last_update_str:
-        return current_stats
+    gb     = GAME_BALANCE
+    hunger = codey.get('hunger', 50)
 
-    try:
-        last_update   = datetime.fromisoformat(last_update_str.replace('Z', '+00:00'))
-        days_inactive = (datetime.now(timezone.utc) - last_update).days
-
-        if days_inactive <= 1:
-            return current_stats
-
-        decay_factor = 0.95 ** days_inactive
-        decayed = current_stats.copy()
-        decayed['health']    *= decay_factor
-        decayed['happiness'] *= decay_factor
-        decayed['energy']    *= max(0.3, decay_factor)
-        # BUG REMOVED: streak was decremented here too — now only in update_brutal_stats
-        return decayed
-
-    except Exception:
-        return current_stats
-
-
-# ─────────────────────────────────────────────
-# MAIN DATA COLLECTOR
-# ─────────────────────────────────────────────
-
-def get_all_data_for_user(owner):
-    """
-    Collects all relevant data for the owner:
-    - Events (commits, PRs, issues) from last 24h
-    - Repo list with quality scores
-    - Language breakdown (first 5 own repos only, saves API calls)
-    - Commit quality from message analysis
-    - NEW: Issue quality from IssuesEvent analysis
-    """
-    all_events = fetch_all_events_for_user(owner)
-    repos_list = fetch_all_repos_for_user(owner)
-
-    own_repos    = [r for r in repos_list if not r.get('fork')]
-    self_starred = fetch_real_stars(owner)   # REST — wie Star Report ✓
-    total_stars  = sum( # FIX stars 03.03.2026
-        r.get('stargazers_count', 0) - (1 if r.get('name') in self_starred else 0)
-        for r in own_repos
-    )
-    print(f"⭐ Real stars: {total_stars} (self-starred: {len(self_starred)})")
-    total_forks  = sum(r.get('forks_count',      0) for r in own_repos)
-
-    repo_qualities  = [analyze_repo_quality(r) for r in own_repos]
-    avg_repo_quality = sum(repo_qualities) / max(len(repo_qualities), 1)
-
-    # Language analysis — only first 5 own repos to save rate limit
-    languages_bytes = Counter()
-    for repo in own_repos[:5]:
-        ok, lang_data = get_json_safe(f'https://api.github.com/repos/{repo["full_name"]}/languages')
-        if ok and isinstance(lang_data, dict):
-            languages_bytes.update(lang_data)
-
-    dominant_language = languages_bytes.most_common(1)
-    dominant_language = dominant_language[0][0] if dominant_language else 'unknown'
-
-    language_count = len(languages_bytes)
-    if language_count > 10:
-        language_diversity_penalty = 0.8   # jack of all trades, master of none
-    elif language_count == 1:
-        language_diversity_penalty = 0.9   # very narrow stack
+    if daily_commits == 0:
+        # Inactive → gets hungry
+        hunger += gb['HUNGER_DECAY_INACTIVE']
     else:
-        language_diversity_penalty = 1.0
+        # Active → drive is being fed
+        commit_gain = min(daily_commits, gb['HUNGER_SPAM_THRESHOLD']) * gb['HUNGER_GAIN_COMMIT']
+        hunger     -= commit_gain
 
-    # Process events for daily activity (last 24h)
-    now          = datetime.now(timezone.utc)
-    one_day_ago  = now - timedelta(days=1)
-    daily_commits = 0
-    daily_prs     = 0
-    all_commits   = []
+        # Oversatiated from commit spam
+        if daily_commits > gb['HUNGER_SPAM_THRESHOLD']:
+            hunger -= gb['HUNGER_SPAM_PENALTY']
 
-    for event in all_events:
-        ts = event.get('created_at')
-        if not ts:
-            continue
-        event_time = datetime.fromisoformat(ts.replace('Z', '+00:00'))
-        if event_time <= one_day_ago:
-            continue
+    # Social signals boost hunger
+    hunger += social_signals.get('forks_received', 0) * gb['HUNGER_GAIN_FORK_RECV']
+    hunger += social_signals.get('stars_received', 0) * gb['HUNGER_GAIN_STAR_RECV']
+    hunger += social_signals.get('new_followers',  0) * gb['HUNGER_GAIN_FOLLOWER']
 
-        if event.get('type') == 'PushEvent':
-            commits = event.get('payload', {}).get('commits', [])
-            daily_commits += len(commits)
-            all_commits.extend(commits)
+    # Release = big satisfaction
+    hunger += social_signals.get('releases', 0) * gb['HUNGER_GAIN_RELEASE']
 
-        elif event.get('type') == 'PullRequestEvent':
-            payload = event.get('payload', {})
-            if (payload.get('action') == 'closed' and
-                    payload.get('pull_request', {}).get('merged')):
-                daily_prs += 1
+    # Cap hunger when energy is too low — no drive without power
+    if energy < 10:
+        hunger = min(hunger, gb['HUNGER_CAP_LOW_ENERGY'])
 
-    # FALLBACK: Events API returned 0 commits (private repo, org, or rate limit)
-    # → directly query /commits for each own repo as fallback
-    if daily_commits == 0 and own_repos:
-        print("⚠️  Events API returned 0 commits — trying direct /commits fallback...")
-        since_iso = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
-        for repo in own_repos[:10]:  # max 10 repos to save API calls
-            ok, commits_data = get_json_safe(
-                f'https://api.github.com/repos/{repo["full_name"]}/commits',
-                params={'author': owner, 'since': since_iso, 'per_page': 100}
-            )
-            if ok and isinstance(commits_data, list) and commits_data:
-                daily_commits += len(commits_data)
-                all_commits.extend(commits_data)
-                print(f"  ✓ {repo['full_name']}: {len(commits_data)} commits")
-        print(f"  Fallback total: {daily_commits} commits")
-
-    commit_quality_data = analyze_commit_quality(all_commits) if all_commits else {
-        'quality_score': 1.0, 'penalties': [], 'bonuses': []
-    }
-
-    # NEW: Issue activity from full event history (not just 24h, shows pattern)
-    issue_data = analyze_issue_activity(all_events, owner)
-
-    return {
-        'daily_commits':            daily_commits,
-        'daily_prs':                daily_prs,
-        'total_stars':              total_stars,
-        'total_forks':              total_forks,
-        'total_own_repos':          len(own_repos),
-        'dominant_language':        dominant_language,
-        'language_diversity_penalty': language_diversity_penalty,
-        'avg_repo_quality':         avg_repo_quality,
-        'commit_quality':           commit_quality_data,
-        'issue_data':               issue_data,     # NEW
-        'all_repos':                repos_list,
-    }
+    return max(0, min(100, hunger))
 
 
-# ─────────────────────────────────────────────
-# CODEY STATE
-# ─────────────────────────────────────────────
+def calculate_happiness_change(codey, social_signals, all_repos, commit_quality_score):
+    """
+    HAPPINESS = Recognition / Appreciation
+    Rises with external validation, drops with neglect.
+    """
+    gb        = GAME_BALANCE
+    happiness = codey.get('happiness', 50)
 
-def load_codey():
-    """Load state from codey.json, migrate missing fields gracefully."""
-    defaults = {
-        'health': 50, 'hunger': 50, 'happiness': 50, 'energy': 50,
-        'level': 1, 'streak': 0, 'total_commits': 0, 'mood': 'neutral',
-        'rpg_stats': {}, 'achievements': [], 'history': [],
-        'brutal_stats': {}, 'last_update': None
-    }
-    try:
-        with open('codey.json', 'r') as f:
-            data = json.load(f)
-        # Migrate: add missing keys without losing existing data
-        for k, v in defaults.items():
-            if k not in data:
-                data[k] = v
-        print("codey.json loaded.")
-        return data
-    except (FileNotFoundError, json.JSONDecodeError):
-        print("codey.json not found or invalid — creating defaults.")
-        return defaults
+    # Dynamic daily decay: base + penalty for bad quality/issues
+    open_issues = sum(r.get('open_issues_count', 0) for r in all_repos if not r.get('fork'))
+    decay       = gb['HAPPINESS_DECAY_BASE']
+
+    if open_issues > gb['HAPPINESS_ISSUE_THRESHOLD']:
+        # More unresolved issues → more stress → faster decay
+        extra = min(7, (open_issues - gb['HAPPINESS_ISSUE_THRESHOLD']) // 5)
+        decay += extra
+
+    if commit_quality_score < 0.5:
+        decay += 3   # "I write garbage" feeling
+
+    happiness -= min(decay, gb['HAPPINESS_DECAY_MAX'])
+
+    # Gains from recognition
+    happiness += social_signals.get('forks_received', 0)  * gb['HAPPINESS_GAIN_FORK']
+    happiness += social_signals.get('stars_received', 0)  * gb['HAPPINESS_GAIN_STAR']
+    happiness += social_signals.get('new_followers',  0)  * gb['HAPPINESS_GAIN_FOLLOWER']
+    happiness += social_signals.get('issues_closed',  0)  * gb['HAPPINESS_GAIN_ISSUE_CLOSED']
+    happiness += social_signals.get('releases',       0)  * gb['HAPPINESS_GAIN_RELEASE']
+
+    # Clone traffic boost (max +10)
+    clones     = social_signals.get('clones', 0)
+    happiness += min(10, clones * gb['HAPPINESS_GAIN_CLONE'])
+
+    # Penalty for own forks (consuming, not creating)
+    happiness -= social_signals.get('own_forks_created', 0) * gb['HAPPINESS_PENALTY_OWN_FORK']
+
+    return max(0, min(100, happiness))
 
 
-def check_brutal_achievements(codey, tier, github_years):
-    """Award achievements. Each awarded only once."""
-    achievements  = codey.get('achievements', [])
-    brutal_stats  = codey.get('brutal_stats', {})
+def calculate_energy_change(codey, daily_commits, daily_prs, social_signals, tier):
+    """
+    ENERGY = Creative power / Capacity to act
+    Spent by activity, recovered by rest, boosted by recognition.
+    """
+    gb     = GAME_BALANCE
+    energy = codey.get('energy', 50)
+    streak = codey.get('streak', 0)
 
-    candidates = [
-        (tier == 'elder',                                     '🧙‍♂️ Elder Council'),
-        (github_years >= 10,                                  '💀 Decade Survivor'),
-        (brutal_stats.get('social_score', 0) > 1.2,          '👑 Social Elite'),
-        (brutal_stats.get('avg_repo_quality', 0) > 0.8,      '💎 Quality Craftsman'),
-        (codey['streak'] >= 100,                              '🔥 Century Streak'),
-        (codey.get('prestige_level', 0) > 0,                 '⭐ Prestige Master'),
-        # NEW: issue achievement
-        (brutal_stats.get('issue_close_ratio', 0) > 0.8
-         and brutal_stats.get('issues_closed', 0) >= 5,      '🐛 Bug Slayer'),
-        # NEW: quality curator achievement (was wrongly a penalty before)
-        ('quality_curator' in brutal_stats.get('social_bonuses', []),  '🎯 Quality Curator'),
+    commit_cost = gb['ENERGY_COST_COMMIT'].get(tier, 2.5)
+    consumed    = (daily_commits * commit_cost) + \
+                  (daily_prs     * gb['ENERGY_COST_PR']) + \
+                  (social_signals.get('issues_opened', 0) * gb['ENERGY_COST_ISSUE_OPEN']) + \
+                  (social_signals.get('releases', 0)      * gb['ENERGY_COST_RELEASE'])
+
+    if consumed == 0:
+        # Resting: full regen + streak bonus for longer breaks
+        regen = gb['ENERGY_REGEN_REST'] + min(10, streak * 0.5)
+    else:
+        # Active: small flow boost
+        regen = gb['ENERGY_REGEN_ACTIVE'] + min(10, streak * 0.3)
+
+    # Recognition boosts energy
+    regen += social_signals.get('stars_received',  0) * 2
+    regen += social_signals.get('new_followers',   0) * 2
+    regen += social_signals.get('forks_received',  0) * 3
+
+    net_energy = energy - consumed + regen
+    return max(0, min(100, net_energy))
+
+
+def calculate_health(energy, happiness, hunger, streak, quality_score, social_labels):
+    """
+    HEALTH = Weighted average — not directly controllable.
+    """
+    gb = GAME_BALANCE
+
+    health = (
+        energy    * gb['HEALTH_WEIGHT_ENERGY']    +
+        happiness * gb['HEALTH_WEIGHT_HAPPINESS'] +
+        hunger    * gb['HEALTH_WEIGHT_HUNGER']
+    )
+
+    # Streak bonuses
+    if streak >= 30:
+        health += gb['HEALTH_STREAK_BONUS_30']
+    elif streak >= 7:
+        health += gb['HEALTH_STREAK_BONUS_7']
+
+    # Penalties
+    if quality_score < 0.5:
+        health -= gb['HEALTH_PENALTY_QUALITY']
+    if 'spam_follower' in social_labels or 'code_spammer' in social_labels:
+        health -= gb['HEALTH_PENALTY_SPAM']
+    if energy < 10:
+        health -= gb['HEALTH_PENALTY_LOW_ENERGY']
+
+    return max(0, min(100, health))
+
+
+def calculate_mood(energy, happiness, hunger, health, social_score, tier, streak):
+    """Full mood matrix from design doc."""
+    if energy < 10 and happiness < 10:
+        return 'burnout'
+    if health < 25:
+        return 'struggling'
+    if energy < 20 and hunger > 70:
+        return 'exhausted'        # wants to but can't
+    if energy > 60 and hunger < 20:
+        return 'lazy'             # can but won't
+    if energy > 50 and hunger > 60:
+        return 'grinding'         # in the zone
+    if happiness > 75 and energy > 50:
+        return 'inspired'         # fresh fork / new followers
+    if social_score > 1.2 and health > 70:
+        return 'elite'
+    if tier == 'elder' and health > 70:
+        return 'wise'
+    if health > 80:
+        return 'happy'
+    return 'neutral'
+
+
+# ---------------------------------------------------------------------------
+# Achievements
+# ---------------------------------------------------------------------------
+def check_achievements(codey, tier, github_years, social_score):
+    achievements = codey.get('achievements', [])
+
+    checks = [
+        (tier == 'elder',                            '🧙‍♂️ Elder Council'),
+        (github_years >= 10,                         '💀 Decade Survivor'),
+        (social_score > 1.2,                         '👑 Social Elite'),
+        (codey.get('brutal_stats', {}).get('avg_repo_quality', 0) > 0.8, '💎 Quality Craftsman'),
+        (codey.get('streak', 0) >= 100,              '🔥 Century Streak'),
+        (codey.get('prestige_level', 0) > 0,         '⭐ Prestige Master'),
+        (codey.get('streak', 0) >= 7,                '📅 Week Warrior'),
+        (codey.get('streak', 0) >= 30,               '🗓️ Monthly Grinder'),
+        (codey.get('brutal_stats', {}).get('total_stars', 0) >= 100, '⭐ Star Collector'),
     ]
-
-    for condition, badge in candidates:
+    for condition, badge in checks:
         if condition and badge not in achievements:
             achievements.append(badge)
 
     return achievements
 
 
-def calculate_prestige_requirements(codey, github_years):
-    """Check if prestige is possible and what's missing."""
-    if codey['level'] < 10:
-        return False, ['Need Level 10']
-
-    brutal_stats = codey.get('brutal_stats', {})
-    requirements = {
+def calculate_prestige(codey, tier, github_years, brutal_stats):
+    if codey.get('level', 1) < 10:
+        return False, ['level < 10']
+    reqs = {
         'min_years':        5,
         'min_social_score': 1.0,
         'min_repo_quality': 0.6,
         'min_total_stars':  100,
     }
-    current = {
+    cur = {
         'min_years':        github_years,
         'min_social_score': brutal_stats.get('social_score', 0),
         'min_repo_quality': brutal_stats.get('avg_repo_quality', 0),
         'min_total_stars':  brutal_stats.get('total_stars', 0),
     }
-    missing = [k for k in requirements if current[k] < requirements[k]]
+    missing = [k for k in reqs if cur[k] < reqs[k]]
     return len(missing) == 0, missing
 
 
-# ─────────────────────────────────────────────
-# CORE UPDATE
-# ─────────────────────────────────────────────
-
-def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
-    """
-    Main stat update. Call order matters:
-    1. Decay inactive stats
-    2. Compute XP from raw (pre-bonus) commits
-    3. Apply daily decay
-    4. Apply rewards
-    5. Update streak (single place — no double penalty)
-    6. Level up
-    7. Mood + achievements
-
-    BUG (FIXED): Weekend bonus was applied to daily_activity BEFORE this function,
-    which inflated total_commits permanently. Now total_commits uses raw_commits.
-    """
-    now = datetime.now(timezone.utc).isoformat()
-
-    github_years    = get_github_age_years(user_data.get('created_at', ''))
-    tier            = determine_tier(github_years)
-    social_analysis = calculate_social_engineering_score(user_data, all_time_data.get('all_repos', []))
-    multipliers     = calculate_tier_multipliers(tier, social_analysis['score'])
-    issue_data      = all_time_data.get('issue_data', {'score': 1.0, 'closed': 0})  # NEW
-
-    # Step 1: Decay
-    if codey.get('last_update'):
-        codey = calculate_skill_decay(codey['last_update'], codey)
-
-    # History (keep last 30 days)
-    codey['history'] = codey.get('history', [])[-29:] + [{
-        'timestamp':     now,
-        'daily_commits': daily_activity['commits'],
-        'daily_prs':     daily_activity['prs'],
-        'health':        codey['health'],
-        'mood':          codey['mood'],
-        'streak':        codey['streak'],
-        'tier':          tier,
-    }]
-
-    # Step 2: XP calculation
-    commit_quality = all_time_data.get('commit_quality', {})
-    lang_penalty   = all_time_data.get('language_diversity_penalty', 1.0)
-
-    commit_xp = (daily_activity['commits'] * GAME_BALANCE['XP_PER_COMMIT']
-                 * multipliers['xp'] * commit_quality.get('quality_score', 1.0))
-    pr_xp     = daily_activity['prs'] * GAME_BALANCE['XP_PER_PR'] * multipliers['xp']
-
-    # NEW: Issue XP — reward for closed issues found in event history
-    issue_xp  = issue_data.get('closed', 0) * GAME_BALANCE['XP_PER_ISSUE_CLOSED'] * multipliers['xp']
-
-    total_xp  = (commit_xp + pr_xp + issue_xp) * lang_penalty * issue_data.get('score', 1.0)
-
-    # Step 3: Daily decay
-    codey['hunger']    = max(0, codey['hunger']    - GAME_BALANCE['DAILY_HUNGER_DECAY'])
-    codey['happiness'] = max(0, codey['happiness'] - GAME_BALANCE['DAILY_HAPPINESS_DECAY'])
-
-    # Step 4: Energy
-    energy_cost = (daily_activity['commits'] * GAME_BALANCE['ENERGY_COST_COMMIT'] +
-                   daily_activity['prs']     * GAME_BALANCE['ENERGY_COST_PR'])
-    regen       = GAME_BALANCE['ENERGY_REGEN_REST'] if energy_cost == 0 else GAME_BALANCE['ENERGY_REGEN_ACTIVE']
-    codey['energy'] = max(0, min(100, codey['energy'] - energy_cost + regen))
-
-    # Rewards from activity
-    codey['hunger']    = min(100, codey['hunger']    + total_xp * GAME_BALANCE['HUNGER_GAIN_MODIFIER'])
-    codey['happiness'] = min(100, codey['happiness'] + pr_xp    * GAME_BALANCE['HAPPINESS_GAIN_MODIFIER'])
-
-    # Health = average of the three core stats
-    codey['health'] = (codey['hunger'] + codey['happiness'] + codey['energy']) / 3
-
-    # Step 5: Streak — single place, no double penalty
-    # BUG (FIXED): was also decremented in calculate_skill_decay
-    active = daily_activity['commits'] > 0 or daily_activity['prs'] > 0
-    if active:
-        codey['streak'] += 1
-    else:
-        streak_loss     = max(1, codey['streak'] // GAME_BALANCE['STREAK_LOSS_DIVISOR'])
-        codey['streak'] = max(0, codey['streak'] - streak_loss)
-
-    # Step 6: Level
-    # BUG (FIXED): used daily_activity['commits'] which included weekend bonus multiplier.
-    # Now we use the raw_commits passed in so total_commits stays accurate.
-    codey['total_commits'] += daily_activity.get('raw_commits', daily_activity['commits'])
-    tier_req    = GAME_BALANCE['BASE_LEVEL_REQUIREMENT'] * multipliers['requirements']
-    codey['level'] = min(10, 1 + int(codey['total_commits'] / tier_req))
-
-    # Brutal stats snapshot
-    codey['brutal_stats'] = {
-        'tier':                    tier,
-        'github_years':            github_years,
-        'social_score':            social_analysis['score'],
-        'social_penalties':        social_analysis['penalties'],   # RED in themes
-        'social_bonuses':          social_analysis['bonuses'],     # GREEN in themes — NEW
-        'avg_repo_quality':        all_time_data.get('avg_repo_quality', 0),
-        'commit_quality_score':    commit_quality.get('quality_score', 1.0),
-        'commit_quality_penalties': commit_quality.get('penalties', []),
-        'commit_quality_bonuses':  commit_quality.get('bonuses', []),   # NEW
-        'multipliers':             multipliers,
-        'total_stars':             all_time_data.get('total_stars', 0),
-        'language_diversity_penalty': lang_penalty,
-        'xp_earned':               total_xp,
-        'dominant_language':       all_time_data.get('dominant_language', 'unknown'),
-        # issue stats
-        'issues_closed':           issue_data.get('closed', 0),
-        'issue_close_ratio':       issue_data.get('close_ratio', 0),
-        'issue_score':             issue_data.get('score', 1.0),
-    }
-
-    # Step 7: Mood
-    penalties_count = (len(social_analysis['penalties']) +
-                       len(commit_quality.get('penalties', [])))
-    bonuses_count   = (len(social_analysis['bonuses']) +
-                       len(commit_quality.get('bonuses', [])))
-
-    if codey['health'] < 30:              codey['mood'] = 'struggling'
-    elif codey['energy'] < 20:            codey['mood'] = 'exhausted'
-    elif penalties_count > 2:             codey['mood'] = 'overwhelmed'
-    elif social_analysis['score'] > 1.2:  codey['mood'] = 'elite'
-    elif tier == 'elder' and codey['health'] > 70: codey['mood'] = 'wise'
-    elif bonuses_count >= 2:              codey['mood'] = 'inspired'   # NEW mood
-    elif codey['health'] > 80:            codey['mood'] = 'happy'
-    else:                                 codey['mood'] = 'grinding'
-
-    codey['achievements'] = check_brutal_achievements(codey, tier, github_years)
-    can_prestige, missing = calculate_prestige_requirements(codey, github_years)
-    codey['brutal_stats']['can_prestige']     = can_prestige
-    codey['brutal_stats']['prestige_missing'] = missing
-    codey['last_update'] = now
-
-    return codey
-
-
-# ─────────────────────────────────────────────
-# SEASONAL / WEEKEND
-# ─────────────────────────────────────────────
-
+# ---------------------------------------------------------------------------
+# Seasonal / Weekend
+# ---------------------------------------------------------------------------
 def get_seasonal_bonus():
     bonuses = {
-        10: {'emoji': '🎃', 'name': 'Hacktoberfest', 'multiplier': 1.5},
-        11: {'emoji': '🍁', 'name': 'Year Push',     'multiplier': 1.25},
-        12: {'emoji': '🎄', 'name': 'Advent',        'multiplier': 1.3},
-        1:  {'emoji': '🎯', 'name': 'New Year',      'multiplier': 1.2},
-        2:  {'emoji': '💖', 'name': 'OS Love',       'multiplier': 1.1},
-        3:  {'emoji': '🧹', 'name': 'Refactor',      'multiplier': 1.2},
-        4:  {'emoji': '🐞', 'name': 'Bug Hunt',      'multiplier': 1.1},
-        5:  {'emoji': '🚀', 'name': 'Deploy',        'multiplier': 1.3},
-        6:  {'emoji': '📚', 'name': 'Docs',          'multiplier': 1.1},
-        7:  {'emoji': '🔥', 'name': 'Grind',         'multiplier': 1.4},
-        8:  {'emoji': '🧊', 'name': 'Freeze',        'multiplier': 1.05},
-        9:  {'emoji': '🎓', 'name': 'School',        'multiplier': 1.2},
+        1:  {'emoji': '🎯', 'name': 'New Year Resolution',  'multiplier': 1.2},
+        2:  {'emoji': '💖', 'name': 'Open Source Love',     'multiplier': 1.1},
+        3:  {'emoji': '🧹', 'name': 'Refactor Spring',      'multiplier': 1.2},
+        4:  {'emoji': '🐞', 'name': 'Bug Hunt Bonus',       'multiplier': 1.1},
+        5:  {'emoji': '🚀', 'name': 'Deployment Sprint',    'multiplier': 1.3},
+        6:  {'emoji': '📚', 'name': 'Documentation Focus',  'multiplier': 1.1},
+        7:  {'emoji': '🔥', 'name': 'Summer Grind',         'multiplier': 1.4},
+        8:  {'emoji': '🧊', 'name': 'Feature Freeze',       'multiplier': 1.05},
+        9:  {'emoji': '🎓', 'name': 'Back-to-School',       'multiplier': 1.2},
+        10: {'emoji': '🎃', 'name': 'Hacktoberfest',        'multiplier': 1.5},
+        11: {'emoji': '🍁', 'name': 'End of Year Push',     'multiplier': 1.25},
+        12: {'emoji': '🎄', 'name': 'Advent of Code',       'multiplier': 1.3},
     }
     return bonuses.get(datetime.now().month)
 
@@ -813,122 +698,405 @@ def is_weekend_warrior():
     return datetime.now().weekday() >= 5
 
 
-# ─────────────────────────────────────────────
-# THEME LOADER
-# ─────────────────────────────────────────────
-
-import importlib.util
-from pathlib import Path
-
-def load_theme_config(config_path: str = "codey.config") -> tuple:
-    """Reads THEME= and ANIMATION_POWER= from codey.config.
-    Env var ANIMATION_POWER always wins over config (GitHub Actions).
-    Returns (theme: str, cycles: int)
-    """
-    theme = "default"
-    power = None
+# ---------------------------------------------------------------------------
+# Load / Save
+# ---------------------------------------------------------------------------
+def load_codey():
     try:
-        for line in Path(config_path).read_text().splitlines():
-            line = line.strip()
-            if line.startswith("#"):
-                continue
-            if line.startswith("THEME"):
-                theme = line.split("=")[1].strip().strip('"').strip("'")
-            if line.startswith("ANIMATION_POWER"):
-                power = line.split("=")[1].strip().strip('"').strip("'")
-    except FileNotFoundError:
-        pass
-    # GitHub Actions env wins over codey.config
-    power  = os.environ.get('ANIMATION_POWER', power or 'normal')
-    cycles = {'light': 2, 'normal': 4, 'full': 8}.get(power, 4)
-    print(f"⚙️  Animation power: {power} ({cycles} cycles)")
-    return theme, cycles
+        with open('codey.json', 'r') as f:
+            data = json.load(f)
+            print("codey.json loaded.")
+            for key, default in [
+                ('history',      []),
+                ('rpg_stats',    {}),
+                ('achievements', []),
+                ('brutal_stats', {}),
+            ]:
+                if key not in data:
+                    data[key] = default
+            return data
+    except (FileNotFoundError, json.JSONDecodeError):
+        print("codey.json not found or invalid — creating defaults.")
 
-def load_generate_fn(theme: str):
-    """Loads generate_brutal_svg from theme folder. Fallback to default."""
-    candidates = [
-        Path(f".codey_themes/_default_{theme}/_cl_lab_{theme}.py"),
-        Path(f".codey_themes/{theme}/_cl_lab_{theme}.py"),      # community themes
-        Path(".codey_themes/_default/_cl_lab_default.py"),       # hard fallback
-    ]
-    for path in candidates:
-        if path.exists():
-            spec = importlib.util.spec_from_file_location("theme", path)
-            mod  = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(mod)
-            if hasattr(mod, 'generate_brutal_svg'):
-                print(f"🎨 Theme loaded: {path}")
-                return mod.generate_brutal_svg
-    raise FileNotFoundError(f"No valid theme found for '{theme}' — check .codey_themes/")
-
-
-# ─────────────────────────────────────────────
-# MAIN
-# ─────────────────────────────────────────────
-
-if __name__ == "__main__":
-    print("🔥 Updating BRUTAL Codey...")
-
-    user_data     = get_user_data(OWNER)
-    all_time_data = get_all_data_for_user(OWNER)
-
-    raw_commits  = all_time_data.get('daily_commits', 0)
-    raw_prs      = all_time_data.get('daily_prs', 0)
-
-    # BUG (FIXED): Weekend bonus now stored separately as 'display' values.
-    # raw_commits is passed as 'raw_commits' so total_commits stays accurate.
-    # The bonus only affects XP/hunger/happiness via the inflated 'commits' key.
-    if is_weekend_warrior():
-        print("🎯 Weekend Warrior bonus activated!")
-        display_commits = int(raw_commits * GAME_BALANCE['WEEKEND_BONUS'])
-        display_prs     = int(raw_prs     * GAME_BALANCE['WEEKEND_BONUS'])
-    else:
-        display_commits = raw_commits
-        display_prs     = raw_prs
-
-    daily_activity = {
-        'commits':     display_commits,   # used for XP/rewards
-        'prs':         display_prs,
-        'raw_commits': raw_commits,        # used for total_commits (no inflation)
+    return {
+        'health': 50, 'hunger': 50, 'happiness': 50, 'energy': 50,
+        'level': 1, 'streak': 0, 'total_commits': 0, 'mood': 'neutral',
+        'rpg_stats': {}, 'achievements': [], 'history': [],
+        'brutal_stats': {}, 'last_update': None,
     }
 
-    print(f"Daily activity: {raw_commits} commits, {raw_prs} PRs (raw)")
-    print(f"  After bonus:  {display_commits} commits, {display_prs} PRs")
-    print(f"Repo Quality:   {all_time_data.get('avg_repo_quality', 0):.2f}")
-    print(f"Commit Quality: {all_time_data.get('commit_quality', {}).get('quality_score', 1.0):.2f}")
-    issue_data = all_time_data.get('issue_data', {})
-    print(f"Issue Score:    {issue_data.get('score', 1.0):.2f} "
-          f"(closed: {issue_data.get('closed', 0)}, ratio: {issue_data.get('close_ratio', 0):.2f})")
+
+# ---------------------------------------------------------------------------
+# Main Update Logic
+# ---------------------------------------------------------------------------
+def get_all_data_for_user(owner, since_iso):
+    """
+    Collect all data needed for stat calculation.
+    Commits fetched via since= filter (no double-counting).
+    Social signals via events (only for signals, not commit counting).
+    """
+    all_repos = fetch_all_repos_for_user(owner)
+    own_repos = [r for r in all_repos if not r.get('fork')]
+
+    # Commits since last run (idempotent — no double counting)
+    commits        = fetch_commits_since(owner, all_repos, since_iso)
+    daily_commits  = len(commits)
+    commit_quality = analyze_commit_quality(commits)
+
+    # Merged PRs since last run
+    daily_prs = fetch_prs_since(owner, all_repos, since_iso)
+
+    # Traffic clones (needs push token scope — silently skips if 403)
+    clones = fetch_clone_traffic(owner, own_repos)
+
+    # Social signals from events
+    social_signals = fetch_events_for_social(owner)
+    social_signals['clones'] = clones
+
+    # Repo quality
+    repo_qualities = [analyze_repo_quality(r) for r in own_repos]
+    avg_quality    = sum(repo_qualities) / max(len(repo_qualities), 1)
+
+    # Language stats (top 5 repos)
+    languages = Counter()
+    for repo in all_repos[:5]:
+        if not repo.get('fork'):
+            ok, langs = get_json_safe(
+                f'https://api.github.com/repos/{repo["full_name"]}/languages'
+            )
+            if ok and isinstance(langs, dict):
+                languages.update(langs)
+
+    dominant_lang = languages.most_common(1)
+    dominant_lang = dominant_lang[0][0] if dominant_lang else 'unknown'
+
+    lang_count = len(languages)
+    lang_penalty = 0.8 if lang_count > 10 else (0.9 if lang_count == 1 else 1.0)
+
+    return {
+        'daily_commits':    daily_commits,
+        'daily_prs':        daily_prs,
+        'social_signals':   social_signals,
+        'commit_quality':   commit_quality,
+        'avg_repo_quality': avg_quality,
+        'dominant_language':dominant_lang,
+        'lang_penalty':     lang_penalty,
+        'all_repos':        all_repos,
+        'own_repos':        own_repos,
+    }
+
+
+def update_stats(codey, data, user_data, tier, social, multipliers):
+    """
+    Core stat update — new logic from design doc.
+    Called only when run-guard allows it.
+    """
+    now    = datetime.now(timezone.utc).isoformat()
+    gb     = GAME_BALANCE
+    sigs   = data['social_signals']
+    cq     = data['commit_quality']
+    streak = codey.get('streak', 0)
+
+    daily_commits = data['daily_commits']
+    daily_prs     = data['daily_prs']
+
+    # Weekend warrior bonus
+    if is_weekend_warrior():
+        print("🎯 Weekend Warrior bonus!")
+        daily_commits = int(daily_commits * gb['WEEKEND_BONUS'])
+        daily_prs     = int(daily_prs     * gb['WEEKEND_BONUS'])
+
+    # --- Calculate each stat independently ---
+    new_energy    = calculate_energy_change(codey, daily_commits, daily_prs, sigs, tier)
+    new_hunger    = calculate_hunger_change(codey, daily_commits, sigs, new_energy)
+    new_happiness = calculate_happiness_change(codey, sigs, data['all_repos'], cq['quality_score'])
+    new_health    = calculate_health(
+        new_energy, new_happiness, new_hunger,
+        streak, cq['quality_score'], social['labels']
+    )
+    new_mood = calculate_mood(
+        new_energy, new_happiness, new_hunger,
+        new_health, social['score'], tier, streak
+    )
+
+    # --- Streak ---
+    if daily_commits > 0 or daily_prs > 0:
+        streak += 1
+    else:
+        loss   = max(1, streak // gb['STREAK_LOSS_DIVISOR'])
+        streak = max(0, streak - loss)
+
+    # --- XP / Level ---
+    xp_per_commit    = gb['XP_PER_COMMIT'] * multipliers['xp'] * cq['quality_score']
+    xp_per_pr        = gb['XP_PER_PR']     * multipliers['xp']
+    total_xp         = (daily_commits * xp_per_commit + daily_prs * xp_per_pr) * data['lang_penalty']
+    new_total_commits = codey.get('total_commits', 0) + daily_commits
+    tier_req          = gb['BASE_LEVEL_REQUIREMENT'] * multipliers['requirements']
+    new_level         = min(10, 1 + int(new_total_commits / tier_req))
+
+    # --- History (last 30 entries) ---
+    history = codey.get('history', [])[-29:] + [{
+        'timestamp':    now,
+        'commits':      daily_commits,
+        'prs':          daily_prs,
+        'health':       new_health,
+        'mood':         new_mood,
+        'streak':       streak,
+        'tier':         tier,
+    }]
+
+    # --- Write back ---
+    codey.update({
+        'energy':         new_energy,
+        'hunger':         new_hunger,
+        'happiness':      new_happiness,
+        'health':         new_health,
+        'mood':           new_mood,
+        'streak':         streak,
+        'level':          new_level,
+        'total_commits':  new_total_commits,
+        'last_update':    now,
+        'history':        history,
+    })
+
+    codey['brutal_stats'] = {
+        'tier':                   tier,
+        'github_years':           user_data.get('_github_years', 1),
+        'social_score':           social['score'],
+        'social_labels':          social['labels'],
+        'avg_repo_quality':       data['avg_repo_quality'],
+        'commit_quality_score':   cq['quality_score'],
+        'commit_quality_penalties': cq['penalties'],
+        'multipliers':            multipliers,
+        'total_stars':            social['total_stars'],
+        'lang_penalty':           data['lang_penalty'],
+        'xp_earned':              total_xp,
+        'dominant_language':      data['dominant_language'],
+        'can_prestige':           False,   # filled below
+        'prestige_missing':       [],
+    }
+
+    codey['achievements'] = check_achievements(
+        codey, tier, user_data.get('_github_years', 1), social['score']
+    )
+
+    can_prestige, missing = calculate_prestige(codey, tier, user_data.get('_github_years', 1), codey['brutal_stats'])
+    codey['brutal_stats']['can_prestige']     = can_prestige
+    codey['brutal_stats']['prestige_missing'] = missing
+
+    return codey
+
+
+# ---------------------------------------------------------------------------
+# SVG Generation — untouched, themes handle their own rendering
+# ---------------------------------------------------------------------------
+def generate_svg(codey, seasonal_bonus):
+    brutal_stats   = codey.get('brutal_stats', {})
+    tier           = brutal_stats.get('tier', 'noob')
+    tier_colors    = {'noob': '#22c55e', 'developer': '#3b82f6', 'veteran': '#8b5cf6', 'elder': '#f59e0b'}
+    tier_emojis    = {'noob': '🌱', 'developer': '💻', 'veteran': '⚔️', 'elder': '🧙‍♂️'}
+    mood_emojis    = {
+        'happy': '😊', 'struggling': '😰', 'exhausted': '😵',
+        'grinding': '😤', 'elite': '😎', 'wise': '🧐', 'neutral': '😐',
+        'burnout': '💀', 'lazy': '😴', 'inspired': '🤩', 'overwhelmed': '🤯',
+    }
+    pets = {
+        'C': '🦫', 'C++': '🐬', 'C#': '🦊', 'Java': '🦧', 'PHP': '🐘',
+        'Python': '🐍', 'JavaScript': '🦔', 'TypeScript': '🦋', 'Ruby': '💎',
+        'Go': '🐹', 'Swift': '🐦', 'Kotlin': '🐨', 'Rust': '🦀',
+        'HTML': '🦘', 'CSS': '🦎', 'Sass': '🦄', 'Vue': '🐉', 'React': '🦥',
+        'Angular': '🦁', 'Jupyter Notebook': '🦉', 'R': '🐿️', 'Matlab': '🐻',
+        'SQL': '🐙', 'Julia': '🦓', 'Haskell': '🦚', 'Elixir': '🐝',
+        'Clojure': '🦌', 'F#': '🐑', 'Shell': '🐌', 'PowerShell': '🐺',
+        'Bash': '🦬', 'Perl': '🐪', 'Lua': '🐒', 'Dart': '🐧',
+        'GDScript': '🕹️', 'Assembly': '🐜', 'Solidity': '🔱',
+        'Vim Script': '🕷️', 'GraphQL': '🕸️', 'SCSS': '🦢',
+        'Svelte': '🕊️', 'Zig': '🐆', 'unknown': '🐲',
+    }
+
+    dominant_lang = brutal_stats.get('dominant_language', 'unknown')
+    pet_emoji     = pets.get(dominant_lang, '🐲')
+
+    colors = {
+        'background':    '#0d1117',
+        'card':          '#161b22',
+        'text':          '#f0f6fc',
+        'secondary':     '#8b949e',
+        'health':        '#f85149',
+        'hunger':        '#ffa657',
+        'happiness':     '#a855f7',
+        'energy':        '#3fb950',
+        'border':        '#30363d',
+        'tier':          tier_colors.get(tier, '#22c55e'),
+    }
+
+    # Achievements
+    ach_display = ''
+    if codey.get('achievements'):
+        ach_list  = codey['achievements'][-4:]
+        ach_count = len(ach_list)
+        aw, gap   = 35, 10
+        ax_start  = 580 - ach_count * (aw + gap)
+        for i, ach in enumerate(ach_list):
+            xp = ax_start + i * (aw + gap) + aw / 2
+            ach_display += f'<text x="{xp}" y="48" text-anchor="middle" fill="{colors["text"]}" font-size="20">{ach.split(" ")[0]}</text>'
+
+    # Seasonal
+    seasonal_display = ''
+    if seasonal_bonus:
+        seasonal_display = f'''<g>
+            <rect x="62.5" y="10" width="115" height="35" rx="17.5" fill="{colors["tier"]}" opacity="0.9" stroke="{colors["border"]}" stroke-width="1.5"/>
+            <text x="120" y="33" text-anchor="middle" fill="{colors["text"]}" font-size="12" font-weight="bold">{seasonal_bonus["emoji"]} {seasonal_bonus["name"]}</text>
+        </g>'''
+
+    # Prestige
+    prestige_display = ''
+    if codey.get('prestige_level', 0) > 0:
+        stars = '⭐' * codey['prestige_level']
+        prestige_display = f'<text x="315" y="85" text-anchor="middle" fill="{colors["tier"]}" font-size="14" font-weight="bold">{stars} PRESTIGE {stars}</text>'
+    elif brutal_stats.get('can_prestige'):
+        prestige_display = f'<text x="315" y="85" text-anchor="middle" fill="{colors["energy"]}" font-size="12" font-weight="bold">✨ PRESTIGE READY ✨</text>'
+
+    def bar(value, color, y_label, y_bar, label_text, pct):
+        w = min(330, value * 3.3)
+        return f'''
+        <text x="0" y="{y_label}" fill="{colors["text"]}" font-weight="bold" font-size="14">{label_text}</text>
+        <text x="330" y="{y_label}" text-anchor="end" fill="{colors["secondary"]}" font-size="12">{pct:.0f}%</text>
+        <rect x="0" y="{y_bar}" width="330" height="12" fill="#21262d" rx="6"/>
+        <rect x="0" y="{y_bar}" width="{w}" height="12" fill="{color}" rx="6"/>'''
+
+    social_w = min(330, brutal_stats.get('social_score', 1.0) * 165)
+    quality_w = min(330, brutal_stats.get('avg_repo_quality', 0.5) * 330)
+
+    svg = f'''<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
+  <rect width="630" height="473" fill="{colors["background"]}" rx="15"/>
+  <rect x="20" y="20" width="590" height="433" fill="{colors["card"]}" rx="12" stroke="{colors["border"]}" stroke-width="1"/>
+  {seasonal_display}
+  <text x="40" y="75" fill="{colors["text"]}" font-size="18" font-weight="bold">{tier_emojis.get(tier,"🌱")} CODEY Level {codey["level"]}</text>
+  {prestige_display}
+  {ach_display}
+
+  <g transform="translate(0,84)">
+    <circle cx="120" cy="150" r="57.5" fill="#21262d" stroke="{colors["tier"]}" stroke-width="3"/>
+    <text x="120" y="176" text-anchor="middle" font-size="65">{pet_emoji}</text>
+    <circle cx="120" cy="225" r="25" fill="#21262d" stroke="{colors["border"]}" stroke-width="1"/>
+    <text x="120" y="230" text-anchor="middle" font-size="25">{mood_emojis.get(codey["mood"],"😐")}</text>
+    <text x="120" y="260" text-anchor="middle" fill="{colors["secondary"]}" font-size="11">{codey["mood"].title()} • {brutal_stats.get("github_years",1):.1f}y</text>
+  </g>
+
+  <g transform="translate(205,120)">
+    {bar(codey["health"],    colors["health"],    20,  25,  "❤️ Health",    codey["health"])}
+    {bar(codey["hunger"],    colors["hunger"],    55,  60,  "🍖 Hunger",    codey["hunger"])}
+    {bar(codey["happiness"], colors["happiness"], 90,  95,  "😊 Happiness", codey["happiness"])}
+    {bar(codey["energy"],    colors["energy"],    125, 130, "⚡ Energy",    codey["energy"])}
+    <text x="0" y="160" fill="{colors["text"]}" font-weight="bold" font-size="14">👥 Social</text>
+    <text x="330" y="160" text-anchor="end" fill="{colors["secondary"]}" font-size="12">{brutal_stats.get("social_score",1.0):.2f}</text>
+    <rect x="0" y="165" width="330" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="165" width="{social_w}" height="12" fill="{colors["tier"]}" rx="6"/>
+    <text x="0" y="195" fill="{colors["text"]}" font-weight="bold" font-size="14">💎 Quality</text>
+    <text x="330" y="195" text-anchor="end" fill="{colors["secondary"]}" font-size="12">{brutal_stats.get("avg_repo_quality",0.5):.2f}</text>
+    <rect x="0" y="200" width="330" height="12" fill="#21262d" rx="6"/>
+    <rect x="0" y="200" width="{quality_w}" height="12" fill="{colors["happiness"]}" rx="6"/>
+  </g>
+
+  <g transform="translate(315,375)">
+    <text x="0" y="0" text-anchor="middle" fill="{colors["text"]}" font-size="13" font-weight="bold">PET STATUS:</text>
+    <text x="0" y="15" text-anchor="middle" fill="{colors["secondary"]}" font-size="11">
+      Tier: {tier.upper()} • XP Mult: {brutal_stats.get("multipliers",{}).get("xp",1.0):.2f}x • Labels: {", ".join(brutal_stats.get("social_labels",[])[:3]) or "None"}
+    </text>
+  </g>
+
+  <g transform="translate(315,413)">
+    <text x="0" y="0" text-anchor="middle" fill="{colors["text"]}" font-size="14">
+      🗓️ {codey["streak"]} day streak • 📊 {codey["total_commits"]} commits • ⭐ {brutal_stats.get("total_stars",0)} stars
+    </text>
+  </g>
+
+  <text x="315" y="438" text-anchor="middle" fill="{colors["secondary"]}" font-size="12">
+    Last Update: {datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")} • Dominant: {dominant_lang}
+  </text>
+</svg>'''
+
+    return svg
+
+
+# ---------------------------------------------------------------------------
+# Entry Point
+# ---------------------------------------------------------------------------
+if __name__ == "__main__":
+    print("🔥 Codey No Mercy v3 starting...")
+
+    rate = get_rate_limit()
+    print(f"   API rate limit — core: {rate.get('core_remaining','?')} | graphql: {rate.get('graphql_remaining','?')}")
 
     codey = load_codey()
-    codey = update_brutal_stats(codey, daily_activity, all_time_data, user_data)
 
-    brutal = codey.get('brutal_stats', {})
-    print(f"\n🔥 BRUTAL UPDATE COMPLETE:")
-    print(f"  Tier:         {brutal.get('tier', '?').upper()} ({brutal.get('github_years', 0):.1f} years)")
-    print(f"  Health:       {codey['health']:.0f}% | Energy: {codey['energy']:.0f}% | Mood: {codey['mood']}")
-    print(f"  Social Score: {brutal.get('social_score', 1.0):.2f}x | XP Today: {brutal.get('xp_earned', 0):.0f}")
-    print(f"  Social+:      {brutal.get('social_bonuses', [])} | Social-: {brutal.get('social_penalties', [])}")
-    print(f"  Issues:       closed={brutal.get('issues_closed', 0)}, score={brutal.get('issue_score', 1.0):.2f}")
+    # --- Run Guard ---
+    should_update, hours_since = should_run_full_update(codey)
+    if not should_update:
+        print(f"⏭️  Last update was {hours_since:.1f}h ago (interval: {RUN_INTERVAL_HOURS}h).")
+        print("   Skipping stat update — regenerating SVG only.")
+        seasonal_bonus = get_seasonal_bonus()
+        svg = generate_svg(codey, seasonal_bonus)
+        with open('codey.svg', 'w', encoding='utf-8') as f:
+            f.write(svg)
+        print("🎨 codey.svg refreshed. Done.")
+        sys.exit(0)
 
-    if brutal.get('can_prestige'):
-        print("  🌟 PRESTIGE READY! 🌟")
+    print(f"   Last update: {hours_since:.1f}h ago — running full update.")
+
+    # --- Determine since_iso for idempotent commit fetching ---
+    last_update = codey.get('last_update')
+    if last_update:
+        since_iso = last_update
     else:
-        print(f"  Prestige missing: {', '.join(brutal.get('prestige_missing', []))}")
+        since_iso = (datetime.now(timezone.utc) - timedelta(hours=RUN_INTERVAL_HOURS)).isoformat()
 
-    seasonal_bonus = get_seasonal_bonus()
-    if seasonal_bonus:
-        print(f"  Seasonal: {seasonal_bonus['name']} {seasonal_bonus['emoji']} ({seasonal_bonus['multiplier']}x)")
+    # --- Fetch all data ---
+    user_data = get_user_data(OWNER)
+    github_years = get_github_age_years(user_data.get('created_at', ''))
+    user_data['_github_years'] = github_years
 
+    data = get_all_data_for_user(OWNER, since_iso)
+
+    # --- Derived metrics ---
+    tier       = determine_tier(github_years, len(data['own_repos']), codey.get('total_commits', 0))
+    social     = calculate_social_score(user_data, data['all_repos'])
+    multipliers = calculate_tier_multipliers(tier, social['score'])
+
+    print(f"\n📊 Activity since last run ({since_iso[:10]}):")
+    print(f"   Commits: {data['daily_commits']} | PRs merged: {data['daily_prs']}")
+    print(f"   Clones: {data['social_signals'].get('clones', 0)} | Stars received: {data['social_signals'].get('stars_received', 0)}")
+    print(f"   Forks received: {data['social_signals'].get('forks_received', 0)} | New followers: {data['social_signals'].get('new_followers', 0)}")
+    print(f"   Tier: {tier.upper()} | Social score: {social['score']:.2f} | Labels: {social['labels'] or 'None'}")
+    print(f"   Repo quality: {data['avg_repo_quality']:.2f} | Commit quality: {data['commit_quality']['quality_score']:.2f}")
+
+    # --- Update stats ---
+    codey = update_stats(codey, data, user_data, tier, social, multipliers)
+
+    print(f"\n✅ Stats updated:")
+    print(f"   Health: {codey['health']:.0f}% | Energy: {codey['energy']:.0f}% | Hunger: {codey['hunger']:.0f}% | Happiness: {codey['happiness']:.0f}%")
+    print(f"   Mood: {codey['mood']} | Streak: {codey['streak']}d | Level: {codey['level']}")
+
+    bs = codey['brutal_stats']
+    if bs.get('can_prestige'):
+        print("   🌟 PRESTIGE READY!")
+    else:
+        print(f"   Prestige missing: {bs.get('prestige_missing', [])}")
+
+    # --- Save ---
     with open('codey.json', 'w') as f:
         json.dump(codey, f, indent=2)
-    print("\n💾 codey.json written.")
+    print("\n💾 codey.json saved.")
 
-    theme, cycles = load_theme_config()
-    generate_fn   = load_generate_fn(theme)
-    svg           = generate_fn(codey, seasonal_bonus, cycles)
+    # --- SVG ---
+    seasonal_bonus = get_seasonal_bonus()
+    if seasonal_bonus:
+        print(f"   🎉 Seasonal: {seasonal_bonus['name']} ({seasonal_bonus['multiplier']}x)")
+
+    svg = generate_svg(codey, seasonal_bonus)
     with open('codey.svg', 'w', encoding='utf-8') as f:
         f.write(svg)
     print("🎨 codey.svg written.")
 
-    print("\n💀 BRUTAL Codey update finished. Only the strong survive! 💀")
+    print("\n💀 No Mercy v2.3 done. Only the strong survive!")
