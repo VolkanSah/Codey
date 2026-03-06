@@ -323,10 +323,13 @@ see [.codey_themes](.codey_themes) folder
 - [x] Blue Hell default theme
 - [x] Penalty/Bonus split -  (in dev and core + some in >2.2.2)
 - [x] more usability for update_codey.yml
+- [x] added inflation (value = self_starred)
+- [x] Update cuty to version >2.3.x
+
 
 
 #### In progress
-- [x] RUN GUARD to avoid multi calculations
+- [x] RUN GUARD to avoid multi calculations (testing)
 - [ ] Issue quality analysis — found new patterns, needs fixing
 - [ ] Heartbeat — logic test (mostly not public, sorry)
 - [ ] Outsorce logic of update core and use Codey Starreport for more brutal stats.
@@ -704,6 +707,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
