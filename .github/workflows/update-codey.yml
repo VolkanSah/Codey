@@ -1,5 +1,5 @@
 # =============================================================================
-# WORKFLOW: Codey Integrity Guard - [Update Codey]
+# WORKFLOW: Codey Integrity Guard - [Update Codey] Version 2.3.0
 # PART OF:  Codey - No Mercy EDITION
 # =============================================================================
 # Role:        Automated Audit & Compliance (ESOL v1.1)
@@ -9,11 +9,13 @@
 # =============================================================================
 
 # Define the name of the workflow as it appears in the Actions tab
-name: Update Codey
+name: Update Codey v.2.3
 
 # Define the triggers for this workflow
 on:
   # Run automatically at 06:00 UTC every day (Cron syntax)
+  # You can also run codey in +6h interval , 
+  # to avoid miscalculation there ist ther RUN GURAD function in core >2.2.3
   schedule:
     - cron: '0 6 * * *'
   # Allow manual triggering of the workflow from the UI
@@ -78,7 +80,7 @@ jobs:
         fi
 
         # Commit the update
-        git commit -m "🐾 Daily Codey update 🐾"
+        git commit -m "🐾 Codey updated 🐾"
 
         # Pull remote changes first to avoid push conflicts
         # Uses current branch name automatically — works on main, PRs, test branches
