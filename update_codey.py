@@ -785,7 +785,7 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     bonuses_count   = (len(social_analysis['bonuses']) +
                        len(commit_quality.get('bonuses', [])))
 
-    if codey['health'] < 30:              codey['mood'] = 'struggling'
+    if codey['health'] < 25:              codey['mood'] = 'struggling'
     elif codey['energy'] < 20:            codey['mood'] = 'exhausted'
     elif penalties_count > 2:             codey['mood'] = 'overwhelmed'
     elif social_analysis['score'] > 1.2:  codey['mood'] = 'elite'
@@ -793,6 +793,17 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     elif bonuses_count >= 2:              codey['mood'] = 'inspired'   # NEW mood
     elif codey['health'] > 80:            codey['mood'] = 'happy'
     else:                                 codey['mood'] = 'grinding'
+    # NEU? not ready! -- need update themes too!
+    #if codey['energy'] < 10 and codey['happiness'] < 10:   codey['mood'] = 'burnout'
+    #elif codey['health'] < 25:                              codey['mood'] = 'struggling'
+    #elif codey['energy'] < 20 and codey['hunger'] > 70:    codey['mood'] = 'exhausted'
+    #elif codey['energy'] > 60 and codey['hunger'] < 20:    codey['mood'] = 'lazy'
+    #elif codey['energy'] > 50 and codey['hunger'] > 60:    codey['mood'] = 'grinding'
+    #elif codey['happiness'] > 75 and codey['energy'] > 50: codey['mood'] = 'inspired'
+    #elif social_analysis['score'] > 1.2 and codey['health'] > 70: codey['mood'] = 'elite'
+    #elif tier == 'elder' and codey['health'] > 70:         codey['mood'] = 'wise'
+    #elif codey['health'] > 80:                             codey['mood'] = 'happy'
+    #else:                                                   codey['mood'] = 'neutral'
 
     codey['achievements'] = check_brutal_achievements(codey, tier, github_years)
     can_prestige, missing = calculate_prestige_requirements(codey, github_years)
