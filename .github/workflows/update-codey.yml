@@ -7,83 +7,61 @@
 # License:     Apache 2.0 + ESOL v1.1 (https://github.com/VolkanSah/ESOL)
 # Enforcement: Jurisdiction Berlin, Germany (StGB & DSGVO)
 # =============================================================================
-
-# Define the name of the workflow as it appears in the Actions tab
-name: Update Codey
-
-# Define the triggers for this workflow
+# it works local version :P
+name: Update Codey 2.3
 on:
-  # Run automatically at 06:00 UTC every day (Cron syntax)
   schedule:
     - cron: '0 6 * * *'
-  # Allow manual triggering of the workflow from the UI
   workflow_dispatch:
-
-# Define the execution logic
 jobs:
-  # Job identifier
   update-codey:
-    # Use the latest Ubuntu runner provided by GitHub
     runs-on: ubuntu-latest
-    # Grant permission to write/push changes back to the repository
     permissions:
       contents: write
-
     steps:
     # Step 1: Clone the repository to the runner
     - uses: actions/checkout@v4
       with:
-        # Use the default GITHUB_TOKEN for authentication
         token: ${{ secrets.GITHUB_TOKEN }}
-        # Keep credentials stored to allow git commands later
         persist-credentials: true
 
     # Step 2: Prepare the Python environment
     - uses: actions/setup-python@v4
       with:
-        # Specify the exact Python version for consistency
         python-version: '3.11'
 
-    # Step 3: Setup required libraries
+    # Step 3: Install required libraries
     - name: Install dependencies
       run: |
-        # Upgrade the package installer first
         python -m pip install --upgrade pip
-        # Install from file if it exists, otherwise fallback to 'requests'
         if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install requests; fi
 
-    # Step 4: Execute the actual "No Mercy" audit/update script
+    # Step 4: Run Codey update script
     - name: Update Codey
       env:
-        # Pass secrets and variables as environment variables to Python
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
         GIT_REPOSITORY: ${{ vars.GIT_REPOSITORY }}
       run: python update_codey.py
 
-    # Step 5: Save changes back to the repository
+    # Step 5: Commit and push generated files
     - name: Commit
       run: |
-        # Set local identity for the commit
         git config --local user.name "Codey Bot"
         git config --local user.email "action@github.com"
 
-        # Stage generated assets (suppress errors if files don't exist yet)
-        git add codey.svg codey.json 2>/dev/null || true
+        # Stage generated assets
+        git add codey.svg codey.json
 
-        # Skip commit if nothing changed
-        if git diff --cached --quiet; then
+        # git status --porcelain erkennt neue UND geänderte Dateien zuverlässig
+        # git diff --cached erkennt neue (untracked) Dateien NICHT — daher dieser Fix
+        if [ -z "$(git status --porcelain codey.svg codey.json)" ]; then
           echo "No changes to commit — skipping."
           exit 0
         fi
 
-        # Commit the update
         git commit -m "🐾 Daily Codey update 🐾"
 
-        # Pull remote changes first to avoid push conflicts
-        # Uses current branch name automatically — works on main, PRs, test branches
+        # Pull erst, dann push — verhindert Konflikte bei parallelen Runs
         git pull --rebase origin ${{ github.ref_name }}
-
-        # Push — never fails the workflow (e.g. protected branches, race conditions)
         git push || echo "⚠️ Push skipped (protected branch or no permission)"
-
