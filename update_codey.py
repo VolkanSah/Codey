@@ -771,6 +771,8 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
         'commit_quality_bonuses':  commit_quality.get('bonuses', []),   # NEW
         'multipliers':             multipliers,
         'total_stars':             all_time_data.get('total_stars', 0),
+        # fehlt self_starred test 1
+        'self_starred':            all_time_data.get('self_starred', 0),
         'language_diversity_penalty': lang_penalty,
         'xp_earned':               total_xp,
         'dominant_language':       all_time_data.get('dominant_language', 'unknown'),
