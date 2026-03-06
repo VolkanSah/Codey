@@ -362,7 +362,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       <text x="89" y="162" font-size="16" fill="#e0aaff" text-anchor="middle" filter="url(#glow)">✦</text>
     </g>
 
-    <text x="141" y="364" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#e0aaff" opacity="0.8">{codey.get('mood', 'neutral').upper()} • {brutal_stats.get('github_years', 1):.1f}y</text>
+    <text x="141" y="364" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#e0aaff" opacity="0.8">MOOD > {codey.get('mood', 'neutral').upper()} • {brutal_stats.get('github_years', 1):.1f}y</text>
   </g>
 
   <!-- ══ STATS PANEL — exakte Inkscape koordinaten ══ -->
