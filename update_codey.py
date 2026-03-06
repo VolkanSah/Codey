@@ -585,8 +585,8 @@ def get_all_data_for_user(owner):
     return {
         'daily_commits':            daily_commits,
         'daily_prs':                daily_prs,
-        'total_stars':              total_stars
-        'self_starred':             self_starred
+        'total_stars':              total_stars,
+        'self_starred':             self_starred,
         'total_forks':              total_forks,
         'total_own_repos':          len(own_repos),
         'dominant_language':        dominant_language,
