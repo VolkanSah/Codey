@@ -877,29 +877,9 @@ def load_generate_fn(theme: str):
                 return mod.generate_brutal_svg
     raise FileNotFoundError(f"No valid theme found for '{theme}' — check .codey_themes/")
 
-
-# ─────────────────────────────────────────────
-# MAIN
-# ─────────────────────────────────────────────
-
 if __name__ == "__main__":
     print("🔥 Updating BRUTAL Codey...")
 
-    # Run Guard FIRST — vor allen API calls!
-    codey = load_codey()
-    should_update, hours_since = should_run_full_update(codey)
-    if not should_update:
-        print(f"⏭️ Last update was {hours_since:.1f}h ago — skipping.")
-        seasonal_bonus = get_seasonal_bonus()
-        theme, cycles = load_theme_config()
-        generate_fn   = load_generate_fn(theme)
-        svg           = generate_fn(codey, seasonal_bonus, cycles)
-        with open('codey.svg', 'w', encoding='utf-8') as f:
-            f.write(svg)
-        print("🎨 codey.svg refreshed.")
-        sys.exit(0)
-
-    # Erst hier API calls — nur wenn wirklich nötig!
     user_data     = get_user_data(OWNER)
     all_time_data = get_all_data_for_user(OWNER)
 
@@ -928,28 +908,30 @@ if __name__ == "__main__":
     print(f"Issue Score:    {issue_data.get('score', 1.0):.2f} "
           f"(closed: {issue_data.get('closed', 0)}, ratio: {issue_data.get('close_ratio', 0):.2f})")
 
-    codey = update_brutal_stats(codey, daily_activity, all_time_data, user_data)
-
-    brutal = codey.get('brutal_stats', {})
-    print(f"\n🔥 BRUTAL UPDATE COMPLETE:")
-    print(f"  Tier:         {brutal.get('tier', '?').upper()} ({brutal.get('github_years', 0):.1f} years)")
-    print(f"  Health:       {codey['health']:.0f}% | Energy: {codey['energy']:.0f}% | Mood: {codey['mood']}")
-    print(f"  Social Score: {brutal.get('social_score', 1.0):.2f}x | XP Today: {brutal.get('xp_earned', 0):.0f}")
-    print(f"  Social+:      {brutal.get('social_bonuses', [])} | Social-: {brutal.get('social_penalties', [])}")
-    print(f"  Issues:       closed={brutal.get('issues_closed', 0)}, score={brutal.get('issue_score', 1.0):.2f}")
-
-    if brutal.get('can_prestige'):
-        print("  🌟 PRESTIGE READY! 🌟")
+    codey = load_codey()
+    should_update, hours_since = should_run_full_update(codey)
+    if not should_update:
+        print(f"⏭️ Last update was {hours_since:.1f}h ago — skipping stat update.")
     else:
-        print(f"  Prestige missing: {', '.join(brutal.get('prestige_missing', []))}")
+        codey = update_brutal_stats(codey, daily_activity, all_time_data, user_data)
+        with open('codey.json', 'w') as f:
+            json.dump(codey, f, indent=2)
+        print("\n💾 codey.json written.")
+        brutal = codey.get('brutal_stats', {})
+        print(f"\n🔥 BRUTAL UPDATE COMPLETE:")
+        print(f"  Tier:         {brutal.get('tier', '?').upper()} ({brutal.get('github_years', 0):.1f} years)")
+        print(f"  Health:       {codey['health']:.0f}% | Energy: {codey['energy']:.0f}% | Mood: {codey['mood']}")
+        print(f"  Social Score: {brutal.get('social_score', 1.0):.2f}x | XP Today: {brutal.get('xp_earned', 0):.0f}")
+        print(f"  Social+:      {brutal.get('social_bonuses', [])} | Social-: {brutal.get('social_penalties', [])}")
+        print(f"  Issues:       closed={brutal.get('issues_closed', 0)}, score={brutal.get('issue_score', 1.0):.2f}")
+        if brutal.get('can_prestige'):
+            print("  🌟 PRESTIGE READY! 🌟")
+        else:
+            print(f"  Prestige missing: {', '.join(brutal.get('prestige_missing', []))}")
 
     seasonal_bonus = get_seasonal_bonus()
     if seasonal_bonus:
         print(f"  Seasonal: {seasonal_bonus['name']} {seasonal_bonus['emoji']} ({seasonal_bonus['multiplier']}x)")
-
-    with open('codey.json', 'w') as f:
-        json.dump(codey, f, indent=2)
-    print("\n💾 codey.json written.")
 
     theme, cycles = load_theme_config()
     generate_fn   = load_generate_fn(theme)
@@ -957,5 +939,5 @@ if __name__ == "__main__":
     with open('codey.svg', 'w', encoding='utf-8') as f:
         f.write(svg)
     print("🎨 codey.svg written.")
-
     print("\n💀 BRUTAL Codey update finished. Only the strong survive! 💀")
+
