@@ -64,6 +64,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     s_val         = brutal_stats.get('social_score', 1.0)
     q_val         = brutal_stats.get('avg_repo_quality', 0.5)
     total_stars   = brutal_stats.get('total_stars', 0)
+    self_starred  = brutal_stats.get('self_starred', 0)
 
     # ── Penalties / Bonuses ────────────────────────────────────────────────
     social_penalties = brutal_stats.get('social_penalties', [])
@@ -407,7 +408,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
     <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
     <text x="0" y="21">STREAK={codey.get('streak', 0)}d  •  COMMITS={codey.get('total_commits', 0)}</text>
-    <text x="0" y="42">REAL_STARS={total_stars}  •  INFLATION={brutal_stats.get('self_starred', 0)}</text>
+    <text x="0" y="42">REAL_STARS={total_stars}  •  INFLATION={self_starred}</text>
     <text x="0" y="63" fill="{status_color}">STATUS={status_val}</text>
     {issue_xml}
     <text x="0" y="105" fill="#ff88dd">{season_info}</text>
