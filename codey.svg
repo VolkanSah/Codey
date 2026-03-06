@@ -123,7 +123,7 @@
   <rect x="15" y="15" width="600" height="28" fill="#bf00ff" opacity="0.08"/>
   <line x1="15" y1="43" x2="615" y2="43" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
   <text x="26" y="34" fill="#e0aaff" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user ELDER --lvl 1 --prestige 0</text>
-  <text x="608" y="34" text-anchor="end" fill="#f59e0b" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-03-06 19:22 UTC</text>
+  <text x="608" y="34" text-anchor="end" fill="#f59e0b" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-03-06 22:16 UTC</text>
 
   <!-- ONE-SHOT scanline -->
   <rect class="scanline" x="15" y="43" width="600" height="5" fill="#bf00ff"/>
@@ -234,8 +234,9 @@
 
   <!-- ══ STATS PANEL — exakte Inkscape koordinaten ══ -->
 
-  <!-- Header: x=265 y=74 -->
-  <text x="265" y="74" fill="#e0aaff" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
+  <!-- Header: x=265 y=74  //cat stats.log-->
+  <text x="265" y="74" fill="#e0aaff" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat Python.log</text>
+
 
   <!-- sep1: y=90 -->
   <line x1="263" y1="90" x2="630" y2="90" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
