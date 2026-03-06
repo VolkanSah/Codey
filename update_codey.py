@@ -940,7 +940,6 @@ if __name__ == "__main__":
           f"(closed: {issue_data.get('closed', 0)}, ratio: {issue_data.get('close_ratio', 0):.2f})")
 
     codey = load_codey()
-    
     should_update, hours_since = should_run_full_update(codey)
     if not should_update:
         print(f"⏭️ Last update was {hours_since:.1f}h ago — skipping.")
@@ -952,9 +951,6 @@ if __name__ == "__main__":
             f.write(svg)
         print("🎨 codey.svg refreshed.")
         sys.exit(0)
-    
-   
-  
     codey = update_brutal_stats(codey, daily_activity, all_time_data, user_data)
 
     brutal = codey.get('brutal_stats', {})
