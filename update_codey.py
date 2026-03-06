@@ -63,6 +63,22 @@ GAME_BALANCE = {
 }
 
 # ─────────────────────────────────────────────
+# RUN Guard to save calls, too
+# ─────────────────────────────────────────────
+RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 24))
+
+def should_run_full_update(codey):
+    last = codey.get('last_update')
+    if not last:
+        return True, 999.0
+    try:
+        last_dt = datetime.fromisoformat(last.replace('Z', '+00:00'))
+        hours_since = (datetime.now(timezone.utc) - last_dt).total_seconds() / 3600
+        return hours_since >= RUN_INTERVAL_HOURS, hours_since
+    except Exception:
+        return True, 999.0
+
+# ─────────────────────────────────────────────
 # REPO / OWNER NORMALIZATION
 # ─────────────────────────────────────────────
 
@@ -869,15 +885,27 @@ def load_generate_fn(theme: str):
 if __name__ == "__main__":
     print("🔥 Updating BRUTAL Codey...")
 
+    # Run Guard FIRST — vor allen API calls!
+    codey = load_codey()
+    should_update, hours_since = should_run_full_update(codey)
+    if not should_update:
+        print(f"⏭️ Last update was {hours_since:.1f}h ago — skipping.")
+        seasonal_bonus = get_seasonal_bonus()
+        theme, cycles = load_theme_config()
+        generate_fn   = load_generate_fn(theme)
+        svg           = generate_fn(codey, seasonal_bonus, cycles)
+        with open('codey.svg', 'w', encoding='utf-8') as f:
+            f.write(svg)
+        print("🎨 codey.svg refreshed.")
+        sys.exit(0)
+
+    # Erst hier API calls — nur wenn wirklich nötig!
     user_data     = get_user_data(OWNER)
     all_time_data = get_all_data_for_user(OWNER)
 
     raw_commits  = all_time_data.get('daily_commits', 0)
     raw_prs      = all_time_data.get('daily_prs', 0)
 
-    # BUG (FIXED): Weekend bonus now stored separately as 'display' values.
-    # raw_commits is passed as 'raw_commits' so total_commits stays accurate.
-    # The bonus only affects XP/hunger/happiness via the inflated 'commits' key.
     if is_weekend_warrior():
         print("🎯 Weekend Warrior bonus activated!")
         display_commits = int(raw_commits * GAME_BALANCE['WEEKEND_BONUS'])
@@ -887,9 +915,9 @@ if __name__ == "__main__":
         display_prs     = raw_prs
 
     daily_activity = {
-        'commits':     display_commits,   # used for XP/rewards
+        'commits':     display_commits,
         'prs':         display_prs,
-        'raw_commits': raw_commits,        # used for total_commits (no inflation)
+        'raw_commits': raw_commits,
     }
 
     print(f"Daily activity: {raw_commits} commits, {raw_prs} PRs (raw)")
@@ -900,7 +928,6 @@ if __name__ == "__main__":
     print(f"Issue Score:    {issue_data.get('score', 1.0):.2f} "
           f"(closed: {issue_data.get('closed', 0)}, ratio: {issue_data.get('close_ratio', 0):.2f})")
 
-    codey = load_codey()
     codey = update_brutal_stats(codey, daily_activity, all_time_data, user_data)
 
     brutal = codey.get('brutal_stats', {})
