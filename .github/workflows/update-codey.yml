@@ -59,7 +59,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
         GIT_REPOSITORY: ${{ vars.GIT_REPOSITORY }}
-      run: python update_codey.py
+      run: |
+        rm -f codey.svg
+        python update_codey.py
 
     # Step 5: Save changes back to the repository
     - name: Commit
