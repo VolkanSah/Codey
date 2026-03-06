@@ -64,7 +64,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     s_val         = brutal_stats.get('social_score', 1.0)
     q_val         = brutal_stats.get('avg_repo_quality', 0.5)
     total_stars   = brutal_stats.get('total_stars', 0)
-    self_starred  = brutal_stats.get('self_starred', 0)
+    self_starred  = brutal_stats.get('self_starred_count', 0)
 
     # ── Penalties / Bonuses ────────────────────────────────────────────────
     social_penalties = brutal_stats.get('social_penalties', [])
