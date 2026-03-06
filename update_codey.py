@@ -24,6 +24,8 @@
 # NEW:      marks new features
 # IMPROVED: marks improvements
 # =============================================================================
+
+
 #!/usr/bin/env python3
 # update_codey.py - No Mercy EDITION v3
 # New stat logic + run-guard + traffic/clones + dynamic decay
@@ -241,15 +243,26 @@ def fetch_all_repos_for_user(owner):
 
 def fetch_commits_since(owner, repos, since_iso):
     """
-    Fetch commits per repo using `since=` filter.
-    Much more efficient than parsing 300 events.
-    Only checks own (non-fork) repos.
-    Returns list of raw commit objects.
+    Fetch commits using since= filter.
+    Only checks own repos that were actually pushed to since last run.
+    This avoids hammering the API for dead repos.
     """
     all_commits = []
+    since_dt = datetime.fromisoformat(since_iso.replace('Z', '+00:00'))
+
     for repo in repos:
         if repo.get('fork'):
             continue
+        # Skip repos not touched since last run
+        pushed_at = repo.get('pushed_at', '')
+        if pushed_at:
+            try:
+                pushed_dt = datetime.fromisoformat(pushed_at.replace('Z', '+00:00'))
+                if pushed_dt < since_dt:
+                    continue   # untouched since last run → skip
+            except Exception:
+                pass
+
         ok, commits = get_json_safe(
             f'https://api.github.com/repos/{repo["full_name"]}/commits',
             params={'author': owner, 'since': since_iso, 'per_page': 100}
@@ -402,7 +415,7 @@ def analyze_repo_quality(repo_data):
     return max(0.1, score)
 
 
-def calculate_social_score(user_data, all_repos):
+def calculate_social_engineering_score(user_data, all_repos):
     """Detect social engineering patterns. selective_networker is a BONUS not a penalty."""
     followers = user_data.get('followers', 1)
     following = user_data.get('following', 0)
@@ -441,7 +454,7 @@ def calculate_social_score(user_data, all_repos):
         'ffr':         ffr,
         'fork_ratio':  fork_ratio,
         'star_per_repo': star_per_repo,
-        'labels':      labels,
+        'penalties': labels,
         'total_stars': total_stars,
     }
 
@@ -578,7 +591,7 @@ def calculate_energy_change(codey, daily_commits, daily_prs, social_signals, tie
     return max(0, min(100, net_energy))
 
 
-def calculate_health(energy, happiness, hunger, streak, quality_score, social_labels):
+def calculate_health(energy, happiness, hunger, streak, quality_score, social_penalties):
     """
     HEALTH = Weighted average — not directly controllable.
     """
@@ -599,7 +612,7 @@ def calculate_health(energy, happiness, hunger, streak, quality_score, social_la
     # Penalties
     if quality_score < 0.5:
         health -= gb['HEALTH_PENALTY_QUALITY']
-    if 'spam_follower' in social_labels or 'code_spammer' in social_labels:
+    if 'spam_follower' in social_penalties or 'code_spammer' in social_penalties:
         health -= gb['HEALTH_PENALTY_SPAM']
     if energy < 10:
         health -= gb['HEALTH_PENALTY_LOW_ENERGY']
@@ -633,7 +646,7 @@ def calculate_mood(energy, happiness, hunger, health, social_score, tier, streak
 # ---------------------------------------------------------------------------
 # Achievements
 # ---------------------------------------------------------------------------
-def check_achievements(codey, tier, github_years, social_score):
+def check_brutal_achievements(codey, tier, github_years, social_score):
     achievements = codey.get('achievements', [])
 
     checks = [
@@ -654,7 +667,7 @@ def check_achievements(codey, tier, github_years, social_score):
     return achievements
 
 
-def calculate_prestige(codey, tier, github_years, brutal_stats):
+def calculate_prestige_requirements(codey, tier, github_years, brutal_stats):
     if codey.get('level', 1) < 10:
         return False, ['level < 10']
     reqs = {
@@ -786,7 +799,7 @@ def get_all_data_for_user(owner, since_iso):
     }
 
 
-def update_stats(codey, data, user_data, tier, social, multipliers):
+def update_brutal_stats(codey, data, user_data, tier, social, multipliers):
     """
     Core stat update — new logic from design doc.
     Called only when run-guard allows it.
@@ -812,7 +825,7 @@ def update_stats(codey, data, user_data, tier, social, multipliers):
     new_happiness = calculate_happiness_change(codey, sigs, data['all_repos'], cq['quality_score'])
     new_health    = calculate_health(
         new_energy, new_happiness, new_hunger,
-        streak, cq['quality_score'], social['labels']
+        streak, cq['quality_score'], social['penalties']
     )
     new_mood = calculate_mood(
         new_energy, new_happiness, new_hunger,
@@ -863,7 +876,7 @@ def update_stats(codey, data, user_data, tier, social, multipliers):
         'tier':                   tier,
         'github_years':           user_data.get('_github_years', 1),
         'social_score':           social['score'],
-        'social_labels':          social['labels'],
+        'social_penalties':        social['penalties'],
         'avg_repo_quality':       data['avg_repo_quality'],
         'commit_quality_score':   cq['quality_score'],
         'commit_quality_penalties': cq['penalties'],
@@ -876,11 +889,11 @@ def update_stats(codey, data, user_data, tier, social, multipliers):
         'prestige_missing':       [],
     }
 
-    codey['achievements'] = check_achievements(
+    codey["achievements"] = check_brutal_achievements(
         codey, tier, user_data.get('_github_years', 1), social['score']
     )
 
-    can_prestige, missing = calculate_prestige(codey, tier, user_data.get('_github_years', 1), codey['brutal_stats'])
+    can_prestige, missing = calculate_prestige_requirements(codey, tier, user_data.get('_github_years', 1), codey['brutal_stats'])
     codey['brutal_stats']['can_prestige']     = can_prestige
     codey['brutal_stats']['prestige_missing'] = missing
 
@@ -890,7 +903,7 @@ def update_stats(codey, data, user_data, tier, social, multipliers):
 # ---------------------------------------------------------------------------
 # SVG Generation — untouched, themes handle their own rendering
 # ---------------------------------------------------------------------------
-def generate_svg(codey, seasonal_bonus):
+def generate_brutal_svg(codey, seasonal_bonus):
     brutal_stats   = codey.get('brutal_stats', {})
     tier           = brutal_stats.get('tier', 'noob')
     tier_colors    = {'noob': '#22c55e', 'developer': '#3b82f6', 'veteran': '#8b5cf6', 'elder': '#f59e0b'}
@@ -1002,7 +1015,7 @@ def generate_svg(codey, seasonal_bonus):
   <g transform="translate(315,375)">
     <text x="0" y="0" text-anchor="middle" fill="{colors["text"]}" font-size="13" font-weight="bold">PET STATUS:</text>
     <text x="0" y="15" text-anchor="middle" fill="{colors["secondary"]}" font-size="11">
-      Tier: {tier.upper()} • XP Mult: {brutal_stats.get("multipliers",{}).get("xp",1.0):.2f}x • Labels: {", ".join(brutal_stats.get("social_labels",[])[:3]) or "None"}
+      Tier: {tier.upper()} • XP Mult: {brutal_stats.get("multipliers",{}).get("xp",1.0):.2f}x • Labels: {", ".join(brutal_stats.get("social_penalties",[])[:3]) or "None"}
     </text>
   </g>
 
@@ -1037,7 +1050,7 @@ if __name__ == "__main__":
         print(f"⏭️  Last update was {hours_since:.1f}h ago (interval: {RUN_INTERVAL_HOURS}h).")
         print("   Skipping stat update — regenerating SVG only.")
         seasonal_bonus = get_seasonal_bonus()
-        svg = generate_svg(codey, seasonal_bonus)
+        svg = generate_brutal_svg(codey, seasonal_bonus)
         with open('codey.svg', 'w', encoding='utf-8') as f:
             f.write(svg)
         print("🎨 codey.svg refreshed. Done.")
@@ -1061,18 +1074,18 @@ if __name__ == "__main__":
 
     # --- Derived metrics ---
     tier       = determine_tier(github_years, len(data['own_repos']), codey.get('total_commits', 0))
-    social     = calculate_social_score(user_data, data['all_repos'])
+    social     = calculate_social_engineering_score(user_data, data['all_repos'])
     multipliers = calculate_tier_multipliers(tier, social['score'])
 
     print(f"\n📊 Activity since last run ({since_iso[:10]}):")
     print(f"   Commits: {data['daily_commits']} | PRs merged: {data['daily_prs']}")
     print(f"   Clones: {data['social_signals'].get('clones', 0)} | Stars received: {data['social_signals'].get('stars_received', 0)}")
     print(f"   Forks received: {data['social_signals'].get('forks_received', 0)} | New followers: {data['social_signals'].get('new_followers', 0)}")
-    print(f"   Tier: {tier.upper()} | Social score: {social['score']:.2f} | Labels: {social['labels'] or 'None'}")
+    print(f"   Tier: {tier.upper()} | Social score: {social['score']:.2f} | Labels: {social['penalties'] or 'None'}")
     print(f"   Repo quality: {data['avg_repo_quality']:.2f} | Commit quality: {data['commit_quality']['quality_score']:.2f}")
 
     # --- Update stats ---
-    codey = update_stats(codey, data, user_data, tier, social, multipliers)
+    codey = update_brutal_stats(codey, data, user_data, tier, social, multipliers)
 
     print(f"\n✅ Stats updated:")
     print(f"   Health: {codey['health']:.0f}% | Energy: {codey['energy']:.0f}% | Hunger: {codey['hunger']:.0f}% | Happiness: {codey['happiness']:.0f}%")
@@ -1094,9 +1107,15 @@ if __name__ == "__main__":
     if seasonal_bonus:
         print(f"   🎉 Seasonal: {seasonal_bonus['name']} ({seasonal_bonus['multiplier']}x)")
 
-    svg = generate_svg(codey, seasonal_bonus)
+    svg = generate_brutal_svg(codey, seasonal_bonus)
     with open('codey.svg', 'w', encoding='utf-8') as f:
         f.write(svg)
     print("🎨 codey.svg written.")
 
-    print("\n💀 No Mercy v2.3 done. Only the strong survive!")
+    print("\n💀 No Mercy v3 done. Only the strong survive!")
+
+#!/usr/bin/env python3
+# update_codey.py - No Mercy EDITION v3
+# New stat logic + run-guard + traffic/clones + dynamic decay
+# Themes are in separate files — this file handles logic only.
+
