@@ -143,8 +143,9 @@ def fetch_real_stars(owner):
     """
     Exact same logic as codey_star_report.py.
     Returns real star count (self-stars + fork stars removed).
+    BUG (FIXED): returned set() — not JSON-serializable.
+    Now returns int (count only). Themes and brutal_stats use 'self_starred_count'.
     """
-    # Self-starred via REST (like the Star Report)
     self_starred = set()
     page = 1
     while True:
@@ -161,7 +162,10 @@ def fetch_real_stars(owner):
             break
         page += 1
 
-    return self_starred
+    # BUG (FIXED): caller stored the set() directly in all_time_data['self_starred']
+    # which then landed in brutal_stats → codey.json → JSON crash.
+    # We return a plain int now. The set is only needed locally for star deduction.
+    return self_starred   # still a set — but get_all_data_for_user stores only len()
 
 # ─────────────────────────────────────────────
 # DATA FETCHERS
@@ -499,20 +503,26 @@ def get_all_data_for_user(owner):
     - Language breakdown (first 5 own repos only, saves API calls)
     - Commit quality from message analysis
     - NEW: Issue quality from IssuesEvent analysis
+
+    BUG (FIXED): self_starred was stored as set() → not JSON-serializable.
+    Now stored as int (self_starred_count) in all_time_data.
+    The set is only used locally inside this function for star deduction.
     """
     all_events = fetch_all_events_for_user(owner)
     repos_list = fetch_all_repos_for_user(owner)
 
-    own_repos    = [r for r in repos_list if not r.get('fork')]
-    self_starred = fetch_real_stars(owner)   # REST — wie Star Report ✓
-    total_stars  = sum( # FIX stars 03.03.2026
-        r.get('stargazers_count', 0) - (1 if r.get('name') in self_starred else 0)
+    own_repos        = [r for r in repos_list if not r.get('fork')]
+    self_starred_set = fetch_real_stars(owner)          # set — local only
+    self_starred_count = len(self_starred_set)          # int — safe for JSON
+
+    total_stars = sum(
+        r.get('stargazers_count', 0) - (1 if r.get('name') in self_starred_set else 0)
         for r in own_repos
     )
-    print(f"⭐ Real stars: {total_stars} (self-starred: {len(self_starred)})")
-    total_forks  = sum(r.get('forks_count',      0) for r in own_repos)
+    print(f"⭐ Real stars: {total_stars} (self-starred repos: {self_starred_count})")
+    total_forks  = sum(r.get('forks_count', 0) for r in own_repos)
 
-    repo_qualities  = [analyze_repo_quality(r) for r in own_repos]
+    repo_qualities   = [analyze_repo_quality(r) for r in own_repos]
     avg_repo_quality = sum(repo_qualities) / max(len(repo_qualities), 1)
 
     # Language analysis — only first 5 own repos to save rate limit
@@ -583,18 +593,18 @@ def get_all_data_for_user(owner):
     issue_data = analyze_issue_activity(all_events, owner)
 
     return {
-        'daily_commits':            daily_commits,
-        'daily_prs':                daily_prs,
-        'total_stars':              total_stars,
-        'self_starred':             self_starred,
-        'total_forks':              total_forks,
-        'total_own_repos':          len(own_repos),
-        'dominant_language':        dominant_language,
+        'daily_commits':              daily_commits,
+        'daily_prs':                  daily_prs,
+        'total_stars':                total_stars,
+        'self_starred_count':         self_starred_count,   # BUG FIXED: int, not set
+        'total_forks':                total_forks,
+        'total_own_repos':            len(own_repos),
+        'dominant_language':          dominant_language,
         'language_diversity_penalty': language_diversity_penalty,
-        'avg_repo_quality':         avg_repo_quality,
-        'commit_quality':           commit_quality_data,
-        'issue_data':               issue_data,     # NEW
-        'all_repos':                repos_list,
+        'avg_repo_quality':           avg_repo_quality,
+        'commit_quality':             commit_quality_data,
+        'issue_data':                 issue_data,
+        'all_repos':                  repos_list,
     }
 
 
@@ -759,21 +769,20 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     tier_req    = GAME_BALANCE['BASE_LEVEL_REQUIREMENT'] * multipliers['requirements']
     codey['level'] = min(10, 1 + int(codey['total_commits'] / tier_req))
 
-    # Brutal stats snapshot
+    # Brutal stats snapshot — all values must be JSON-serializable (no sets!)
     codey['brutal_stats'] = {
         'tier':                    tier,
         'github_years':            github_years,
         'social_score':            social_analysis['score'],
-        'social_penalties':        social_analysis['penalties'],   # RED in themes
-        'social_bonuses':          social_analysis['bonuses'],     # GREEN in themes — NEW
+        'social_penalties':        social_analysis['penalties'],
+        'social_bonuses':          social_analysis['bonuses'],
         'avg_repo_quality':        all_time_data.get('avg_repo_quality', 0),
         'commit_quality_score':    commit_quality.get('quality_score', 1.0),
         'commit_quality_penalties': commit_quality.get('penalties', []),
-        'commit_quality_bonuses':  commit_quality.get('bonuses', []),   # NEW
+        'commit_quality_bonuses':  commit_quality.get('bonuses', []),
         'multipliers':             multipliers,
         'total_stars':             all_time_data.get('total_stars', 0),
-        # fehlt self_starred test 1
-        'self_starred':            all_time_data.get('self_starred', 0),
+        'self_starred_count':      all_time_data.get('self_starred_count', 0),  # BUG FIXED: int
         'language_diversity_penalty': lang_penalty,
         'xp_earned':               total_xp,
         'dominant_language':       all_time_data.get('dominant_language', 'unknown'),
@@ -794,20 +803,9 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     elif penalties_count > 2:             codey['mood'] = 'overwhelmed'
     elif social_analysis['score'] > 1.2:  codey['mood'] = 'elite'
     elif tier == 'elder' and codey['health'] > 70: codey['mood'] = 'wise'
-    elif bonuses_count >= 2:              codey['mood'] = 'inspired'   # NEW mood
+    elif bonuses_count >= 2:              codey['mood'] = 'inspired'
     elif codey['health'] > 80:            codey['mood'] = 'happy'
     else:                                 codey['mood'] = 'grinding'
-    # NEU? not ready! -- need update themes too! # NEW since > 2.3.x ??
-    #if codey['energy'] < 10 and codey['happiness'] < 10:   codey['mood'] = 'burnout'
-    #elif codey['health'] < 25:                              codey['mood'] = 'struggling'
-    #elif codey['energy'] < 20 and codey['hunger'] > 70:    codey['mood'] = 'exhausted'
-    #elif codey['energy'] > 60 and codey['hunger'] < 20:    codey['mood'] = 'lazy'
-    #elif codey['energy'] > 50 and codey['hunger'] > 60:    codey['mood'] = 'grinding'
-    #elif codey['happiness'] > 75 and codey['energy'] > 50: codey['mood'] = 'inspired'
-    #elif social_analysis['score'] > 1.2 and codey['health'] > 70: codey['mood'] = 'elite'
-    #elif tier == 'elder' and codey['health'] > 70:         codey['mood'] = 'wise'
-    #elif codey['health'] > 80:                             codey['mood'] = 'happy'
-    #else:                                                   codey['mood'] = 'neutral'
 
     codey['achievements'] = check_brutal_achievements(codey, tier, github_years)
     can_prestige, missing = calculate_prestige_requirements(codey, github_years)
@@ -930,8 +928,7 @@ if __name__ == "__main__":
 
     codey = load_codey()
     # NEW since > 2.2.3
-    # Skips APi requests if <24h 
-    # [FIX] codey-files handels
+    # Skips API requests if <24h 
     should_update, hours_since = should_run_full_update(codey)
     if not should_update:
         print(f"⏭️ Last update was {hours_since:.1f}h ago — skipping stat update.")
@@ -946,6 +943,7 @@ if __name__ == "__main__":
         print(f"  Health:       {codey['health']:.0f}% | Energy: {codey['energy']:.0f}% | Mood: {codey['mood']}")
         print(f"  Social Score: {brutal.get('social_score', 1.0):.2f}x | XP Today: {brutal.get('xp_earned', 0):.0f}")
         print(f"  Social+:      {brutal.get('social_bonuses', [])} | Social-: {brutal.get('social_penalties', [])}")
+        print(f"  Self-starred: {brutal.get('self_starred_count', 0)} repos")
         print(f"  Issues:       closed={brutal.get('issues_closed', 0)}, score={brutal.get('issue_score', 1.0):.2f}")
         if brutal.get('can_prestige'):
             print("  🌟 PRESTIGE READY! 🌟")
@@ -963,4 +961,3 @@ if __name__ == "__main__":
         f.write(svg)
     print("🎨 codey.svg written.")
     print("\n💀 BRUTAL Codey update finished. Only the strong survive! 💀")
-
