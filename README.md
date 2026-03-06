@@ -321,16 +321,18 @@ see [.codey_themes](.codey_themes) folder
 - [x] API endpoint — yes and no, you'll see :D
 - [x] Codey Star_Report now 100 % ⭐
 - [x] Blue Hell default theme
-- [x] Penalty/Bonus split -  (in dev and core + soon 2.2.3)
+- [x] Penalty/Bonus split -  (in dev and core + some in >2.2.2)
+- [x] more usability for update_codey.yml
 
 
 #### In progress
+- [x] RUN GUARD to avoid multi calculations
 - [ ] Issue quality analysis — found new patterns, needs fixing
 - [ ] Heartbeat — logic test (mostly not public, sorry)
 - [ ] Outsorce logic of update core and use Codey Starreport for more brutal stats.
 - [x] Default Theme Patch - crafting on new logic, for more brutal stats (in dev + soon 2.2.3)
 - [ ] Kali Linux Skin
-- [x] Optimize Cuty for less GPU usage + ad values and sort UI  (in dev + soon 2.2.3)
+- [x] Optimize Cuty for less GPU usage + ad values and sort UI  (in dev + > 2.2.2)
 
 #### Planned
 - [ ] GitLab support
@@ -338,7 +340,7 @@ see [.codey_themes](.codey_themes) folder
 - [ ] brain_bug.log as official feature (when Brain is ready)
 
 ### Pending (v2.3.0)
-- [ ] Implement Game Logic v2 in update_codey.py
+- [ ] Implement Game Logic v2 in update_codey.py se branche 
 - [ ] Recalculate and test GAME_BALANCE values
 - [ ] Rename quality_curator to selective_networker (bonus not penalty)
 - [ ] Fix Kali theme — same backslash escape as PowerShell
@@ -395,9 +397,9 @@ see [.codey_themes](.codey_themes) folder
 
 
 
-
-# CHANGELOG — Codey v2.2.2
-# =============================================================================
+### [2.2.3] — 2026-03-06
+- [NEW] RUN GUARD
+- [OPT] Codey-Workflow optimized.
 
 ## [2.2.2] — 2026-03-03
 
@@ -702,6 +704,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
