@@ -368,8 +368,9 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
 
   <!-- ══ STATS PANEL — exakte Inkscape koordinaten ══ -->
 
-  <!-- Header: x=265 y=74 -->
-  <text x="265" y="74" fill="#e0aaff" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
+  <!-- Header: x=265 y=74  //cat stats.log-->
+  <text x="265" y="74" fill="#e0aaff" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat {dominant_language}.log</text>
+
 
   <!-- sep1: y=90 -->
   <line x1="263" y1="90" x2="630" y2="90" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
