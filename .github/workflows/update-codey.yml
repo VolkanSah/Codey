@@ -61,7 +61,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
         GIT_REPOSITORY: ${{ vars.GIT_REPOSITORY }}
-        CODEY_FALLBACK: 'false'   # Bypass fallback for dev (set to false onproduktions)
+        CODEY_FALLBACK: 'true'   # set false to bypass fallback for dev
       run: python update_codey.py
 
     # Step 5: Save changes back to the repository
