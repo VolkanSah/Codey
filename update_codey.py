@@ -69,19 +69,6 @@ GAME_BALANCE = {
 #  RUN Guard to save calls, too
 # ─────────────────────────────────────────────
 # NEW since > 2.2.3
-#RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 20))
-
-#def should_run_full_update(codey):
-    #last = codey.get('last_update')
-    #if not last:
-        #return True, 999.0
-    #try:
-        #last_dt = datetime.fromisoformat(last.replace('Z', '+00:00'))
-       # hours_since = (datetime.now(timezone.utc) - last_dt).total_seconds() / 3600
-       # return hours_since >= RUN_INTERVAL_HOURS, hours_since
-   # except Exception:
-       # return True, 999.0
-
 RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 20))
 
 def should_run_full_update(codey):
@@ -595,6 +582,8 @@ def get_all_data_for_user(owner):
     # FALLBACK: Events API returned 0 commits (private repo, org, or rate limit)
     # → directly query /commits for each own repo as fallback
     # FALLBACK: opt-in via CODEY_FALLBACK=true (kostet extra API-Calls!)
+    # FALLBACK: opt-in via CODEY_FALLBACK=true (kostet extra API-Calls!)  
+    #env: set:  CODEY_FALLBACK: 'true'   # nur wenn du's brauchst
     if daily_commits == 0 and own_repos:
         if not ENABLE_FALLBACK:
             print("⏭️  Events API returned 0 commits — fallback disabled (set CODEY_FALLBACK=true to enable)")
