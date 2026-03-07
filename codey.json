@@ -1,0 +1,62 @@
+{
+  "health": 46.0,
+  "hunger": 100,
+  "happiness": 38.0,
+  "energy": 0,
+  "level": 1,
+  "streak": 1,
+  "total_commits": 46,
+  "mood": "exhausted",
+  "rpg_stats": {},
+  "achievements": [
+    "\ud83e\uddd9\u200d\u2642\ufe0f Elder Council",
+    "\ud83d\udc80 Decade Survivor",
+    "\ud83d\udc51 Social Elite",
+    "\ud83d\udc8e Quality Craftsman",
+    "\ud83c\udfaf Quality Curator"
+  ],
+  "history": [
+    {
+      "timestamp": "2026-03-07T10:11:49.582873+00:00",
+      "daily_commits": 69,
+      "daily_prs": 0,
+      "health": 50,
+      "mood": "neutral",
+      "streak": 0,
+      "tier": "elder"
+    }
+  ],
+  "brutal_stats": {
+    "tier": "elder",
+    "github_years": 10.009582477754963,
+    "social_score": 1.25,
+    "social_penalties": [],
+    "social_bonuses": [
+      "quality_curator"
+    ],
+    "avg_repo_quality": 0.8320312500000009,
+    "commit_quality_score": 0.95,
+    "commit_quality_penalties": [
+      "no_description"
+    ],
+    "commit_quality_bonuses": [],
+    "multipliers": {
+      "xp": 0.25,
+      "decay": 0.8,
+      "requirements": 4.0
+    },
+    "total_stars": 606,
+    "self_starred_count": 177,
+    "language_diversity_penalty": 1.0,
+    "xp_earned": 240.62499999999997,
+    "dominant_language": "Python",
+    "issues_closed": 4,
+    "issue_close_ratio": 1.3333333333333333,
+    "issue_score": 1.4,
+    "can_prestige": false,
+    "prestige_missing": [
+      "Need Level 10"
+    ]
+  },
+  "last_update": "2026-03-07T10:11:49.582873+00:00"
+}
