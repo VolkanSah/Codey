@@ -147,7 +147,7 @@
   <rect x="15" y="15" width="600" height="28" fill="#00aaff" opacity="0.06"/>
   <line x1="15" y1="43" x2="615" y2="43" stroke="#f59e0b" stroke-width="1" opacity="0.4"/>
   <text x="26" y="34" fill="#00ff88" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user ELDER --lvl 9 --prestige 0</text>
-  <text x="608" y="34" text-anchor="end" fill="#00aaff" font-family="Courier New,monospace" font-size="10" opacity="0.45">2026-03-07 10:04 UTC</text>
+  <text x="608" y="34" text-anchor="end" fill="#00aaff" font-family="Courier New,monospace" font-size="10" opacity="0.45">2026-03-07 10:09 UTC</text>
 
   <!-- ONE-SHOT scanline -->
   <rect class="scanline" x="15" y="43" width="600" height="5" fill="#00aaff"/>
