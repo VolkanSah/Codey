@@ -267,7 +267,8 @@ see [.codey_themes](.codey_themes) folder
 - Cuty (cute robot)
 - CyberCat (neon)
 - Evil Robot (dark) — soon
-- Ghost (blue/green) — soon
+- Ghost (blue/green)
+- Blue Hell (BSOD)
 - + Community themes welcome
 > please, set theme/skin in `example.codey.config` and rename it to `codey.config`
 
@@ -321,16 +322,22 @@ see [.codey_themes](.codey_themes) folder
 - [x] API endpoint — yes and no, you'll see :D
 - [x] Codey Star_Report now 100 % ⭐
 - [x] Blue Hell default theme
-- [x] Penalty/Bonus split -  (in dev and core + soon 2.2.3)
+- [x] Penalty/Bonus split -  (in dev and core + some in >2.2.2)
+- [x] more usability for update_codey.yml
+- [x] added inflation (value = self_starred)
+- [x] Updated/optimized cuty, cat, ghost to version >2.3.x
+- [x] Ghost Skin relased
+
 
 
 #### In progress
+- [x] RUN GUARD to avoid multi calculations (testing)
 - [ ] Issue quality analysis — found new patterns, needs fixing
 - [ ] Heartbeat — logic test (mostly not public, sorry)
 - [ ] Outsorce logic of update core and use Codey Starreport for more brutal stats.
 - [x] Default Theme Patch - crafting on new logic, for more brutal stats (in dev + soon 2.2.3)
 - [ ] Kali Linux Skin
-- [x] Optimize Cuty for less GPU usage + ad values and sort UI  (in dev + soon 2.2.3)
+- [x] Optimize Cuty for less GPU usage + ad values and sort UI  (in dev + > 2.2.2)
 
 #### Planned
 - [ ] GitLab support
@@ -338,7 +345,7 @@ see [.codey_themes](.codey_themes) folder
 - [ ] brain_bug.log as official feature (when Brain is ready)
 
 ### Pending (v2.3.0)
-- [ ] Implement Game Logic v2 in update_codey.py
+- [ ] Implement Game Logic v2 in update_codey.py se branche 
 - [ ] Recalculate and test GAME_BALANCE values
 - [ ] Rename quality_curator to selective_networker (bonus not penalty)
 - [ ] Fix Kali theme — same backslash escape as PowerShell

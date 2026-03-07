@@ -64,6 +64,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
     s_val         = brutal_stats.get('social_score', 1.0)
     q_val         = brutal_stats.get('avg_repo_quality', 0.5)
     total_stars   = brutal_stats.get('total_stars', 0)
+    self_starred  = brutal_stats.get('self_starred_count', 0)
 
     # ── Penalties / Bonuses ────────────────────────────────────────────────
     social_penalties = brutal_stats.get('social_penalties', [])
@@ -82,7 +83,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
         status_icon  = ''
 
     season_info = (
-        f'SEASON={seasonal_bonus["emoji"]} {seasonal_bonus["name"]} +10%' # +10% - Note VOLKAN!  falsch aus codey_core seesons auslesen # # SEASONAL / WEEKEND 791-815 (def get_seasonal_bonus + def is_weekend_warrior)
+        f'SEASON={seasonal_bonus["name"]} +{seasonal_bonus["multiplier"]}x {seasonal_bonus["emoji"]}' # [FIX] 06.03.2026
         if seasonal_bonus else 'SEASON=OFFLINE'
     )
 
@@ -362,13 +363,14 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
       <text x="89" y="162" font-size="16" fill="#e0aaff" text-anchor="middle" filter="url(#glow)">✦</text>
     </g>
 
-    <text x="141" y="364" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#e0aaff" opacity="0.8">{codey.get('mood', 'neutral').upper()} • {brutal_stats.get('github_years', 1):.1f}y</text>
+    <text x="141" y="364" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#e0aaff" opacity="0.8">MOOD > {codey.get('mood', 'neutral').upper()} • {brutal_stats.get('github_years', 1):.1f}y</text>
   </g>
 
   <!-- ══ STATS PANEL — exakte Inkscape koordinaten ══ -->
 
-  <!-- Header: x=265 y=74 -->
-  <text x="265" y="74" fill="#e0aaff" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat stats.log</text>
+  <!-- Header: x=265 y=74  //cat stats.log-->
+  <text x="265" y="74" fill="#e0aaff" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat {dominant_lang}.log</text>
+
 
   <!-- sep1: y=90 -->
   <line x1="263" y1="90" x2="630" y2="90" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
@@ -407,7 +409,7 @@ def generate_brutal_svg(codey, seasonal_bonus, cycles=4):
   <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
     <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
     <text x="0" y="21">STREAK={codey.get('streak', 0)}d  •  COMMITS={codey.get('total_commits', 0)}</text>
-    <text x="0" y="42">REAL_STARS={total_stars}  •  INFLATION={brutal_stats.get('self_starred_repos', 0)}</text>
+    <text x="0" y="42">REAL_STARS={total_stars}  •  INFLATION={self_starred}</text>
     <text x="0" y="63" fill="{status_color}">STATUS={status_val}</text>
     {issue_xml}
     <text x="0" y="105" fill="#ff88dd">{season_info}</text>

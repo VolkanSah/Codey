@@ -24,8 +24,8 @@
 # NEW:      marks new features
 # IMPROVED: marks improvements
 # =============================================================================
-
-
+# Version 2.2.3 -DEV-
+# Added RUN GUARD + some fixes
 import requests
 import json
 import os
@@ -64,6 +64,43 @@ GAME_BALANCE = {
     'STREAK_LOSS_DIVISOR':     10,
     'WEEKEND_BONUS':           1.5,
 }
+
+# ─────────────────────────────────────────────
+#  RUN Guard to save calls, too
+# ─────────────────────────────────────────────
+# NEW since > 2.2.3
+#RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 20))
+
+#def should_run_full_update(codey):
+    #last = codey.get('last_update')
+    #if not last:
+        #return True, 999.0
+    #try:
+        #last_dt = datetime.fromisoformat(last.replace('Z', '+00:00'))
+       # hours_since = (datetime.now(timezone.utc) - last_dt).total_seconds() / 3600
+       # return hours_since >= RUN_INTERVAL_HOURS, hours_since
+   # except Exception:
+       # return True, 999.0
+
+RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 20))
+
+def should_run_full_update(codey):
+    last = codey.get('last_update')
+    if not last:
+        return True, 999.0
+    try:
+        last_dt     = datetime.fromisoformat(last.replace('Z', '+00:00'))
+        now         = datetime.now(timezone.utc)
+        hours_since = (now - last_dt).total_seconds() / 3600
+
+        # Primär: anderer Kalendertag → immer updaten
+        if last_dt.date() < now.date():
+            return True, hours_since
+
+        # Fallback: Stundengrenze für mehrfaches Testen am selben Tag
+        return hours_since >= RUN_INTERVAL_HOURS, hours_since
+    except Exception:
+        return True, 999.0
 
 # ─────────────────────────────────────────────
 # REPO / OWNER NORMALIZATION
@@ -124,13 +161,14 @@ def get_json_safe(url, params=None):
 
 
 # own stared 
-# new from 2.2.x
+# new from >2.2.x
 def fetch_real_stars(owner):
     """
     Exact same logic as codey_star_report.py.
     Returns real star count (self-stars + fork stars removed).
+    BUG (FIXED): returned set() — not JSON-serializable.
+    Now returns int (count only). Themes and brutal_stats use 'self_starred_count'.
     """
-    # Self-starred via REST (wie im Star Report)
     self_starred = set()
     page = 1
     while True:
@@ -147,7 +185,10 @@ def fetch_real_stars(owner):
             break
         page += 1
 
-    return self_starred
+    # BUG (FIXED): caller stored the set() directly in all_time_data['self_starred']
+    # which then landed in brutal_stats → codey.json → JSON crash.
+    # We return a plain int now. The set is only needed locally for star deduction.
+    return self_starred   # still a set — but get_all_data_for_user stores only len()
 
 # ─────────────────────────────────────────────
 # DATA FETCHERS
@@ -485,20 +526,26 @@ def get_all_data_for_user(owner):
     - Language breakdown (first 5 own repos only, saves API calls)
     - Commit quality from message analysis
     - NEW: Issue quality from IssuesEvent analysis
+
+    BUG (FIXED): self_starred was stored as set() → not JSON-serializable.
+    Now stored as int (self_starred_count) in all_time_data.
+    The set is only used locally inside this function for star deduction.
     """
     all_events = fetch_all_events_for_user(owner)
     repos_list = fetch_all_repos_for_user(owner)
 
-    own_repos    = [r for r in repos_list if not r.get('fork')]
-    self_starred = fetch_real_stars(owner)   # REST — wie Star Report ✓
-    total_stars  = sum( # FIX stars 03.03.2026
-        r.get('stargazers_count', 0) - (1 if r.get('name') in self_starred else 0)
+    own_repos        = [r for r in repos_list if not r.get('fork')]
+    self_starred_set = fetch_real_stars(owner)          # set — local only
+    self_starred_count = len(self_starred_set)          # int — safe for JSON
+
+    total_stars = sum(
+        r.get('stargazers_count', 0) - (1 if r.get('name') in self_starred_set else 0)
         for r in own_repos
     )
-    print(f"⭐ Real stars: {total_stars} (self-starred: {len(self_starred)})")
-    total_forks  = sum(r.get('forks_count',      0) for r in own_repos)
+    print(f"⭐ Real stars: {total_stars} (self-starred repos: {self_starred_count})")
+    total_forks  = sum(r.get('forks_count', 0) for r in own_repos)
 
-    repo_qualities  = [analyze_repo_quality(r) for r in own_repos]
+    repo_qualities   = [analyze_repo_quality(r) for r in own_repos]
     avg_repo_quality = sum(repo_qualities) / max(len(repo_qualities), 1)
 
     # Language analysis — only first 5 own repos to save rate limit
@@ -573,17 +620,18 @@ def get_all_data_for_user(owner):
     issue_data = analyze_issue_activity(all_events, owner)
 
     return {
-        'daily_commits':            daily_commits,
-        'daily_prs':                daily_prs,
-        'total_stars':              total_stars,
-        'total_forks':              total_forks,
-        'total_own_repos':          len(own_repos),
-        'dominant_language':        dominant_language,
+        'daily_commits':              daily_commits,
+        'daily_prs':                  daily_prs,
+        'total_stars':                total_stars,
+        'self_starred_count':         self_starred_count,   # BUG FIXED: int, not set
+        'total_forks':                total_forks,
+        'total_own_repos':            len(own_repos),
+        'dominant_language':          dominant_language,
         'language_diversity_penalty': language_diversity_penalty,
-        'avg_repo_quality':         avg_repo_quality,
-        'commit_quality':           commit_quality_data,
-        'issue_data':               issue_data,     # NEW
-        'all_repos':                repos_list,
+        'avg_repo_quality':           avg_repo_quality,
+        'commit_quality':             commit_quality_data,
+        'issue_data':                 issue_data,
+        'all_repos':                  repos_list,
     }
 
 
@@ -748,19 +796,20 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     tier_req    = GAME_BALANCE['BASE_LEVEL_REQUIREMENT'] * multipliers['requirements']
     codey['level'] = min(10, 1 + int(codey['total_commits'] / tier_req))
 
-    # Brutal stats snapshot
+    # Brutal stats snapshot — all values must be JSON-serializable (no sets!)
     codey['brutal_stats'] = {
         'tier':                    tier,
         'github_years':            github_years,
         'social_score':            social_analysis['score'],
-        'social_penalties':        social_analysis['penalties'],   # RED in themes
-        'social_bonuses':          social_analysis['bonuses'],     # GREEN in themes — NEW
+        'social_penalties':        social_analysis['penalties'],
+        'social_bonuses':          social_analysis['bonuses'],
         'avg_repo_quality':        all_time_data.get('avg_repo_quality', 0),
         'commit_quality_score':    commit_quality.get('quality_score', 1.0),
         'commit_quality_penalties': commit_quality.get('penalties', []),
-        'commit_quality_bonuses':  commit_quality.get('bonuses', []),   # NEW
+        'commit_quality_bonuses':  commit_quality.get('bonuses', []),
         'multipliers':             multipliers,
         'total_stars':             all_time_data.get('total_stars', 0),
+        'self_starred_count':      all_time_data.get('self_starred_count', 0),  # BUG FIXED: int
         'language_diversity_penalty': lang_penalty,
         'xp_earned':               total_xp,
         'dominant_language':       all_time_data.get('dominant_language', 'unknown'),
@@ -776,12 +825,12 @@ def update_brutal_stats(codey, daily_activity, all_time_data, user_data):
     bonuses_count   = (len(social_analysis['bonuses']) +
                        len(commit_quality.get('bonuses', [])))
 
-    if codey['health'] < 30:              codey['mood'] = 'struggling'
+    if codey['health'] < 25:              codey['mood'] = 'struggling'
     elif codey['energy'] < 20:            codey['mood'] = 'exhausted'
     elif penalties_count > 2:             codey['mood'] = 'overwhelmed'
     elif social_analysis['score'] > 1.2:  codey['mood'] = 'elite'
     elif tier == 'elder' and codey['health'] > 70: codey['mood'] = 'wise'
-    elif bonuses_count >= 2:              codey['mood'] = 'inspired'   # NEW mood
+    elif bonuses_count >= 2:              codey['mood'] = 'inspired'
     elif codey['health'] > 80:            codey['mood'] = 'happy'
     else:                                 codey['mood'] = 'grinding'
 
@@ -870,7 +919,7 @@ def load_generate_fn(theme: str):
 
 
 # ─────────────────────────────────────────────
-# MAIN
+# MAIN RUN
 # ─────────────────────────────────────────────
 
 if __name__ == "__main__":
@@ -882,9 +931,6 @@ if __name__ == "__main__":
     raw_commits  = all_time_data.get('daily_commits', 0)
     raw_prs      = all_time_data.get('daily_prs', 0)
 
-    # BUG (FIXED): Weekend bonus now stored separately as 'display' values.
-    # raw_commits is passed as 'raw_commits' so total_commits stays accurate.
-    # The bonus only affects XP/hunger/happiness via the inflated 'commits' key.
     if is_weekend_warrior():
         print("🎯 Weekend Warrior bonus activated!")
         display_commits = int(raw_commits * GAME_BALANCE['WEEKEND_BONUS'])
@@ -894,9 +940,9 @@ if __name__ == "__main__":
         display_prs     = raw_prs
 
     daily_activity = {
-        'commits':     display_commits,   # used for XP/rewards
+        'commits':     display_commits,
         'prs':         display_prs,
-        'raw_commits': raw_commits,        # used for total_commits (no inflation)
+        'raw_commits': raw_commits,
     }
 
     print(f"Daily activity: {raw_commits} commits, {raw_prs} PRs (raw)")
@@ -908,28 +954,32 @@ if __name__ == "__main__":
           f"(closed: {issue_data.get('closed', 0)}, ratio: {issue_data.get('close_ratio', 0):.2f})")
 
     codey = load_codey()
-    codey = update_brutal_stats(codey, daily_activity, all_time_data, user_data)
-
-    brutal = codey.get('brutal_stats', {})
-    print(f"\n🔥 BRUTAL UPDATE COMPLETE:")
-    print(f"  Tier:         {brutal.get('tier', '?').upper()} ({brutal.get('github_years', 0):.1f} years)")
-    print(f"  Health:       {codey['health']:.0f}% | Energy: {codey['energy']:.0f}% | Mood: {codey['mood']}")
-    print(f"  Social Score: {brutal.get('social_score', 1.0):.2f}x | XP Today: {brutal.get('xp_earned', 0):.0f}")
-    print(f"  Social+:      {brutal.get('social_bonuses', [])} | Social-: {brutal.get('social_penalties', [])}")
-    print(f"  Issues:       closed={brutal.get('issues_closed', 0)}, score={brutal.get('issue_score', 1.0):.2f}")
-
-    if brutal.get('can_prestige'):
-        print("  🌟 PRESTIGE READY! 🌟")
+    # NEW since > 2.2.3
+    # Skips API requests if <24h 
+    should_update, hours_since = should_run_full_update(codey)
+    if not should_update:
+        print(f"⏭️ Last update was {hours_since:.1f}h ago — skipping stat update.")
     else:
-        print(f"  Prestige missing: {', '.join(brutal.get('prestige_missing', []))}")
+        codey = update_brutal_stats(codey, daily_activity, all_time_data, user_data)
+        with open('codey.json', 'w') as f:
+            json.dump(codey, f, indent=2)
+        print("\n💾 codey.json written.")
+        brutal = codey.get('brutal_stats', {})
+        print(f"\n🔥 BRUTAL UPDATE COMPLETE:")
+        print(f"  Tier:         {brutal.get('tier', '?').upper()} ({brutal.get('github_years', 0):.1f} years)")
+        print(f"  Health:       {codey['health']:.0f}% | Energy: {codey['energy']:.0f}% | Mood: {codey['mood']}")
+        print(f"  Social Score: {brutal.get('social_score', 1.0):.2f}x | XP Today: {brutal.get('xp_earned', 0):.0f}")
+        print(f"  Social+:      {brutal.get('social_bonuses', [])} | Social-: {brutal.get('social_penalties', [])}")
+        print(f"  Self-starred: {brutal.get('self_starred_count', 0)} repos")
+        print(f"  Issues:       closed={brutal.get('issues_closed', 0)}, score={brutal.get('issue_score', 1.0):.2f}")
+        if brutal.get('can_prestige'):
+            print("  🌟 PRESTIGE READY! 🌟")
+        else:
+            print(f"  Prestige missing: {', '.join(brutal.get('prestige_missing', []))}")
 
     seasonal_bonus = get_seasonal_bonus()
     if seasonal_bonus:
         print(f"  Seasonal: {seasonal_bonus['name']} {seasonal_bonus['emoji']} ({seasonal_bonus['multiplier']}x)")
-
-    with open('codey.json', 'w') as f:
-        json.dump(codey, f, indent=2)
-    print("\n💾 codey.json written.")
 
     theme, cycles = load_theme_config()
     generate_fn   = load_generate_fn(theme)
@@ -937,5 +987,4 @@ if __name__ == "__main__":
     with open('codey.svg', 'w', encoding='utf-8') as f:
         f.write(svg)
     print("🎨 codey.svg written.")
-
     print("\n💀 BRUTAL Codey update finished. Only the strong survive! 💀")
