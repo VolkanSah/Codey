@@ -39,6 +39,9 @@ from collections import Counter
 
 TOKEN = os.environ.get('GIT_TOKEN') or os.environ.get('GITHUB_TOKEN')
 REPO  = os.environ.get('GIT_REPOSITORY') or os.environ.get('GITHUB_REPOSITORY')
+# Bypass fallback
+# ── CONFIG ──
+ENABLE_FALLBACK = os.environ.get('CODEY_FALLBACK', 'false').lower() == 'true'
 
 if not REPO:
     print("WARNING: No REPO set. Using 'VolkanSah' as fallback.")
@@ -544,19 +547,23 @@ def get_all_data_for_user(owner):
 
     # FALLBACK: Events API returned 0 commits (private repo, org, or rate limit)
     # → directly query /commits for each own repo as fallback
+    # FALLBACK: opt-in via CODEY_FALLBACK=true (kostet extra API-Calls!)
     if daily_commits == 0 and own_repos:
-        print("⚠️  Events API returned 0 commits — trying direct /commits fallback...")
-        since_iso = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
-        for repo in own_repos[:10]:  # max 10 repos to save API calls
-            ok, commits_data = get_json_safe(
-                f'https://api.github.com/repos/{repo["full_name"]}/commits',
-                params={'author': owner, 'since': since_iso, 'per_page': 100}
-            )
-            if ok and isinstance(commits_data, list) and commits_data:
-                daily_commits += len(commits_data)
-                all_commits.extend(commits_data)
-                print(f"  ✓ {repo['full_name']}: {len(commits_data)} commits")
-        print(f"  Fallback total: {daily_commits} commits")
+        if not ENABLE_FALLBACK:
+            print("⏭️  Events API returned 0 commits — fallback disabled (set CODEY_FALLBACK=true to enable)")
+        else:
+            print("⚠️  Events API returned 0 commits — trying direct /commits fallback...")
+            since_iso = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
+            for repo in own_repos[:10]:
+                ok, commits_data = get_json_safe(
+                    f'https://api.github.com/repos/{repo["full_name"]}/commits',
+                    params={'author': owner, 'since': since_iso, 'per_page': 100}
+                )
+                if ok and isinstance(commits_data, list) and commits_data:
+                    daily_commits += len(commits_data)
+                    all_commits.extend(commits_data)
+                    print(f"  ✓ {repo['full_name']}: {len(commits_data)} commits")
+            print(f"  Fallback total: {daily_commits} commits")
 
     commit_quality_data = analyze_commit_quality(all_commits) if all_commits else {
         'quality_score': 1.0, 'penalties': [], 'bonuses': []
