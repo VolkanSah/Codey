@@ -66,7 +66,7 @@ GAME_BALANCE = {
 #  RUN Guard to save calls, too
 # ─────────────────────────────────────────────
 # NEW since > 2.2.3
-RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 24))
+RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 20))
 
 def should_run_full_update(codey):
     last = codey.get('last_update')
