@@ -66,6 +66,19 @@ GAME_BALANCE = {
 #  RUN Guard to save calls, too
 # ─────────────────────────────────────────────
 # NEW since > 2.2.3
+#RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 20))
+
+#def should_run_full_update(codey):
+    #last = codey.get('last_update')
+    #if not last:
+        #return True, 999.0
+    #try:
+        #last_dt = datetime.fromisoformat(last.replace('Z', '+00:00'))
+       # hours_since = (datetime.now(timezone.utc) - last_dt).total_seconds() / 3600
+       # return hours_since >= RUN_INTERVAL_HOURS, hours_since
+   # except Exception:
+       # return True, 999.0
+
 RUN_INTERVAL_HOURS = int(os.environ.get('CODEY_RUN_INTERVAL', 20))
 
 def should_run_full_update(codey):
@@ -73,8 +86,15 @@ def should_run_full_update(codey):
     if not last:
         return True, 999.0
     try:
-        last_dt = datetime.fromisoformat(last.replace('Z', '+00:00'))
-        hours_since = (datetime.now(timezone.utc) - last_dt).total_seconds() / 3600
+        last_dt     = datetime.fromisoformat(last.replace('Z', '+00:00'))
+        now         = datetime.now(timezone.utc)
+        hours_since = (now - last_dt).total_seconds() / 3600
+
+        # Primär: anderer Kalendertag → immer updaten
+        if last_dt.date() < now.date():
+            return True, hours_since
+
+        # Fallback: Stundengrenze für mehrfaches Testen am selben Tag
         return hours_since >= RUN_INTERVAL_HOURS, hours_since
     except Exception:
         return True, 999.0
