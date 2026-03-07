@@ -11,6 +11,8 @@
 
 > [!WARNING]
 > Animated SVGs can be GPU-heavy — lighter skins are on the way.
+>
+> Testing Codey from: 05.03-15.03.2026 for metrics
 
 ---
 
@@ -727,6 +729,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
