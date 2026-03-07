@@ -9,12 +9,26 @@
   </a>
 </p>
 
-
-
-> ... with some actions toolbox you will ❤️ **Sources: [DEV-Codey](https://github.com/volkansah/Codey)** note: use always latest on [Codey`s Lab](https://github.com/Codey-LAB/Codey)
-please note that animated SVGs can be heavy.. soon more (light) skins 
+> [!WARNING]
+> Animated SVGs can be GPU-heavy — lighter skins are on the way.
 
 ---
+
+> Don't just hug Codey — explore the Actions Toolbox and give a ⭐ if you ❤️ it!
+
+
+---
+> [!IMPORTANT]
+> Codey is under active development — always use the latest release from [Codey's Lab](https://github.com/Codey-LAB/Codey) *(stable builds land here first)*.
+> This repo ([DEV-Codey](https://github.com/VolkanSah/Codey)) is where the chaos happens. 🔬
+
+
+
+
+
+
+---
+
 
 
 
@@ -713,6 +727,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
