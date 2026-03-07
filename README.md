@@ -400,6 +400,7 @@ see [.codey_themes](.codey_themes) folder
 
 <details>
 <summary> - Changelog - </summary> 
+  
 ### [2.2.3]
 - [NEW] RUN GUARD — skips all API calls if already updated today (calendar-day based)
 - [NEW] Fallback Bypass — opt-in via CODEY_FALLBACK=true env (saves API credits)
@@ -712,6 +713,7 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
+
 
 
 
