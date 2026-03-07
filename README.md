@@ -401,12 +401,7 @@ see [.codey_themes](.codey_themes) folder
 <summary> - Changelog - </summary> 
 
 
-
-### [2.2.3] — 2026-03-06
-- [NEW] RUN GUARD
-- [OPT] Codey-Workflow optimized.
-
-## [2.2.2] — 2026-03-03
+### [2.2.2] — 2026-03-03
 
 ### Fixed
 - [FIX] fetch_real_stars() — switched from broken GraphQL to REST API
@@ -709,8 +704,6 @@ The ESOL is a mandatory, non-severable condition of use. By using this software,
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
 > [ESOL v1.1](https://github.com/ESOL-License/ESOL/)
 > Read code header why for codey too!!! its not a game its an open source audit!
-
-
 
 
 

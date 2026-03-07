@@ -143,11 +143,11 @@
   <polyline points="15,438 15,458 35,458"    fill="none" stroke="#00ff88" stroke-width="2"/>
   <polyline points="615,438 615,458 595,458" fill="none" stroke="#00ff88" stroke-width="2"/>
 
-  <!-- Header -->
-  <rect x="15" y="15" width="600" height="28" fill="#00aaff" opacity="0.06"/>
-  <line x1="15" y1="43" x2="615" y2="43" stroke="#f59e0b" stroke-width="1" opacity="0.4"/>
-  <text x="26" y="34" fill="#00ff88" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user ELDER --lvl 1 --prestige 0</text>
-  <text x="608" y="34" text-anchor="end" fill="#00aaff" font-family="Courier New,monospace" font-size="10" opacity="0.45">2026-03-07 09:55 UTC</text>
+  <!-- Header :D -->
+  <rect x="15" y="15" width="600" height="28" fill="#bf00ff" opacity="0.08"/>
+  <line x1="15" y1="43" x2="615" y2="43" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
+  <text x="26" y="34" fill="#e0aaff" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user ELDER --lvl 9 --prestige 0</text>
+  <text x="608" y="34" text-anchor="end" fill="#f59e0b" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-03-07 06:51 UTC</text>
 
   <!-- ONE-SHOT scanline -->
   <rect class="scanline" x="15" y="43" width="600" height="5" fill="#00aaff"/>
@@ -280,11 +280,11 @@
   <g transform="translate(265, 95)" font-family="Courier New,monospace" fill="#00aaff" font-size="12">
     <text x="0"   y="22"  opacity="0.65">health   </text>
     <text x="80"  y="22" >[██████░░░░░░░░░░░░░░]</text>
-    <text x="318" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ff88">35%</text>
+    <text x="318" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">31%</text>
 
     <text x="0"   y="44"  opacity="0.65">hunger   </text>
-    <text x="80"  y="44" >[██████░░░░░░░░░░░░░░]</text>
-    <text x="318" y="44"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ff88">34%</text>
+    <text x="80"  y="44" >[██████████████████░░]</text>
+    <text x="318" y="44"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">93%</text>
 
     <text x="0"   y="66"  opacity="0.65">happiness</text>
     <text x="80"  y="66" >[█████░░░░░░░░░░░░░░░]</text>
@@ -309,11 +309,11 @@
   <!-- Activity: matrix(1.199,0,0,1.145, 267,274) -->
   <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#00aaff" font-size="12">
     <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
-    <text x="0" y="21">STREAK=2d  •  COMMITS=5</text>
-    <text x="0" y="42">REAL_STARS=606  •  INFLATION=177</text>
+    <text x="0" y="21">STREAK=27d  •  COMMITS=875</text>
+    <text x="0" y="42">REAL_STARS=606  •  INFLATION=0</text>
     <text x="0" y="63" fill="#22cc66">STATUS=quality_curator</text>
     <text x="0" y="84" fill="#ff88dd" font-size="10">ISSUES=closed:4 • ratio:1.33 • score:1.40</text>
-    <text x="0" y="105" fill="#00ff88">SEASON=Refactor +1.2x 🧹</text>
+    <text x="0" y="105" fill="#ff88dd">SEASON=🧹 Refactor +10%</text>
   </g>
 
   <!-- sep3: y=414 -->

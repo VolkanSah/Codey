@@ -1,4 +1,4 @@
-# The Codey Gazette — 2026-03-03
+# The Codey Gazette — 2026-03-06
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
@@ -6,20 +6,20 @@
 
 ---
 
-## BREAKING: 605 real stars (+0 since yesterday)
+## BREAKING: 606 real stars (+1 since yesterday)
 
 > GitHub/Shields inflates your count with self-stars and fork stars.
-> Their number: **807** — the inflation: **202**. You're welcome.
+> Their number: **819** — the inflation: **213**. You're welcome.
 
 ---
 
 | | Count |
 |---|---|
-| Real stars (earned) | **605** |
-| Self-stars removed | 165 |
-| Fork stars removed | 37 |
-| GitHub / Shields shows | 807 |
-| Inflation | 202 |
+| Real stars (earned) | **606** |
+| Self-stars removed | 177 |
+| Fork stars removed | 36 |
+| GitHub / Shields shows | 819 |
+| Inflation | 213 |
 
 ---
 
@@ -29,11 +29,11 @@
 | | Active | Archived | Total |
 |---|---|---|---|
 | Own Repos | 124 | 4 | 128 |
-| Own Stars | 541 | 64 | **605** |
-| Forks | 85 | 0 | 85 |
-| Fork Stars _(not counted)_ | 37 | 0 | 37 |
+| Own Stars | 542 | 64 | **606** |
+| Forks | 83 | 0 | 83 |
+| Fork Stars _(not counted)_ | 36 | 0 | 36 |
 
-- Fork Ratio: 0.69 — clean
+- Fork Ratio: 0.67 — clean
 - Repos with 0 stars: 32
 
 </details>
@@ -108,6 +108,7 @@
 | OpenAi-GPT-GUI | 3 |
 | Security-Headers-Guide | 3 |
 | STEP-Viewer-Pro | 3 |
+| Website-Backup-with-Wget | 2 |
 | advanced-RAM-use-on-Bash-installed-systems | 2 |
 | Apache2-with-Nginx-Reverse-Proxy-and-Let-s-Encrypt-SSL-on-Debian-Ubuntu | 2 |
 | Instagram-Suspicious-Followers-Detection | 2 |
@@ -123,7 +124,6 @@
 | Android-GOD-Mode | 2 |
 | Safe-Honeypot | 2 |
 | Bash-script-for-monitoring-and-restarting-services | 1 |
-| Website-Backup-with-Wget | 1 |
 | creatig-Joomla-plugin-like-for-breadcrumbs | 1 |
 | how-to-Magento-2-plugin | 1 |
 | check-keywordrank-in-Google-search-with-js | 1 |
@@ -206,7 +206,6 @@
 | air-light-fork | 1 |
 | btc-hack-fork | 1 |
 | wp-autoplugin-fork | 1 |
-| social-app-fork | 1 |
 
 </details>
 
