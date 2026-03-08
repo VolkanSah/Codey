@@ -125,7 +125,7 @@
   <rect x="15" y="15" width="600" height="28" fill="#ff44cc" opacity="0.08"/>
   <line x1="15" y1="43" x2="615" y2="43" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
   <text x="26" y="34" fill="#ff44cc" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user ELDER --lvl 1 --prestige 0</text>
-  <text x="608" y="34" text-anchor="end" fill="#00ffff" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-03-07 10:23 UTC</text>
+  <text x="608" y="34" text-anchor="end" fill="#00ffff" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-03-08 06:53 UTC</text>
 
   <!-- ONE-SHOT scanline -->
   <rect class="scanline" x="15" y="43" width="600" height="5" fill="#ff44cc"/>
@@ -237,7 +237,7 @@
     </g>
 
     <!-- MOOD -->
-    <text x="117" y="364" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#ff44cc" opacity="0.8" filter="url(#glow)">MOOD > ELITE • 10.0y</text>
+    <text x="117" y="364" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#ff44cc" opacity="0.8" filter="url(#glow)">MOOD > EXHAUSTED • 10.0y</text>
   </g>
 
   <!-- ══ STATS PANEL — exakte Inkscape koordinaten (identisch Cuty) ══ -->
@@ -251,20 +251,20 @@
   <!-- Bars: translate(265, 95) -->
   <g transform="translate(265, 95)" font-family="Courier New,monospace" fill="#ff44cc" font-size="12">
     <text x="0"   y="22"  opacity="0.65">health   </text>
-    <text x="80"  y="22" >[█████████░░░░░░░░░░░]</text>
-    <text x="318" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">47%</text>
+    <text x="80"  y="22" >[███████░░░░░░░░░░░░░]</text>
+    <text x="318" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">40%</text>
 
     <text x="0"   y="44"  opacity="0.65">hunger   </text>
-    <text x="80"  y="44" >[██████░░░░░░░░░░░░░░]</text>
-    <text x="318" y="44"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">34%</text>
+    <text x="80"  y="44" >[██████████████████░░]</text>
+    <text x="318" y="44"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">94%</text>
 
     <text x="0"   y="66"  opacity="0.65">happiness</text>
-    <text x="80"  y="66" >[███████░░░░░░░░░░░░░]</text>
-    <text x="318" y="66"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">38%</text>
+    <text x="80"  y="66" >[█████░░░░░░░░░░░░░░░]</text>
+    <text x="318" y="66"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">26%</text>
 
     <text x="0"   y="88"  opacity="0.65">energy   </text>
-    <text x="80"  y="88" >[██████████████░░░░░░]</text>
-    <text x="318" y="88"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">70%</text>
+    <text x="80"  y="88" >[░░░░░░░░░░░░░░░░░░░░]</text>
+    <text x="318" y="88"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">0%</text>
 
     <text x="0"   y="110" opacity="0.65">social   </text>
     <text x="80"  y="110">[████████████░░░░░░░░]</text>
@@ -281,10 +281,10 @@
   <!-- Activity: matrix(1.199,0,0,1.145, 267,274) -->
   <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#ff44cc" font-size="12">
     <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
-    <text x="0" y="21">STREAK=0d  •  COMMITS=0</text>
-    <text x="0" y="42">REAL_STARS=606  •  INFLATION=177</text>
+    <text x="0" y="21">STREAK=1d  •  COMMITS=34</text>
+    <text x="0" y="42">REAL_STARS=606  •  INFLATION=163</text>
     <text x="0" y="63" fill="#22cc66">STATUS=quality_curator</text>
-    <text x="0" y="84" fill="#ff88dd" font-size="10">ISSUES=closed:3 • ratio:1.50 • score:1.45</text>
+    <text x="0" y="84" fill="#ff88dd" font-size="10">ISSUES=closed:2 • ratio:2.00 • score:1.50</text>
     <text x="0" y="105" fill="#ff88dd">SEASON=Refactor +1.2x 🧹</text>
   </g>
 
