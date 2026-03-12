@@ -1,4 +1,4 @@
-# The Codey Gazette — 2026-03-06
+# The Codey Gazette — 2026-03-12
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
@@ -6,20 +6,20 @@
 
 ---
 
-## BREAKING: 606 real stars (+1 since yesterday)
+## BREAKING: 607 real stars (+1 since yesterday)
 
 > GitHub/Shields inflates your count with self-stars and fork stars.
-> Their number: **819** — the inflation: **213**. You're welcome.
+> Their number: **807** — the inflation: **200**. You're welcome.
 
 ---
 
 | | Count |
 |---|---|
-| Real stars (earned) | **606** |
-| Self-stars removed | 177 |
+| Real stars (earned) | **607** |
+| Self-stars removed | 164 |
 | Fork stars removed | 36 |
-| GitHub / Shields shows | 819 |
-| Inflation | 213 |
+| GitHub / Shields shows | 807 |
+| Inflation | 200 |
 
 ---
 
@@ -28,13 +28,13 @@
 
 | | Active | Archived | Total |
 |---|---|---|---|
-| Own Repos | 124 | 4 | 128 |
-| Own Stars | 542 | 64 | **606** |
-| Forks | 83 | 0 | 83 |
+| Own Repos | 125 | 4 | 129 |
+| Own Stars | 543 | 64 | **607** |
+| Forks | 84 | 0 | 84 |
 | Fork Stars _(not counted)_ | 36 | 0 | 36 |
 
 - Fork Ratio: 0.67 — clean
-- Repos with 0 stars: 32
+- Repos with 0 stars: 33
 
 </details>
 
@@ -78,11 +78,11 @@
 | Multiple-Isolated-Tor-Instances-for-Hidden-Services | 7 |
 | VolkanSah | 7 |
 | OpenAI-Cost-Calculator | 7 |
+| WP-Claude-Interface | 7 |
 | Python-Modules-Overview | 6 |
 | The_Extractor.py | 6 |
 | SQLp-EDU | 6 |
 | InteliLink | 6 |
-| WP-Claude-Interface | 6 |
 | Detection-Labs-for-Palantir-Style-Activity | 6 |
 | ModSecurity-rule-to-block-SQL-injection-attacks-in-PHP | 5 |
 | Human-like-Instagram-Unfollower | 5 |
