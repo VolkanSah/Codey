@@ -1,4 +1,4 @@
-# The Codey Gazette — 2026-03-15
+# The Codey Gazette — 2026-04-01
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
@@ -6,20 +6,20 @@
 
 ---
 
-## BREAKING: 607 real stars (+0 since yesterday)
+## BREAKING: 613 real stars (+6 since yesterday)
 
 > GitHub/Shields inflates your count with self-stars and fork stars.
-> Their number: **810** — the inflation: **203**. You're welcome.
+> Their number: **818** — the inflation: **205**. You're welcome.
 
 ---
 
 | | Count |
 |---|---|
-| Real stars (earned) | **607** |
-| Self-stars removed | 167 |
+| Real stars (earned) | **613** |
+| Self-stars removed | 169 |
 | Fork stars removed | 36 |
-| GitHub / Shields shows | 810 |
-| Inflation | 203 |
+| GitHub / Shields shows | 818 |
+| Inflation | 205 |
 
 ---
 
@@ -28,13 +28,13 @@
 
 | | Active | Archived | Total |
 |---|---|---|---|
-| Own Repos | 125 | 6 | 131 |
-| Own Stars | 515 | 92 | **607** |
-| Forks | 85 | 0 | 85 |
+| Own Repos | 128 | 6 | 134 |
+| Own Stars | 522 | 91 | **613** |
+| Forks | 87 | 0 | 87 |
 | Fork Stars _(not counted)_ | 36 | 0 | 36 |
 
 - Fork Ratio: 0.68 — clean
-- Repos with 0 stars: 35
+- Repos with 0 stars: 38
 
 </details>
 
@@ -46,10 +46,10 @@
 | GPT-API-Integration-in-HTML-CSS-with-JS-PHP | 86 |
 | Exploring-the-Code-Interpreter-in-OpenAI-GPT | 43 |
 | AI-API-Security-Best-Practices | 32 |
-| optimize-MySQL-MariaDB | 30 |
+| optimize-MySQL-MariaDB | 31 |
 | WordPress-Security-Scanner-advanced-use | 22 |
 | ModSecurity-Webserver-Protection-Guide | 22 |
-| Auto-Proxy-Fetcher | 18 |
+| Auto-Proxy-Fetcher | 19 |
 | PoisonIvory | 15 |
 | Bitcoin-Lottery-Miner | 11 |
 | Implementing-AI-Systems-Whitepaper | 9 |
@@ -64,24 +64,24 @@
 | GPT-API-Integration-in-HTML-CSS-with-JS-PHP | 86 |
 | Exploring-the-Code-Interpreter-in-OpenAI-GPT | 43 |
 | AI-API-Security-Best-Practices | 32 |
-| optimize-MySQL-MariaDB | 30 |
+| optimize-MySQL-MariaDB | 31 |
 | WordPress-Security-Scanner-advanced-use | 22 |
 | ModSecurity-Webserver-Protection-Guide | 22 |
-| Auto-Proxy-Fetcher | 18 |
+| Auto-Proxy-Fetcher | 19 |
 | PoisonIvory | 15 |
 | Bitcoin-Lottery-Miner | 11 |
 | Implementing-AI-Systems-Whitepaper | 9 |
+| VolkanSah | 8 |
 | NMAP-Black-Python | 8 |
 | SherlocksHome | 8 |
 | XSSPY-NCF | 8 |
+| Detection-Labs-for-Palantir-Style-Activity | 8 |
 | Multiple-Isolated-Tor-Instances-for-Hidden-Services | 7 |
-| VolkanSah | 7 |
 | OpenAI-Cost-Calculator | 7 |
 | Python-Modules-Overview | 6 |
 | The_Extractor.py | 6 |
 | SQLp-EDU | 6 |
 | InteliLink | 6 |
-| Detection-Labs-for-Palantir-Style-Activity | 6 |
 | ModSecurity-rule-to-block-SQL-injection-attacks-in-PHP | 5 |
 | Human-like-Instagram-Unfollower | 5 |
 | Simple-Keyword-Rank-Scrapper | 5 |
@@ -96,6 +96,7 @@
 | intelligent-Proxy-Management-System | 4 |
 | Debug-Logger-Pro | 4 |
 | writethrough-caching | 3 |
+| Instagram-Suspicious-Followers-Detection | 3 |
 | WP-Facebook-Engagement-Metrics | 3 |
 | PHP-Libraries-Overview | 3 |
 | The_Collector | 3 |
@@ -105,18 +106,17 @@
 | How-to-use-fcrackzip | 3 |
 | OpenAi-GPT-GUI | 3 |
 | Security-Headers-Guide | 3 |
+| Securing-FastAPI-Applications | 3 |
 | STEP-Viewer-Pro | 3 |
 | Website-Backup-with-Wget | 2 |
 | advanced-RAM-use-on-Bash-installed-systems | 2 |
 | Apache2-with-Nginx-Reverse-Proxy-and-Let-s-Encrypt-SSL-on-Debian-Ubuntu | 2 |
-| Instagram-Suspicious-Followers-Detection | 2 |
 | Debian-Based-AI-Developer-Server | 2 |
 | Web-Interface-for-Running-Python-Scripts | 2 |
 | Python-Script-Runner-Debugger | 2 |
 | Python-Command-Overview-for-handling-files | 2 |
 | Web-Business-Card | 2 |
 | Text-to-Speech-PyGUI-for-Whisper | 2 |
-| Securing-FastAPI-Applications | 2 |
 | x201-BatConsole | 2 |
 | CryptoScanner | 2 |
 | Android-GOD-Mode | 2 |
@@ -159,7 +159,7 @@
 
 | Repository | Stars |
 |---|---|
-| ChatGPT-ShellMaster | 59 |
+| ChatGPT-ShellMaster | 58 |
 | aicc-comments-reply | 21 |
 | WP-Claude-Interface | 7 |
 | Social-Media-Poster-GUI | 4 |
