@@ -1,4 +1,4 @@
-# The Codey Gazette — 2026-04-15
+# The Codey Gazette — 2026-05-01
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
@@ -6,20 +6,20 @@
 
 ---
 
-## BREAKING: 624 real stars (+11 since yesterday)
+## BREAKING: 631 real stars (+7 since yesterday)
 
 > GitHub/Shields inflates your count with self-stars and fork stars.
-> Their number: **833** — the inflation: **209**. You're welcome.
+> Their number: **842** — the inflation: **211**. You're welcome.
 
 ---
 
 | | Count |
 |---|---|
-| Real stars (earned) | **624** |
-| Self-stars removed | 173 |
+| Real stars (earned) | **631** |
+| Self-stars removed | 175 |
 | Fork stars removed | 36 |
-| GitHub / Shields shows | 833 |
-| Inflation | 209 |
+| GitHub / Shields shows | 842 |
+| Inflation | 211 |
 
 ---
 
@@ -29,11 +29,11 @@
 | | Active | Archived | Total |
 |---|---|---|---|
 | Own Repos | 130 | 6 | 136 |
-| Own Stars | 534 | 90 | **624** |
-| Forks | 94 | 0 | 94 |
+| Own Stars | 540 | 91 | **631** |
+| Forks | 97 | 0 | 97 |
 | Fork Stars _(not counted)_ | 36 | 0 | 36 |
 
-- Fork Ratio: 0.72 — clean
+- Fork Ratio: 0.75 — clean
 - Repos with 0 stars: 38
 
 </details>
@@ -45,13 +45,13 @@
 |---|---|
 | GPT-API-Integration-in-HTML-CSS-with-JS-PHP | 85 |
 | Exploring-the-Code-Interpreter-in-OpenAI-GPT | 43 |
-| optimize-MySQL-MariaDB | 32 |
+| optimize-MySQL-MariaDB | 33 |
 | AI-API-Security-Best-Practices | 32 |
 | ModSecurity-Webserver-Protection-Guide | 23 |
 | WordPress-Security-Scanner-advanced-use | 22 |
 | Auto-Proxy-Fetcher | 19 |
-| PoisonIvory | 15 |
-| Bitcoin-Lottery-Miner | 13 |
+| PoisonIvory | 17 |
+| Bitcoin-Lottery-Miner | 14 |
 | Implementing-AI-Systems-Whitepaper | 9 |
 
 </details>
@@ -63,13 +63,13 @@
 |---|---|
 | GPT-API-Integration-in-HTML-CSS-with-JS-PHP | 85 |
 | Exploring-the-Code-Interpreter-in-OpenAI-GPT | 43 |
-| optimize-MySQL-MariaDB | 32 |
+| optimize-MySQL-MariaDB | 33 |
 | AI-API-Security-Best-Practices | 32 |
 | ModSecurity-Webserver-Protection-Guide | 23 |
 | WordPress-Security-Scanner-advanced-use | 22 |
 | Auto-Proxy-Fetcher | 19 |
-| PoisonIvory | 15 |
-| Bitcoin-Lottery-Miner | 13 |
+| PoisonIvory | 17 |
+| Bitcoin-Lottery-Miner | 14 |
 | Implementing-AI-Systems-Whitepaper | 9 |
 | Detection-Labs-for-Palantir-Style-Activity | 9 |
 | Multiple-Isolated-Tor-Instances-for-Hidden-Services | 8 |
@@ -78,6 +78,7 @@
 | SherlocksHome | 8 |
 | XSSPY-NCF | 8 |
 | OpenAI-Cost-Calculator | 7 |
+| Windows-Cleaner | 7 |
 | Python-Modules-Overview | 6 |
 | The_Extractor.py | 6 |
 | SQLp-EDU | 6 |
@@ -89,7 +90,6 @@
 | OpenAI-Text-to-Speech-Interface | 5 |
 | Custom-Fields-Eraser | 5 |
 | TNT | 5 |
-| Windows-Cleaner | 5 |
 | Python-XPath-Tutorial | 4 |
 | Ransy-EDU | 4 |
 | GPT-over-CLI | 4 |
@@ -162,7 +162,7 @@
 | Repository | Stars |
 |---|---|
 | ChatGPT-ShellMaster | 58 |
-| aicc-comments-reply | 20 |
+| aicc-comments-reply | 21 |
 | WP-Claude-Interface | 7 |
 | Social-Media-Poster-GUI | 4 |
 | Obsidian-Nightfall | 1 |
