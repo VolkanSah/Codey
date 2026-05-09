@@ -114,8 +114,8 @@
   <ellipse cx="120" cy="240" rx="120" ry="140" fill="#ff44cc" opacity="0.04" filter="url(#softglow)"/>
 
   <!-- Card -->
-  <rect x="15" y="15" width="600" height="443" fill="#0f0612" stroke="#f59e0b" stroke-width="1.5"/>
-  <rect x="12" y="12" width="606" height="449" fill="none" stroke="#f59e0b" stroke-width="0.8" stroke-dasharray="6 3" opacity="0.3"/>
+  <rect x="15" y="15" width="600" height="443" fill="#0f0612" stroke="#22c55e" stroke-width="1.5"/>
+  <rect x="12" y="12" width="606" height="449" fill="none" stroke="#22c55e" stroke-width="0.8" stroke-dasharray="6 3" opacity="0.3"/>
   <polyline points="15,35 15,15 35,15"       fill="none" stroke="#00ffff" stroke-width="2"/>
   <polyline points="615,35 615,15 595,15"    fill="none" stroke="#00ffff" stroke-width="2"/>
   <polyline points="15,438 15,458 35,458"    fill="none" stroke="#00ffff" stroke-width="2"/>
@@ -123,9 +123,9 @@
 
   <!-- Header -->
   <rect x="15" y="15" width="600" height="28" fill="#ff44cc" opacity="0.08"/>
-  <line x1="15" y1="43" x2="615" y2="43" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
-  <text x="26" y="34" fill="#ff44cc" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user ELDER --lvl 4 --prestige 0</text>
-  <text x="608" y="34" text-anchor="end" fill="#00ffff" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-05-08 07:49 UTC</text>
+  <line x1="15" y1="43" x2="615" y2="43" stroke="#22c55e" stroke-width="1" opacity="0.5"/>
+  <text x="26" y="34" fill="#ff44cc" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user NOOB --lvl 10 --prestige 0</text>
+  <text x="608" y="34" text-anchor="end" fill="#00ffff" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-05-09 08:02 UTC</text>
 
   <!-- ONE-SHOT scanline -->
   <rect class="scanline" x="15" y="43" width="600" height="5" fill="#ff44cc"/>
@@ -153,7 +153,7 @@
     <line class="circ2" x1="138" y1="272" x2="117" y2="272" stroke="#ff44cc" stroke-width="1" opacity="0.5"/>
     <!-- belly screen -->
     <rect x="96" y="263" width="42" height="32" rx="5" fill="#0a0008" stroke="#ff44cc" stroke-width="1"/>
-    <text x="117" y="284" text-anchor="middle" font-family="Courier New,monospace" font-size="20" fill="#ff44cc" opacity="0.9" filter="url(#glow)">🐍</text>
+    <text x="117" y="284" text-anchor="middle" font-family="Courier New,monospace" font-size="20" fill="#ff44cc" opacity="0.9" filter="url(#glow)">🐲</text>
 
     <!-- PAWS -->
     <g class="paw-l">
@@ -237,13 +237,13 @@
     </g>
 
     <!-- MOOD -->
-    <text x="117" y="364" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#ff44cc" opacity="0.8" filter="url(#glow)">MOOD > ELITE • 10.2y</text>
+    <text x="117" y="364" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#ff44cc" opacity="0.8" filter="url(#glow)">MOOD > ELITE • 1.0y</text>
   </g>
 
   <!-- ══ STATS PANEL — exakte Inkscape koordinaten (identisch Cuty) ══ -->
 
   <!-- Header: x=265 y=74 -->
-  <text x="265" y="74" fill="#ff44cc" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat Python.log</text>
+  <text x="265" y="74" fill="#ff44cc" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat unknown.log</text>
 
   <!-- sep1: y=90 -->
   <line x1="263" y1="90" x2="630" y2="90" stroke="#ff44cc" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
@@ -252,11 +252,11 @@
   <g transform="translate(265, 95)" font-family="Courier New,monospace" fill="#ff44cc" font-size="12">
     <text x="0"   y="22"  opacity="0.65">health   </text>
     <text x="80"  y="22" >[██████░░░░░░░░░░░░░░]</text>
-    <text x="318" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">34%</text>
+    <text x="318" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">33%</text>
 
     <text x="0"   y="44"  opacity="0.65">hunger   </text>
     <text x="80"  y="44" >[░░░░░░░░░░░░░░░░░░░░]</text>
-    <text x="318" y="44"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">1%</text>
+    <text x="318" y="44"  font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">0%</text>
 
     <text x="0"   y="66"  opacity="0.65">happiness</text>
     <text x="80"  y="66" >[░░░░░░░░░░░░░░░░░░░░]</text>
@@ -271,8 +271,8 @@
     <text x="318" y="110" font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">1.25</text>
 
     <text x="0"   y="132" opacity="0.65">quality  </text>
-    <text x="80"  y="132">[████████████████░░░░]</text>
-    <text x="318" y="132" font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">0.84</text>
+    <text x="80"  y="132">[░░░░░░░░░░░░░░░░░░░░]</text>
+    <text x="318" y="132" font-size="11" opacity="0.55" text-anchor="end" fill="#00ffff">0.00</text>
   </g>
 
   <!-- sep2: y=254 -->
@@ -282,9 +282,9 @@
   <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#ff44cc" font-size="12">
     <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
     <text x="0" y="21">STREAK=0d  •  COMMITS=366</text>
-    <text x="0" y="42">REAL_STARS=634  •  INFLATION=175</text>
+    <text x="0" y="42">REAL_STARS=0  •  INFLATION=0</text>
     <text x="0" y="63" fill="#22cc66">STATUS=quality_curator</text>
-    <text x="0" y="84" fill="#ff88dd" font-size="10">ISSUES=closed:1 • ratio:0.50 • score:1.20</text>
+    
     <text x="0" y="105" fill="#ff88dd">SEASON=Deploy +1.3x 🚀</text>
   </g>
 
@@ -293,7 +293,7 @@
 
   <!-- Cursor + Achievement Icons inline -->
   <g transform="translate(265, 422)" font-family="Courier New,monospace" fill="#ff44cc">
-    <text x="0" y="16" font-size="13" font-weight="bold">$ ./codey --run <tspan fill="#f59e0b">💀 👑 💎 🎯 🐛</tspan> <tspan class="cursor">█</tspan></text>
+    <text x="0" y="16" font-size="13" font-weight="bold">$ ./codey --run <tspan fill="#22c55e">💀 👑 💎 🎯 🐛</tspan> <tspan class="cursor">█</tspan></text>
   </g>
 
 </svg>
