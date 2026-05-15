@@ -1,4 +1,4 @@
-# The Codey Gazette — 2026-05-01
+# The Codey Gazette — 2026-05-15
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
@@ -6,19 +6,19 @@
 
 ---
 
-## BREAKING: 631 real stars (+7 since yesterday)
+## BREAKING: 637 real stars (+6 since yesterday)
 
 > GitHub/Shields inflates your count with self-stars and fork stars.
-> Their number: **842** — the inflation: **211**. You're welcome.
+> Their number: **848** — the inflation: **211**. You're welcome.
 
 ---
 
 | | Count |
 |---|---|
-| Real stars (earned) | **631** |
+| Real stars (earned) | **637** |
 | Self-stars removed | 175 |
 | Fork stars removed | 36 |
-| GitHub / Shields shows | 842 |
+| GitHub / Shields shows | 848 |
 | Inflation | 211 |
 
 ---
@@ -29,12 +29,12 @@
 | | Active | Archived | Total |
 |---|---|---|---|
 | Own Repos | 130 | 6 | 136 |
-| Own Stars | 540 | 91 | **631** |
-| Forks | 97 | 0 | 97 |
+| Own Stars | 546 | 91 | **637** |
+| Forks | 98 | 0 | 98 |
 | Fork Stars _(not counted)_ | 36 | 0 | 36 |
 
 - Fork Ratio: 0.75 — clean
-- Repos with 0 stars: 38
+- Repos with 0 stars: 37
 
 </details>
 
@@ -50,9 +50,9 @@
 | ModSecurity-Webserver-Protection-Guide | 23 |
 | WordPress-Security-Scanner-advanced-use | 22 |
 | Auto-Proxy-Fetcher | 19 |
-| PoisonIvory | 17 |
+| PoisonIvory | 16 |
 | Bitcoin-Lottery-Miner | 14 |
-| Implementing-AI-Systems-Whitepaper | 9 |
+| Detection-Labs-for-Palantir-Style-Activity | 11 |
 
 </details>
 
@@ -68,11 +68,11 @@
 | ModSecurity-Webserver-Protection-Guide | 23 |
 | WordPress-Security-Scanner-advanced-use | 22 |
 | Auto-Proxy-Fetcher | 19 |
-| PoisonIvory | 17 |
+| PoisonIvory | 16 |
 | Bitcoin-Lottery-Miner | 14 |
+| Detection-Labs-for-Palantir-Style-Activity | 11 |
+| Multiple-Isolated-Tor-Instances-for-Hidden-Services | 9 |
 | Implementing-AI-Systems-Whitepaper | 9 |
-| Detection-Labs-for-Palantir-Style-Activity | 9 |
-| Multiple-Isolated-Tor-Instances-for-Hidden-Services | 8 |
 | VolkanSah | 8 |
 | NMAP-Black-Python | 8 |
 | SherlocksHome | 8 |
@@ -96,6 +96,8 @@
 | Tor-Network-Application-with-Stem-and-Scapy | 4 |
 | intelligent-Proxy-Management-System | 4 |
 | Debug-Logger-Pro | 4 |
+| Securing-FastAPI-Applications | 4 |
+| STEP-Viewer-Pro | 4 |
 | writethrough-caching | 3 |
 | Instagram-Suspicious-Followers-Detection | 3 |
 | WP-Facebook-Engagement-Metrics | 3 |
@@ -107,8 +109,6 @@
 | How-to-use-fcrackzip | 3 |
 | OpenAi-GPT-GUI | 3 |
 | Security-Headers-Guide | 3 |
-| Securing-FastAPI-Applications | 3 |
-| STEP-Viewer-Pro | 3 |
 | Website-Backup-with-Wget | 2 |
 | encode-and-decode-php8 | 2 |
 | advanced-RAM-use-on-Bash-installed-systems | 2 |
@@ -122,6 +122,7 @@
 | x201-BatConsole | 2 |
 | CryptoScanner | 2 |
 | Android-GOD-Mode | 2 |
+| CMIFC | 2 |
 | Safe-Honeypot | 2 |
 | Bash-script-for-monitoring-and-restarting-services | 1 |
 | creatig-Joomla-plugin-like-for-breadcrumbs | 1 |
