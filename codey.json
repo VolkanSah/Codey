@@ -1,11 +1,11 @@
 {
-  "health": 29.583333333333332,
-  "hunger": 8.75,
+  "health": 26.166666666666668,
+  "hunger": 3.5,
   "happiness": 0.0,
-  "energy": 80.0,
+  "energy": 75.0,
   "level": 4,
-  "streak": 2,
-  "total_commits": 381,
+  "streak": 3,
+  "total_commits": 385,
   "mood": "elite",
   "rpg_stats": {},
   "achievements": [
@@ -17,15 +17,6 @@
     "\ud83d\udc1b Bug Slayer"
   ],
   "history": [
-    {
-      "timestamp": "2026-04-27T08:34:58.369802+00:00",
-      "daily_commits": 1,
-      "daily_prs": 0,
-      "health": 34.11333333333334,
-      "mood": "elite",
-      "streak": 0,
-      "tier": "elder"
-    },
     {
       "timestamp": "2026-04-28T08:33:37.739287+00:00",
       "daily_commits": 0,
@@ -286,11 +277,20 @@
       "mood": "elite",
       "streak": 1,
       "tier": "elder"
+    },
+    {
+      "timestamp": "2026-05-27T10:05:32.437403+00:00",
+      "daily_commits": 4,
+      "daily_prs": 0,
+      "health": 29.583333333333332,
+      "mood": "elite",
+      "streak": 2,
+      "tier": "elder"
     }
   ],
   "brutal_stats": {
     "tier": "elder",
-    "github_years": 10.225872689938399,
+    "github_years": 10.231348391512663,
     "social_score": 1.25,
     "social_penalties": [],
     "social_bonuses": [
@@ -299,9 +299,7 @@
     "avg_repo_quality": 0.8417910447761204,
     "commit_quality_score": 1.0,
     "commit_quality_penalties": [],
-    "commit_quality_bonuses": [
-      "clean_history"
-    ],
+    "commit_quality_bonuses": [],
     "multipliers": {
       "xp": 0.25,
       "decay": 0.8,
@@ -310,15 +308,15 @@
     "total_stars": 642,
     "self_starred_count": 176,
     "language_diversity_penalty": 1.0,
-    "xp_earned": 17.5,
+    "xp_earned": 7.0,
     "dominant_language": "Python",
     "issues_closed": 0,
-    "issue_close_ratio": 0,
-    "issue_score": 1.0,
+    "issue_close_ratio": 0.0,
+    "issue_score": 0.7,
     "can_prestige": false,
     "prestige_missing": [
       "Need Level 10"
     ]
   },
-  "last_update": "2026-05-26T06:20:00.877006+00:00"
+  "last_update": "2026-05-27T10:05:32.437403+00:00"
 }
