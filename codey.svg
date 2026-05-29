@@ -29,9 +29,9 @@
   <!-- Stat bars -->
   <g transform="translate(205, 120)">
     <text x="0" y="20"   fill="#f0f6fc" font-weight="bold" font-size="14">❤️ Health</text>
-    <text x="330" y="20" fill="#8b949e" font-size="12" text-anchor="end">32%</text>
+    <text x="330" y="20" fill="#8b949e" font-size="12" text-anchor="end">33%</text>
     <rect x="0" y="25"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="25"   width="104.5" height="12" fill="#f85149" rx="6"/>
+    <rect x="0" y="25"   width="110.0" height="12" fill="#f85149" rx="6"/>
 
     <text x="0" y="55"   fill="#f0f6fc" font-weight="bold" font-size="14">🍖 Hunger</text>
     <text x="330" y="55" fill="#8b949e" font-size="12" text-anchor="end">0%</text>
@@ -44,9 +44,9 @@
     <rect x="0" y="95"   width="0.0" height="12" fill="#a855f7" rx="6"/>
 
     <text x="0" y="125"   fill="#f0f6fc" font-weight="bold" font-size="14">⚡ Energy</text>
-    <text x="330" y="125" fill="#8b949e" font-size="12" text-anchor="end">95%</text>
+    <text x="330" y="125" fill="#8b949e" font-size="12" text-anchor="end">100%</text>
     <rect x="0" y="130"   width="330" height="12" fill="#21262d" rx="6"/>
-    <rect x="0" y="130"   width="313.5" height="12" fill="#3fb950" rx="6"/>
+    <rect x="0" y="130"   width="330" height="12" fill="#3fb950" rx="6"/>
 
     <text x="0" y="160"   fill="#f0f6fc" font-weight="bold" font-size="14">👥 Social</text>
     <text x="330" y="160" fill="#8b949e" font-size="12" text-anchor="end">1.25</text>
@@ -68,12 +68,12 @@
   </g>
   <g transform="translate(315, 400)">
     <text x="0" y="0" text-anchor="middle" fill="#f0f6fc" font-size="13">
-      🗓️ 2d streak • 📊 385 commits • ⭐ 641 stars
+      🗓️ 1d streak • 📊 385 commits • ⭐ 641 stars
     </text>
     
   </g>
   <text x="315" y="445" text-anchor="middle" fill="#22cc66" font-size="11">✅ quality_curator</text>
   <text x="315" y="465" text-anchor="middle" fill="#8b949e" font-size="11">
-    2026-05-28 10:14 UTC • Python 🐍
+    2026-05-29 10:03 UTC • Python 🐍
   </text>
 </svg>
