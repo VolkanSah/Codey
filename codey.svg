@@ -3,7 +3,7 @@
   <rect x="20" y="20" width="590" height="460" fill="#161b22" rx="12"
         stroke="#30363d" stroke-width="1"/>
 
-  <g><rect x="45.0" y="10" width="150" height="35" rx="17.5" fill="#f59e0b" opacity="0.9" stroke="#30363d" stroke-width="1.5"/><text x="120" y="33" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">🚀 Deploy</text></g>
+  <g><rect x="45.0" y="10" width="150" height="35" rx="17.5" fill="#f59e0b" opacity="0.9" stroke="#30363d" stroke-width="1.5"/><text x="120" y="33" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">📚 Docs</text></g>
   <text x="40" y="75" fill="#f0f6fc" font-size="18" font-weight="bold">
     🧙‍♂️ CODEY Level 4
   </text>
@@ -74,6 +74,6 @@
   </g>
   <text x="315" y="445" text-anchor="middle" fill="#22cc66" font-size="11">✅ quality_curator</text>
   <text x="315" y="465" text-anchor="middle" fill="#8b949e" font-size="11">
-    2026-05-31 08:54 UTC • Python 🐍
+    2026-06-01 11:46 UTC • Python 🐍
   </text>
 </svg>
