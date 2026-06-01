@@ -1,4 +1,4 @@
-# The Codey Gazette — 2026-05-26
+# The Codey Gazette — 2026-06-01
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
@@ -6,19 +6,19 @@
 
 ---
 
-## BREAKING: 642 real stars (+5 since yesterday)
+## BREAKING: 643 real stars (+1 since yesterday)
 
 > GitHub/Shields inflates your count with self-stars and fork stars.
-> Their number: **854** — the inflation: **212**. You're welcome.
+> Their number: **855** — the inflation: **212**. You're welcome.
 
 ---
 
 | | Count |
 |---|---|
-| Real stars (earned) | **642** |
+| Real stars (earned) | **643** |
 | Self-stars removed | 176 |
 | Fork stars removed | 36 |
-| GitHub / Shields shows | 854 |
+| GitHub / Shields shows | 855 |
 | Inflation | 212 |
 
 ---
@@ -29,11 +29,11 @@
 | | Active | Archived | Total |
 |---|---|---|---|
 | Own Repos | 128 | 6 | 134 |
-| Own Stars | 550 | 92 | **642** |
-| Forks | 102 | 0 | 102 |
+| Own Stars | 551 | 92 | **643** |
+| Forks | 104 | 0 | 104 |
 | Fork Stars _(not counted)_ | 36 | 0 | 36 |
 
-- Fork Ratio: 0.8 — clean
+- Fork Ratio: 0.81 — clean
 - Repos with 0 stars: 34
 
 </details>
@@ -43,7 +43,7 @@
 
 | Repository | Stars |
 |---|---|
-| GPT-API-Integration-in-HTML-CSS-with-JS-PHP | 86 |
+| GPT-API-Integration-in-HTML-CSS-with-JS-PHP | 85 |
 | Exploring-the-Code-Interpreter-in-OpenAI-GPT | 43 |
 | optimize-MySQL-MariaDB | 33 |
 | AI-API-Security-Best-Practices | 32 |
@@ -51,8 +51,8 @@
 | WordPress-Security-Scanner-advanced-use | 22 |
 | Auto-Proxy-Fetcher | 19 |
 | PoisonIvory | 16 |
-| Bitcoin-Lottery-Miner | 14 |
-| Detection-Labs-for-Palantir-Style-Activity | 11 |
+| Bitcoin-Lottery-Miner | 15 |
+| Detection-Labs-for-Palantir-Style-Activity | 12 |
 
 </details>
 
@@ -61,7 +61,7 @@
 
 | Repository | Stars |
 |---|---|
-| GPT-API-Integration-in-HTML-CSS-with-JS-PHP | 86 |
+| GPT-API-Integration-in-HTML-CSS-with-JS-PHP | 85 |
 | Exploring-the-Code-Interpreter-in-OpenAI-GPT | 43 |
 | optimize-MySQL-MariaDB | 33 |
 | AI-API-Security-Best-Practices | 32 |
@@ -69,8 +69,8 @@
 | WordPress-Security-Scanner-advanced-use | 22 |
 | Auto-Proxy-Fetcher | 19 |
 | PoisonIvory | 16 |
-| Bitcoin-Lottery-Miner | 14 |
-| Detection-Labs-for-Palantir-Style-Activity | 11 |
+| Bitcoin-Lottery-Miner | 15 |
+| Detection-Labs-for-Palantir-Style-Activity | 12 |
 | Multiple-Isolated-Tor-Instances-for-Hidden-Services | 9 |
 | Implementing-AI-Systems-Whitepaper | 9 |
 | VolkanSah | 8 |
