@@ -1,4 +1,4 @@
-# The Codey Gazette — 2026-10-03
+# The Codey Gazette — 2026-10-15
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
@@ -6,19 +6,19 @@
 
 ---
 
-## BREAKING: 674 real stars (+31 since yesterday)
+## BREAKING: 678 real stars (+4 since yesterday)
 
 > GitHub/Shields inflates your count with self-stars and fork stars.
-> Their number: **887** — the inflation: **213**. You're welcome.
+> Their number: **891** — the inflation: **213**. You're welcome.
 
 ---
 
 | | Count |
 |---|---|
-| Real stars (earned) | **674** |
+| Real stars (earned) | **678** |
 | Self-stars removed | 176 |
 | Fork stars removed | 37 |
-| GitHub / Shields shows | 887 |
+| GitHub / Shields shows | 891 |
 | Inflation | 213 |
 
 ---
@@ -29,11 +29,11 @@
 | | Active | Archived | Total |
 |---|---|---|---|
 | Own Repos | 128 | 6 | 134 |
-| Own Stars | 582 | 92 | **674** |
-| Forks | 119 | 0 | 119 |
+| Own Stars | 586 | 92 | **678** |
+| Forks | 120 | 0 | 120 |
 | Fork Stars _(not counted)_ | 37 | 0 | 37 |
 
-- Fork Ratio: 0.93 — clean
+- Fork Ratio: 0.94 — clean
 - Repos with 0 stars: 31
 
 </details>
@@ -49,9 +49,9 @@
 | AI-API-Security-Best-Practices | 32 |
 | WordPress-Security-Scanner-advanced-use | 23 |
 | ModSecurity-Webserver-Protection-Guide | 23 |
-| Auto-Proxy-Fetcher | 21 |
-| Bitcoin-Lottery-Miner | 20 |
-| PoisonIvory | 16 |
+| Auto-Proxy-Fetcher | 22 |
+| Bitcoin-Lottery-Miner | 19 |
+| PoisonIvory | 15 |
 | Detection-Labs-for-Palantir-Style-Activity | 15 |
 
 </details>
@@ -67,24 +67,25 @@
 | AI-API-Security-Best-Practices | 32 |
 | WordPress-Security-Scanner-advanced-use | 23 |
 | ModSecurity-Webserver-Protection-Guide | 23 |
-| Auto-Proxy-Fetcher | 21 |
-| Bitcoin-Lottery-Miner | 20 |
-| PoisonIvory | 16 |
+| Auto-Proxy-Fetcher | 22 |
+| Bitcoin-Lottery-Miner | 19 |
+| PoisonIvory | 15 |
 | Detection-Labs-for-Palantir-Style-Activity | 15 |
-| Multiple-Isolated-Tor-Instances-for-Hidden-Services | 11 |
+| Multiple-Isolated-Tor-Instances-for-Hidden-Services | 12 |
 | NMAP-Black-Python | 9 |
 | Implementing-AI-Systems-Whitepaper | 9 |
-| XSSPY-NCF | 9 |
+| Windows-Cleaner | 9 |
 | VolkanSah | 8 |
 | SherlocksHome | 8 |
-| Windows-Cleaner | 8 |
+| XSSPY-NCF | 8 |
 | Python-Modules-Overview | 7 |
 | OpenAI-Cost-Calculator | 7 |
 | Securing-FastAPI-Applications | 7 |
+| STEP-Viewer-Pro | 7 |
 | The_Extractor.py | 6 |
 | OpenAI-Text-to-Speech-Interface | 6 |
 | InteliLink | 6 |
-| STEP-Viewer-Pro | 6 |
+| Awesome-Audio-Visualizer | 6 |
 | ModSecurity-rule-to-block-SQL-injection-attacks-in-PHP | 5 |
 | Human-like-Instagram-Unfollower | 5 |
 | Simple-Keyword-Rank-Scrapper | 5 |
@@ -98,7 +99,6 @@
 | Tor-Network-Application-with-Stem-and-Scapy | 4 |
 | intelligent-Proxy-Management-System | 4 |
 | Debug-Logger-Pro | 4 |
-| Awesome-Audio-Visualizer | 4 |
 | writethrough-caching | 3 |
 | Instagram-Suspicious-Followers-Detection | 3 |
 | WP-Facebook-Engagement-Metrics | 3 |
@@ -108,6 +108,7 @@
 | Stem-Local-Stream-Logger | 3 |
 | Twitter-X-AINewsBot | 3 |
 | OpenAi-GPT-GUI | 3 |
+| Security-Headers-Guide | 3 |
 | Website-Backup-with-Wget | 2 |
 | encode-and-decode-php8 | 2 |
 | advanced-RAM-use-on-Bash-installed-systems | 2 |
@@ -119,7 +120,6 @@
 | Web-Business-Card | 2 |
 | How-to-use-fcrackzip | 2 |
 | Text-to-Speech-PyGUI-for-Whisper | 2 |
-| Security-Headers-Guide | 2 |
 | x201-BatConsole | 2 |
 | CryptoScanner | 2 |
 | Android-GOD-Mode | 2 |
