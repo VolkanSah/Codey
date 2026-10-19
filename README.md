@@ -11,9 +11,7 @@
 </p>
 
 > [!WARNING]
-> Animated SVGs can be GPU-heavy — lighter skins are on the way.
->
-> Testing Codey from: 05.03-15.03.2026 for metrics
+> Animated SVGs can be GPU-heavy
 
 ---
 
