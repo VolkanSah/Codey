@@ -1,4 +1,4 @@
-# The Codey Gazette — 2026-10-15
+# The Codey Gazette — 2026-11-01
 
 ![]( https://github.com/VolkanSah.png?size=80)
 
@@ -6,19 +6,19 @@
 
 ---
 
-## BREAKING: 678 real stars (+4 since yesterday)
+## BREAKING: 686 real stars (+8 since yesterday)
 
 > GitHub/Shields inflates your count with self-stars and fork stars.
-> Their number: **891** — the inflation: **213**. You're welcome.
+> Their number: **899** — the inflation: **213**. You're welcome.
 
 ---
 
 | | Count |
 |---|---|
-| Real stars (earned) | **678** |
+| Real stars (earned) | **686** |
 | Self-stars removed | 176 |
 | Fork stars removed | 37 |
-| GitHub / Shields shows | 891 |
+| GitHub / Shields shows | 899 |
 | Inflation | 213 |
 
 ---
@@ -29,11 +29,11 @@
 | | Active | Archived | Total |
 |---|---|---|---|
 | Own Repos | 128 | 6 | 134 |
-| Own Stars | 586 | 92 | **678** |
-| Forks | 120 | 0 | 120 |
+| Own Stars | 593 | 93 | **686** |
+| Forks | 127 | 0 | 127 |
 | Fork Stars _(not counted)_ | 37 | 0 | 37 |
 
-- Fork Ratio: 0.94 — clean
+- Fork Ratio: 0.99 — clean
 - Repos with 0 stars: 31
 
 </details>
@@ -51,8 +51,8 @@
 | ModSecurity-Webserver-Protection-Guide | 23 |
 | Auto-Proxy-Fetcher | 22 |
 | Bitcoin-Lottery-Miner | 19 |
-| PoisonIvory | 15 |
-| Detection-Labs-for-Palantir-Style-Activity | 15 |
+| Detection-Labs-for-Palantir-Style-Activity | 18 |
+| PoisonIvory | 17 |
 
 </details>
 
@@ -69,12 +69,12 @@
 | ModSecurity-Webserver-Protection-Guide | 23 |
 | Auto-Proxy-Fetcher | 22 |
 | Bitcoin-Lottery-Miner | 19 |
-| PoisonIvory | 15 |
-| Detection-Labs-for-Palantir-Style-Activity | 15 |
-| Multiple-Isolated-Tor-Instances-for-Hidden-Services | 12 |
+| Detection-Labs-for-Palantir-Style-Activity | 18 |
+| PoisonIvory | 17 |
+| Multiple-Isolated-Tor-Instances-for-Hidden-Services | 13 |
+| Windows-Cleaner | 10 |
 | NMAP-Black-Python | 9 |
 | Implementing-AI-Systems-Whitepaper | 9 |
-| Windows-Cleaner | 9 |
 | VolkanSah | 8 |
 | SherlocksHome | 8 |
 | XSSPY-NCF | 8 |
@@ -166,7 +166,7 @@
 
 | Repository | Stars |
 |---|---|
-| ChatGPT-ShellMaster | 58 |
+| ChatGPT-ShellMaster | 59 |
 | aicc-comments-reply | 21 |
 | WP-Claude-Interface | 8 |
 | Social-Media-Poster-GUI | 4 |
