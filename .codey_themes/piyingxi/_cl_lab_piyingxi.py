@@ -2,7 +2,7 @@
 from datetime import datetime, timezone
 from xml.sax.saxutils import escape
 # =============================================================================
-# FILE:        _cl_piyingxi.py - "SHADOW PLAY" EDITION (皮影戏)
+# FILE:        __cl_lab_piyingxi.py - "SHADOW PLAY" EDITION (皮影戏)
 # =============================================================================
 # DEMO DUMMY:  ./codey_piyingxi.svg
 # UPDATED:     2026-11-03
