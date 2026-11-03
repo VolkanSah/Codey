@@ -1,292 +1,142 @@
-<svg width="630" height="473" xmlns="http://www.w3.org/2000/svg">
+<svg width="630" height="473" viewBox="0 0 630 473" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-      <path d="M20 0L0 0 0 20" fill="none" stroke="#bf00ff" stroke-width="0.3" opacity="0.12"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff0f8"/>
+      <stop offset="50%" stop-color="#f3ecff"/>
+      <stop offset="100%" stop-color="#e6f7ff"/>
+    </linearGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="1.6" fill="#ffb8dc" opacity="0.45"/>
+      <circle cx="15" cy="15" r="1.2" fill="#c6a8ff" opacity="0.4"/>
     </pattern>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="glow-hard">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <radialGradient id="bodygrad" cx="35%" cy="30%" r="65%">
-      <stop offset="0%"   stop-color="#d580ff"/>
-      <stop offset="100%" stop-color="#7700cc"/>
+    <radialGradient id="fur" cx="40%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#ffe3f1"/>
     </radialGradient>
-    <radialGradient id="headgrad" cx="35%" cy="30%" r="65%">
-      <stop offset="0%"   stop-color="#e0aaff"/>
-      <stop offset="100%" stop-color="#8800dd"/>
-    </radialGradient>
-    <radialGradient id="eyegrad" cx="30%" cy="30%" r="65%">
-      <stop offset="0%"   stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#ddaaff"/>
-    </radialGradient>
-    <radialGradient id="pupilgrad" cx="35%" cy="35%" r="60%">
-      <stop offset="0%"   stop-color="#cc44ff"/>
-      <stop offset="100%" stop-color="#5500aa"/>
-    </radialGradient>
-    <radialGradient id="cheekgrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#ff88dd" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#ff44cc" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="shadowgrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#bf00ff" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#bf00ff" stop-opacity="0"/>
+    <radialGradient id="cheek" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff8fbf" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ff8fbf" stop-opacity="0"/>
     </radialGradient>
     <style>
-      @keyframes breathe {
-        0%,100% { transform: translateY(0); }
-        50%     { transform: translateY(-7px); }
-      }
-      @keyframes blink {
-        0%,42%,58%,100% { transform: scaleY(1); }
-        50%             { transform: scaleY(0.06); }
-      }
-      @keyframes antpulse {
-        0%,100% { r:8;  opacity:1;   fill:#ff44cc; }
-        50%     { r:10; opacity:0.5; fill:#ffaaee; }
-      }
-      @keyframes wave {
-        0%,100% { transform: rotate(0deg);   }
-        25%     { transform: rotate(22deg);  }
-        75%     { transform: rotate(-12deg); }
-      }
-      @keyframes headbob {
-        0%,100% { transform: rotate(0deg); }
-        30%     { transform: rotate(4deg); }
-        70%     { transform: rotate(-4deg); }
-      }
-      @keyframes heartpop {
-        0%,65%,100% { transform: scale(0);   opacity:0; }
-        70%         { transform: scale(1.4); opacity:1; }
-        82%         { transform: scale(1.0); opacity:1; }
-        95%         { transform: scale(0.6); opacity:0; }
-      }
-      @keyframes starpop {
-        0%,80%,100% { transform: scale(0) rotate(0deg);    opacity:0; }
-        85%         { transform: scale(1.3) rotate(20deg);  opacity:1; }
-        95%         { transform: scale(0.8) rotate(-10deg); opacity:0; }
-      }
-      @keyframes blush {
-        0%,100% { opacity:0.45; }
-        50%     { opacity:0.75; }
-      }
-      @keyframes cur   { 0%,49%{opacity:1} 50%,100%{opacity:0} }
-      @keyframes circ  { 0%{stroke-dashoffset:60} 100%{stroke-dashoffset:0} }
-      @keyframes scanline {
-        0%   { transform:translateY(-8px); opacity:0;   }
-        8%   { opacity:0.25; }
-        92%  { opacity:0.25; }
-        100% { transform:translateY(220px); opacity:0; }
-      }
-      @keyframes ledpop {
-        0%,100% { r:3;   opacity:1;   }
-        50%     { r:4.5; opacity:0.3; }
-      }
-
-      .scanline { animation: scanline 3.8s linear 2 forwards; }
-      .circ1    { stroke-dasharray:60; animation: circ 2.6s linear 1 forwards; }
-      .circ2    { stroke-dasharray:50; animation: circ 3.2s linear 1 0.9s forwards; }
-
-      .bot-body { animation: breathe 3.2s ease-in-out infinite; }
-      .head-bob { animation: headbob 4.5s ease-in-out infinite; transform-origin: 141px 185px; }
-      .eye-l    { animation: blink 5s ease-in-out infinite;      transform-origin: 122px 185px; }
-      .eye-r    { animation: blink 5s ease-in-out infinite 0.1s;      transform-origin: 160px 185px; }
-      .arm-wave { animation: wave 2.2s ease-in-out infinite;    transform-origin: 207px 162px; }
-      .anttip   { animation: antpulse 1.5s ease-in-out infinite; }
-      .blush    { animation: blush 3.2s ease-in-out infinite; }
-      .heart    { animation: heartpop 5s ease-in-out infinite 0.8s; transform-origin: 195px 148px; }
-      .star     { animation: starpop 7s ease-in-out infinite 2s;  transform-origin: 89px 158px; }
-      .cursor   { animation: cur 1s step-end infinite; }
-      .led1     { animation: ledpop 0.9s ease-in-out infinite; }
-      .led2     { animation: ledpop 1.3s ease-in-out infinite 0.3s; }
-      .led3     { animation: ledpop 1.1s ease-in-out infinite 0.7s; }
-      .led4     { animation: ledpop 0.7s ease-in-out infinite 0.1s; }
+      text { font-family: 'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo','Nanum Gothic',sans-serif; }
+      @keyframes float   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+      @keyframes blink   { 0%,44%,56%,100%{transform:scaleY(1)} 50%{transform:scaleY(0.08)} }
+      @keyframes ear     { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(-7deg)} }
+      @keyframes wave    { 0%,100%{transform:rotate(0deg)} 30%{transform:rotate(-25deg)} 70%{transform:rotate(8deg)} }
+      @keyframes pop     { 0%,60%,100%{transform:scale(0);opacity:0} 70%{transform:scale(1.3);opacity:1}
+                           85%{transform:scale(1);opacity:1} 95%{transform:scale(0.5);opacity:0} }
+      @keyframes twinkle { 0%,100%{transform:scale(0.6);opacity:0.4} 50%{transform:scale(1.2);opacity:1} }
+      @keyframes cur     { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+      .float { animation:float 3.2s ease-in-out infinite; }
+      .eye   { animation:blink 4.5s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+      .earL  { animation:ear 3s ease-in-out infinite; transform-origin:118px 120px; }
+      .earR  { animation:ear 3s ease-in-out infinite; transform-origin:164px 120px; animation-delay:0.4s; }
+      .arm   { animation:wave 2s ease-in-out infinite; transform-origin:196px 238px; }
+      .h1    { animation:pop 5s ease-in-out infinite; transform-origin:205px 150px; }
+      .h2    { animation:pop 5s ease-in-out infinite 1.8s; transform-origin:78px 165px; }
+      .tw    { animation:twinkle 2.4s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+      .cursor{ animation:cur 1s step-end infinite; }
     </style>
   </defs>
 
-  <!-- Background -->
-  <rect width="630" height="473" fill="#080010"/>
-  <rect width="630" height="473" fill="url(#grid)"/>
+  <!-- background + card -->
+  <rect width="630" height="473" rx="26" fill="url(#bg)"/>
+  <rect width="630" height="473" rx="26" fill="url(#dots)"/>
+  <rect x="12" y="12" width="606" height="449" rx="22" fill="#ffffff" fill-opacity="0.55" stroke="#ffc46b" stroke-width="3"/>
+  <rect x="20" y="20" width="590" height="433" rx="17" fill="none" stroke="#ffc46b" stroke-width="1.2" stroke-dasharray="2 6" stroke-linecap="round"/>
 
-  <!-- Card :D -->
-  <rect x="15" y="15" width="600" height="443" fill="#0c0018" stroke="#f59e0b" stroke-width="1.5"/>
-  <rect x="12" y="12" width="606" height="449" fill="none" stroke="#f59e0b" stroke-width="0.8" stroke-dasharray="6 3" opacity="0.3"/>
-  <polyline points="15,35 15,15 35,15"       fill="none" stroke="#e0aaff" stroke-width="2"/>
-  <polyline points="615,35 615,15 595,15"    fill="none" stroke="#e0aaff" stroke-width="2"/>
-  <polyline points="15,438 15,458 35,458"    fill="none" stroke="#e0aaff" stroke-width="2"/>
-  <polyline points="615,438 615,458 595,458" fill="none" stroke="#e0aaff" stroke-width="2"/>
+  <!-- header pill -->
+  <rect x="30" y="26" width="570" height="28" rx="14" fill="#ffc46b" fill-opacity="0.28"/>
+  <text x="46" y="45" font-size="12" font-weight="700" fill="#7a4b9e">♡ 레전드 👑 · 레벨 5 </text>
+  <text x="586" y="45" text-anchor="end" font-size="10" fill="#9b7fc0">2026-11-03 06:59 UTC</text>
 
-  <!-- Header :D -->
-  <rect x="15" y="15" width="600" height="28" fill="#bf00ff" opacity="0.08"/>
-  <line x1="15" y1="43" x2="615" y2="43" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
-  <text x="26" y="34" fill="#e0aaff" font-family="Courier New,monospace" font-size="12" font-weight="bold" filter="url(#glow)">root@codey:~$ ./status --user ELDER --lvl 5 --prestige 0</text>
-  <text x="608" y="34" text-anchor="end" fill="#f59e0b" font-family="Courier New,monospace" font-size="10" opacity="0.5">2026-11-02 15:18 UTC</text>
+  <!-- divider -->
+  <line x1="253" y1="66" x2="253" y2="445" stroke="#ffc46b" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/>
 
-  <!-- ONE-SHOT scanline -->
-  <rect class="scanline" x="15" y="43" width="600" height="5" fill="#bf00ff"/>
+  <!-- ══ BUNNY ══ -->
+  <g class="float">
+    <ellipse cx="141" cy="352" rx="52" ry="8" fill="#c6a8ff" opacity="0.3"/>
 
-  <!-- Divider -->
-  <line x1="253" y1="44" x2="253" y2="455" stroke="#bf00ff" stroke-width="1" stroke-dasharray="4 3" opacity="0.3"/>
+    <!-- feet -->
+    <ellipse cx="120" cy="338" rx="18" ry="10" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2"/>
+    <ellipse cx="162" cy="338" rx="18" ry="10" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2"/>
 
-  <!-- ══ CUTE ROBOT — cx=141 ══ -->
-  <g class="bot-body">
-    <ellipse cx="141" cy="336" rx="48" ry="8" fill="url(#shadowgrad)"/>
+    <!-- body -->
+    <ellipse cx="141" cy="285" rx="48" ry="54" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2.5"/>
+    <ellipse cx="141" cy="298" rx="29" ry="34" fill="#fff" stroke="#ffd0e6" stroke-width="1.5"/>
+    <text x="141" y="308" text-anchor="middle" font-size="26">🐍</text>
 
-    <!-- Legs -->
-    <rect x="121" y="295" width="16" height="30" rx="8" fill="url(#bodygrad)"/>
-    <rect x="149" y="295" width="16" height="30" rx="8" fill="url(#bodygrad)"/>
-    <ellipse cx="129" cy="328" rx="14" ry="8" fill="#9922cc"/>
-    <ellipse cx="157" cy="328" rx="14" ry="8" fill="#9922cc"/>
-    <ellipse cx="125" cy="325" rx="5"  ry="3" fill="#e0aaff" opacity="0.3"/>
-    <ellipse cx="153" cy="325" rx="5"  ry="3" fill="#e0aaff" opacity="0.3"/>
-
-    <!-- Body -->
-    <rect x="105" y="215" width="72" height="85" rx="22" fill="url(#bodygrad)" filter="url(#glow)"/>
-    <ellipse cx="130" cy="228" rx="24" ry="12" fill="white" opacity="0.12"/>
-    <rect x="115" y="228" width="52" height="38" rx="10" fill="#3d0066" opacity="0.6"/>
-    <line class="circ1" x1="121" y1="242" x2="141" y2="242" stroke="#e0aaff" stroke-width="1" opacity="0.5"/>
-    <line               x1="141" y1="242" x2="141" y2="252" stroke="#e0aaff" stroke-width="1" opacity="0.4"/>
-    <line class="circ2" x1="161" y1="252" x2="141" y2="252" stroke="#e0aaff" stroke-width="1" opacity="0.5"/>
-    <text x="141" y="260" text-anchor="middle" font-size="20" fill="#ff88dd" opacity="0.9" filter="url(#glow)">🐍</text>
-
-    <!-- Left arm -->
-    <rect x="69"  y="222" width="38" height="16" rx="8" fill="url(#bodygrad)" filter="url(#glow)"/>
-    <circle cx="69" cy="230" r="12" fill="#9922cc" filter="url(#glow)"/>
-    <ellipse cx="65" cy="227" rx="5" ry="3" fill="#e0aaff" opacity="0.35"/>
-
-    <!-- Right arm waving -->
-    <g class="arm-wave">
-      <rect x="175" y="222" width="38" height="16" rx="8" fill="url(#bodygrad)" filter="url(#glow)"/>
-      <circle cx="213" cy="230" r="12" fill="#9922cc" filter="url(#glow)"/>
-      <ellipse cx="209" cy="227" rx="5" ry="3" fill="#e0aaff" opacity="0.35"/>
+    <!-- left arm -->
+    <ellipse cx="96" cy="278" rx="11" ry="20" transform="rotate(18 96 278)" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2"/>
+    <!-- right arm (wave) -->
+    <g class="arm">
+      <ellipse cx="190" cy="262" rx="11" ry="20" transform="rotate(-25 190 262)" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2"/>
     </g>
 
-    <!-- Neck -->
-    <rect x="135" y="204" width="12" height="16" rx="5" fill="#9922cc"/>
-
-    <!-- HEAD GROUP -->
-    <g class="head-bob">
-      <rect x="97" y="130" width="88" height="78" rx="28" fill="url(#headgrad)" filter="url(#glow)"/>
-      <ellipse cx="129" cy="142" rx="32" ry="14" fill="white" opacity="0.15"/>
-      <circle cx="111" cy="138" r="5" fill="white" opacity="0.2"/>
-      <circle cx="105" cy="140" r="14" fill="url(#headgrad)" filter="url(#glow)"/>
-      <circle cx="105" cy="140" r="8"  fill="#cc44ff" opacity="0.5"/>
-      <circle cx="105" cy="140" r="4"  fill="white"   opacity="0.2"/>
-      <circle cx="185" cy="140" r="14" fill="url(#headgrad)" filter="url(#glow)"/>
-      <circle cx="185" cy="140" r="8"  fill="#cc44ff" opacity="0.5"/>
-      <circle cx="185" cy="140" r="4"  fill="white"   opacity="0.2"/>
-      <rect x="107" y="142" width="68" height="52" rx="14" fill="#1a0030" stroke="#cc44ff" stroke-width="1.2"/>
-      <rect x="113" y="146" width="24" height="6" rx="3" fill="white" opacity="0.07"/>
-      <g opacity="0.07">
-        <rect x="107" y="146" width="68" height="2" fill="#e0aaff"/>
-        <rect x="107" y="152" width="68" height="2" fill="#e0aaff"/>
-        <rect x="107" y="158" width="68" height="2" fill="#e0aaff"/>
-        <rect x="107" y="164" width="68" height="2" fill="#e0aaff"/>
-        <rect x="107" y="170" width="68" height="2" fill="#e0aaff"/>
-        <rect x="107" y="176" width="68" height="2" fill="#e0aaff"/>
-        <rect x="107" y="182" width="68" height="2" fill="#e0aaff"/>
-        <rect x="107" y="188" width="68" height="2" fill="#e0aaff"/>
-      </g>
-      <g class="eye-l">
-        <circle cx="122" cy="168" r="14" fill="url(#eyegrad)"/>
-        <circle cx="122" cy="168" r="10" fill="url(#pupilgrad)"/>
-        <circle cx="122" cy="168" r="5"  fill="#330055"/>
-        <circle cx="117" cy="163" r="3.5" fill="white" opacity="0.9"/>
-        <circle cx="125" cy="173" r="1.5" fill="white" opacity="0.4"/>
-        <line x1="115" y1="156" x2="113" y2="152" stroke="#cc44ff" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="122" y1="154" x2="122" y2="150" stroke="#cc44ff" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="129" y1="156" x2="131" y2="152" stroke="#cc44ff" stroke-width="1.5" stroke-linecap="round"/>
-      </g>
-      <g class="eye-r">
-        <circle cx="160" cy="168" r="14" fill="url(#eyegrad)"/>
-        <circle cx="160" cy="168" r="10" fill="url(#pupilgrad)"/>
-        <circle cx="160" cy="168" r="5"  fill="#330055"/>
-        <circle cx="155" cy="163" r="3.5" fill="white" opacity="0.9"/>
-        <circle cx="163" cy="173" r="1.5" fill="white" opacity="0.4"/>
-        <line x1="153" y1="156" x2="151" y2="152" stroke="#cc44ff" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="160" y1="154" x2="160" y2="150" stroke="#cc44ff" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="167" y1="156" x2="169" y2="152" stroke="#cc44ff" stroke-width="1.5" stroke-linecap="round"/>
-      </g>
-      <path d="M 133 186 Q 141 194 149 186" stroke="#ff88dd" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#glow)"/>
-      <ellipse class="blush" cx="108" cy="180" rx="12" ry="7" fill="url(#cheekgrad)"/>
-      <ellipse class="blush" cx="174" cy="180" rx="12" ry="7" fill="url(#cheekgrad)"/>
-      <circle class="led1" cx="131" cy="145" r="3" fill="#ff88dd"/>
-      <circle class="led2" cx="141" cy="143" r="3" fill="#e0aaff"/>
-      <circle class="led3" cx="151" cy="143" r="3" fill="#ff88dd"/>
-      <circle class="led4" cx="161" cy="145" r="3" fill="#e0aaff"/>
-      <line x1="141" y1="130" x2="141" y2="102" stroke="#cc44ff" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
-      <circle class="anttip" cx="141" cy="94" r="8" fill="#ff44cc" filter="url(#glow-hard)"/>
-      <circle cx="138" cy="91" r="2.5" fill="white" opacity="0.7"/>
+    <!-- ears -->
+    <g class="earL">
+      <ellipse cx="112" cy="88" rx="16" ry="42" transform="rotate(-10 112 88)" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2.5"/>
+      <ellipse cx="112" cy="92" rx="8" ry="28" transform="rotate(-10 112 92)" fill="#ffb3d4" opacity="0.7"/>
+    </g>
+    <g class="earR">
+      <ellipse cx="170" cy="88" rx="16" ry="42" transform="rotate(10 170 88)" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2.5"/>
+      <ellipse cx="170" cy="92" rx="8" ry="28" transform="rotate(10 170 92)" fill="#ffb3d4" opacity="0.7"/>
     </g>
 
-    <g class="heart">
-      <text x="195" y="152" font-size="22" fill="#ff44cc" text-anchor="middle" filter="url(#glow-hard)">♥</text>
-    </g>
-    <g class="star">
-      <text x="89" y="162" font-size="16" fill="#e0aaff" text-anchor="middle" filter="url(#glow)">✦</text>
-    </g>
+    <!-- head -->
+    <ellipse cx="141" cy="172" rx="60" ry="52" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2.5"/>
+    <ellipse cx="120" cy="148" rx="20" ry="8" fill="#fff" opacity="0.7"/>
 
-    <text x="141" y="364" text-anchor="middle" font-family="Courier New,monospace" font-size="11" fill="#e0aaff" opacity="0.8">MOOD > ELITE • 10.7y</text>
+    <!-- eyes -->
+    <g class="eye"><ellipse cx="118" cy="172" rx="8" ry="10" fill="#4a2a66"/>
+      <circle cx="115" cy="167" r="3.2" fill="#fff"/><circle cx="121" cy="176" r="1.6" fill="#fff"/></g>
+    <g class="eye"><ellipse cx="164" cy="172" rx="8" ry="10" fill="#4a2a66"/>
+      <circle cx="161" cy="167" r="3.2" fill="#fff"/><circle cx="167" cy="176" r="1.6" fill="#fff"/></g>
+
+    <!-- cheeks, nose, mouth -->
+    <ellipse cx="100" cy="188" rx="14" ry="9" fill="url(#cheek)"/>
+    <ellipse cx="182" cy="188" rx="14" ry="9" fill="url(#cheek)"/>
+    <ellipse cx="141" cy="184" rx="3.5" ry="2.6" fill="#ff7eb6"/>
+    <path d="M141 187 Q141 195 134 195 M141 187 Q141 195 148 195" stroke="#c0568a" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+    <!-- hair clip -->
+    <path d="M178 140 l7 -7 l7 7 l-7 7 z" fill="#ffd966" stroke="#ffb94d" stroke-width="1.2"/>
+
+    <!-- floating hearts / sparkles -->
+    <g class="h1"><text x="205" y="154" font-size="22" text-anchor="middle" fill="#ff6fa8">♥</text></g>
+    <g class="h2"><text x="78" y="168" font-size="16" text-anchor="middle" fill="#c6a8ff">♥</text></g>
+    <path class="tw" style="animation-delay:0s" d="M60 102Q60 110 68 110Q60 110 60 118Q60 110 52 110Q60 110 60 102Z" fill="#fff6a8" stroke="#ffd966" stroke-width="0.8"/>
+    <path class="tw" style="animation-delay:0.8s" d="M226 106Q226 112 232 112Q226 112 226 118Q226 112 220 112Q226 112 226 106Z" fill="#fff6a8" stroke="#ffd966" stroke-width="0.8"/>
+    <path class="tw" style="animation-delay:1.4s" d="M52 295Q52 300 57 300Q52 300 52 305Q52 300 47 300Q52 300 52 295Z" fill="#fff6a8" stroke="#ffd966" stroke-width="0.8"/>
+
+    <rect x="56" y="368" width="170" height="24" rx="12" fill="#ffc46b" fill-opacity="0.3"/>
+    <text x="141" y="385" text-anchor="middle" font-size="11" font-weight="700" fill="#7a4b9e">😰 힘들어요 · 10.7년차</text>
   </g>
 
-  <!-- ══ STATS PANEL — exakte Inkscape koordinaten ══ -->
+  <!-- ══ STATS ══ -->
+  <text x="265" y="84" font-size="15" font-weight="700" fill="#7a4b9e">♡ Python 로그 ♡</text>
+  <line x1="265" y1="96" x2="600" y2="96" stroke="#ffc46b" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
 
-  <!-- Header: x=265 y=74  //cat stats.log-->
-  <text x="265" y="74" fill="#e0aaff" font-family="Courier New,monospace" font-size="15" font-weight="bold" filter="url(#glow)">user@codey:~$ cat Python.log</text>
-
-
-  <!-- sep1: y=90 -->
-  <line x1="263" y1="90" x2="630" y2="90" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
-
-  <!-- Bars: translate(265, 95) — direkt nach sep1, kein badge -->
-  <g transform="translate(265, 95)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
-    <text x="0"   y="22"  opacity="0.65">health   </text>
-    <text x="80"  y="22" >[█████░░░░░░░░░░░░░░░]</text>
-    <text x="318" y="22"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">29%</text>
-
-    <text x="0"   y="44"  opacity="0.65">hunger   </text>
-    <text x="80"  y="44" >[███░░░░░░░░░░░░░░░░░]</text>
-    <text x="318" y="44"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">19%</text>
-
-    <text x="0"   y="66"  opacity="0.65">happiness</text>
-    <text x="80"  y="66" >[░░░░░░░░░░░░░░░░░░░░]</text>
-    <text x="318" y="66"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0%</text>
-
-    <text x="0"   y="88"  opacity="0.65">energy   </text>
-    <text x="80"  y="88" >[█████████████░░░░░░░]</text>
-    <text x="318" y="88"  font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">68%</text>
-
-    <text x="0"   y="110" opacity="0.65">social   </text>
-    <text x="80"  y="110">[████████████░░░░░░░░]</text>
-    <text x="318" y="110" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">1.25</text>
-
-    <text x="0"   y="132" opacity="0.65">quality  </text>
-    <text x="80"  y="132">[████████████████░░░░]</text>
-    <text x="318" y="132" font-size="11" opacity="0.55" text-anchor="end" fill="#ff88dd">0.84</text>
+  <g transform="translate(265, 112)" font-size="12" fill="#6b4a8a">
+    <text x="0" y="10" opacity="0.8">체력</text><rect x="70" y="0" width="200" height="14" rx="7" fill="#fff" stroke="#ff9ecb" stroke-width="1.2"/><rect x="70" y="0" width="27.9" height="14" rx="7" fill="#ff9ecb"/><rect x="74" y="3" width="19.9" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="11" text-anchor="end" font-size="11" fill="#ff7eb6">14%</text><text x="0" y="32" opacity="0.8">배고픔</text><rect x="70" y="22" width="200" height="14" rx="7" fill="#fff" stroke="#ffc46b" stroke-width="1.2"/><rect x="70" y="22" width="33.6" height="14" rx="7" fill="#ffc46b"/><rect x="74" y="25" width="25.6" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="33" text-anchor="end" font-size="11" fill="#ff7eb6">17%</text><text x="0" y="54" opacity="0.8">행복</text><rect x="70" y="44" width="200" height="14" rx="7" fill="#fff" stroke="#ffa6d9" stroke-width="1.2"/><rect x="70" y="44" width="0.0" height="14" rx="7" fill="#ffa6d9"/><rect x="74" y="47" width="0.0" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="55" text-anchor="end" font-size="11" fill="#ff7eb6">0%</text><text x="0" y="76" opacity="0.8">에너지</text><rect x="70" y="66" width="200" height="14" rx="7" fill="#fff" stroke="#8ed9ff" stroke-width="1.2"/><rect x="70" y="66" width="50.0" height="14" rx="7" fill="#8ed9ff"/><rect x="74" y="69" width="42.0" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="77" text-anchor="end" font-size="11" fill="#ff7eb6">25%</text><text x="0" y="98" opacity="0.8">소셜</text><rect x="70" y="88" width="200" height="14" rx="7" fill="#fff" stroke="#c6a8ff" stroke-width="1.2"/><rect x="70" y="88" width="125.0" height="14" rx="7" fill="#c6a8ff"/><rect x="74" y="91" width="117.0" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="99" text-anchor="end" font-size="11" fill="#ff7eb6">1.25</text><text x="0" y="120" opacity="0.8">퀄리티</text><rect x="70" y="110" width="200" height="14" rx="7" fill="#fff" stroke="#7fe3c0" stroke-width="1.2"/><rect x="70" y="110" width="168.4" height="14" rx="7" fill="#7fe3c0"/><rect x="74" y="113" width="160.4" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="121" text-anchor="end" font-size="11" fill="#ff7eb6">0.84</text>
   </g>
 
-  <!-- sep2: y=254 absolut — Inkscape -->
-  <line x1="263" y1="254" x2="630" y2="254" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+  <line x1="265" y1="254" x2="600" y2="254" stroke="#ffc46b" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
 
-  <!-- Activity: matrix(1.199, 0, 0, 1.145, 267, 274) -->
-  <g transform="matrix(1.199,0,0,1.145,267,274)" font-family="Courier New,monospace" fill="#e0aaff" font-size="12">
-    <text x="0" y="0"  font-size="11" opacity="0.5">$ cat activity.log</text>
-    <text x="0" y="21">STREAK=1d  •  COMMITS=422</text>
-    <text x="0" y="42">REAL_STARS=686  •  INFLATION=176</text>
-    <text x="0" y="63" fill="#22cc66">STATUS=quality_curator</text>
-    <text x="0" y="84" fill="#ff88dd" font-size="10">ISSUES=closed:1 • ratio:0.25 • score:1.07</text>
-    <text x="0" y="105" fill="#ff88dd">SEASON=Year Push +1.25x 🍁</text>
+  <!-- activity -->
+  <g transform="translate(267, 276)" font-size="13" fill="#6b4a8a">
+    <text x="0" y="0" font-size="11" opacity="0.6">♪ 활동 기록</text>
+    <text x="0" y="24">🔥 연속 2일  •  커밋 441</text>
+    <text x="0" y="46">⭐ 진짜 별 686  •  별 인플레 176</text>
+    <text x="0" y="68" fill="#3ec9a0" font-weight="700">💌 상태 = quality_curator</text>
+    <text x="0" y="84" fill="#ff7eb6" font-size="10">이슈 해결:1 • 비율:0.17 • 점수:0.75</text>
+    <text x="0" y="108" fill="#ff7eb6" font-weight="700">🌸 시즌=Year Push +1.25x 🍁</text>
   </g>
 
-  <!-- sep3: y=414 absolut — Inkscape -->
-  <line x1="263" y1="414" x2="636" y2="414" stroke="#bf00ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+  <line x1="265" y1="414" x2="600" y2="414" stroke="#ffc46b" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
 
-  <!-- Cursor + Achievement Icons inline — Icons in tier_color, kein Datum -->
-  <g transform="translate(265, 422)" font-family="Courier New,monospace" fill="#e0aaff">
-    <text x="0" y="16" font-size="13" font-weight="bold">$ ./codey --run <tspan fill="#f59e0b">💀 👑 💎 🎯 🐛</tspan> <tspan class="cursor">█</tspan></text>
+  <!-- footer -->
+  <g transform="translate(265, 424)" fill="#6b4a8a">
+    <text x="0" y="16" font-size="13" font-weight="700">♡ 오늘도 화이팅! 💀 👑 💎 🎯 🐛 <tspan class="cursor" fill="#ffc46b">▌</tspan></text>
   </g>
-
 </svg>
