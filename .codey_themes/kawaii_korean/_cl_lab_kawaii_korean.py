@@ -1,11 +1,25 @@
 #!/usr/bin/env python3
 # =============================================================================
-# FILE: kawaii_codey_kr.py - "KAWAII 한국어" EDITION
+# FILE: _cl_lab_kawaii_korean.py - "KAWAII 한국어" THEME for Codey
 # =============================================================================
-# Inspired by _cl_lab_cuty.py by VolkanSah (Apache 2.0 + ESOL v1.1).
-# This is an independent re-design (new character, new palette, Korean UI)
-# that keeps the same input data format, so it is a drop-in replacement:
-#     svg = generate_kawaii_svg(codey, seasonal_bonus, cycles=4)
+# Theme for Codey: https://github.com/VolkanSah/Codey
+# Based on the theme structure and data format of _cl_lab_cuty.py by
+# Volkan Kücükbudak (VolkanSah). New character, new palette, Korean UI.
+#
+# Theme author:  <YOUR NAME / GITHUB HANDLE>
+# Made with AI assistance (Claude). Korean texts: to be proofread by a
+# native speaker before publishing.
+#
+# LICENSE: This theme is treated as a derivative work of Codey. It stays under
+# the base license of the Codey project (Apache 2.0) AND the Ethical Security
+# Operations License (ESOL v2.0, https://github.com/ESOL-License/ESOL/),
+# which is a mandatory, non-severable condition of use.
+# Original author name, repository link and ESOL notice must remain intact
+# (ESOL v2.0, Section 3).
+# Author: Mimi + Claude after them the boss VolkanSah :D 
+#
+# Drop-in replacement for the default generator:
+#     svg = generate_brutal_svg(codey, seasonal_bonus, cycles=4)
 # =============================================================================
 from datetime import datetime, timezone
 from xml.sax.saxutils import escape
