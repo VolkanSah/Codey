@@ -6,7 +6,7 @@
 # Based on the theme structure and data format of _cl_lab_cuty.py by
 # Volkan Kücükbudak (VolkanSah). New character, new palette, Korean UI.
 #
-# Theme author:  <YOUR NAME / GITHUB HANDLE>
+# Theme author: Mimi + Claude, Fixed by VolkanSah
 # Made with AI assistance (Claude). Korean texts: to be proofread by a
 # native speaker before publishing.
 #
@@ -37,8 +37,8 @@ def generate_kawaii_svg(codey, seasonal_bonus, cycles=4):
                   'veteran': '베테랑 ⭐', 'elder': '레전드 👑'}
     moods = {
         'happy': ('😊', '행복해요'), 'struggling': ('😰', '힘들어요'),
-        'exhausted': ('😵', '지쳤어요'), 'grinding': ('😤', '열공중'),
-        'elite': ('😎', '멋져요'), 'wise': ('🧐', '똑똑해요'),
+        'exhausted': ('😵', '지쳤어요'), 'grinding': ('😤', '열일 중'),
+        'elite': ('😎', '멋져요'), 'wise': ('🧐', '현명해요'),
         'neutral': ('😐', '그냥 그래요'), 'overwhelmed': ('🤯', '정신없어요'),
         'inspired': ('✨', '영감 폭발'),
     }
@@ -75,7 +75,7 @@ def generate_kawaii_svg(codey, seasonal_bonus, cycles=4):
         status, status_c = '깨끗해요 ✨', '#a99bc4'
 
     season = (f'시즌={seasonal_bonus["name"]} +{seasonal_bonus["multiplier"]}x {seasonal_bonus["emoji"]}'
-              if seasonal_bonus else '시즌=휴식중 💤')
+              if seasonal_bonus else '시즌=휴식 중 💤')
 
     issue_line = ''
     if b.get('issues_closed', 0) > 0:
@@ -110,7 +110,7 @@ def generate_kawaii_svg(codey, seasonal_bonus, cycles=4):
     bars = ''.join([
         bar(0,   '체력',   codey.get('health', 0),    '#ff9ecb', f"{codey.get('health', 0):.0f}%"),
         bar(22,  '배고픔', codey.get('hunger', 0),    '#ffc46b', f"{codey.get('hunger', 0):.0f}%"),
-        bar(44,  '행복',   codey.get('happiness', 0), '#ffa6d9', f"{codey.get('happiness', 0):.0f}%"),
+        bar(44,  '행복도',   codey.get('happiness', 0), '#ffa6d9', f"{codey.get('happiness', 0):.0f}%"),
         bar(66,  '에너지', codey.get('energy', 0),    '#8ed9ff', f"{codey.get('energy', 0):.0f}%"),
         bar(88,  '소셜',   min(100, s_val * 50),      '#c6a8ff', f"{s_val:.2f}"),
         bar(110, '퀄리티', q_val * 100,               '#7fe3c0', f"{q_val:.2f}"),
@@ -237,7 +237,7 @@ def generate_kawaii_svg(codey, seasonal_bonus, cycles=4):
     {sparkle(52, 300, 5, 1.4)}
 
     <rect x="56" y="368" width="170" height="24" rx="12" fill="{tc}" fill-opacity="0.3"/>
-    <text x="141" y="385" text-anchor="middle" font-size="11" font-weight="700" fill="#7a4b9e">{mood_emoji} {mood_kr} · {years:.1f}년차</text>
+    <text x="141" y="385" text-anchor="middle" font-size="11" font-weight="700" fill="#7a4b9e">{mood_emoji} {mood_kr} · {years:.1f}년</text>
   </g>
 
   <!-- ══ STATS ══ -->
