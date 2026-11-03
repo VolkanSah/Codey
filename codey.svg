@@ -1,142 +1,287 @@
 <svg width="630" height="473" viewBox="0 0 630 473" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#fff0f8"/>
-      <stop offset="50%" stop-color="#f3ecff"/>
-      <stop offset="100%" stop-color="#e6f7ff"/>
-    </linearGradient>
-    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
-      <circle cx="4" cy="4" r="1.6" fill="#ffb8dc" opacity="0.45"/>
-      <circle cx="15" cy="15" r="1.2" fill="#c6a8ff" opacity="0.4"/>
-    </pattern>
-    <radialGradient id="fur" cx="40%" cy="30%" r="75%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#ffe3f1"/>
-    </radialGradient>
-    <radialGradient id="cheek" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#ff8fbf" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#ff8fbf" stop-opacity="0"/>
-    </radialGradient>
-    <style>
-      text { font-family: 'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo','Nanum Gothic',sans-serif; }
-      @keyframes float   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-      @keyframes blink   { 0%,44%,56%,100%{transform:scaleY(1)} 50%{transform:scaleY(0.08)} }
-      @keyframes ear     { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(-7deg)} }
-      @keyframes wave    { 0%,100%{transform:rotate(0deg)} 30%{transform:rotate(-25deg)} 70%{transform:rotate(8deg)} }
-      @keyframes pop     { 0%,60%,100%{transform:scale(0);opacity:0} 70%{transform:scale(1.3);opacity:1}
-                           85%{transform:scale(1);opacity:1} 95%{transform:scale(0.5);opacity:0} }
-      @keyframes twinkle { 0%,100%{transform:scale(0.6);opacity:0.4} 50%{transform:scale(1.2);opacity:1} }
-      @keyframes cur     { 0%,49%{opacity:1} 50%,100%{opacity:0} }
-      .float { animation:float 3.2s ease-in-out infinite; }
-      .eye   { animation:blink 4.5s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
-      .earL  { animation:ear 3s ease-in-out infinite; transform-origin:118px 120px; }
-      .earR  { animation:ear 3s ease-in-out infinite; transform-origin:164px 120px; animation-delay:0.4s; }
-      .arm   { animation:wave 2s ease-in-out infinite; transform-origin:196px 238px; }
-      .h1    { animation:pop 5s ease-in-out infinite; transform-origin:205px 150px; }
-      .h2    { animation:pop 5s ease-in-out infinite 1.8s; transform-origin:78px 165px; }
-      .tw    { animation:twinkle 2.4s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
-      .cursor{ animation:cur 1s step-end infinite; }
-    </style>
-  </defs>
-
-  <!-- background + card -->
-  <rect width="630" height="473" rx="26" fill="url(#bg)"/>
-  <rect width="630" height="473" rx="26" fill="url(#dots)"/>
-  <rect x="12" y="12" width="606" height="449" rx="22" fill="#ffffff" fill-opacity="0.55" stroke="#ffc46b" stroke-width="3"/>
-  <rect x="20" y="20" width="590" height="433" rx="17" fill="none" stroke="#ffc46b" stroke-width="1.2" stroke-dasharray="2 6" stroke-linecap="round"/>
-
-  <!-- header pill -->
-  <rect x="30" y="26" width="570" height="28" rx="14" fill="#ffc46b" fill-opacity="0.28"/>
-  <text x="46" y="45" font-size="12" font-weight="700" fill="#7a4b9e">♡ 레전드 👑 · 레벨 5 </text>
-  <text x="586" y="45" text-anchor="end" font-size="10" fill="#9b7fc0">2026-11-03 13:54 UTC</text>
-
-  <!-- divider -->
-  <line x1="253" y1="66" x2="253" y2="445" stroke="#ffc46b" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/>
-
-  <!-- ══ BUNNY ══ -->
-  <g class="float">
-    <ellipse cx="141" cy="352" rx="52" ry="8" fill="#c6a8ff" opacity="0.3"/>
-
-    <!-- feet -->
-    <ellipse cx="120" cy="338" rx="18" ry="10" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2"/>
-    <ellipse cx="162" cy="338" rx="18" ry="10" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2"/>
-
-    <!-- body -->
-    <ellipse cx="141" cy="285" rx="48" ry="54" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2.5"/>
-    <ellipse cx="141" cy="298" rx="29" ry="34" fill="#fff" stroke="#ffd0e6" stroke-width="1.5"/>
-    <text x="141" y="308" text-anchor="middle" font-size="26">🐍</text>
-
-    <!-- left arm -->
-    <ellipse cx="96" cy="278" rx="11" ry="20" transform="rotate(18 96 278)" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2"/>
-    <!-- right arm (wave) -->
-    <g class="arm">
-      <ellipse cx="190" cy="262" rx="11" ry="20" transform="rotate(-25 190 262)" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2"/>
-    </g>
-
-    <!-- ears -->
-    <g class="earL">
-      <ellipse cx="112" cy="88" rx="16" ry="42" transform="rotate(-10 112 88)" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2.5"/>
-      <ellipse cx="112" cy="92" rx="8" ry="28" transform="rotate(-10 112 92)" fill="#ffb3d4" opacity="0.7"/>
-    </g>
-    <g class="earR">
-      <ellipse cx="170" cy="88" rx="16" ry="42" transform="rotate(10 170 88)" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2.5"/>
-      <ellipse cx="170" cy="92" rx="8" ry="28" transform="rotate(10 170 92)" fill="#ffb3d4" opacity="0.7"/>
-    </g>
-
-    <!-- head -->
-    <ellipse cx="141" cy="172" rx="60" ry="52" fill="url(#fur)" stroke="#ffb3d4" stroke-width="2.5"/>
-    <ellipse cx="120" cy="148" rx="20" ry="8" fill="#fff" opacity="0.7"/>
-
-    <!-- eyes -->
-    <g class="eye"><ellipse cx="118" cy="172" rx="8" ry="10" fill="#4a2a66"/>
-      <circle cx="115" cy="167" r="3.2" fill="#fff"/><circle cx="121" cy="176" r="1.6" fill="#fff"/></g>
-    <g class="eye"><ellipse cx="164" cy="172" rx="8" ry="10" fill="#4a2a66"/>
-      <circle cx="161" cy="167" r="3.2" fill="#fff"/><circle cx="167" cy="176" r="1.6" fill="#fff"/></g>
-
-    <!-- cheeks, nose, mouth -->
-    <ellipse cx="100" cy="188" rx="14" ry="9" fill="url(#cheek)"/>
-    <ellipse cx="182" cy="188" rx="14" ry="9" fill="url(#cheek)"/>
-    <ellipse cx="141" cy="184" rx="3.5" ry="2.6" fill="#ff7eb6"/>
-    <path d="M141 187 Q141 195 134 195 M141 187 Q141 195 148 195" stroke="#c0568a" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-    <!-- hair clip -->
-    <path d="M178 140 l7 -7 l7 7 l-7 7 z" fill="#ffd966" stroke="#ffb94d" stroke-width="1.2"/>
-
-    <!-- floating hearts / sparkles -->
-    <g class="h1"><text x="205" y="154" font-size="22" text-anchor="middle" fill="#ff6fa8">♥</text></g>
-    <g class="h2"><text x="78" y="168" font-size="16" text-anchor="middle" fill="#c6a8ff">♥</text></g>
-    <path class="tw" style="animation-delay:0s" d="M60 102Q60 110 68 110Q60 110 60 118Q60 110 52 110Q60 110 60 102Z" fill="#fff6a8" stroke="#ffd966" stroke-width="0.8"/>
-    <path class="tw" style="animation-delay:0.8s" d="M226 106Q226 112 232 112Q226 112 226 118Q226 112 220 112Q226 112 226 106Z" fill="#fff6a8" stroke="#ffd966" stroke-width="0.8"/>
-    <path class="tw" style="animation-delay:1.4s" d="M52 295Q52 300 57 300Q52 300 52 305Q52 300 47 300Q52 300 52 295Z" fill="#fff6a8" stroke="#ffd966" stroke-width="0.8"/>
-
-    <rect x="56" y="368" width="170" height="24" rx="12" fill="#ffc46b" fill-opacity="0.3"/>
-    <text x="141" y="385" text-anchor="middle" font-size="11" font-weight="700" fill="#7a4b9e">😰 힘들어요 · 10.7년</text>
-  </g>
-
-  <!-- ══ STATS ══ -->
-  <text x="265" y="84" font-size="15" font-weight="700" fill="#7a4b9e">♡ Python 로그 ♡</text>
-  <line x1="265" y1="96" x2="600" y2="96" stroke="#ffc46b" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
-
-  <g transform="translate(265, 112)" font-size="12" fill="#6b4a8a">
-    <text x="0" y="10" opacity="0.8">체력</text><rect x="70" y="0" width="200" height="14" rx="7" fill="#fff" stroke="#ff9ecb" stroke-width="1.2"/><rect x="70" y="0" width="27.9" height="14" rx="7" fill="#ff9ecb"/><rect x="74" y="3" width="19.9" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="11" text-anchor="end" font-size="11" fill="#ff7eb6">14%</text><text x="0" y="32" opacity="0.8">배고픔</text><rect x="70" y="22" width="200" height="14" rx="7" fill="#fff" stroke="#ffc46b" stroke-width="1.2"/><rect x="70" y="22" width="33.6" height="14" rx="7" fill="#ffc46b"/><rect x="74" y="25" width="25.6" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="33" text-anchor="end" font-size="11" fill="#ff7eb6">17%</text><text x="0" y="54" opacity="0.8">행복도</text><rect x="70" y="44" width="200" height="14" rx="7" fill="#fff" stroke="#ffa6d9" stroke-width="1.2"/><rect x="70" y="44" width="0.0" height="14" rx="7" fill="#ffa6d9"/><rect x="74" y="47" width="0.0" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="55" text-anchor="end" font-size="11" fill="#ff7eb6">0%</text><text x="0" y="76" opacity="0.8">에너지</text><rect x="70" y="66" width="200" height="14" rx="7" fill="#fff" stroke="#8ed9ff" stroke-width="1.2"/><rect x="70" y="66" width="50.0" height="14" rx="7" fill="#8ed9ff"/><rect x="74" y="69" width="42.0" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="77" text-anchor="end" font-size="11" fill="#ff7eb6">25%</text><text x="0" y="98" opacity="0.8">소셜</text><rect x="70" y="88" width="200" height="14" rx="7" fill="#fff" stroke="#c6a8ff" stroke-width="1.2"/><rect x="70" y="88" width="125.0" height="14" rx="7" fill="#c6a8ff"/><rect x="74" y="91" width="117.0" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="99" text-anchor="end" font-size="11" fill="#ff7eb6">1.25</text><text x="0" y="120" opacity="0.8">퀄리티</text><rect x="70" y="110" width="200" height="14" rx="7" fill="#fff" stroke="#7fe3c0" stroke-width="1.2"/><rect x="70" y="110" width="168.4" height="14" rx="7" fill="#7fe3c0"/><rect x="74" y="113" width="160.4" height="3" rx="1.5" fill="#fff" opacity="0.45"/><text x="318" y="121" text-anchor="end" font-size="11" fill="#ff7eb6">0.84</text>
-  </g>
-
-  <line x1="265" y1="254" x2="600" y2="254" stroke="#ffc46b" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
-
-  <!-- activity -->
-  <g transform="translate(267, 276)" font-size="13" fill="#6b4a8a">
-    <text x="0" y="0" font-size="11" opacity="0.6">♪ 활동 기록</text>
-    <text x="0" y="24">🔥 연속 2일  •  커밋 441</text>
-    <text x="0" y="46">⭐ 진짜 별 686  •  별 인플레 176</text>
-    <text x="0" y="68" fill="#3ec9a0" font-weight="700">💌 상태 = quality_curator</text>
-    <text x="0" y="84" fill="#ff7eb6" font-size="10">이슈 해결:1 • 비율:0.17 • 점수:0.75</text>
-    <text x="0" y="108" fill="#ff7eb6" font-weight="700">🌸 시즌=Year Push +1.25x 🍁</text>
-  </g>
-
-  <line x1="265" y1="414" x2="600" y2="414" stroke="#ffc46b" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
-
-  <!-- footer -->
-  <g transform="translate(265, 424)" fill="#6b4a8a">
-    <text x="0" y="16" font-size="13" font-weight="700">♡ 오늘도 화이팅! 💀 👑 💎 🎯 🐛 <tspan class="cursor" fill="#ffc46b">▌</tspan></text>
-  </g>
+<style>
+  text { font-family: 'DejaVu Sans Mono','Menlo','Consolas','Liberation Mono','Courier New',monospace; }
+  @keyframes cur { 0%,49% { opacity:1 } 50%,100% { opacity:0 } }
+  @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:0.72 } }
+  @keyframes rowblink { 0%,100% { opacity:1 } 50% { opacity:0.45 } }
+  @keyframes scan { from { transform:translateY(0) } to { transform:translateY(272px) } }
+  .cursor { animation: cur 1s step-end infinite; }
+  .bars   { animation: pulse 3.2s ease-in-out infinite; }
+  .failrow { animation: rowblink 1.8s ease-in-out infinite; }
+  .scan   { animation: scan 14.4s steps(16, end) infinite; }
+</style>
+<rect width="630" height="473" rx="9" fill="#0b0b0b"/>
+<path d="M0 22 V9 Q0 0 9 0 H621 Q630 0 630 9 V22 Z" fill="#2b2b2b"/>
+<circle cx="16" cy="11" r="4.5" fill="#ff5f56"/><circle cx="32" cy="11" r="4.5" fill="#ffbd2e"/><circle cx="48" cy="11" r="4.5" fill="#27c93f"/>
+<text x="300" y="15" text-anchor="middle" font-size="10.5" fill="#9a9a9a">htop · codey@github · <tspan fill="#ff4d4d" font-weight="700">FAILED at sca</tspan></text>
+<text x="622" y="15" text-anchor="end" font-size="9" fill="#7d7d7d">2026-11-03 21:38 UTC</text>
+<text x="8" y="40" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Health</text>
+<text x="62" y="40" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
+<text class="bars" x="68.92" y="40" font-size="11.5" fill="#ff4d4d" textLength="34.60" lengthAdjust="spacing">|||||</text>
+<text x="318.04" y="40" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">13.9%</text>
+<text x="319.04" y="40" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
+<text x="8" y="57" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Hunger</text>
+<text x="62" y="57" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
+<text class="bars" x="68.92" y="57" font-size="11.5" fill="#ff4d4d" textLength="41.52" lengthAdjust="spacing">||||||</text>
+<text x="318.04" y="57" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">16.8%</text>
+<text x="319.04" y="57" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
+<text x="8" y="74" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Happy</text>
+<text x="62" y="74" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
+<text x="318.04" y="74" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">0.0%</text>
+<text x="319.04" y="74" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
+<text x="8" y="91" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Energy</text>
+<text x="62" y="91" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
+<text class="bars" x="68.92" y="91" font-size="11.5" fill="#e6d84a" textLength="62.28" lengthAdjust="spacing">|||||||||</text>
+<text x="318.04" y="91" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">25.0%</text>
+<text x="319.04" y="91" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
+<text x="8" y="108" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Social</text>
+<text x="62" y="108" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
+<text class="bars" x="68.92" y="108" font-size="11.5" fill="#3ddc55" textLength="152.24" lengthAdjust="spacing">||||||||||||||||||||||</text>
+<text x="318.04" y="108" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">1.25/2.00</text>
+<text x="319.04" y="108" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
+<text x="8" y="125" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Quality</text>
+<text x="62" y="125" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
+<text class="bars" x="68.92" y="125" font-size="11.5" fill="#3ddc55" textLength="179.92" lengthAdjust="spacing">||||||||||||||||||||||||||</text>
+<text x="318.04" y="125" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">0.84/1.00</text>
+<text x="319.04" y="125" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
+<text x="332" y="40" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Commits:</text>
+<text x="394.28" y="40" font-size="11.5" fill="#e8e8e8" font-weight="700">441 <tspan fill="#00cdcd">Streak:</tspan> 2d</text>
+<text x="332" y="57" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Stars:</text>
+<text x="380.44" y="57" font-size="11.5" fill="#e8e8e8" font-weight="700">686 real <tspan fill="#7a7a7a">/</tspan> <tspan fill="#ff4d4d">176 self</tspan></text>
+<text x="332" y="74" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Level:</text>
+<text x="380.44" y="74" font-size="11.5" fill="#e8e8e8" font-weight="700">5 <tspan fill="#00cdcd">Prestige:</tspan> -</text>
+<text x="332" y="91" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Uptime:</text>
+<text x="387.36" y="91" font-size="11.5" fill="#e8e8e8" font-weight="700">10.7 years</text>
+<text x="332" y="108" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Clearance:</text>
+<text x="408.12" y="108" font-size="11.5" fill="#e8e8e8" font-weight="700"><tspan fill="#00cdcd">L4 ARCHITECT</tspan></text>
+<text x="332" y="125" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Season:</text>
+<text x="387.36" y="125" font-size="11.5" fill="#e8e8e8" font-weight="700"><tspan fill="#e6d84a">Year Push x1.25</tspan></text>
+<rect x="0" y="140" width="630" height="17" fill="#1fa84a"/>
+<rect x="276" y="140" width="42" height="17" fill="#00cdcd"/>
+<text x="40" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">PID</text>
+<text x="48" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="start" font-weight="700">TIER</text>
+<text x="134" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">LVL</text>
+<text x="160" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">PRS</text>
+<text x="204" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">STARS</text>
+<text x="258" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">COMMITS</text>
+<text x="266" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">NRG%</text>
+<text x="360" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">HLT%</text>
+<text x="400" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">AGE</text>
+<text x="410" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="start" font-weight="700">Command</text>
+<rect x="0" y="159" width="630" height="17" fill="#00cdcd"/>
+<text x="40" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">1337</text>
+<text x="48" y="171" font-size="11.5" fill="#001a1a" text-anchor="start">elder</text>
+<text x="134" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">5</text>
+<text x="160" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">0</text>
+<text x="204" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">686</text>
+<text x="258" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">441</text>
+<text x="266" y="171" font-size="11.5" fill="#001a1a" text-anchor="start" font-weight="700">D</text>
+<text x="318" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">25.0</text>
+<text x="360" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">13.9</text>
+<text x="400" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">10.7y</text>
+<text x="410" y="171" font-size="11.5" fill="#001a1a">codey [Python] mood=struggling</text>
+<text class="cursor" x="624.5" y="171" font-size="11.5" fill="#001a1a">█</text>
+<text x="40" y="188" font-size="11.5" fill="#e6d84a" text-anchor="end">1338</text>
+<text x="48" y="188" font-size="11.5" fill="#e6d84a" text-anchor="start">elder</text>
+<text x="134" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="188" font-size="11.5" fill="#e6d84a" text-anchor="start" font-weight="700">R</text>
+<text x="318" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="188" font-size="11.5" fill="#e6d84a"><tspan fill="#7a7a7a">├─</tspan> build <tspan fill="#7a7a7a">streak=2d</tspan> <tspan font-weight="700">WARN</tspan></text>
+<text x="40" y="205" font-size="11.5" fill="#e8e8e8" text-anchor="end">1339</text>
+<text x="48" y="205" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
+<text x="134" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="205" font-size="11.5" fill="#3ddc55" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="205" font-size="11.5" fill="#e8e8e8"><tspan fill="#7a7a7a">├─</tspan> secrets-scan <tspan fill="#7a7a7a">clean</tspan> <tspan font-weight="700">PASS</tspan></text>
+<text x="40" y="222" font-size="11.5" fill="#e8e8e8" text-anchor="end">1340</text>
+<text x="48" y="222" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
+<text x="134" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="222" font-size="11.5" fill="#3ddc55" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="222" font-size="11.5" fill="#e8e8e8"><tspan fill="#7a7a7a">├─</tspan> sast <tspan fill="#7a7a7a">q=0.84</tspan> <tspan font-weight="700">PASS</tspan></text>
+<g class="failrow">
+<text x="40" y="239" font-size="11.5" fill="#ff4d4d" text-anchor="end">1341</text>
+<text x="48" y="239" font-size="11.5" fill="#ff4d4d" text-anchor="start">elder</text>
+<text x="134" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="239" font-size="11.5" fill="#ff4d4d" text-anchor="start" font-weight="700">Z</text>
+<text x="318" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="239" font-size="11.5" fill="#ff4d4d"><tspan fill="#7a7a7a">├─</tspan> sca <tspan fill="#7a7a7a">health=14%</tspan> <tspan font-weight="700">FAIL</tspan></text>
+</g>
+<g class="failrow">
+<text x="40" y="256" font-size="11.5" fill="#ff4d4d" text-anchor="end">1342</text>
+<text x="48" y="256" font-size="11.5" fill="#ff4d4d" text-anchor="start">elder</text>
+<text x="134" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="256" font-size="11.5" fill="#ff4d4d" text-anchor="start" font-weight="700">Z</text>
+<text x="318" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="256" font-size="11.5" fill="#ff4d4d"><tspan fill="#7a7a7a">├─</tspan> dast <tspan fill="#7a7a7a">energy=25%</tspan> <tspan font-weight="700">FAIL</tspan></text>
+</g>
+<text x="40" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">1343</text>
+<text x="48" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="start">elder</text>
+<text x="134" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="start" font-weight="700">T</text>
+<text x="318" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="273" font-size="11.5" fill="#7a7a7a"><tspan fill="#7a7a7a">└─</tspan> deploy <tspan fill="#7a7a7a">needs-fix</tspan> <tspan font-weight="700">BLOCKED</tspan></text>
+<text x="40" y="290" font-size="11.5" fill="#e8e8e8" text-anchor="end">1400</text>
+<text x="48" y="290" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
+<text x="134" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="290" font-size="11.5" fill="#3ddc55" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="290" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">issues</tspan> closed=1 ratio=0.17</text>
+<text x="40" y="307" font-size="11.5" fill="#e8e8e8" text-anchor="end">1401</text>
+<text x="48" y="307" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
+<text x="134" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="307" font-size="11.5" fill="#3ddc55" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="307" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">issue-score</tspan> 0.75</text>
+<text x="40" y="324" font-size="11.5" fill="#e8e8e8" text-anchor="end">1402</text>
+<text x="48" y="324" font-size="11.5" fill="#ff4d4d" text-anchor="start">root</text>
+<text x="134" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="324" font-size="11.5" fill="#ff4d4d" text-anchor="start" font-weight="700">R</text>
+<text x="318" y="324" font-size="11.5" fill="#ff4d4d" text-anchor="end" font-weight="700">20.4</text>
+<text x="360" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="324" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">star-inflation</tspan> self=176</text>
+<text x="40" y="341" font-size="11.5" fill="#e8e8e8" text-anchor="end">1403</text>
+<text x="48" y="341" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
+<text x="134" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="341" font-size="11.5" fill="#3ddc55" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="341" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">status-d</tspan> <tspan fill="#3ddc55">quality_curator</tspan></text>
+<text x="40" y="358" font-size="11.5" fill="#e8e8e8" text-anchor="end">1404</text>
+<text x="48" y="358" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
+<text x="134" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="358" font-size="11.5" fill="#e6d84a" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="358" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">season-d</tspan> Year Push x1.25</text>
+<text x="40" y="375" font-size="11.5" fill="#e8e8e8" text-anchor="end">1422</text>
+<text x="48" y="375" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
+<text x="134" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="375" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">achv/social_elite</tspan></text>
+<text x="40" y="392" font-size="11.5" fill="#e8e8e8" text-anchor="end">1423</text>
+<text x="48" y="392" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
+<text x="134" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="392" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">achv/quality_craftsman</tspan></text>
+<text x="40" y="409" font-size="11.5" fill="#e8e8e8" text-anchor="end">1424</text>
+<text x="48" y="409" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
+<text x="134" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="409" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">achv/quality_curator</tspan></text>
+<text x="40" y="426" font-size="11.5" fill="#e8e8e8" text-anchor="end">1425</text>
+<text x="48" y="426" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
+<text x="134" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="160" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="204" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="258" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="266" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="start" font-weight="700">S</text>
+<text x="318" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="360" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="400" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
+<text x="410" y="426" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">achv/bug_slayer</tspan></text>
+<rect class="scan" x="1" y="159" width="628" height="17" fill="none" stroke="#00cdcd" stroke-width="1" opacity="0.7"/>
+<text x="8" y="441" font-size="9" fill="#7a7a7a" text-anchor="start">S: PASS=S WARN=R FAIL=Z BLOCKED=T · gates ≥70 pass ≥40 warn · main row S = mood</text>
+<text x="6.0" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F1</text>
+<rect x="19.8" y="449" width="41.5" height="18" fill="#00cdcd"/>
+<text x="19.8" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Help&#160;&#160;</text>
+<text x="62.6" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F2</text>
+<rect x="76.4" y="449" width="41.5" height="18" fill="#00cdcd"/>
+<text x="76.4" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Setup&#160;</text>
+<text x="119.1" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F3</text>
+<rect x="133.0" y="449" width="41.5" height="18" fill="#00cdcd"/>
+<text x="133.0" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Search</text>
+<text x="175.7" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F4</text>
+<rect x="189.5" y="449" width="41.5" height="18" fill="#00cdcd"/>
+<text x="189.5" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Filter</text>
+<text x="232.2" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F5</text>
+<rect x="246.1" y="449" width="41.5" height="18" fill="#00cdcd"/>
+<text x="246.1" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Tree&#160;&#160;</text>
+<text x="288.8" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F6</text>
+<rect x="302.6" y="449" width="41.5" height="18" fill="#00cdcd"/>
+<text x="302.6" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">SortBy</text>
+<text x="345.4" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F7</text>
+<rect x="359.2" y="449" width="41.5" height="18" fill="#00cdcd"/>
+<text x="359.2" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Nice&#160;-</text>
+<text x="401.9" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F8</text>
+<rect x="415.8" y="449" width="41.5" height="18" fill="#00cdcd"/>
+<text x="415.8" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Nice&#160;+</text>
+<text x="458.5" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F9</text>
+<rect x="472.3" y="449" width="41.5" height="18" fill="#00cdcd"/>
+<text x="472.3" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Kill&#160;&#160;</text>
+<text x="515.0" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F10</text>
+<rect x="535.8" y="449" width="41.5" height="18" fill="#00cdcd"/>
+<text x="535.8" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Quit&#160;&#160;</text>
+<rect x="0.5" y="0.5" width="629" height="472" rx="9" fill="none" stroke="#3a3a3a"/>
 </svg>
