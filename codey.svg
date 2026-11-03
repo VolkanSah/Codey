@@ -48,7 +48,7 @@
   <!-- header pill -->
   <rect x="30" y="26" width="570" height="28" rx="14" fill="#ffc46b" fill-opacity="0.28"/>
   <text x="46" y="45" font-size="12" font-weight="700" fill="#7a4b9e">♡ 레전드 👑 · 레벨 5 </text>
-  <text x="586" y="45" text-anchor="end" font-size="10" fill="#9b7fc0">2026-11-03 10:43 UTC</text>
+  <text x="586" y="45" text-anchor="end" font-size="10" fill="#9b7fc0">2026-11-03 13:54 UTC</text>
 
   <!-- divider -->
   <line x1="253" y1="66" x2="253" y2="445" stroke="#ffc46b" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/>
