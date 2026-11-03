@@ -720,9 +720,9 @@ or check my profile repo to see my upcoming freaky minds :D
 
 ## License
 
-This project is dual-licensed under **Apache 2.0** and the **Ethical Security Operations License (ESOL v1.1)** byV Volkan K-Budak (VolkanSah).
+This project is dual-licensed under **Apache 2.0** and the **Ethical Security Operations License (ESOL v2.1)** byV Volkan K-Budak (VolkanSah).
 
-The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in ESOL v1.1.
+The ESOL is a mandatory, non-severable condition of use. By using this software, you agree to all ethical constraints defined in ESOL v2.1.
 
 > Free to use and modify. Selling this script or using it for reputation manipulation is explicitly prohibited.  
 > Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.  
