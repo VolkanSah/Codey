@@ -13,7 +13,7 @@
 # Free to use on GitHub and GitLab.
 # Selling this script or using it for reputation manipulation is prohibited.
 # update_codey.py Licensed  Privat , its free to use on Github and Gitlab
-# Rest of code Licensed under Apache 2.0 + Ethical Security Operations License (ESOL v1.1)
+# Rest of code Licensed under Apache 2.0 + Ethical Security Operations License (ESOL v2.1)
 # Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.
 # https://github.com/VolkanSah/ESOL
 #
