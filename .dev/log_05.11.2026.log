@@ -76,3 +76,436 @@ codey.json loaded.
 🎨 codey.svg written.
 💀 BRUTAL Codey update finished. Only the strong survive! 💀
 
+debug: cause no them chaged:
+
+
+From https://github.com/VolkanSah/Codey
+ * [new ref]         325776e8471b7588ee6311f6e893522c712093a2 -> origin/main
+##[debug]0
+##[debug]
+::endgroup::
+
+::group::Determining the checkout info
+Determining the checkout info
+/usr/bin/git sparse-checkout disable
+##[debug]0
+##[debug]
+/usr/bin/git config --local --unset-all extensions.worktreeConfig
+##[debug]0
+##[debug]
+::group::Checking out the ref
+Checking out the ref
+##[debug]0
+##[debug]commit 325776e8471b7588ee6311f6e893522c712093a2
+##[debug]Author: Think before you type! <VolkanSah@users.noreply.github.com>
+##[debug]Date:   Thu Nov 5 13:17:31 2026 +0100
+##[debug]
+##[debug]    Update README.md
+##[debug]
+/usr/bin/git log -1 --format=%H
+325776e8471b7588ee6311f6e893522c712093a2
+##[debug]0
+##[debug]325776e8471b7588ee6311f6e893522c712093a2
+##[debug]
+##[debug]Unsetting HOME override
+::remove-matcher owner=checkout-git::
+##[debug]Removed matchers: 'checkout-git'
+##[debug]Node Action run completed with exit code 0
+##[debug]Save intra-action state isPost = true
+##[debug]Save intra-action state setSafeDirectory = true
+##[debug]Save intra-action state repositoryPath = /home/runner/work/Codey/Codey
+##[debug]Set output commit = 325776e8471b7588ee6311f6e893522c712093a2
+##[debug]Set output ref = refs/heads/main
+##[debug]Finishing: Run actions/checkout@v4
+##[debug]GITHUB_WORKSPACE = '/home/runner/work/Codey/Codey'
+##[debug]qualified repository = 'VolkanSah/Codey'
+##[debug]ref = 'refs/heads/main'
+##[debug]commit = '325776e8471b7588ee6311f6e893522c712093a2'
+##[debug]clean = true
+##[debug]filter = undefined
+##[debug]fetch depth = 1
+##[debug]fetch tags = false
+##[debug]show progress = true
+##[debug]lfs = false
+##[debug]submodules = false
+##[debug]recursive submodules = false
+##[debug]GitHub Host URL = 
+##[debug]allow unsafe PR checkout = false
+::add-matcher::/home/runner/work/_actions/actions/checkout/v4/dist/problem-matcher.json
+##[debug]Added matchers: 'checkout-git'. Problem matchers scan action output for known warning or error strings and report these inline.
+Syncing repository: VolkanSah/Codey
+::group::Getting Git version info
+Getting Git version info
+::add-mask::***
+Temporarily overriding HOME='/home/runner/work/_temp/aefc46a8-cd05-4e44-bdce-32c106c60ec7' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /home/runner/work/Codey/Codey
+##[debug]0
+##[debug]
+Deleting the contents of '/home/runner/work/Codey/Codey'
+::group::Initializing the repository
+Initializing the repository
+::group::Disabling automatic garbage collection
+Disabling automatic garbage collection
+::group::Setting up auth
+Setting up auth
+::group::Fetching the repository
+Fetching the repository
+  /usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +325776e8471b7588ee6311f6e893522c712093a2:refs/remotes/origin/main
+1s
+##[debug]Evaluating condition for step: 'Run actions/setup-python@v4'
+##[debug]Evaluating: success()
+##[debug]Evaluating success:
+##[debug]=> true
+##[debug]Result: true
+##[debug]Starting: Run actions/setup-python@v4
+##[debug]Register post job cleanup for action: actions/setup-python@v4
+##[debug]Loading inputs
+##[debug]Evaluating: (((github.server_url == 'https://github.com') && github.token) || '')
+##[debug]Evaluating Or:
+##[debug]..Evaluating And:
+##[debug]....Evaluating Equal:
+##[debug]......Evaluating Index:
+##[debug]........Evaluating github:
+##[debug]........=> Object
+##[debug]........Evaluating String:
+##[debug]........=> 'server_url'
+##[debug]......=> 'https://github.com'
+##[debug]......Evaluating String:
+##[debug]......=> 'https://github.com'
+##[debug]....=> true
+##[debug]....Evaluating Index:
+##[debug]......Evaluating github:
+##[debug]......=> Object
+##[debug]......Evaluating String:
+##[debug]......=> 'token'
+##[debug]....=> '***'
+##[debug]..=> '***'
+##[debug]=> '***'
+##[debug]Expanded: ((('https://github.com' == 'https://github.com') && '***') || '')
+##[debug]Result: '***'
+##[debug]Loading env
+Run actions/setup-python@v4
+##[debug]Python is expected to be installed into /opt/hostedtoolcache
+::group::Installed versions
+Installed versions
+  ##[debug]Semantic version spec of 3.11 is 3.11
+  ##[debug]isExplicit: 
+  ##[debug]explicit? false
+  ##[debug]isExplicit: 3.11.18
+  ##[debug]explicit? true
+  ##[debug]isExplicit: 3.12.16
+  ##[debug]explicit? true
+  ##[debug]isExplicit: 3.13.18
+  ##[debug]explicit? true
+  ##[debug]isExplicit: 3.14.10
+  ##[debug]explicit? true
+  ##[debug]isExplicit: 3.15.2
+  ##[debug]explicit? true
+  ##[debug]evaluating 5 versions
+  ##[debug]matched: 3.11.18
+  ##[debug]checking cache: /opt/hostedtoolcache/Python/3.11.18/x64
+  ##[debug]Found tool in cache Python 3.11.18 x64
+  (node:2281) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+  (Use `node --trace-deprecation ...` to show where the warning was created)
+  Successfully set up CPython (3.11.18)
+  ::endgroup::
+##[add-matcher]/home/runner/work/_actions/actions/setup-python/v4/.github/python.json
+##[debug]Added matchers: 'python'. Problem matchers scan action output for known warning or error strings and report these inline.
+##[debug]Node Action run completed with exit code 0
+##[debug]pythonLocation='/opt/hostedtoolcache/Python/3.11.18/x64'
+##[debug]PKG_CONFIG_PATH='/opt/hostedtoolcache/Python/3.11.18/x64/lib/pkgconfig'
+##[debug]pythonLocation='/opt/hostedtoolcache/Python/3.11.18/x64'
+##[debug]Python_ROOT_DIR='/opt/hostedtoolcache/Python/3.11.18/x64'
+##[debug]Python2_ROOT_DIR='/opt/hostedtoolcache/Python/3.11.18/x64'
+##[debug]Python3_ROOT_DIR='/opt/hostedtoolcache/Python/3.11.18/x64'
+##[debug]PKG_CONFIG_PATH='/opt/hostedtoolcache/Python/3.11.18/x64/lib/pkgconfig'
+##[debug]LD_LIBRARY_PATH='/opt/hostedtoolcache/Python/3.11.18/x64/lib'
+##[debug]Set output python-version = 3.11.18
+##[debug]Set output python-path = /opt/hostedtoolcache/Python/3.11.18/x64/bin/python
+##[debug]Finishing: Run actions/setup-python@v4
+5s
+##[debug]Evaluating condition for step: 'Install dependencies'
+##[debug]Evaluating: success()
+##[debug]Evaluating success:
+##[debug]=> true
+##[debug]Result: true
+##[debug]Starting: Install dependencies
+##[debug]Loading inputs
+##[debug]Loading env
+Run # Upgrade the package installer first
+##[debug]/usr/bin/bash -e /home/runner/work/_temp/e105e605-2748-461d-b2b9-01dc43b40eb1.sh
+Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages (26.2.2)
+Collecting pip
+  Downloading pip-26.3-py3-none-any.whl.metadata (4.6 kB)
+Downloading pip-26.3-py3-none-any.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 140.4 MB/s  0:00:00
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 26.2.2
+    Uninstalling pip-26.2.2:
+      Successfully uninstalled pip-26.2.2
+Successfully installed pip-26.3
+Collecting requests (from -r requirements.txt (line 1))
+  Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting charset_normalizer<4,>=2 (from requests->-r requirements.txt (line 1))
+  Downloading charset_normalizer-3.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+Collecting idna<4,>=2.5 (from requests->-r requirements.txt (line 1))
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting urllib3<3,>=1.26 (from requests->-r requirements.txt (line 1))
+  Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting certifi>=2023.5.7 (from requests->-r requirements.txt (line 1))
+  Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+Downloading charset_normalizer-3.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (269 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+Installing collected packages: urllib3, idna, charset_normalizer, certifi, requests
+Successfully installed certifi-2026.10.23 charset_normalizer-3.5.2 idna-3.20 requests-2.34.2 urllib3-2.8.0
+##[debug]Finishing: Install dependencies
+0s
+##[debug]Evaluating: secrets.GITHUB_TOKEN
+##[debug]Evaluating Index:
+##[debug]..Evaluating secrets:
+##[debug]..=> Object
+##[debug]..Evaluating String:
+##[debug]..=> 'GITHUB_TOKEN'
+##[debug]=> '***'
+##[debug]Result: '***'
+##[debug]Evaluating: secrets.GIT_TOKEN
+##[debug]Evaluating Index:
+##[debug]..Evaluating secrets:
+##[debug]..=> Object
+##[debug]..Evaluating String:
+##[debug]..=> 'GIT_TOKEN'
+##[debug]=> '***'
+##[debug]Result: '***'
+##[debug]Evaluating: vars.GIT_REPOSITORY
+##[debug]Evaluating Index:
+##[debug]..Evaluating vars:
+##[debug]..=> Object
+##[debug]..Evaluating String:
+##[debug]..=> 'GIT_REPOSITORY'
+##[debug]=> 'volkansah'
+##[debug]Result: 'volkansah'
+##[debug]Evaluating condition for step: 'Update Codey'
+##[debug]Evaluating: success()
+##[debug]Evaluating success:
+##[debug]=> true
+##[debug]Result: true
+##[debug]Starting: Update Codey
+##[debug]Loading inputs
+##[debug]Loading env
+Run python update_codey.py
+##[debug]/usr/bin/bash -e /home/runner/work/_temp/b9599ed0-7dc1-4373-96ee-c0de8e2bd9e2.sh
+🔥 Updating BRUTAL Codey...
+codey.json loaded.
+⏭️ Last update was 0.4h ago — skipping all API calls.
+  Seasonal: Year Push 🍁 (1.25x)
+⚙️  Animation power: normal (4 cycles)
+🎨 Theme loaded: .codey_themes/htop/_cl_lab_htop.py
+🎨 codey.svg written.
+💀 BRUTAL Codey update finished. Only the strong survive! 💀
+##[debug]Finishing: Update Codey
+1s
+##[debug]Evaluating condition for step: 'Commit'
+##[debug]Evaluating: success()
+##[debug]Evaluating success:
+##[debug]=> true
+##[debug]Result: true
+##[debug]Starting: Commit
+##[debug]Loading inputs
+##[debug]Evaluating: format('# Set local identity for the commit
+##[debug]git config --local user.name "Codey Bot"
+##[debug]git config --local user.email "action@github.com"
+##[debug]
+##[debug]# Stage generated assets (suppress errors if files don''t exist yet)
+##[debug]git add codey.svg codey.json 2>/dev/null || true
+##[debug]
+##[debug]# Skip commit if nothing changed
+##[debug]if git diff --cached --quiet; then
+##[debug]  echo "No changes to commit — skipping."
+##[debug]  exit 0
+##[debug]fi
+##[debug]
+##[debug]# Commit the update
+##[debug]git commit -m "🐾 Codey updated 🐾"
+##[debug]
+##[debug]# Pull remote changes first to avoid push conflicts
+##[debug]# Uses current branch name automatically — works on main, PRs, test branches
+##[debug]git pull --rebase origin {0}
+##[debug]
+##[debug]# Push — never fails the workflow (e.g. protected branches, race conditions)
+##[debug]git push || echo "⚠️ Push skipped (protected branch or no permission)"
+##[debug]', github.ref_name)
+##[debug]Evaluating format:
+##[debug]..Evaluating String:
+##[debug]..=> '# Set local identity for the commit
+##[debug]git config --local user.name "Codey Bot"
+##[debug]git config --local user.email "action@github.com"
+##[debug]
+##[debug]# Stage generated assets (suppress errors if files don''t exist yet)
+##[debug]git add codey.svg codey.json 2>/dev/null || true
+##[debug]
+##[debug]# Skip commit if nothing changed
+##[debug]if git diff --cached --quiet; then
+##[debug]  echo "No changes to commit — skipping."
+##[debug]  exit 0
+##[debug]fi
+##[debug]
+##[debug]# Commit the update
+##[debug]git commit -m "🐾 Codey updated 🐾"
+##[debug]
+##[debug]# Pull remote changes first to avoid push conflicts
+##[debug]# Uses current branch name automatically — works on main, PRs, test branches
+##[debug]git pull --rebase origin {0}
+##[debug]
+##[debug]# Push — never fails the workflow (e.g. protected branches, race conditions)
+##[debug]git push || echo "⚠️ Push skipped (protected branch or no permission)"
+##[debug]'
+##[debug]..Evaluating Index:
+##[debug]....Evaluating github:
+##[debug]....=> Object
+##[debug]....Evaluating String:
+##[debug]....=> 'ref_name'
+##[debug]..=> 'main'
+##[debug]=> '# Set local identity for the commit
+##[debug]git config --local user.name "Codey Bot"
+##[debug]git config --local user.email "action@github.com"
+##[debug]
+##[debug]# Stage generated assets (suppress errors if files don''t exist yet)
+##[debug]git add codey.svg codey.json 2>/dev/null || true
+##[debug]
+##[debug]# Skip commit if nothing changed
+##[debug]if git diff --cached --quiet; then
+##[debug]  echo "No changes to commit — skipping."
+##[debug]  exit 0
+##[debug]fi
+##[debug]
+##[debug]# Commit the update
+##[debug]git commit -m "🐾 Codey updated 🐾"
+##[debug]
+##[debug]# Pull remote changes first to avoid push conflicts
+##[debug]# Uses current branch name automatically — works on main, PRs, test branches
+##[debug]git pull --rebase origin main
+##[debug]
+##[debug]# Push — never fails the workflow (e.g. protected branches, race conditions)
+##[debug]git push || echo "⚠️ Push skipped (protected branch or no permission)"
+##[debug]'
+##[debug]Result: '# Set local identity for the commit
+##[debug]git config --local user.name "Codey Bot"
+##[debug]git config --local user.email "action@github.com"
+##[debug]
+##[debug]# Stage generated assets (suppress errors if files don''t exist yet)
+##[debug]git add codey.svg codey.json 2>/dev/null || true
+##[debug]
+##[debug]# Skip commit if nothing changed
+##[debug]if git diff --cached --quiet; then
+##[debug]  echo "No changes to commit — skipping."
+##[debug]  exit 0
+##[debug]fi
+##[debug]
+##[debug]# Commit the update
+##[debug]git commit -m "🐾 Codey updated 🐾"
+##[debug]
+##[debug]# Pull remote changes first to avoid push conflicts
+##[debug]# Uses current branch name automatically — works on main, PRs, test branches
+##[debug]git pull --rebase origin main
+##[debug]
+##[debug]# Push — never fails the workflow (e.g. protected branches, race conditions)
+##[debug]git push || echo "⚠️ Push skipped (protected branch or no permission)"
+##[debug]'
+##[debug]Loading env
+Run # Set local identity for the commit
+##[debug]/usr/bin/bash -e /home/runner/work/_temp/fd2adbb7-1dc0-44a2-b4a5-ddb8984fdc06.sh
+[main 0d70e75] 🐾 Codey updated 🐾
+ 1 file changed, 285 insertions(+), 78 deletions(-)
+From https://github.com/VolkanSah/Codey
+ * branch            main       -> FETCH_HEAD
+   325776e..300a623  main       -> origin/main
+Auto-merging codey.svg
+CONFLICT (content): Merge conflict in codey.svg
+Rebasing (1/1)
+error: could not apply 0d70e75... 🐾 Codey updated 🐾
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+hint: Disable this message with "git config set advice.mergeConflict false"
+Could not apply 0d70e75... # 🐾 Codey updated 🐾
+Error: Process completed with exit code 1.
+##[debug]Finishing: Commit
+0s
+##[debug]Evaluating condition for step: 'Post Run actions/setup-python@v4'
+##[debug]Evaluating: success()
+##[debug]Evaluating success:
+##[debug]=> false
+##[debug]Result: false
+0s
+##[debug]Evaluating condition for step: 'Post Run actions/checkout@v4'
+##[debug]Evaluating: always()
+##[debug]Evaluating always:
+##[debug]=> true
+##[debug]Result: true
+##[debug]Starting: Post Run actions/checkout@v4
+##[debug]Loading inputs
+##[debug]Evaluating: secrets.GITHUB_TOKEN
+##[debug]Evaluating Index:
+##[debug]..Evaluating secrets:
+##[debug]..=> Object
+##[debug]..Evaluating String:
+##[debug]..=> 'GITHUB_TOKEN'
+##[debug]=> '***'
+##[debug]Result: '***'
+##[debug]Evaluating: github.repository
+##[debug]Evaluating Index:
+##[debug]..Evaluating github:
+##[debug]..=> Object
+##[debug]..Evaluating String:
+##[debug]..=> 'repository'
+##[debug]=> 'VolkanSah/Codey'
+##[debug]Result: 'VolkanSah/Codey'
+##[debug]Loading env
+Post job cleanup.
+##[debug]Getting git version
+/usr/bin/git version
+git version 2.56.0
+##[debug]0
+##[debug]git version 2.56.0
+##[debug]
+##[debug]Set git useragent to: git/2.56.0 (github-actions-checkout)
+::add-mask::***
+Temporarily overriding HOME='/home/runner/work/_temp/3d47ea55-fa79-451b-b16b-6431bdbcda35' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /home/runner/work/Codey/Codey
+##[debug]0
+##[debug]
+/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+##[debug]1
+##[debug]
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+##[debug]0
+##[debug]
+/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+http.https://github.com/.extraheader
+##[debug]0
+##[debug]http.https://github.com/.extraheader
+##[debug]
+/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+##[debug]0
+##[debug]
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+##[debug]0
+##[debug]
+/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+##[debug]1
+##[debug]
+/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+##[debug]0
+##[debug]
+##[debug]Unsetting HOME override
+##[debug]Node Action run completed with exit code 0
+##[debug]Finishing: Post Run actions/checkout@v4
+
+
