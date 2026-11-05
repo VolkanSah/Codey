@@ -1,0 +1,44 @@
+Run python update_codey.py
+  python update_codey.py
+  shell: /usr/bin/bash -e {0}
+  env:
+    pythonLocation: /opt/hostedtoolcache/Python/3.11.17/x64
+    PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.17/x64/lib/pkgconfig
+    Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.17/x64
+    Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.17/x64
+    Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.17/x64
+    LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.17/x64/lib
+    GITHUB_TOKEN: ***
+    GIT_TOKEN: ***
+    GIT_REPOSITORY: volkansah
+    CODEY_FALLBACK: true
+  
+🔥 Updating BRUTAL Codey...
+codey.json loaded.
+✓ Fetched 287 events
+⭐ Real stars: 687 (self-starred repos: 154)
+⚠️  Events API returned 0 commits — trying direct /commits fallback...
+  ✓ VolkanSah/Codey: 8 commits
+  ✓ VolkanSah/volkansah.github.io: 1 commits
+  ✓ VolkanSah/lasmirandadensiewillja: 1 commits
+  ✓ VolkanSah/VolkanSah: 1 commits
+  Fallback total: 11 commits
+Daily activity: 11 commits, 0 PRs (raw)
+  After bonus:  11 commits, 0 PRs
+Repo Quality:   0.84
+Commit Quality: 0.95
+Issue Score:    1.06 (closed: 1, ratio: 0.20)
+💾 codey.json written.
+🔥 BRUTAL UPDATE COMPLETE:
+  Tier:         ELDER (10.7 years)
+  Health:       13% | Energy: 0% | Mood: struggling
+  Social Score: 1.25x | XP Today: 30
+  Social+:      ['quality_curator'] | Social-: []
+  Self-starred: 154 repos
+  Issues:       closed=1, score=1.06
+  Prestige missing: Need Level 10
+  Seasonal: Year Push 🍁 (1.25x)
+⚙️  Animation power: normal (4 cycles)
+🎨 Theme loaded: .codey_themes/_default_bsod/_cl_lab_bsod.py
+🎨 codey.svg written.
+💀 BRUTAL Codey update finished. Only the strong survive! 💀
