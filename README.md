@@ -357,21 +357,21 @@ see [.codey_themes](.codey_themes) folder
 
 - [x] Issue quality analysis — found new patterns, needs fixing
 - [ ] Heartbeat — logic test (mostly not public, sorry)
-- [ ] Outsorce logic of update core and use Codey Starreport for more brutal stats.
-- [ ] ome other Skins
+- [x] Outsorce logic of update core and use Codey Starreport for more brutal stats.
+- [x] some other Skins
 
 
 #### Planned
-- [ ] GitLab support
+- [x] GitLab support
 - [ ] PostgreSQL integration for historical Issue quality tracking
 - [ ] brain_bug.log as official feature (when Brain is ready)
 
 ### Pending (v2.3.0)
-- [ ] Implement Game Logic v2 in update_codey.py se branche 
-- [ ] Recalculate and test GAME_BALANCE values
-- [ ] Decision: codey_theme_base.py or keep everything in update_codey.py
-- [ ] Simulate full week with new logic before deploying
-- [ ] Lingo for some themes
+- [x] Implement Game Logic v2 in update_codey.py se branche 
+- [x] Recalculate and test GAME_BALANCE values
+- [x] Decision: codey_theme_base.py or keep everything in update_codey.py - now theme loader solution
+- [x] Simulate full week with new logic before deploying
+- [-] Lingo for some themes
 
 </details> 
 
