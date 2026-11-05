@@ -61,3 +61,18 @@ codey.json loaded.
 ## runs :D  
 note: 
 - test theme file is emty/error  than fallback to default! works! 
+
+### test 3 
+loaded 
+
+Run python update_codey.py
+  
+🔥 Updating BRUTAL Codey...
+codey.json loaded.
+⏭️ Last update was 0.3h ago — skipping all API calls.
+  Seasonal: Year Push 🍁 (1.25x)
+⚙️  Animation power: normal (4 cycles)
+🎨 Theme loaded: .codey_themes/htop/_cl_lab_htop.py
+🎨 codey.svg written.
+💀 BRUTAL Codey update finished. Only the strong survive! 💀
+
