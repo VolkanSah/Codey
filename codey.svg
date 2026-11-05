@@ -1,286 +1,108 @@
-<svg width="630" height="473" viewBox="0 0 630 473" xmlns="http://www.w3.org/2000/svg">
-<style>
-  text { font-family: 'DejaVu Sans Mono','Menlo','Consolas','Liberation Mono','Courier New',monospace; }
-  @keyframes cur { 0%,49% { opacity:1 } 50%,100% { opacity:0 } }
-  @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:0.72 } }
-  @keyframes rowblink { 0%,100% { opacity:1 } 50% { opacity:0.45 } }
-  @keyframes scan { from { transform:translateY(0) } to { transform:translateY(272px) } }
-  .cursor { animation: cur 1s step-end infinite; }
-  .bars   { animation: pulse 3.2s ease-in-out infinite; }
-  .failrow { animation: rowblink 1.8s ease-in-out infinite; }
-  .scan   { animation: scan 14.4s steps(16, end) infinite; }
-</style>
-<rect width="630" height="473" rx="9" fill="#0b0b0b"/>
-<path d="M0 22 V9 Q0 0 9 0 H621 Q630 0 630 9 V22 Z" fill="#2b2b2b"/>
-<circle cx="16" cy="11" r="4.5" fill="#ff5f56"/><circle cx="32" cy="11" r="4.5" fill="#ffbd2e"/><circle cx="48" cy="11" r="4.5" fill="#27c93f"/>
-<text x="300" y="15" text-anchor="middle" font-size="10.5" fill="#9a9a9a">htop · codey@github · <tspan fill="#ff4d4d" font-weight="700">FAILED at sca</tspan></text>
-<text x="622" y="15" text-anchor="end" font-size="9" fill="#7d7d7d">2026-11-04 14:07 UTC</text>
-<text x="8" y="40" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Health</text>
-<text x="62" y="40" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
-<text class="bars" x="68.92" y="40" font-size="11.5" fill="#ff4d4d" textLength="34.60" lengthAdjust="spacing">|||||</text>
-<text x="318.04" y="40" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">14.5%</text>
-<text x="319.04" y="40" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
-<text x="8" y="57" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Hunger</text>
-<text x="62" y="57" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
-<text class="bars" x="68.92" y="57" font-size="11.5" fill="#e6d84a" textLength="110.72" lengthAdjust="spacing">||||||||||||||||</text>
-<text x="318.04" y="57" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">43.5%</text>
-<text x="319.04" y="57" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
-<text x="8" y="74" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Happy</text>
-<text x="62" y="74" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
-<text x="318.04" y="74" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">0.0%</text>
-<text x="319.04" y="74" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
-<text x="8" y="91" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Energy</text>
-<text x="62" y="91" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
-<text x="318.04" y="91" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">0.0%</text>
-<text x="319.04" y="91" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
-<text x="8" y="108" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Social</text>
-<text x="62" y="108" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
-<text class="bars" x="68.92" y="108" font-size="11.5" fill="#3ddc55" textLength="152.24" lengthAdjust="spacing">||||||||||||||||||||||</text>
-<text x="318.04" y="108" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">1.25/2.00</text>
-<text x="319.04" y="108" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
-<text x="8" y="125" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Quality</text>
-<text x="62" y="125" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">[</text>
-<text class="bars" x="68.92" y="125" font-size="11.5" fill="#3ddc55" textLength="179.92" lengthAdjust="spacing">||||||||||||||||||||||||||</text>
-<text x="318.04" y="125" font-size="11.5" fill="#e8e8e8" text-anchor="end" font-weight="700">0.84/1.00</text>
-<text x="319.04" y="125" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">]</text>
-<text x="332" y="40" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Commits:</text>
-<text x="394.28" y="40" font-size="11.5" fill="#e8e8e8" font-weight="700">481 <tspan fill="#00cdcd">Streak:</tspan> 3d</text>
-<text x="332" y="57" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Stars:</text>
-<text x="380.44" y="57" font-size="11.5" fill="#e8e8e8" font-weight="700">687 real <tspan fill="#7a7a7a">/</tspan> <tspan fill="#ff4d4d">176 self</tspan></text>
-<text x="332" y="74" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Level:</text>
-<text x="380.44" y="74" font-size="11.5" fill="#e8e8e8" font-weight="700">5 <tspan fill="#00cdcd">Prestige:</tspan> -</text>
-<text x="332" y="91" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Uptime:</text>
-<text x="387.36" y="91" font-size="11.5" fill="#e8e8e8" font-weight="700">10.7 years</text>
-<text x="332" y="108" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Clearance:</text>
-<text x="408.12" y="108" font-size="11.5" fill="#e8e8e8" font-weight="700"><tspan fill="#00cdcd">L4 ARCHITECT</tspan></text>
-<text x="332" y="125" font-size="11.5" fill="#00cdcd" text-anchor="start" font-weight="700">Season:</text>
-<text x="387.36" y="125" font-size="11.5" fill="#e8e8e8" font-weight="700"><tspan fill="#e6d84a">Year Push x1.25</tspan></text>
-<rect x="0" y="140" width="630" height="17" fill="#1fa84a"/>
-<rect x="276" y="140" width="42" height="17" fill="#00cdcd"/>
-<text x="40" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">PID</text>
-<text x="48" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="start" font-weight="700">TIER</text>
-<text x="134" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">LVL</text>
-<text x="160" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">PRS</text>
-<text x="204" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">STARS</text>
-<text x="258" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">COMMITS</text>
-<text x="266" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">NRG%</text>
-<text x="360" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">HLT%</text>
-<text x="400" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="end" font-weight="700">AGE</text>
-<text x="410" y="152.5" font-size="11.5" fill="#001a1a" text-anchor="start" font-weight="700">Command</text>
-<rect x="0" y="159" width="630" height="17" fill="#00cdcd"/>
-<text x="40" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">1337</text>
-<text x="48" y="171" font-size="11.5" fill="#001a1a" text-anchor="start">elder</text>
-<text x="134" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">5</text>
-<text x="160" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">0</text>
-<text x="204" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">687</text>
-<text x="258" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">481</text>
-<text x="266" y="171" font-size="11.5" fill="#001a1a" text-anchor="start" font-weight="700">D</text>
-<text x="318" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">0.0</text>
-<text x="360" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">14.5</text>
-<text x="400" y="171" font-size="11.5" fill="#001a1a" text-anchor="end">10.7y</text>
-<text x="410" y="171" font-size="11.5" fill="#001a1a">codey [Python] mood=struggling</text>
-<text class="cursor" x="624.5" y="171" font-size="11.5" fill="#001a1a">█</text>
-<text x="40" y="188" font-size="11.5" fill="#e6d84a" text-anchor="end">1338</text>
-<text x="48" y="188" font-size="11.5" fill="#e6d84a" text-anchor="start">elder</text>
-<text x="134" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="188" font-size="11.5" fill="#e6d84a" text-anchor="start" font-weight="700">R</text>
-<text x="318" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="188" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="188" font-size="11.5" fill="#e6d84a"><tspan fill="#7a7a7a">├─</tspan> build <tspan fill="#7a7a7a">streak=3d</tspan> <tspan font-weight="700">WARN</tspan></text>
-<text x="40" y="205" font-size="11.5" fill="#e8e8e8" text-anchor="end">1339</text>
-<text x="48" y="205" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
-<text x="134" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="205" font-size="11.5" fill="#3ddc55" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="205" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="205" font-size="11.5" fill="#e8e8e8"><tspan fill="#7a7a7a">├─</tspan> secrets-scan <tspan fill="#7a7a7a">clean</tspan> <tspan font-weight="700">PASS</tspan></text>
-<text x="40" y="222" font-size="11.5" fill="#e8e8e8" text-anchor="end">1340</text>
-<text x="48" y="222" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
-<text x="134" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="222" font-size="11.5" fill="#3ddc55" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="222" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="222" font-size="11.5" fill="#e8e8e8"><tspan fill="#7a7a7a">├─</tspan> sast <tspan fill="#7a7a7a">q=0.84</tspan> <tspan font-weight="700">PASS</tspan></text>
-<g class="failrow">
-<text x="40" y="239" font-size="11.5" fill="#ff4d4d" text-anchor="end">1341</text>
-<text x="48" y="239" font-size="11.5" fill="#ff4d4d" text-anchor="start">elder</text>
-<text x="134" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="239" font-size="11.5" fill="#ff4d4d" text-anchor="start" font-weight="700">Z</text>
-<text x="318" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="239" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="239" font-size="11.5" fill="#ff4d4d"><tspan fill="#7a7a7a">├─</tspan> sca <tspan fill="#7a7a7a">health=14%</tspan> <tspan font-weight="700">FAIL</tspan></text>
-</g>
-<g class="failrow">
-<text x="40" y="256" font-size="11.5" fill="#ff4d4d" text-anchor="end">1342</text>
-<text x="48" y="256" font-size="11.5" fill="#ff4d4d" text-anchor="start">elder</text>
-<text x="134" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="256" font-size="11.5" fill="#ff4d4d" text-anchor="start" font-weight="700">Z</text>
-<text x="318" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="256" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="256" font-size="11.5" fill="#ff4d4d"><tspan fill="#7a7a7a">├─</tspan> dast <tspan fill="#7a7a7a">energy=0%</tspan> <tspan font-weight="700">FAIL</tspan></text>
-</g>
-<text x="40" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">1343</text>
-<text x="48" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="start">elder</text>
-<text x="134" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="start" font-weight="700">T</text>
-<text x="318" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="273" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="273" font-size="11.5" fill="#7a7a7a"><tspan fill="#7a7a7a">└─</tspan> deploy <tspan fill="#7a7a7a">needs-fix</tspan> <tspan font-weight="700">BLOCKED</tspan></text>
-<text x="40" y="290" font-size="11.5" fill="#e8e8e8" text-anchor="end">1400</text>
-<text x="48" y="290" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
-<text x="134" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="290" font-size="11.5" fill="#3ddc55" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="290" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="290" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">issues</tspan> closed=1 ratio=0.20</text>
-<text x="40" y="307" font-size="11.5" fill="#e8e8e8" text-anchor="end">1401</text>
-<text x="48" y="307" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
-<text x="134" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="307" font-size="11.5" fill="#3ddc55" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="307" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="307" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">issue-score</tspan> 1.06</text>
-<text x="40" y="324" font-size="11.5" fill="#e8e8e8" text-anchor="end">1402</text>
-<text x="48" y="324" font-size="11.5" fill="#ff4d4d" text-anchor="start">root</text>
-<text x="134" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="324" font-size="11.5" fill="#ff4d4d" text-anchor="start" font-weight="700">R</text>
-<text x="318" y="324" font-size="11.5" fill="#ff4d4d" text-anchor="end" font-weight="700">20.4</text>
-<text x="360" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="324" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="324" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">star-inflation</tspan> self=176</text>
-<text x="40" y="341" font-size="11.5" fill="#e8e8e8" text-anchor="end">1403</text>
-<text x="48" y="341" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
-<text x="134" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="341" font-size="11.5" fill="#3ddc55" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="341" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="341" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">status-d</tspan> <tspan fill="#3ddc55">quality_curator</tspan></text>
-<text x="40" y="358" font-size="11.5" fill="#e8e8e8" text-anchor="end">1404</text>
-<text x="48" y="358" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
-<text x="134" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="358" font-size="11.5" fill="#e6d84a" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="358" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="358" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">season-d</tspan> Year Push x1.25</text>
-<text x="40" y="375" font-size="11.5" fill="#e8e8e8" text-anchor="end">1422</text>
-<text x="48" y="375" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
-<text x="134" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="375" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="375" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">achv/social_elite</tspan></text>
-<text x="40" y="392" font-size="11.5" fill="#e8e8e8" text-anchor="end">1423</text>
-<text x="48" y="392" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
-<text x="134" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="392" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="392" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">achv/quality_craftsman</tspan></text>
-<text x="40" y="409" font-size="11.5" fill="#e8e8e8" text-anchor="end">1424</text>
-<text x="48" y="409" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
-<text x="134" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="409" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="409" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">achv/quality_curator</tspan></text>
-<text x="40" y="426" font-size="11.5" fill="#e8e8e8" text-anchor="end">1425</text>
-<text x="48" y="426" font-size="11.5" fill="#e8e8e8" text-anchor="start">elder</text>
-<text x="134" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="160" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="204" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="258" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="266" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="start" font-weight="700">S</text>
-<text x="318" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="360" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="400" y="426" font-size="11.5" fill="#7a7a7a" text-anchor="end">-</text>
-<text x="410" y="426" font-size="11.5" fill="#e8e8e8"><tspan font-weight="700">achv/bug_slayer</tspan></text>
-<rect class="scan" x="1" y="159" width="628" height="17" fill="none" stroke="#00cdcd" stroke-width="1" opacity="0.7"/>
-<text x="8" y="441" font-size="9" fill="#7a7a7a" text-anchor="start">S: PASS=S WARN=R FAIL=Z BLOCKED=T · gates ≥70 pass ≥40 warn · main row S = mood</text>
-<text x="6.0" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F1</text>
-<rect x="19.8" y="449" width="41.5" height="18" fill="#00cdcd"/>
-<text x="19.8" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Help&#160;&#160;</text>
-<text x="62.6" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F2</text>
-<rect x="76.4" y="449" width="41.5" height="18" fill="#00cdcd"/>
-<text x="76.4" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Setup&#160;</text>
-<text x="119.1" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F3</text>
-<rect x="133.0" y="449" width="41.5" height="18" fill="#00cdcd"/>
-<text x="133.0" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Search</text>
-<text x="175.7" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F4</text>
-<rect x="189.5" y="449" width="41.5" height="18" fill="#00cdcd"/>
-<text x="189.5" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Filter</text>
-<text x="232.2" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F5</text>
-<rect x="246.1" y="449" width="41.5" height="18" fill="#00cdcd"/>
-<text x="246.1" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Tree&#160;&#160;</text>
-<text x="288.8" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F6</text>
-<rect x="302.6" y="449" width="41.5" height="18" fill="#00cdcd"/>
-<text x="302.6" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">SortBy</text>
-<text x="345.4" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F7</text>
-<rect x="359.2" y="449" width="41.5" height="18" fill="#00cdcd"/>
-<text x="359.2" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Nice&#160;-</text>
-<text x="401.9" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F8</text>
-<rect x="415.8" y="449" width="41.5" height="18" fill="#00cdcd"/>
-<text x="415.8" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Nice&#160;+</text>
-<text x="458.5" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F9</text>
-<rect x="472.3" y="449" width="41.5" height="18" fill="#00cdcd"/>
-<text x="472.3" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Kill&#160;&#160;</text>
-<text x="515.0" y="462" font-size="11.5" fill="#e8e8e8" text-anchor="start" font-weight="700">F10</text>
-<rect x="535.8" y="449" width="41.5" height="18" fill="#00cdcd"/>
-<text x="535.8" y="462" font-size="11.5" fill="#001a1a" text-anchor="start">Quit&#160;&#160;</text>
-<rect x="0.5" y="0.5" width="629" height="472" rx="9" fill="none" stroke="#3a3a3a"/>
+<svg width="630" height="500" viewBox="0 0 630 500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .b  { font-family:"Courier New","Lucida Console",monospace; }
+    @keyframes blink    { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+    @keyframes fadein   { from{opacity:0;} to{opacity:1;} }
+    @keyframes scanline { 0%{transform:translateY(-4px);opacity:0;}
+                          5%{opacity:0.10;} 95%{opacity:0.10;}
+                          100%{transform:translateY(500px);opacity:0;} }
+    @keyframes scanloop { 0%{transform:translateY(-4px);opacity:0;}
+                          5%{opacity:0.05;} 95%{opacity:0.05;}
+                          100%{transform:translateY(500px);opacity:0;} }
+    .cursor  { animation: blink 1s step-end infinite; }
+    .scan-1  { animation: scanline 2.5s linear 1 forwards; }
+    .scan-lp { animation: scanloop 5s linear infinite; }
+    .l01{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.1s;}
+    .l02{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.3s;}
+    .l03{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.5s;}
+    .l04{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.7s;}
+    .l05{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:0.9s;}
+    .l06{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.1s;}
+    .l07{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.3s;}
+    .l08{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.5s;}
+    .l09{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.7s;}
+    .l10{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:1.9s;}
+    .l11{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.1s;}
+    .l12{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.3s;}
+    .l13{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.5s;}
+    .l14{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.7s;}
+    .l15{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:2.9s;}
+    .l16{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.1s;}
+    .l17{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.3s;}
+    .l18{opacity:0;animation:fadein 0.4s ease-out forwards;animation-delay:3.5s;}
+  </style>
+
+  <!-- BG — the blue hell -->
+  <rect width="630" height="500" fill="#000080"/>
+
+  <!-- CRT scanlines -->
+  <rect class="scan-1"  x="0" y="0" width="630" height="4" fill="#ffffff"/>
+  <rect class="scan-lp" x="0" y="0" width="630" height="3" fill="#ffffff"/>
+
+  <!-- ══ HEADER y=0 h=44 ══ -->
+  <rect x="0" y="0" width="630" height="44" fill="#0000aa"/>
+  <text x="315" y="28" text-anchor="middle" fill="#ffffff"
+        class="b l01" font-size="15" font-weight="bold">Windows Blue Screen of Death</text>
+  <text x="590" y="40" text-anchor="end" fill="#c0c0c0"
+        class="b" font-size="9" opacity="0.7">2026-11-05 12:04 UTC</text>
+
+  <!-- ══ SAD FACE y=56 → baseline y=100 ══ -->
+  <text x="40" y="100" fill="#ffffff" class="b l02" font-size="48">:(</text>
+
+  <!-- ══ MAIN MESSAGE CVE-STYLE y=116 ══ -->
+  <text x="40" y="116" fill="#ffffff" class="b l03" font-size="15" font-weight="bold">Your ELDER Python dev crashed: ENERGY_DEPLETED</text>
+  <text x="40" y="136" fill="#c0c0c0" class="b l04" font-size="11">Collecting error info... Codey will restart automatically. Mood: :-(</text>
+
+  <!-- ══ STOP CODE y=158 ══ -->
+  <text x="40" y="158" fill="#ffffff" class="b l05" font-size="11">For more information, search online:</text>
+  <text x="40" y="176" fill="#00ffff" class="b l06" font-size="12" font-weight="bold">DESCRIPTION_NULL_PTR_REF_0x0022</text>
+
+  <!-- ══ DIVIDER y=194 ══ -->
+  <line x1="40" y1="194" x2="590" y2="194" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l06"/>
+
+  <!-- ══ TECH INFO y=212 ══ -->
+  <text x="40" y="212" fill="#ffffff" class="b l07" font-size="12" font-weight="bold">TECHNICAL INFORMATION:</text>
+
+  <!-- ══ STAT BARS — 2 columns y=232 ══ -->
+  <g class="b" font-size="12" fill="#c0c0c0">
+    <text x="40" y="232" class="l08">health   [██░░░░░░░░░░░░░░] 13%</text>
+    <text x="40" y="252" class="l09">hunger   [██████░░░░░░░░░░] 38%</text>
+    <text x="40" y="272" class="l10">happines [░░░░░░░░░░░░░░░░] 0%</text>
+    <text x="330"  y="232" class="l08">energy  [░░░░░░░░░░░░░░░░] 0%</text>
+    <text x="330"  y="252" class="l09">social  [██████████░░░░░░] 1.25x</text>
+    <text x="330"  y="272" class="l10">quality [█████████████░░░] 0.84</text>
+  </g>
+
+  <!-- ══ DIVIDER y=292 ══ -->
+  <line x1="40" y1="292" x2="590" y2="292" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l10"/>
+
+  <!-- ══ SYSTEM INFO y=312 ══ -->
+  <g class="b" font-size="12">
+    <text x="40" y="312" fill="#ffff00" class="l11">TIER: ELDER  |  LEVEL: 5  |  XP: 0.25x  |  GITHUB: 10.7y  |  PRESTIGE: 0</text>
+    <text x="40" y="332" fill="#ffffff"     class="l12">STREAK: 4d  |  COMMITS: 492  |  STARS: 687  |  BUGS_FIXED: 1</text>
+    <text x="40" y="352" fill="#c0c0c0"   class="l13">PENALTIES: no_description, ENERGY_DEPLETED</text>
+  </g>
+
+  <!-- ══ SEASONAL / PRESTIGE y=372 ══ -->
+  <text x="40" y="372" fill="#ffff00" class="b l14" font-size="12">SEASONAL: YEAR PUSH 1.25x XP</text>
+  
+
+  <!-- ══ ACHIEVEMENTS y=392 ══ -->
+  <text x="40" y="392" fill="#c0c0c0" class="b l15" font-size="12">BADGES: 🧙‍♂️ 💀 👑 💎 🎯 🐛</text>
+
+  <!-- ══ DIVIDER y=412 ══ -->
+  <line x1="40" y1="412" x2="590" y2="412" stroke="#c0c0c0" stroke-width="1" opacity="0.4" class="l15"/>
+
+  <!-- ══ DEV LINE expanded y=432 ══ -->
+  <text x="40" y="432" fill="#ffffff" class="b l16" font-size="13">
+    🐍 Python  //  :-( STRUGGLING  //  ELDER 10.7y  //  4d streak
+  </text>
+
+  <!-- ══ FOOTER y=452 ══ -->
+  <text x="40" y="452" fill="#c0c0c0" class="b l17" font-size="10">Press any key to continue... (just kidding, Codey runs on a schedule)</text>
+  <text x="40" y="472" fill="#ffffff"   class="b l18" font-size="12">C:\WINDOWS\SYSTEM32&gt; codey --reboot --tier ELDER --no-mercy<tspan class="cursor" fill="#ffffff">_</tspan></text>
+
+  <!-- ══ BOTTOM BAR ══ -->
+  <rect x="0" y="490" width="630" height="10" fill="#0000aa"/>
+
 </svg>
