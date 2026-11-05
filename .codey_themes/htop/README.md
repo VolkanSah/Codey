@@ -7,3 +7,8 @@
 > Brainstormed the concept with Claude — result of a stupid, lazy nonsense workflow. Have fun!
 
 *Crafted by Human with help of AI as tool. No Skills.md, no Agents! Just me and Claude web free version! Thx!*
+
+### Credits
+- Dummy by Volkan Sah
+- Concept rewrite Claude Sonnet 5.5
+- Released with ❤️ that sucks sometimes if you must look 7 hours on htop! 
