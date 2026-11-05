@@ -6,7 +6,7 @@
 # Based on the theme structure and data format of _cl_lab_cuty.py by
 # Volkan Kücükbudak (VolkanSah). New character, new palette, Korean UI.
 #
-# Theme author: Mimi + Claude, Fixed by VolkanSah
+# Theme author: Mimi + Claude assist, Fixed by VolkanSah
 # Made with AI assistance (Claude). Korean texts: to be proofread by a
 # native speaker before publishing.
 #
