@@ -1,5 +1,5 @@
 
-# 🐾 Codey - Your Brutally Honest GitHub Stats/Pet
+# 🐾 Codey - Your Brutally Honest Git Stats/Pet
 ###### v.2.2.3 dev
 
 
