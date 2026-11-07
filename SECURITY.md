@@ -19,7 +19,7 @@ Codey is a neutral quality pet/tool for GitHub and GitLab.
 Free to use on GitHub and GitLab and similar Portals.
 Selling this script or using it for reputation manipulation is prohibited.
 
-#### Licensed under Apache 2.0 + Ethical Security Operations License (ESOL v1.1)
+##### Update_codey.py is free for GitHub & Gitlab but Privat Licensed , all other code under Apache 2.0 + Ethical Security Operations License (ESOL v2.1) and compatible License for community themes.
 
 Jurisdiction: Germany (Berlin) — enforced under StGB §202a/b/c and DSGVO.
 [https://github.com/VolkanSah/ESOL](https://github.com/VolkanSah/ESOL)
