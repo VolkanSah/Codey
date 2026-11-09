@@ -1,10 +1,10 @@
 {
-  "health": 20.675,
-  "hunger": 62.025000000000006,
+  "health": 21.42166666666667,
+  "hunger": 44.26500000000001,
   "happiness": 0.0,
-  "energy": 0,
+  "energy": 20.0,
   "level": 6,
-  "streak": 5,
+  "streak": 4,
   "total_commits": 531,
   "mood": "struggling",
   "rpg_stats": {},
@@ -17,15 +17,6 @@
     "\ud83d\udc1b Bug Slayer"
   ],
   "history": [
-    {
-      "timestamp": "2026-10-10T12:13:36.370256+00:00",
-      "daily_commits": 0,
-      "daily_prs": 0,
-      "health": 33.333333333333336,
-      "mood": "elite",
-      "streak": 0,
-      "tier": "elder"
-    },
     {
       "timestamp": "2026-10-11T12:28:10.808273+00:00",
       "daily_commits": 0,
@@ -286,11 +277,20 @@
       "mood": "struggling",
       "streak": 4,
       "tier": "elder"
+    },
+    {
+      "timestamp": "2026-11-09T15:46:34.754703+00:00",
+      "daily_commits": 0,
+      "daily_prs": 0,
+      "health": 20.675,
+      "mood": "struggling",
+      "streak": 5,
+      "tier": "elder"
     }
   ],
   "brutal_stats": {
     "tier": "elder",
-    "github_years": 10.683093771389458,
+    "github_years": 10.685831622176591,
     "social_score": 1.25,
     "social_penalties": [],
     "social_bonuses": [
@@ -299,9 +299,7 @@
     "avg_repo_quality": 0.8419117647058834,
     "commit_quality_score": 1.0,
     "commit_quality_penalties": [],
-    "commit_quality_bonuses": [
-      "clean_history"
-    ],
+    "commit_quality_bonuses": [],
     "multipliers": {
       "xp": 0.25,
       "decay": 0.8,
@@ -310,7 +308,7 @@
     "total_stars": 687,
     "self_starred_count": 154,
     "language_diversity_penalty": 1.0,
-    "xp_earned": 74.48,
+    "xp_earned": 4.48,
     "dominant_language": "Python",
     "issues_closed": 2,
     "issue_close_ratio": 0.4,
@@ -320,5 +318,5 @@
       "Need Level 10"
     ]
   },
-  "last_update": "2026-11-08T13:03:12.509869+00:00"
+  "last_update": "2026-11-09T15:46:34.754703+00:00"
 }
