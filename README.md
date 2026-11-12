@@ -287,7 +287,7 @@ see [.codey_themes](.codey_themes) folder
 - Blue Hell (BSOD)
 - HTOP
 - piyingxi (not ready , ai slop!- GLM + Claude)
-- Powershell 
+- My Space
 - + Community themes welcome
 > please, set theme/skin in `example.codey.config` and rename it to `codey.config`
 
