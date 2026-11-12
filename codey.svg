@@ -71,7 +71,7 @@ text { font-family: 'JetBrains Mono','Fira Code','Courier New',monospace; }
   <!-- header -->
   <line x1="15" y1="43" x2="615" y2="43" stroke="#ff9a4d" stroke-opacity="0.35"/>
   <text x="28" y="34" font-size="12" font-weight="bold" fill="#dfe6ff">▲ mission: ELDER · LVL 7 </text>
-  <text x="602" y="34" text-anchor="end" font-size="10" fill="#ff9a4d" opacity="0.7">2026-11-12 14:39 UTC</text>
+  <text x="602" y="34" text-anchor="end" font-size="10" fill="#ff9a4d" opacity="0.7">2026-11-12 14:55 UTC</text>
 
   <line x1="253" y1="52" x2="253" y2="450" stroke="#ff9a4d" stroke-opacity="0.25" stroke-dasharray="2 5"/>
 
