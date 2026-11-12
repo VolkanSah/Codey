@@ -6,3 +6,15 @@
 ### Credits
 - craftet by MIMI (want stay anonym!) + Claude as assitant 
 - checked by VolkanSah
+
+
+
+
+**Kawaii-Theme:**
+| Tier | Farbe | Hex |
+|---|---|---|
+| 🌱 Noob | Rosa | `#ff9ecb` |
+| 💻 Developer | Himmelblau | `#8ecbff` |
+| ⚔️ Veteran | Lavendel | `#c6a8ff` |
+| 🧙 Elder | Goldgelb | `#ffc46b` |
+
