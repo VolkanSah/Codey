@@ -71,7 +71,7 @@ text { font-family: 'JetBrains Mono','Fira Code','Courier New',monospace; }
   <!-- header -->
   <line x1="15" y1="43" x2="615" y2="43" stroke="#ff9a4d" stroke-opacity="0.35"/>
   <text x="28" y="34" font-size="12" font-weight="bold" fill="#dfe6ff">▲ mission: ELDER · LVL 7 </text>
-  <text x="602" y="34" text-anchor="end" font-size="10" fill="#ff9a4d" opacity="0.7">2026-11-12 14:55 UTC</text>
+  <text x="602" y="34" text-anchor="end" font-size="10" fill="#ff9a4d" opacity="0.7">2026-11-13 14:21 UTC</text>
 
   <line x1="253" y1="52" x2="253" y2="450" stroke="#ff9a4d" stroke-opacity="0.25" stroke-dasharray="2 5"/>
 
@@ -117,14 +117,14 @@ text { font-family: 'JetBrains Mono','Fira Code','Courier New',monospace; }
   <line x1="263" y1="90" x2="600" y2="90" stroke="#ff9a4d" stroke-opacity="0.4" stroke-dasharray="3 3"/>
 
   <g transform="translate(265, 108)" font-size="12" fill="#c9d2ff">
-    <text x="0" y="9" opacity="0.7">hull</text><rect x="84" y="0" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="0" width="63.3" height="10" rx="5" fill="url(#barg)"/><text x="318" y="9" text-anchor="end" font-size="11" fill="#ff9a4d">33%</text><text x="0" y="31" opacity="0.7">hunger</text><rect x="84" y="22" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="22" width="190.0" height="10" rx="5" fill="url(#barg)"/><text x="318" y="31" text-anchor="end" font-size="11" fill="#ff9a4d">100%</text><text x="0" y="53" opacity="0.7">joy</text><rect x="84" y="44" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="44" width="0.0" height="10" rx="5" fill="url(#barg)"/><text x="318" y="53" text-anchor="end" font-size="11" fill="#ff9a4d">0%</text><text x="0" y="75" opacity="0.7">energy</text><rect x="84" y="66" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="66" width="0.0" height="10" rx="5" fill="url(#barg)"/><text x="318" y="75" text-anchor="end" font-size="11" fill="#ff9a4d">0%</text><text x="0" y="97" opacity="0.7">social</text><rect x="84" y="88" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="88" width="118.8" height="10" rx="5" fill="url(#barg)"/><text x="318" y="97" text-anchor="end" font-size="11" fill="#ff9a4d">1.25</text><text x="0" y="119" opacity="0.7">quality</text><rect x="84" y="110" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="110" width="160.8" height="10" rx="5" fill="url(#barg)"/><text x="318" y="119" text-anchor="end" font-size="11" fill="#ff9a4d">0.85</text>
+    <text x="0" y="9" opacity="0.7">hull</text><rect x="84" y="0" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="0" width="62.4" height="10" rx="5" fill="url(#barg)"/><text x="318" y="9" text-anchor="end" font-size="11" fill="#ff9a4d">33%</text><text x="0" y="31" opacity="0.7">hunger</text><rect x="84" y="22" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="22" width="187.2" height="10" rx="5" fill="url(#barg)"/><text x="318" y="31" text-anchor="end" font-size="11" fill="#ff9a4d">99%</text><text x="0" y="53" opacity="0.7">joy</text><rect x="84" y="44" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="44" width="0.0" height="10" rx="5" fill="url(#barg)"/><text x="318" y="53" text-anchor="end" font-size="11" fill="#ff9a4d">0%</text><text x="0" y="75" opacity="0.7">energy</text><rect x="84" y="66" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="66" width="0.0" height="10" rx="5" fill="url(#barg)"/><text x="318" y="75" text-anchor="end" font-size="11" fill="#ff9a4d">0%</text><text x="0" y="97" opacity="0.7">social</text><rect x="84" y="88" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="88" width="118.8" height="10" rx="5" fill="url(#barg)"/><text x="318" y="97" text-anchor="end" font-size="11" fill="#ff9a4d">1.25</text><text x="0" y="119" opacity="0.7">quality</text><rect x="84" y="110" width="190" height="10" rx="5" fill="#141a3a" stroke="#2a3366" stroke-width="0.8"/><rect x="84" y="110" width="161.0" height="10" rx="5" fill="url(#barg)"/><text x="318" y="119" text-anchor="end" font-size="11" fill="#ff9a4d">0.85</text>
   </g>
 
   <line x1="263" y1="254" x2="600" y2="254" stroke="#ff9a4d" stroke-opacity="0.4" stroke-dasharray="3 3"/>
 
   <g transform="translate(267, 276)" font-size="12.5" fill="#c9d2ff">
     <text x="0" y="0" font-size="11" opacity="0.5">$ cat activity.log</text>
-    <text x="0" y="22">STREAK=7d  •  COMMITS=684</text>
+    <text x="0" y="22">STREAK=8d  •  COMMITS=697</text>
     <text x="0" y="44">REAL_STARS=688  •  INFLATION=158</text>
     <text x="0" y="66" fill="#4fe39a">STATUS=quality_curator</text>
     <text x="0" y="84" fill="#ff7ad9" font-size="10">ISSUES=closed:1 • ratio:0.25 • score:1.07</text>
