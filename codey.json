@@ -1,11 +1,11 @@
 {
-  "health": 33.333333333333336,
-  "hunger": 100,
+  "health": 29.729166666666668,
+  "hunger": 89.1875,
   "happiness": 0.0,
   "energy": 0,
   "level": 9,
-  "streak": 14,
-  "total_commits": 824,
+  "streak": 15,
+  "total_commits": 830,
   "mood": "exhausted",
   "rpg_stats": {},
   "achievements": [
@@ -17,15 +17,6 @@
     "\ud83d\udc1b Bug Slayer"
   ],
   "history": [
-    {
-      "timestamp": "2026-10-23T11:20:07.977465+00:00",
-      "daily_commits": 0,
-      "daily_prs": 0,
-      "health": 34.30833333333333,
-      "mood": "elite",
-      "streak": 2,
-      "tier": "elder"
-    },
     {
       "timestamp": "2026-10-24T10:39:52.288351+00:00",
       "daily_commits": 10,
@@ -286,39 +277,48 @@
       "mood": "exhausted",
       "streak": 13,
       "tier": "elder"
+    },
+    {
+      "timestamp": "2026-11-22T14:22:54.659941+00:00",
+      "daily_commits": 9,
+      "daily_prs": 0,
+      "health": 33.333333333333336,
+      "mood": "exhausted",
+      "streak": 14,
+      "tier": "elder"
     }
   ],
   "brutal_stats": {
     "tier": "elder",
-    "github_years": 10.718685831622176,
+    "github_years": 10.72142368240931,
     "social_score": 1.25,
     "social_penalties": [],
     "social_bonuses": [
       "quality_curator"
     ],
-    "avg_repo_quality": 0.8528985507246387,
-    "commit_quality_score": 0.8999999999999999,
-    "commit_quality_penalties": [
-      "no_description"
+    "avg_repo_quality": 0.8518248175182492,
+    "commit_quality_score": 1.0,
+    "commit_quality_penalties": [],
+    "commit_quality_bonuses": [
+      "clean_history"
     ],
-    "commit_quality_bonuses": [],
     "multipliers": {
       "xp": 0.25,
       "decay": 0.8,
       "requirements": 4.0
     },
-    "total_stars": 690,
-    "self_starred_count": 158,
+    "total_stars": 689,
+    "self_starred_count": 157,
     "language_diversity_penalty": 1.0,
-    "xp_earned": 130.9,
+    "xp_earned": 18.375,
     "dominant_language": "Python",
     "issues_closed": 1,
-    "issue_close_ratio": 0.3333333333333333,
-    "issue_score": 1.1,
+    "issue_close_ratio": 0.16666666666666666,
+    "issue_score": 0.75,
     "can_prestige": false,
     "prestige_missing": [
       "Need Level 10"
     ]
   },
-  "last_update": "2026-11-21T14:27:51.921024+00:00"
+  "last_update": "2026-11-22T14:22:54.659941+00:00"
 }
